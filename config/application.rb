@@ -31,5 +31,10 @@ module Stamp
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    console do
+      require 'hirb'
+      Hirb.enable
+    end
   end
 end
