@@ -16,11 +16,13 @@ gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'devise'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'hirb'
