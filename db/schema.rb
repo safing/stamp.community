@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108130910) do
+ActiveRecord::Schema.define(version: 20171108135312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20171108130910) do
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_domains_on_creator_id"
     t.index ["parent_id"], name: "index_domains_on_parent_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "name"
+    t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_labels_on_parent_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,4 +57,5 @@ ActiveRecord::Schema.define(version: 20171108130910) do
 
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "domains", "users", column: "creator_id"
+  add_foreign_key "labels", "labels", column: "parent_id"
 end
