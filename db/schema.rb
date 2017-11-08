@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108135312) do
+ActiveRecord::Schema.define(version: 20171108141423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 20171108135312) do
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_domains_on_creator_id"
     t.index ["parent_id"], name: "index_domains_on_parent_id"
+  end
+
+  create_table "internal_stamps", force: :cascade do |t|
+    t.integer "upvote_count"
+    t.integer "downvote_count"
+    t.bigint "label_id"
+    t.bigint "creator_id"
+    t.string "stampable_type"
+    t.bigint "stampable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_internal_stamps_on_creator_id"
+    t.index ["label_id"], name: "index_internal_stamps_on_label_id"
+    t.index ["stampable_type", "stampable_id"], name: "index_internal_stamps_on_stampable_type_and_stampable_id"
   end
 
   create_table "labels", force: :cascade do |t|
@@ -57,5 +71,7 @@ ActiveRecord::Schema.define(version: 20171108135312) do
 
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "domains", "users", column: "creator_id"
+  add_foreign_key "internal_stamps", "labels"
+  add_foreign_key "internal_stamps", "users", column: "creator_id"
   add_foreign_key "labels", "labels", column: "parent_id"
 end
