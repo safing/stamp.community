@@ -1,0 +1,2 @@
+class Upvote < Vote
+end

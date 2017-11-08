@@ -1,0 +1,2 @@
+class Downvote < Vote
+end
