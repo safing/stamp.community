@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :internal_stamp do
+  factory :stamp do
     upvote_count 0
     downvote_count 0
     label

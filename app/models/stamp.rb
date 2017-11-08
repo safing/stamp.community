@@ -1,4 +1,4 @@
-class InternalStamp < ApplicationRecord
+class Stamp < ApplicationRecord
   belongs_to :label
   belongs_to :creator
 end

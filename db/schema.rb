@@ -25,26 +25,26 @@ ActiveRecord::Schema.define(version: 20171108141423) do
     t.index ["parent_id"], name: "index_domains_on_parent_id"
   end
 
-  create_table "internal_stamps", force: :cascade do |t|
-    t.integer "upvote_count"
-    t.integer "downvote_count"
-    t.bigint "label_id"
-    t.bigint "creator_id"
-    t.string "stampable_type"
-    t.bigint "stampable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_internal_stamps_on_creator_id"
-    t.index ["label_id"], name: "index_internal_stamps_on_label_id"
-    t.index ["stampable_type", "stampable_id"], name: "index_internal_stamps_on_stampable_type_and_stampable_id"
-  end
-
   create_table "labels", force: :cascade do |t|
     t.string "name"
     t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_labels_on_parent_id"
+  end
+
+  create_table "stamps", force: :cascade do |t|
+    t.integer "upvote_count"
+    t.integer "downvote_count"
+    t.bigint "label_id"
+    t.string "stampable_type"
+    t.bigint "stampable_id"
+    t.bigint "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_stamps_on_creator_id"
+    t.index ["label_id"], name: "index_stamps_on_label_id"
+    t.index ["stampable_type", "stampable_id"], name: "index_stamps_on_stampable_type_and_stampable_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20171108141423) do
 
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "domains", "users", column: "creator_id"
-  add_foreign_key "internal_stamps", "labels"
-  add_foreign_key "internal_stamps", "users", column: "creator_id"
   add_foreign_key "labels", "labels", column: "parent_id"
+  add_foreign_key "stamps", "labels"
+  add_foreign_key "stamps", "users", column: "creator_id"
 end
