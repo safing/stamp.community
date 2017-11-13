@@ -1,17 +1,15 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.1.4'
 gem 'pg'
+gem 'rails', '~> 5.1.4'
 
 gem 'sass-rails'
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
+gem 'jbuilder'
 gem 'jquery-rails'
 gem 'turbolinks'
-
-gem 'jbuilder'
+gem 'uglifier', '>= 1.3.0'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -20,14 +18,14 @@ gem 'devise'
 gem 'state_machines-activerecord'
 
 group :development, :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'guard-livereload'
+  gem 'guard-rspec'
+  gem 'hirb'
   gem 'pry-byebug'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
-  gem 'factory_bot_rails'
-  gem 'guard-rspec'
-  gem 'guard-livereload'
-  gem 'hirb'
-  gem 'faker'
 end
 
 group :test do
