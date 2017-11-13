@@ -1,0 +1,13 @@
+AllCops:
+  Excludes:
+    - db/**/*.rb
+
+Metrics/LineLength:
+  Max: 100
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  CountComments: false
+  Exclude:
+    - 'spec/*/*.rb'
