@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :upvote do
-    stamp
+    association :voteable, factory: :stamp
     user
   end
 end

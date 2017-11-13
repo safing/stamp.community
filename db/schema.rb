@@ -86,13 +86,14 @@ ActiveRecord::Schema.define(version: 20171113154430) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.bigint "stamp_id"
+    t.string "voteable_type"
+    t.bigint "voteable_id"
     t.bigint "user_id"
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stamp_id"], name: "index_votes_on_stamp_id"
     t.index ["user_id"], name: "index_votes_on_user_id"
+    t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id"
   end
 
   add_foreign_key "data_stamps", "users", column: "creator_id"
@@ -101,6 +102,5 @@ ActiveRecord::Schema.define(version: 20171113154430) do
   add_foreign_key "labels", "labels", column: "parent_id"
   add_foreign_key "stamps", "labels"
   add_foreign_key "stamps", "users", column: "creator_id"
-  add_foreign_key "votes", "stamps"
   add_foreign_key "votes", "users"
 end
