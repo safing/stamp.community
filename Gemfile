@@ -17,6 +17,7 @@ gem 'jbuilder'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
+gem 'state_machines-activerecord'
 
 group :development, :test do
   gem 'pry-byebug'
