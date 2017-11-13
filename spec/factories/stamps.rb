@@ -4,7 +4,7 @@ FactoryBot.define do
     downvote_count 0
     label
     percentage { Faker::Number.between(1, 100) }
-    creator_id { create(:user).id }
+    association :creator, factory: :user
     association :stampable, factory: :domain
   end
 end
