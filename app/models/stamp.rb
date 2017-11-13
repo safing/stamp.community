@@ -1,5 +1,5 @@
 class Stamp < ApplicationRecord
-  include State
+  include StampState
 
   belongs_to :label
   belongs_to :creator, class_name: 'User'
