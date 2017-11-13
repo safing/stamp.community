@@ -35,8 +35,6 @@ Rails.application.configure do
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
 
-  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
-
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
@@ -61,7 +59,7 @@ Rails.application.configure do
   # config.action_controller.asset_host = 'http://assets.example.com'
 
   # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # Set this to true and configure the email server for immediate delivery to raise delivery errors
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
