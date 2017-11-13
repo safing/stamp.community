@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20171108145836) do
   create_table "stamps", force: :cascade do |t|
     t.integer "upvote_count"
     t.integer "downvote_count"
+    t.integer "percentage"
+    t.text "state"
     t.bigint "label_id"
     t.string "stampable_type"
     t.bigint "stampable_id"
