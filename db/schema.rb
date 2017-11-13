@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108145836) do
+ActiveRecord::Schema.define(version: 20171113154430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "data_stamps", force: :cascade do |t|
+    t.integer "upvote_count"
+    t.integer "downvote_count"
+    t.text "state"
+    t.binary "data"
+    t.string "stampable_type"
+    t.bigint "stampable_id"
+    t.bigint "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_data_stamps_on_creator_id"
+    t.index ["stampable_type", "stampable_id"], name: "index_data_stamps_on_stampable_type_and_stampable_id"
+  end
 
   create_table "domains", force: :cascade do |t|
     t.string "url"
@@ -81,6 +95,7 @@ ActiveRecord::Schema.define(version: 20171108145836) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "data_stamps", "users", column: "creator_id"
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "domains", "users", column: "creator_id"
   add_foreign_key "labels", "labels", column: "parent_id"
