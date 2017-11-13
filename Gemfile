@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'fix-db-schema-conflicts'
 gem 'pg'
 gem 'rails', '~> 5.1.4'
 
