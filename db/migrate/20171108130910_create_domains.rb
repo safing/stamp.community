@@ -1,7 +1,7 @@
 class CreateDomains < ActiveRecord::Migration[5.1]
   def change
     create_table :domains do |t|
-      t.string :url
+      t.string :name
       t.references :creator, references: :users
       t.references :parent, references: :domains
 
