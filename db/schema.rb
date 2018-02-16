@@ -49,14 +49,12 @@ ActiveRecord::Schema.define(version: 20171113154430) do
   create_table "stamps", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "creator_id"
-    t.integer "downvote_count"
     t.bigint "label_id"
     t.integer "percentage"
     t.bigint "stampable_id"
     t.string "stampable_type"
     t.text "state"
     t.datetime "updated_at", null: false
-    t.integer "upvote_count"
     t.index ["creator_id"], name: "index_stamps_on_creator_id"
     t.index ["label_id"], name: "index_stamps_on_label_id"
     t.index ["stampable_type", "stampable_id"], name: "index_stamps_on_stampable_type_and_stampable_id"
