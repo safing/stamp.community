@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171113154430) do
 
   create_table "labels", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.text "description"
     t.string "name"
     t.bigint "parent_id"
     t.datetime "updated_at", null: false
