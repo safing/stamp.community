@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :downvote do
+  factory :vote do
     association :votable, factory: :stamp
     user
   end

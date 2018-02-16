@@ -1,2 +1,0 @@
-class Upvote < Vote
-end
