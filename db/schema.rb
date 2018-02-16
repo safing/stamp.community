@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20171113154430) do
     t.integer "failed_attempts", default: 0, null: false
     t.datetime "locked_at"
     t.datetime "remember_created_at"
+    t.integer "reputation", null: false
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.string "unconfirmed_email"
