@@ -6,6 +6,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   def voting_power
-    reputation <= 0 ? 0 : Math.log10(reputation).to_i + 1
+    reputation <= 0 ? 0 : reputation.log10_power
   end
 end
