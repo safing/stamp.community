@@ -1,13 +1,15 @@
+require 'database_cleaner'
+
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner[:active_record].strategy = :transaction
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.before(:each) do
-    DatabaseCleaner[:active_record].start
+    DatabaseCleaner.start
   end
 
   config.after(:each) do
-    DatabaseCleaner[:active_record].clean
+    DatabaseCleaner.clean
   end
 end
