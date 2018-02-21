@@ -23,17 +23,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     puts "RSPEC SEED: #{RSpec.configuration.seed}"
-    DatabaseCleaner[:active_record].strategy = :transaction
-
     FactoryBot.reload
-  end
-
-  config.before(:each) do
-    DatabaseCleaner[:active_record].start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner[:active_record].clean
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4
