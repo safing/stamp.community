@@ -4,6 +4,8 @@ class Vote < ApplicationRecord
   belongs_to :votable, polymorphic: true
   belongs_to :user
 
+  scope :today, -> { where(created_at: ApplicationController.helpers.current_day_range) }
+
   validates_presence_of :power, :user, :votable
 
   private
