@@ -18,6 +18,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'state_machines-activerecord'
 
+gem 'grape'
+gem 'grape-entity'
+
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
@@ -31,6 +34,7 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'grape-entity-matchers'
 end
 
 group :development do
