@@ -5,12 +5,16 @@ AllCops:
 Documentation:
   Enabled: false
 
-Metrics/LineLength:
-  Max: 100
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Metrics/BlockLength:
   CountComments: false
   Exclude:
     - 'spec/*/*.rb'
+Metrics/LineLength:
+  Max: 100
+
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/api/v1/*.rb'
+Style/FrozenStringLiteralComment:
+  Enabled: false
