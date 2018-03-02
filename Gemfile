@@ -38,5 +38,6 @@ group :test do
 end
 
 group :development do
+  gem 'grape_on_rails_routes'
   gem 'letter_opener'
 end
