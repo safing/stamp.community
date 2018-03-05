@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+# https://github.com/bundler/bundler/issues/4978
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
+  "https://github.com/#{repo_name}.git"
+end
+
 gem 'fix-db-schema-conflicts'
 gem 'pg'
 gem 'rails', '~> 5.1.4'
@@ -19,7 +25,7 @@ gem 'devise'
 gem 'state_machines-activerecord'
 
 gem 'grape'
-gem 'grape-entity'
+gem 'grape-entity', github: 'ruby-grape/grape-entity', branch: 'master'
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -34,7 +40,6 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'grape-entity-matchers'
 end
 
 group :development do
