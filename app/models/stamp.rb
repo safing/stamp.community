@@ -6,4 +6,8 @@ class Stamp < ApplicationRecord
   validates_presence_of :creator, :label, :percentage, :stampable, :state
 
   belongs_to :label
+
+  def domain?
+    stampable_type == 'Domain'
+  end
 end
