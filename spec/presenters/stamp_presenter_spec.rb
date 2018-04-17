@@ -19,5 +19,17 @@ RSpec.describe StampPresenter::Entity do
       expect(subject[:state]).to be_a(String)
       expect(subject[:state]).to eq(stamp.state)
     end
+
+    context 'stampable_type is Domain' do
+      it 'domain as String' do
+        expect(subject[:domain]).to be_a(String)
+        expect(subject[:domain]).to eq(stamp.stampable.name)
+      end
+
+      it 'domain_id as Integer' do
+        expect(subject[:domain_id]).to be_an(Integer)
+        expect(subject[:domain_id]).to eq(stamp.stampable_id)
+      end
+    end
   end
 end

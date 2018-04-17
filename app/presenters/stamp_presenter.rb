@@ -17,6 +17,14 @@ module StampPresenter
       desc: 'State',
       required: true
     }
+
+    expose :domain_id, if: proc { |stamp, _| stamp.domain? } do |stamp, _|
+      stamp.stampable_id
+    end
+
+    expose :domain, if: proc { |stamp, _| stamp.domain? } do |stamp, _|
+      stamp.stampable.name
+    end
   end
 
   class Collection < Grape::Entity
