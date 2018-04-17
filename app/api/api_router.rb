@@ -1,4 +1,6 @@
 class APIRouter < Grape::API
+  include ExceptionHandler
+
   version 'v1', using: :path
 
   format :json
