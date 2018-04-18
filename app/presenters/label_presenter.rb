@@ -25,6 +25,8 @@ module LabelPresenter
              desc: 'the parent label',
              required: false
            }
+
+    expose :stamps, using: StampPresenter::Entity, if: :with_stamps
   end
 
   class Collection < Grape::Entity
