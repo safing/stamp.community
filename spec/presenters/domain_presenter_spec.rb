@@ -2,9 +2,11 @@ require 'spec_helper'
 
 RSpec.describe DomainPresenter::Entity do
   describe '.represent' do
-    subject { DomainPresenter::Entity.represent(domain).as_json }
+    subject { DomainPresenter::Entity.represent(domain, with_stamps: with_stamps).as_json }
+
     let(:domain) { FactoryBot.create(:domain, parent: parent) }
     let(:parent) { nil }
+    let(:with_stamps) { nil }
 
     it 'name as String' do
       expect(subject[:name]).to be_a(String)
@@ -39,6 +41,16 @@ RSpec.describe DomainPresenter::Entity do
 
       it 'does not include parent_name' do
         expect(subject).not_to include(:parent_name)
+      end
+    end
+
+    context 'options[:with_stamps] is true' do
+      let(:with_stamps) { true }
+      let(:domain) { FactoryBot.create(:domain, :with_stamps) }
+
+      it 'presents the domain#stamps' do
+        expect(subject[:stamps]).not_to be_nil
+        expect(subject[:stamps].first[:percentage]).to be_an(Integer)
       end
     end
   end

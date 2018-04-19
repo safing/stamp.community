@@ -25,6 +25,8 @@ module DomainPresenter
         required: false
       }
     end
+
+    expose :stamps, using: StampPresenter::Entity, if: :with_stamps
   end
 
   class Collection < Grape::Entity
