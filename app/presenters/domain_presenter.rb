@@ -1,11 +1,5 @@
 module DomainPresenter
   class Entity < Grape::Entity
-    expose :id, documentation: {
-      type: 'Integer',
-      desc: 'Domain id',
-      required: true
-    }
-
     expose :name, documentation: {
       type: 'String',
       desc: 'Name',

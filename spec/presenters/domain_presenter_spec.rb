@@ -6,11 +6,6 @@ RSpec.describe DomainPresenter::Entity do
     let(:domain) { FactoryBot.create(:domain, parent: parent) }
     let(:parent) { nil }
 
-    it 'id as Integer' do
-      expect(subject[:id]).to be_an(Integer)
-      expect(subject[:id]).to eq(domain.id)
-    end
-
     it 'name as String' do
       expect(subject[:name]).to be_a(String)
       expect(subject[:name]).to eq(domain.name)
