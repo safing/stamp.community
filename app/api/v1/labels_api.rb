@@ -8,6 +8,10 @@ class V1::LabelsAPI < Grape::API
       get do
         present Label.find(params[:id]), with: LabelPresenter::Entity
       end
+
+      get :stamps do
+        present Label.find(params[:id]), with: LabelPresenter::Entity, with_stamps: true
+      end
     end
   end
 end
