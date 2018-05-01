@@ -1,8 +1,12 @@
 <header>
   <nav class="navbar navbar-light bg-light">
     <%= link_to root_url do %>
-      <%= image_tag('basic_logo.png', alt: 'Stamp Logo', width: 30, height: 30) %>
+      <%= image_tag('basic_logo.png', alt: 'Stamp Logo', width: 40, height: 40) %>
     <% end %>
-    <%= link_to 'Sign In', new_user_session_path %>
+    <% if user_signed_in? %>
+      <%= link_to 'Sign Out', destroy_user_session_path, method: 'delete' %>
+    <% else %>
+      <%= link_to 'Sign In', new_user_session_path %>
+    <% end %>
   </nav>
 </header>
