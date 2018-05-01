@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :votes
   has_many :domains, foreign_key: :creator_id
 
+  before_create :add_reputation
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   def voting_power
@@ -15,5 +17,9 @@ class User < ApplicationRecord
 
   def daily_voting_limit
     ENVProxy.required_integer('USER_DAILY_VOTING_LIMIT')
+  end
+
+  def add_reputation
+    self.reputation = ENVProxy.required_integer('USER_INITIAL_REPUTATION') if reputation.nil?
   end
 end

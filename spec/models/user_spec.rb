@@ -1,6 +1,41 @@
 require 'spec_helper'
 
 RSpec.describe User do
+  describe '#create', focus: true do
+    subject { user.save }
+    let(:user) { FactoryBot.build(:user, reputation: reputation) }
+
+    before { allow_required_integer_env('USER_INITIAL_REPUTATION').and_return(0) }
+
+    context 'reputation is nil' do
+      let(:reputation) { nil }
+
+      it 'calls #add_reputation' do
+        expect(user).to receive(:add_reputation).and_call_original
+        subject
+      end
+
+      it 'sets reputation USER_INITIAL_REPUTATION' do
+        subject
+        expect(user.reputation).to eq(0)
+      end
+    end
+
+    context 'reputation is set' do
+      let(:reputation) { 20 }
+
+      it 'calls #add_reputation' do
+        expect(user).to receive(:add_reputation).and_call_original
+        subject
+      end
+
+      it 'does not overwrite the set reputation' do
+        subject
+        expect(user.reputation).to eq(20)
+      end
+    end
+  end
+
   describe '#voting_power' do
     subject { user.voting_power }
     let(:user) { FactoryBot.create(:user, reputation: reputation) }
