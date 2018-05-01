@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stamp</title>
+    <%= stylesheet_link_tag    'devise', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render partial: 'partials/header' %>
+
+    <div class="container-fluid fill">
+      <div class="row justify-content-center d-flex align-content-center fill">
+        <div class="content-wrapper ">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
