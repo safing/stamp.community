@@ -24,12 +24,12 @@
 
 .btn-denied {
   color: white;
-  background-color: #9e004f;
-  border-color: #9e004f;
+  background-color: $red;
+  border-color: $red;
 
   &:hover {
-    background-color: #7e003f;
+    background-color: $red_darken;
     color: white;
-    border-color: #6b0036;
+    border-color: $red_darken_border;
   }
 }
