@@ -10,4 +10,8 @@ class Stamp < ApplicationRecord
   def domain?
     stampable_type == 'Domain'
   end
+
+  def domain
+    stampable if domain?
+  end
 end
