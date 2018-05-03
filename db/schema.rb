@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20171113154430) do
   create_table "domains", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "creator_id"
-    t.string "name"
+    t.string "name", null: false
     t.bigint "parent_id"
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_domains_on_creator_id"
+    t.index ["name"], name: "index_domains_on_name", unique: true
     t.index ["parent_id"], name: "index_domains_on_parent_id"
   end
 
