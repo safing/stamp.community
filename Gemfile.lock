@@ -103,6 +103,8 @@ GEM
     ffi (1.9.23)
     fix-db-schema-conflicts (3.0.2)
       rubocop (>= 0.38.0)
+    font_awesome5_rails (0.3.2)
+      railties (>= 4.2, < 5.3)
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -323,6 +325,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   fix-db-schema-conflicts
+  font_awesome5_rails
   grape
   grape-entity!
   grape_on_rails_routes
