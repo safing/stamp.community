@@ -1,0 +1,45 @@
+<span id='stamps'>
+  <div class='row'>
+    <div class='col-10'>
+      <h2>
+        <%= @stamp.stampable.name %>
+        &nbsp;&nbsp;
+        <button class='btn btn-info'>
+          <%= @stamp.label.name %>
+          &nbsp;&nbsp;&nbsp;
+          <%= @stamp.percentage %><i class='fas fa-percent' data-fa-transform='shrink-6 left-2'></i>
+        </button>
+      </h2>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-6'>
+      <div class='row'>
+        <h5>Upvotes</h5>
+      </div>
+
+      <% @stamp.upvotes.each do |upvote| %>
+        <div class='row'>
+          <div class='col-12'>
+            <%= fa_icon('caret-up', class: 'fa-2x color-green') %>
+            <%= upvote.user.username %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class='col-6'>
+      <div class='row'>
+        <h5>Downvotes</h5>
+      </div>
+
+      <% @stamp.downvotes.each do |downvote| %>
+        <div class='row'>
+          <div class='col-12'>
+            <%= fa_icon('caret-down', class: 'fa-2x color-red') %>
+            <%= downvote.user.username %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</span>
