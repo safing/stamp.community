@@ -25,3 +25,7 @@ end
     FactoryBot.create(:stamp, label: label, stampable: domain, creator: User.first, state: state)
   end
 end
+
+stamp = FactoryBot.create(:stamp)
+
+20.times { FactoryBot.create(:vote, votable: stamp) }
