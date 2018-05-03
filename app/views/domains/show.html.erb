@@ -1,11 +1,11 @@
 <span id='domains'>
   <div class='row'>
-    <div class='col-10 offset-1 offset-right-1'>
+    <div class='col-12'>
       <h2><%= @domain.name %></h2>
     </div>
   </div>
   <div class='row'>
-    <div class='col-4 offset-1'>
+    <div class='col-6'>
       <% @domain.stamps.order(percentage: :desc).each do |stamp| %>
         <button class='btn btn-info'>
           <%= stamp.label.name %>
@@ -15,7 +15,7 @@
       <% end %>
     </div>
     <% if @domain.children.present? %>
-      <div class='col-6 offset-right-1'>
+      <div class='col-6'>
         <h5>Subdomains</h5>
         <% @domain.children.order(name: :asc).each do |child| %>
           <%= link_to child.name, domain_path(child.name) %>
@@ -23,7 +23,7 @@
       </div>
     <% end %>
     <% if @domain.parent.present? %>
-      <div class='col-3 offset-right-1'>
+      <div class='col-6'>
         <h5>Top Level Domain</h5>
         <%= link_to @domain.parent.name, domain_path(@domain.parent.name) %>
       </div>
