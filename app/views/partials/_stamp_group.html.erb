@@ -1,0 +1,14 @@
+<% if @domain.stamps.send(title.parameterize.underscore).present? %>
+  <div class='row'>
+    <h5>
+      <%= title %>
+      &nbsp;
+      <%= fa_icon('angle-right') %>
+    </h5>
+    <span style='<%= "display: none;" if hidden ||= nil %>'>
+      <% @domain.stamps.send(title.parameterize.underscore).order(percentage: :desc).each do |stamp| %>
+        <%= render partial: 'partials/stamp', locals: { stamp: stamp, btn_class: btn_class ||= 'btn-info' } %>
+      <% end %>
+    </span>
+  </div>
+<% end %>

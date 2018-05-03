@@ -4,21 +4,25 @@
       <h2><%= @domain.name %></h2>
     </div>
   </div>
+
   <div class='row'>
     <div class='col-6'>
-      <% @domain.stamps.order(percentage: :desc).each do |stamp| %>
-        <button class='btn btn-info'>
-          <%= stamp.label.name %>
-          &nbsp;&nbsp;&nbsp;
-          <%= stamp.percentage %><i class='fas fa-percent' data-fa-transform='shrink-6 left-2'></i>
-        </button>
-      <% end %>
+      <div class='row'>
+        <% @domain.stamps.accepted.order(percentage: :desc).each do |stamp| %>
+        <%= render partial: 'partials/stamp', locals: { stamp: stamp, btn_class: 'btn-accepted' } %>
+        <% end %>
+      </div>
+
+      <%= render partial: 'partials/stamp_group', locals: { title: 'In Progress' } %>
+      <%= render partial: 'partials/stamp_group', locals: { title: 'Archived', hidden: true, btn_class: 'btn-secondary' } %>
+      <%= render partial: 'partials/stamp_group', locals: { title: 'Overruled', hidden: true, btn_class: 'btn-secondary' } %>
+      <%= render partial: 'partials/stamp_group', locals: { title: 'Denied', hidden: true, btn_class: 'btn-denied' } %>
     </div>
     <% if @domain.children.present? %>
       <div class='col-6'>
         <h5>Subdomains</h5>
         <% @domain.children.order(name: :asc).each do |child| %>
-          <%= link_to child.name, domain_path(child.name) %>
+          <%= link_to child.name, domain_path(child.name) %><br>
         <% end %>
       </div>
     <% end %>
@@ -29,4 +33,6 @@
       </div>
     <% end %>
   </div>
+
+
 </span>

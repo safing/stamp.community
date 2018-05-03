@@ -1,0 +1,35 @@
+.btn-accepted {
+  color: white;
+  background-color: #9e009e;
+  border-color: #9e009e;
+
+  &:hover {
+    background-color: #7e007e;
+    color: white;
+    border-color: #6b006b;
+  }
+}
+
+.btn-in-progress {
+  color: white;
+  background-color: #009e9e;
+  border-color: #009e9e;
+
+  &:hover {
+    background-color: #007e7e;
+    color: white;
+    border-color: #006b6b;
+  }
+}
+
+.btn-denied {
+  color: white;
+  background-color: #9e004f;
+  border-color: #9e004f;
+
+  &:hover {
+    background-color: #7e003f;
+    color: white;
+    border-color: #6b0036;
+  }
+}
