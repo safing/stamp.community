@@ -6,4 +6,12 @@ module Votable
     belongs_to :stampable, polymorphic: true
     has_many :votes, as: :votable
   end
+
+  def upvotes
+    votes.where(accept: true)
+  end
+
+  def downvotes
+    votes.where(accept: false)
+  end
 end
