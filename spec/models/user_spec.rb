@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe User do
-  describe '#create', focus: true do
+  describe '#create' do
     subject { user.save }
     let(:user) { FactoryBot.build(:user, reputation: reputation) }
 
