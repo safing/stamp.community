@@ -1,38 +1,26 @@
-<span id='domains'>
-  <div class='row'>
-    <div class='col-12'>
-      <h2><%= @domain.name %></h2>
-    </div>
+<div id='domains' class='row'>
+  <div class='col-10'>
+    <h2><%= @domain.name %></h2>
   </div>
-
-  <div class='row'>
-    <div class='col-6'>
-      <div class='row'>
-        <% @domain.stamps.accepted.order(percentage: :desc).each do |stamp| %>
-        <%= render partial: 'partials/stamp', locals: { stamp: stamp, btn_class: 'btn-accepted' } %>
-        <% end %>
-      </div>
-
-      <%= render partial: 'partials/stamp_group', locals: { title: 'In Progress' } %>
-      <%= render partial: 'partials/stamp_group', locals: { title: 'Archived', hidden: true, btn_class: 'btn-secondary' } %>
-      <%= render partial: 'partials/stamp_group', locals: { title: 'Overruled', hidden: true, btn_class: 'btn-secondary' } %>
-      <%= render partial: 'partials/stamp_group', locals: { title: 'Denied', hidden: true, btn_class: 'btn-denied' } %>
-    </div>
-    <% if @domain.children.present? %>
-      <div class='col-6'>
-        <h5>Subdomains</h5>
-        <% @domain.children.order(name: :asc).each do |child| %>
-          <%= link_to child.name, domain_path(child.name) %><br>
-        <% end %>
-      </div>
-    <% end %>
-    <% if @domain.parent.present? %>
-      <div class='col-6'>
-        <h5>Top Level Domain</h5>
-        <%= link_to @domain.parent.name, domain_path(@domain.parent.name) %>
-      </div>
-    <% end %>
+  <div class='col-md-6 col-sm-12'>
+    <%= render partial: 'partials/stamp_group', locals: { title: 'Accepted', header: false, btn_class: 'btn-accepted' } %>
+    <%= render partial: 'partials/stamp_group', locals: { title: 'In Progress' } %>
+    <%= render partial: 'partials/stamp_group', locals: { title: 'Archived', hidden: true, btn_class: 'btn-secondary' } %>
+    <%= render partial: 'partials/stamp_group', locals: { title: 'Overruled', hidden: true, btn_class: 'btn-secondary' } %>
+    <%= render partial: 'partials/stamp_group', locals: { title: 'Denied', hidden: true, btn_class: 'btn-denied' } %>
   </div>
-
-
-</span>
+  <% if @domain.children.present? %>
+    <div class='col-md-6 col-sm-12'>
+      <h5>Subdomains</h5>
+      <% @domain.children.order(name: :asc).each do |child| %>
+        <%= link_to child.name, domain_path(child.name) %><br>
+      <% end %>
+    </div>
+  <% end %>
+  <% if @domain.parent.present? %>
+    <div class='col-md-6 col-sm-12'>
+      <h5>Top Level Domain</h5>
+      <%= link_to @domain.parent.name, domain_path(@domain.parent.name) %>
+    </div>
+  <% end %>
+</div>
