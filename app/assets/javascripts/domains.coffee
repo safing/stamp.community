@@ -1,5 +1,4 @@
 $ ->
-  console.log('weee')
-  preview = $("#preview-url")
-  $('h5').on 'click', ->
-    $(this).siblings('span').toggle()
+  $('h5.collapsible').on 'click', ->
+    $(this).next('span').toggleClass('hidden')
+    $(this).children().toggleClass('fa-angle-up').toggleClass('fa-angle-down')
