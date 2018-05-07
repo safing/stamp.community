@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - db/**/*.rb
+    - lib/templates/**/*.rb
 
 Documentation:
   Enabled: false
