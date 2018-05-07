@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe V1::LabelsAPI, type: :request do
   let!(:labels) { FactoryBot.create_list(:label, 5) }
   let(:label) { labels.first }

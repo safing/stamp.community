@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe V1::DomainsAPI, type: :request do
   let!(:domains) { FactoryBot.create_list(:domain, 10) }
   let(:domain) { domains.first }

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Vote do
   describe '#create' do
     subject { vote.save }

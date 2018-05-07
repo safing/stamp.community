@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe ENVProxy do
   describe '.required' do
     subject { ENVProxy.required('SOME_KEY') }

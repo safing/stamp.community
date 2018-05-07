@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe DomainPresenter::Entity do
   describe '.represent' do
     subject { DomainPresenter::Entity.represent(domain, with_stamps: with_stamps).as_json }

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Stamp do
   describe '#domain?' do
     subject { stamp.domain? }

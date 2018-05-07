@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe LabelPresenter::Entity do
   describe '.represent' do
     subject { LabelPresenter::Entity.represent(label, with_stamps: with_stamps).as_json }

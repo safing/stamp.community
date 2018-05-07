@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe V1::StampsAPI, type: :request do
   # initialize test data
   let!(:stamps) { FactoryBot.create_list(:stamp, 10) }

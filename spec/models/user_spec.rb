@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe User do
   describe '#create' do
     subject { user.save }

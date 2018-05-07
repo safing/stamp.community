@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe UserPresenter::Entity do
   describe '.represent' do
     subject { UserPresenter::Entity.represent(user).as_json }
