@@ -1,4 +1,4 @@
-RSpec.describe User do
+RSpec.describe User, type: :model do
   describe '#create' do
     subject { user.save }
     let(:user) { FactoryBot.build(:user, reputation: reputation) }

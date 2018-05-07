@@ -1,4 +1,4 @@
-RSpec.describe Vote do
+RSpec.describe Vote, type: :model do
   describe '#create' do
     subject { vote.save }
     let(:vote) { FactoryBot.build(:vote) }

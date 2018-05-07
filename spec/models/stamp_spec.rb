@@ -1,4 +1,4 @@
-RSpec.describe Stamp do
+RSpec.describe Stamp, type: :model do
   describe '#domain?' do
     subject { stamp.domain? }
     let(:stamp) { FactoryBot.create(:stamp) }

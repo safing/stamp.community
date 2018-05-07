@@ -1,2 +1,2 @@
-RSpec.describe Label do
+RSpec.describe Label, type: :model do
 end
