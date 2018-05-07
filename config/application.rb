@@ -19,7 +19,8 @@ Bundler.require(*Rails.groups)
 module StampCommunity
   class Application < Rails::Application
     config.generators do |g|
-      g.test_framework :rspec
+      g.test_framework  :rspec
+      g.helper          false
     end
 
     console do
