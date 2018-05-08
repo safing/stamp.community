@@ -1,4 +1,21 @@
 RSpec.describe Vote, type: :model do
+  it 'has a valid factory' do
+    expect(FactoryBot.create(:vote)).to be_valid
+  end
+
+  describe 'relations' do
+    subject { FactoryBot.create(:vote) }
+
+    it { is_expected.to belong_to(:user).required(true) }
+    it { is_expected.to belong_to(:votable).required(true) }
+  end
+
+  describe 'validations' do
+    subject { FactoryBot.create(:vote) }
+
+    it { is_expected.to validate_presence_of(:power) }
+  end
+
   describe '#create' do
     subject { vote.save }
     let(:vote) { FactoryBot.build(:vote) }
