@@ -18,6 +18,8 @@ Bundler.require(*Rails.groups)
 
 module StampCommunity
   class Application < Rails::Application
+    config.load_defaults 5.1
+
     config.generators do |g|
       g.test_framework  :rspec
       g.helper          false
