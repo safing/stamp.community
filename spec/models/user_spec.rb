@@ -1,4 +1,8 @@
 RSpec.describe User, type: :model do
+  it 'has a valid factory' do
+    expect(FactoryBot.create(:user)).to be_valid
+  end
+
   describe 'validations' do
   end
 
@@ -9,6 +13,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'indexes' do
+    it { is_expected.to have_db_index(:confirmation_token).unique }
     it { is_expected.to have_db_index(:email).unique }
     it { is_expected.to have_db_index(:reset_password_token).unique }
     it { is_expected.to have_db_index(:unlock_token).unique }

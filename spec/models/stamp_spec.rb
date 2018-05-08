@@ -1,6 +1,10 @@
 RSpec.describe Stamp, type: :model do
   it_behaves_like 'a votable model'
 
+  it 'has a valid factory' do
+    expect(FactoryBot.create(:stamp)).to be_valid
+  end
+
   describe 'relations' do
     it { is_expected.to belong_to(:label).required(true) }
   end
@@ -13,6 +17,10 @@ RSpec.describe Stamp, type: :model do
     end
     it { is_expected.to validate_presence_of(:percentage) }
     it { is_expected.to validate_presence_of(:state) }
+  end
+
+  describe 'database' do
+    it { is_expected.to have_db_index(:label_id) }
   end
 
   describe '#domain?' do
