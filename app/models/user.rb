@@ -1,7 +1,7 @@
 class User < ApplicationRecord
+  has_many :domains, foreign_key: :creator_id
   has_many :stamps, foreign_key: :creator_id
   has_many :votes
-  has_many :domains, foreign_key: :creator_id
 
   before_create :add_reputation
 

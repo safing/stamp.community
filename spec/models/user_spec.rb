@@ -1,4 +1,19 @@
 RSpec.describe User, type: :model do
+  describe 'validations' do
+  end
+
+  describe 'relations' do
+    it { is_expected.to have_many(:votes) }
+    it { is_expected.to have_many(:stamps).with_foreign_key(:creator_id) }
+    it { is_expected.to have_many(:domains).with_foreign_key(:creator_id) }
+  end
+
+  describe 'indexes' do
+    it { is_expected.to have_db_index(:email).unique }
+    it { is_expected.to have_db_index(:reset_password_token).unique }
+    it { is_expected.to have_db_index(:unlock_token).unique }
+  end
+
   describe '#create' do
     subject { user.save }
     let(:user) { FactoryBot.build(:user, reputation: reputation) }
