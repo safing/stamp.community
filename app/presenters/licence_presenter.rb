@@ -17,6 +17,8 @@ module LicencePresenter
       desc: 'Description',
       required: true
     }
+
+    expose :labels, using: LabelPresenter::Entity, if: :with_labels
   end
 
   class Collection < Grape::Entity
