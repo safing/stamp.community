@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113154430) do
+ActiveRecord::Schema.define(version: 20180507114923) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,10 +43,19 @@ ActiveRecord::Schema.define(version: 20171113154430) do
   create_table "labels", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "description"
+    t.bigint "licence_id"
     t.string "name"
     t.bigint "parent_id"
     t.datetime "updated_at", null: false
+    t.index ["licence_id"], name: "index_labels_on_licence_id"
     t.index ["parent_id"], name: "index_labels_on_parent_id"
+  end
+
+  create_table "licences", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.text "name", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stamps", force: :cascade do |t|

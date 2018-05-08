@@ -4,6 +4,7 @@ class CreateLabels < ActiveRecord::Migration[5.1]
       t.string :name
       t.text :description
       t.references :parent, references: :labels
+      t.references :licence
 
       t.timestamps
     end
