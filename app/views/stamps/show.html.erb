@@ -1,7 +1,9 @@
 <div id='stamps' class='row'>
   <div class='col-12'>
     <h2>
-      <%= @stamp.stampable.name %>
+      <%= image_tag 'stamp_j3rik0_no_text.png', style: 'height: 40px;' %>
+      <%= link_to @stamp.stampable.name, domain_path(@stamp.stampable.name) %>
+
       &nbsp;&nbsp;
       <button class='btn btn-info'>
         <%= @stamp.label.name %>
