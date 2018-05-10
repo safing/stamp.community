@@ -1,4 +1,7 @@
 @import 'bootstrap';
+@import 'font_awesome5';
+
+@import 'partials/variables';
 
 html, body {
   height: 100%;
@@ -13,4 +16,8 @@ html, body {
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0 0 15px #ccc;
+}
+
+.alert:first-child {
+  margin-top: 1em;
 }

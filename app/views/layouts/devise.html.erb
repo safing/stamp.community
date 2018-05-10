@@ -10,6 +10,12 @@
     <%= render partial: 'partials/header' %>
 
     <div class="container-fluid fill">
+      <% flash.each do |type, content| %>
+        <div class="container">
+          <%= render 'partials/flash', type: type, content: content %>
+        </div>
+      <% end %>
+
       <div class="row justify-content-center align-content-center fill">
         <div class="content-wrapper form-group">
           <%= yield %>
