@@ -29,6 +29,11 @@ gem 'state_machines-activerecord'
 gem 'grape'
 gem 'grape-entity', github: 'ruby-grape/grape-entity', branch: 'master'
 
+group :development do
+  gem 'grape_on_rails_routes'
+  gem 'letter_opener'
+end
+
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
@@ -44,9 +49,4 @@ group :test do
   gem 'database_cleaner'
   # check if the release is out yet https://github.com/thoughtbot/shoulda-matchers/milestone/13
   gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers', branch: 'master'
-end
-
-group :development do
-  gem 'grape_on_rails_routes'
-  gem 'letter_opener'
 end

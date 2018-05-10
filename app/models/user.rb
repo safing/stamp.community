@@ -5,7 +5,8 @@ class User < ApplicationRecord
 
   before_create :add_reputation
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  devise :confirmable, :database_authenticatable, :registerable, :recoverable,
+         :rememberable, :validatable
 
   def voting_power
     reputation <= 0 ? 0 : reputation.log10_power
