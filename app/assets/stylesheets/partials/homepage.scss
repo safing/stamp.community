@@ -1,0 +1,13 @@
+.homepage {
+  .row {
+    margin-top: 7em;
+
+    &.content-header {
+      margin-top: 0;
+    }
+  }
+
+  .row:last-child {
+    padding-bottom: 10em;
+  }
+}
