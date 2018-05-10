@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507114923) do
+ActiveRecord::Schema.define(version: 20180510122102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_keys", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "token"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["token"], name: "index_api_keys_on_token", unique: true
+    t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
 
   create_table "data_stamps", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -107,6 +116,7 @@ ActiveRecord::Schema.define(version: 20180507114923) do
     t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
   end
 
+  add_foreign_key "api_keys", "users"
   add_foreign_key "data_stamps", "users", column: "creator_id"
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "domains", "users", column: "creator_id"

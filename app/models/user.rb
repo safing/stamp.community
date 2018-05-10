@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_one :api_key
+
   has_many :domains, foreign_key: :creator_id
   has_many :stamps, foreign_key: :creator_id
   has_many :votes

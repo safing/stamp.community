@@ -7,9 +7,10 @@ RSpec.describe User, type: :model do
   end
 
   describe 'relations' do
-    it { is_expected.to have_many(:votes) }
-    it { is_expected.to have_many(:stamps).with_foreign_key(:creator_id) }
+    it { is_expected.to have_one(:api_key) }
     it { is_expected.to have_many(:domains).with_foreign_key(:creator_id) }
+    it { is_expected.to have_many(:stamps).with_foreign_key(:creator_id) }
+    it { is_expected.to have_many(:votes) }
   end
 
   describe 'indexes' do
