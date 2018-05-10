@@ -10,6 +10,10 @@
     <%= render partial: 'partials/header' %>
 
     <div class='container'>
+      <% flash.each do |type, content| %>
+        <%= render 'partials/flash', type: type, content: content %>
+      <% end %>
+
       <%= yield %>
     </div>
   </body>
