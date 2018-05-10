@@ -12,7 +12,8 @@ module Votable
       state_machine initial: :in_progress do
         transition in_progress: :accepted, on: :accept
         transition in_progress: :denied, on: :deny
-        transition %i[accepted denied] => :archived, on: :archive
+        transition accepted: :archived, on: :archive
+        # admins / mods can overrule stamps
         transition %i[accepted denied] => :overruled, on: :overrule
       end
     end
