@@ -8,15 +8,6 @@
 @import 'partials/domains';
 @import 'partials/homepage';
 @import 'partials/stamps';
+@import 'partials/users';
 
-.row {
-  padding: 10px 0 0 0;
-}
-
-.hidden {
-  display: none;
-}
-
-.alert:first-child {
-  margin-top: 1em;
-}
+@import 'partials/global';
