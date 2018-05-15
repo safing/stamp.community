@@ -25,4 +25,12 @@ class User < ApplicationRecord
   def add_reputation
     self.reputation = ENVProxy.required_integer('USER_INITIAL_REPUTATION') if reputation.nil?
   end
+
+  def top_labels(limit: 5)
+    stamps.joins(:label)
+          .group('labels.name')
+          .select('labels.name, COUNT(labels.name)')
+          .order('COUNT(labels.name) DESC, labels.name ASC')
+          .limit(limit)
+  end
 end
