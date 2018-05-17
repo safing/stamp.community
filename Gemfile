@@ -32,6 +32,7 @@ gem 'grape-entity', github: 'ruby-grape/grape-entity', branch: 'master'
 group :development do
   gem 'grape_on_rails_routes'
   gem 'letter_opener'
+  gem 'seedbank'
 end
 
 group :development, :test do

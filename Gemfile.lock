@@ -285,6 +285,7 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    seedbank (0.4.0)
     shellany (0.0.1)
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
@@ -350,6 +351,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   sdoc (~> 0.4.0)
+  seedbank
   shoulda-matchers!
   state_machines-activerecord
   turbolinks
