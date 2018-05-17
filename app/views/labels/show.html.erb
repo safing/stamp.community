@@ -1,15 +1,36 @@
 <span id='labels'>
   <div class='row'>
-    <div class='col-12'>
+    <div class='col-12 pt-4 pb-4'>
       <h2><%= @label.name %></h2>
     </div>
 
-    <div class='col-5 description'>
+    <div class='col-sm-12 col-md-5 offset-right-7'>
       <p><%= @label.description %></p>
     </div>
 
-    <div class='col-5 offset-2'>
-      <h4>Top Contributors</h4>
+    <div class='col-sm-12 col-md-5 offset-right-2 mt-4'>
+      <h5 class='mb-3'><%= image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;' %> In Progress</h5>
+
+      <% if @label.stamps_in_progress.exists? %>
+        <% @label.stamps_in_progress.each do |stamp| %>
+          <div class='row label bg-light-2'>
+            <div class='col-12 align-self-center'>
+              <%= link_to stamp_path(stamp.id) do %>
+                <%= fa_icon 'link' %>
+                <%= stamp.domain.name %>
+
+                <span style='float: right;'>
+                  <%= stamp.percentage %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class='col-sm-12 col-md-5 mt-4'>
+      <h5 class='mb-3'>Top Contributors</h5>
 
       <% @label.top_contributors.each do |contributor| %>
         <div class='row label bg-light-2'>
