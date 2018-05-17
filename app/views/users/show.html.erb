@@ -11,7 +11,7 @@
     </div>
     <div class='col-5'>
       <% @user.top_labels.each do |label| %>
-        <div class='row top-label bg-light-2'>
+        <div class='row label bg-light-2'>
           <div class='col-12 align-self-center'>
             <%= link_to label_path(1) do %>
               <div class='btn btn-primary'>
@@ -21,7 +21,7 @@
             <span style='float: right;'>
               <%= image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;' %>
               <%= label.count %>
-            </span style='float: right;'>
+            </span>
           </div>
         </div>
       <% end %>

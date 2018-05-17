@@ -1,0 +1,31 @@
+<span id='labels'>
+  <div class='row'>
+    <div class='col-12'>
+      <h2><%= @label.name %></h2>
+    </div>
+
+    <div class='col-5 description'>
+      <p><%= @label.description %></p>
+    </div>
+
+    <div class='col-5 offset-2'>
+      <h4>Top Contributors</h4>
+
+      <% @label.top_contributors.each do |contributor| %>
+        <div class='row label bg-light-2'>
+          <div class='col-12 align-self-center'>
+            <%= link_to user_path(contributor.creator_id) do %>
+              <%= fa_icon 'user' %>
+              <%# TODO - this is just wrong, include the user in the query %>
+              <%= User.find(contributor.creator_id).username %>
+            <% end %>
+            <span style='float: right;'>
+              <%= image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;' %>
+              <%= contributor.count %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</span>
