@@ -10,7 +10,7 @@ class Label < ApplicationRecord
         .select('stamps.creator_id, COUNT(stamps.creator_id)')
         .where(stamps: { label_id: id })
         .group('stamps.creator_id')
-        .order('COUNT(stamps.creator_id)')
-        .first(5)
+        .order('COUNT(stamps.creator_id) DESC')
+        .limit(5)
   end
 end
