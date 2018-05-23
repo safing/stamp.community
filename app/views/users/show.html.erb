@@ -13,7 +13,7 @@
       <% @user.top_labels.each do |label| %>
         <div class='row label bg-light-2'>
           <div class='col-12 align-self-center'>
-            <%= link_to label_path(1) do %>
+            <%= link_to label_path(label) do %>
               <div class='btn btn-primary'>
                 <%= label.name %>
               </div>

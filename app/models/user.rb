@@ -27,10 +27,11 @@ class User < ApplicationRecord
   end
 
   def top_labels(limit: 5)
-    stamps.joins(:label)
-          .group('labels.name')
-          .select('labels.name, COUNT(labels.name)')
-          .order('COUNT(labels.name) DESC, labels.name ASC')
-          .limit(limit)
+    Label.joins(:stamps)
+         .where(stamps: { creator_id: id })
+         .group('labels.id, labels.name')
+         .select('labels.name, labels.id, COUNT(labels.name)')
+         .order('COUNT(labels.name) DESC, labels.name ASC')
+         .limit(limit)
   end
 end
