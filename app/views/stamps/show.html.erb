@@ -44,7 +44,9 @@
             <%= render partial: 'votes/partials/upvote', locals: { power: upvote.power }  %>
           </div>
           <div class='col-11 align-self-center'>
-            <%= upvote.user.username %>
+            <%= link_to user_path(upvote.user), class: 'default-color' do %>
+              <%= upvote.user.username %>
+            <% end %>
           </div>
         </div>
         <% end %>
@@ -73,7 +75,9 @@
               <%= render partial: 'votes/partials/downvote', locals: { power: downvote.power }  %>
             </div>
             <div class='col-11 align-self-center'>
-              <%= downvote.user.username %>
+              <%= link_to user_path(downvote.user), class: 'default-color' do %>
+                <%= downvote.user.username %>
+              <% end %>
             </div>
           </div>
         <% end %>
