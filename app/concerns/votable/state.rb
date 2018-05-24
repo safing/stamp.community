@@ -3,11 +3,11 @@ module Votable
     extend ActiveSupport::Concern
 
     included do
-      scope :accepted, -> { where(state: 'accepted') }
-      scope :archived, -> { where(state: 'archived') }
-      scope :denied, -> { where(state: 'denied') }
-      scope :in_progress, -> { where(state: 'in_progress') }
-      scope :overruled, -> { where(state: 'overruled') }
+      scope :accepted, -> { with_state(:accepted) }
+      scope :archived, -> { with_state(:archived) }
+      scope :denied, -> { with_state(:denied) }
+      scope :in_progress, -> { with_state(:in_progress) }
+      scope :overruled, -> { with_state(:overruled) }
 
       state_machine initial: :in_progress do
         transition in_progress: :accepted, on: :accept
