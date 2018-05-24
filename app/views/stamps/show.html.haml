@@ -35,7 +35,7 @@
             .col-12.lead.pb-2
               = link_to user_path(@stamp.creator), class: 'default-color' do
                 = @stamp.creator.username
-            = render partial: 'users/partials/reputation_row', locals: { user: @stamp.creator }
+            = render partial: 'users/partials/power_rep', locals: { user: @stamp.creator }
   .row
     .col-6
       .row.collapsible

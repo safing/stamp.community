@@ -4,7 +4,7 @@
       .profile-holder.border.rounded
         = render partial: 'users/partials/profile_image', locals: { size: '7x' }
         .row
-          = render partial: 'users/partials/reputation_row', locals: { left_col_size: 5, user: @user }
+          = render partial: 'users/partials/power_rep', locals: { left_col_size: 5, user: @user }
     = render partial: 'users/partials/description'
     = render partial: 'users/partials/stats'
 
