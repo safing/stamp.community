@@ -13,4 +13,8 @@ class Label < ApplicationRecord
         .order('COUNT(stamps.creator_id) DESC')
         .limit(5)
   end
+
+  def stamps_in_progress
+    stamps.in_progress.order(percentage: :desc).limit(5)
+  end
 end
