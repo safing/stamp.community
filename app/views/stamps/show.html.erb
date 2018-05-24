@@ -1,43 +1,83 @@
-<div id='stamps' class='row'>
-  <div class='col-12'>
-    <h2>
-      <%= image_tag 'stamp_j3rik0_no_text.png', style: 'height: 40px;' %>
-      <%= link_to @stamp.stampable.name, domain_path(@stamp.stampable.name) %>
-
-      &nbsp;&nbsp;
-      <button class='btn btn-info'>
+<span id='stamps'>
+  <div class='row'>
+    <div class='col-sm-4 col-md-2 text-center'>
+      <%= image_tag 'stamp_intro_j3rik0_no_stamp.png', style: 'height: 100px;' %>
+    </div>
+    <div class='col-sm-8 col-md-5 align-self-center'>
+      <h2>
+        <%= link_to domain_path(@stamp.stampable.name) do %>
+          <%= fa_icon 'link' %>
+          <%= @stamp.stampable.name %>
+        <% end %>
+      </h2>
+    </div>
+    <div class='col-sm-4 col-md-2 align-self-center text-center'>
+      <%= image_tag 'stamp_j3rik0_no_text_icon.png' %>
+    </div>
+    <div class='col-sm-8 col-md-3 align-self-center'>
+      <%= link_to label_path(@stamp.label), class: 'btn btn-primary' do %>
         <%= @stamp.label.name %>
         &nbsp;&nbsp;&nbsp;
         <%= @stamp.percentage %><i class='fas fa-percent' data-fa-transform='shrink-6 left-2'></i>
-      </button>
-    </h2>
-  </div>
-  <div class='col-6'>
-    <div class='row'>
-      <h5>Upvotes</h5>
+      <% end %>
     </div>
-
-    <% @stamp.upvotes.each do |upvote| %>
-      <div class='row'>
-        <div class='col-12'>
-          <%= fa_icon('caret-up', class: 'fa-2x color-green') %>
-          <%= upvote.user.username %>
+  </div>
+  <div class='row'>
+    <div class='col-6'>
+      <div class='row collapsible'>
+        <div class='col-1'>
+          <%= fa_icon('angle-down') %>
+        </div>
+        <div class='col-1'>
+          <%= render partial: 'votes/partials/upvote', locals: { power: @stamp.upvote_power }  %>
+        </div>
+        <div class='col-10'>
+          <h5>
+            Upvotes
+          </h5>
         </div>
       </div>
-    <% end %>
-  </div>
-  <div class='col-6'>
-    <div class='row'>
-      <h5>Downvotes</h5>
+      <span class='hidden'>
+        <% @stamp.upvotes.ordered.each do |upvote| %>
+        <div class='row'>
+          <div class='col-1'>
+            <%= render partial: 'votes/partials/upvote', locals: { power: upvote.power }  %>
+          </div>
+          <div class='col-11 align-self-center'>
+            <%= upvote.user.username %>
+          </div>
+        </div>
+        <% end %>
+      </span>
     </div>
 
-    <% @stamp.downvotes.each do |downvote| %>
-      <div class='row'>
-        <div class='col-12'>
-          <%= fa_icon('caret-down', class: 'fa-2x color-red') %>
-          <%= downvote.user.username %>
+    <div class='col-6'>
+      <div class='row collapsible'>
+        <div class='col-1'>
+          <%= fa_icon('angle-down') %>
+        </div>
+        <div class='col-1'>
+          <%= render partial: 'votes/partials/downvote', locals: { power: @stamp.downvote_power }  %>
+        </div>
+        <div class='col-10'>
+          <h5>
+            Downvotes
+          </h5>
         </div>
       </div>
-    <% end %>
+
+      <span class='hidden'>
+        <% @stamp.downvotes.ordered.each do |downvote| %>
+          <div class='row'>
+            <div class='col-1'>
+              <%= render partial: 'votes/partials/downvote', locals: { power: downvote.power }  %>
+            </div>
+            <div class='col-11 align-self-center'>
+              <%= downvote.user.username %>
+            </div>
+          </div>
+        <% end %>
+      </span>
+    </div>
   </div>
-</div>
+</span>

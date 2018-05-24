@@ -15,4 +15,12 @@ module Votable
   def downvotes
     votes.where(accept: false)
   end
+
+  def upvote_power
+    @upvote_power ||= upvotes.sum(:power)
+  end
+
+  def downvote_power
+    @downvote_power ||= downvotes.sum(:power)
+  end
 end
