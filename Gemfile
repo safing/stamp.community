@@ -15,6 +15,7 @@ gem 'font_awesome5_rails'
 gem 'sass-rails'
 
 gem 'coffee-rails'
+gem 'haml-rails'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'turbolinks'
