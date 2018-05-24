@@ -22,6 +22,39 @@
       <% end %>
     </div>
   </div>
+
+  <div class='row'>
+    <div class='col-4 offset-right-4'>
+      <%= @stamp.state %>
+    </div>
+
+    <div class='col-4'>
+      <h5>Created by</h5>
+      <div class='row border rounded'>
+        <div class='col-4 align-self-center'>
+          <%= render partial: 'users/partials/profile_image', locals: { size: '3x' } %>
+        </div>
+        <div class='col-8'>
+          <div class='row'>
+            <div class='col-12 lead'>
+              <%= link_to user_path(@stamp.creator), class: 'default-color' do %>
+                <%= @stamp.creator.username %>
+              <% end %>
+            </div>
+          </div>
+          <div class='row reputation-holder'>
+            <div class='col-4 voting-power'>
+              💪 <%= @stamp.creator.voting_power %>
+            </div>
+            <div class='col-8'>
+              <%= @stamp.creator.reputation %> <span class='small text-muted'>REP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class='row'>
     <div class='col-6'>
       <div class='row collapsible'>

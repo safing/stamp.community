@@ -1,3 +1,17 @@
+#stamps {
+  .row:nth-child(2) {
+    padding: 20px 0;
+
+    .row {
+      padding: 15px 0;
+
+      .row {
+        padding: 5px 0;
+      }
+    }
+  }
+}
+
 .btn-accepted {
   color: white;
   background-color: #9e009e;
