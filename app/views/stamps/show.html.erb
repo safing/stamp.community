@@ -5,7 +5,7 @@
     </div>
     <div class='col-sm-8 col-md-5 align-self-center'>
       <h2>
-        <%= link_to domain_path(@stamp.stampable.name) do %>
+        <%= link_to domain_path(@stamp.stampable.name), class: 'default-color' do %>
           <%= fa_icon 'link' %>
           <%= @stamp.stampable.name %>
         <% end %>

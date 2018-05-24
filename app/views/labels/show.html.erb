@@ -19,7 +19,7 @@
         <% @label.stamps_in_progress.each do |stamp| %>
           <div class='row label bg-light-2'>
             <div class='col-12 align-self-center'>
-              <%= link_to stamp_path(stamp.id) do %>
+              <%= link_to stamp_path(stamp.id), class: 'default-color' do %>
                 <%= fa_icon 'link' %>
                 <%= stamp.domain.name %>
 
@@ -43,7 +43,7 @@
       <% @label.top_contributors.each do |contributor| %>
         <div class='row label bg-light-2'>
           <div class='col-12 align-self-center'>
-            <%= link_to user_path(contributor.creator_id) do %>
+            <%= link_to user_path(contributor.creator_id), class: 'default-color' do %>
               <%= fa_icon 'user' %>
               <%# TODO - this is just wrong, include the user in the query %>
               <%= User.find(contributor.creator_id).username %>
