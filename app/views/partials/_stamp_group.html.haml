@@ -1,0 +1,12 @@
+- if @domain.stamps.send(title.parameterize.underscore).present?
+  - if local_assigns.fetch :header, true
+    %h5.collapsible
+      - if collapsed ||= false
+        = fa_icon('angle-down')
+      - else
+        = fa_icon('angle-up')
+       
+      \#{title}
+  %span{:class => "#{'hidden' if collapsed}"}
+    - @domain.stamps.send(title.parameterize.underscore).order(percentage: :desc).each do |stamp|
+      = render partial: 'partials/stamp', locals: { stamp: stamp, btn_class: btn_class ||= 'btn-info' }

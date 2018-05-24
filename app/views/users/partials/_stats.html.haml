@@ -1,0 +1,43 @@
+.col-sm-12.col-md-3
+  .row
+    %h5
+      = fa_icon 'chart-bar', type: :regular
+        Stats
+  .row
+    .col-2.p-0.text-center
+      = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;'
+    .col-10
+      = @user.stamps.count
+       
+      %span.small.text-muted stamps
+  .row.align-items-center
+    .col-2.p-0.text-center
+      = fa_icon 'sort', style: 'font-size: 1.3em;'
+    .col-10
+      = @user.votes.count
+       
+      %span.small.text-muted cast votes
+  .row
+    .col-2.p-0.text-center
+      = fa_icon 'link', style: 'font-size: 1.1em;'
+    .col-10
+      = @user.domains.count
+       
+      %span.small.text-muted domains
+  .row.user-stats
+    %h5
+      = fa_icon 'user-check', style: 'font-size: 0.8em;'
+        User
+  .row.align-items-center
+    .col-2.p-0.text-center
+      = fa_icon 'calendar-alt', style: 'font-size: 1em;'
+    .col-10
+      = time_ago_in_words @user.created_at
+       
+      %span.small.text-muted ago
+  .row
+    .col-2.p-0.text-center
+      = fa_icon 'chart-pie', style: 'font-size: 1em;'
+    .col-10
+      67 % 
+      %span.small.text-muted success rate

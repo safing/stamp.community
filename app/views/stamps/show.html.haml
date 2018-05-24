@@ -1,0 +1,77 @@
+%span#stamps
+  .row
+    .col-sm-4.col-md-2.text-center
+      = image_tag 'stamp_intro_j3rik0_no_stamp.png', style: 'height: 100px;'
+    .col-sm-8.col-md-5.align-self-center
+      %h2
+        = link_to domain_path(@stamp.stampable.name), class: 'default-color' do
+          = fa_icon 'link'
+          = @stamp.stampable.name
+    .col-sm-4.col-md-2.align-self-center.text-center
+      = image_tag 'stamp_j3rik0_no_text_icon.png'
+    .col-sm-8.col-md-3.align-self-center
+      = link_to label_path(@stamp.label), class: 'btn btn-primary' do
+        = @stamp.label.name
+           
+        \#{@stamp.percentage}
+        %i.fas.fa-percent{"data-fa-transform" => "shrink-6 left-2"}
+  .row
+    .col-4.offset-right-4
+      .row
+        .col-12
+          %h5 State
+        .col-12
+          %button.btn.btn-info{:type => "button"}
+            = @stamp.state.titleize
+    .col-4
+      .row
+        .col-12
+          %h5 Created by
+      .row.border.rounded
+        .col-4.align-self-center
+          = render partial: 'users/partials/profile_image', locals: { size: '3x' }
+        .col-8
+          .row
+            .col-12.lead.pb-2
+              = link_to user_path(@stamp.creator), class: 'default-color' do
+                = @stamp.creator.username
+            .col-4.text-center.border-right
+              💪 #{@stamp.creator.voting_power}
+            .col-8.text-center.p-0
+              = @stamp.creator.reputation
+              %span.small.text-muted REP
+  .row
+    .col-6
+      .row.collapsible
+        .col-1
+          = fa_icon('angle-down')
+        .col-1
+          = render partial: 'votes/partials/upvote', locals: { power: @stamp.upvote_power }
+        .col-10
+          %h5
+            Upvotes
+      %span.hidden
+        .row
+          - @stamp.upvotes.ordered.each do |upvote|
+            .col-1.pt-2
+              = render partial: 'votes/partials/upvote', locals: { power: upvote.power }
+            .col-11.pt-2.align-self-center
+              = link_to user_path(upvote.user), class: 'default-color' do
+                = upvote.user.username
+    .col-6
+      .row.collapsible
+        .col-1
+          = fa_icon('angle-down')
+        .col-1
+          = render partial: 'votes/partials/downvote', locals: { power: @stamp.downvote_power }
+        .col-10
+          %h5
+            Downvotes
+      %span.hidden
+        .row
+          - @stamp.downvotes.ordered.each do |downvote|
+            .col-1.pt-2
+              = render partial: 'votes/partials/downvote', locals: { power: downvote.power }
+            .col-11.pt-2.align-self-center
+              = link_to user_path(downvote.user), class: 'default-color' do
+                = downvote.user.username

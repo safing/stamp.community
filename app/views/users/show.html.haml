@@ -1,0 +1,22 @@
+%span#users
+  .row
+    .col-sm-3.col-md-3
+      .profile-holder.border.rounded
+        = render partial: 'users/partials/profile_image', locals: { size: '7x' }
+        = render partial: 'users/partials/reputation_row', locals: { size: '7x', user: @user }
+    = render partial: 'users/partials/description'
+    = render partial: 'users/partials/stats'
+
+  .row
+    .col-12
+      %h4 Top Labels
+    .col-5
+      - @user.top_labels.each do |label|
+        .row.label.bg-light-2
+          .col-12.align-self-center
+            = link_to label_path(label) do
+              .btn.btn-primary
+                = label.name
+            %span{style: "float: right;"}
+              = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;'
+              = label.count
