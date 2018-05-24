@@ -3,46 +3,7 @@
     padding-top: 5%;
 
     .profile-holder {
-      border: 1px solid #ccc;
       padding: 12% 12% 8% 12%;
-
-      .square {
-        position: relative;
-        overflow:hidden;
-        width: 100%;
-        margin: 1.66%;
-        padding-bottom: 100%;
-
-        .square-content {
-          position: absolute;
-          height: 100%;
-          width: 100%;
-          border: 1px solid #ccc;
-
-          .square-table {
-            display: table;
-            height: 100%;
-            width: 100%;
-
-            .square-table-cell {
-              display: table-cell;
-              height: 100%;
-              width: 100%;
-              vertical-align: middle;
-            }
-          }
-        }
-
-        .reputation-holder {
-          padding-top: 10%;
-
-          .voting-power {
-            border-right: 1px solid #ccc;
-            padding-left: 0;
-            padding-right: 5%;
-          }
-        }
-      }
     }
 
     .description {
@@ -55,6 +16,48 @@
 
     .row.user-stats {
       padding-top: 15%;
+    }
+  }
+}
+
+.profile-holder {
+  border: 1px solid #ccc;
+  padding: 12% 12% 12% 12%;
+}
+
+.square {
+  position: relative;
+  overflow:hidden;
+  width: 100%;
+  margin: 1.66%;
+  padding-bottom: 100%;
+
+  .square-content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    .square-table {
+      display: table;
+      height: 100%;
+      width: 100%;
+
+      .square-table-cell {
+        display: table-cell;
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .reputation-holder {
+    padding-top: 10%;
+
+    .voting-power {
+      border-right: 1px solid #ccc;
+      padding-left: 0;
+      padding-right: 5%;
     }
   }
 }
