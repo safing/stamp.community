@@ -8,8 +8,12 @@
       <p><%= @label.description %></p>
     </div>
 
-    <div class='col-sm-12 col-md-5 offset-right-2 mt-4'>
-      <h5 class='mb-3'><%= image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;' %> In Progress</h5>
+    <div class='col-sm-12 col-md-5 offset-right-1 mt-4'>
+      <div class='row mb-3'>
+        <div class='col-12'>
+          <h5><%= image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 0.8em;' %> In Progress</h5>
+        </div>
+      </div>
 
       <% if @label.stamps_in_progress.exists? %>
         <% @label.stamps_in_progress.each do |stamp| %>
@@ -29,8 +33,12 @@
       <% end %>
     </div>
 
-    <div class='col-sm-12 col-md-5 mt-4'>
-      <h5 class='mb-3'>Top Contributors</h5>
+    <div class='col-sm-12 col-md-5 offset-right-1 mt-4'>
+      <div class='row mb-3'>
+        <div class='col-12'>
+          <h5>Top Contributors</h5>
+        </div>
+      </div>
 
       <% @label.top_contributors.each do |contributor| %>
         <div class='row label bg-light-2'>
