@@ -5,6 +5,7 @@ class Vote < ApplicationRecord
   belongs_to :votable, polymorphic: true
 
   scope :today, -> { where(created_at: ApplicationController.helpers.current_day_range) }
+  scope :ordered, -> { order(power: :desc, created_at: :desc) }
 
   validates_presence_of :power
 
