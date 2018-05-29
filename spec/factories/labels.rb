@@ -5,7 +5,7 @@ FactoryBot.define do
     licence
 
     trait :with_stamps do
-      stamps { build_list :stamp, 3 }
+      stamps { build_list :stamp, 2 }
     end
   end
 end
