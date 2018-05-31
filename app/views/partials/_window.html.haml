@@ -1,0 +1,14 @@
+- header ||= nil; header_locals ||= nil
+- footer ||= nil; footer_locals ||= nil
+
+.col-8.col-sm-6.col-md-4.col-lg-3.pt-3.pb-3.window
+  .border.rounded.p-4
+    - if header
+      = render partial: "#{path}/partials/window/header", locals: header_locals
+    .square.text-center
+      .square-content.border
+        .square-table
+          .square-table-cell
+            = render partial: "#{path}/partials/window/displayed_item"
+    - if footer
+      = render partial: "#{path}/partials/window/footer", locals: footer_locals
