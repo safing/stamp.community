@@ -51,4 +51,5 @@ group :test do
   gem 'database_cleaner'
   # check if the release is out yet https://github.com/thoughtbot/shoulda-matchers/milestone/13
   gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers', branch: 'master'
+  gem 'state_machines-rspec'
 end
