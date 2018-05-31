@@ -9,4 +9,8 @@ RSpec.shared_examples 'a votable model' do
     it { is_expected.to have_db_index(:creator_id) }
     it { is_expected.to have_db_index(%i[stampable_type stampable_id]) }
   end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:state) }
+  end
 end

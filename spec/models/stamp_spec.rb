@@ -16,7 +16,6 @@ RSpec.describe Stamp, type: :model do
         .is_less_than_or_equal_to(100)
     end
     it { is_expected.to validate_presence_of(:percentage) }
-    it { is_expected.to validate_presence_of(:state) }
   end
 
   describe 'database' do
