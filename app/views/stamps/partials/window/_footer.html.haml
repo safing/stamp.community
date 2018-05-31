@@ -1,5 +1,5 @@
 .row.window-footer
   .col-12.text-center
-    = link_to domain_path(@stamp.stampable) do
+    = link_to domain_path(@stamp.stampable.name) do
       = fa_icon 'link'
       = @stamp.stampable.name
