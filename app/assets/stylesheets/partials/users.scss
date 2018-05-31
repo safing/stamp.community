@@ -1,17 +1,13 @@
 #users {
-  > .row:first-child {
-    padding-top: 5%;
+  .description {
+    padding: 3%;
 
     .profile-holder {
       padding: 12% 12% 8% 12%;
     }
 
-    .description {
-      padding: 3%;
-
-      h3 {
-        margin-bottom: 2%;
-      }
+    h3 {
+      margin-bottom: 2%;
     }
 
     .row.user-stats {
