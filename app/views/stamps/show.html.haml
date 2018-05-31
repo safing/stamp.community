@@ -2,6 +2,10 @@
   .row
     = render partial: 'partials/window', locals: { path: 'stamps', header: true, footer: true }
     .col-9.col-md-5.col-lg-6
+      .row
+        .col-12.text-center
+          %button.btn.btn-info{:type => "button"}
+            = @stamp.state.titleize
     .col-12.col-md-3.col-lg-2
       .row
         %h5
@@ -19,14 +23,6 @@
             .col-12
               = @stamp.creator.reputation
               %span.small.text-muted REP
-  .row.second
-    .col-4.offset-right-4
-      .row
-        .col-12
-          %h5 State
-        .col-12
-          %button.btn.btn-info{:type => "button"}
-            = @stamp.state.titleize
   .row
     .col-6
       .row.collapsible
