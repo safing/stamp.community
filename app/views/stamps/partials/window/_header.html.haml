@@ -4,7 +4,8 @@
   .col-7.pr-0
     .row.p-0.label-holder
       .col-12.lead
-        = @stamp.label.name
+        = link_to label_path(@stamp.label) do
+          = @stamp.label.name
       .col-6.pr-0
         = @stamp.percentage
       .col-6.pl-0.d-flex.align-items-center

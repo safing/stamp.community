@@ -1,25 +1,31 @@
-.square {
-  position: relative;
-  overflow:hidden;
-  width: 100%;
-  margin: 1.66%;
-  padding-bottom: 100%;
+.window {
+  a {
+    color: $text_color;
+  }
 
-  .square-content {
-    position: absolute;
-    height: 100%;
+  .square {
+    position: relative;
+    overflow:hidden;
     width: 100%;
+    margin: 1.66%;
+    padding-bottom: 100%;
 
-    .square-table {
-      display: table;
+    .square-content {
+      position: absolute;
       height: 100%;
       width: 100%;
 
-      .square-table-cell {
-        display: table-cell;
+      .square-table {
+        display: table;
         height: 100%;
         width: 100%;
-        vertical-align: middle;
+
+        .square-table-cell {
+          display: table-cell;
+          height: 100%;
+          width: 100%;
+          vertical-align: middle;
+        }
       }
     }
   }
