@@ -1,5 +1,5 @@
 #stamps {
-  .row:nth-child(2) {
+  .row.second {
     padding: 20px 0;
 
     .row {
@@ -7,6 +7,20 @@
 
       .row {
         padding: 5px 0;
+      }
+    }
+  }
+
+  .window {
+    .window-header {
+      .label-holder {
+        .col-12 {
+          font-size: 1em;
+        }
+
+        div:nth-child(2) {
+          font-size: 2.1em;
+        }
       }
     }
   }

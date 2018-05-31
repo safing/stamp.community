@@ -1,21 +1,7 @@
 %span#stamps
   .row
-    .col-sm-4.col-md-2.text-center
-      = image_tag 'stamp_intro_j3rik0_no_stamp.png', style: 'height: 100px;'
-    .col-sm-8.col-md-5.align-self-center
-      %h2
-        = link_to domain_path(@stamp.stampable.name), class: 'default-color' do
-          = fa_icon 'link'
-          = @stamp.stampable.name
-    .col-sm-4.col-md-2.align-self-center.text-center
-      = image_tag 'stamp_j3rik0_no_text_icon.png'
-    .col-sm-8.col-md-3.align-self-center
-      = link_to label_path(@stamp.label), class: 'btn btn-primary' do
-        = @stamp.label.name
-           
-        \#{@stamp.percentage}
-        %i.fas.fa-percent{"data-fa-transform" => "shrink-6 left-2"}
-  .row
+    = render partial: 'partials/window', locals: { path: 'stamps', header: true, footer: true }
+  .row.second
     .col-4.offset-right-4
       .row
         .col-12

@@ -1,0 +1,11 @@
+.row.pt-0.pb-4.window-header
+  .col-5.p-0.d-flex.align-items-center.justify-content-center
+    = image_tag 'stamp_j3rik0_no_text_icon.png', class: 'width: 100%; height: 50%;'
+  .col-7.pr-0
+    .row.p-0.label-holder
+      .col-12.lead
+        = @stamp.label.name
+      .col-6.pr-0
+        = @stamp.percentage
+      .col-6.pl-0.d-flex.align-items-center
+        = fa_icon 'tag'
