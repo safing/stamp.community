@@ -1,8 +1,6 @@
-- left_col_size ||= 4
-
 .row
-  .text-center.border-right{class: "col-#{left_col_size}"}
-    💪 #{user.voting_power}
-  .text-center.p-0{class: "col-#{12 - left_col_size}"}
-    = user.reputation
+  .text-center.border-right.col-5
+    💪 #{@user.voting_power}
+  .text-center.p-0.col-7
+    = @user.reputation
     %span.small.text-muted REP
