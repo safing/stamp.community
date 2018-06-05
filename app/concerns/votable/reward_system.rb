@@ -34,32 +34,36 @@ module Votable
 
       # created good stuff
       def creator_prize
-        @creator_prize ||= ENVProxy.required_integer('STAMP_CREATOR_PRIZE')
+        @creator_prize ||= ENVProxy.required_integer("#{class_name_env}_CREATOR_PRIZE")
       end
 
       # created trash
       def creator_penalty
-        @creator_penalty ||= ENVProxy.required_integer('STAMP_CREATOR_PENALTY')
+        @creator_penalty ||= ENVProxy.required_integer("#{class_name_env}_CREATOR_PENALTY")
       end
 
       # upvoted good stuff
       def upvoter_prize
-        @upvoter_prize ||= ENVProxy.required_integer('STAMP_UPVOTER_PRIZE')
+        @upvoter_prize ||= ENVProxy.required_integer("#{class_name_env}_UPVOTER_PRIZE")
       end
 
       # upvoted trash
       def upvoter_penalty
-        @upvoter_penalty ||= ENVProxy.required_integer('STAMP_UPVOTER_PENALTY')
+        @upvoter_penalty ||= ENVProxy.required_integer("#{class_name_env}_UPVOTER_PENALTY")
       end
 
       # downvoted good stuff
       def downvoter_prize
-        @downvoter_prize ||= ENVProxy.required_integer('STAMP_DOWNVOTER_PRIZE')
+        @downvoter_prize ||= ENVProxy.required_integer("#{class_name_env}_DOWNVOTER_PRIZE")
       end
 
       # downvoted trash
       def downvoter_penalty
-        @downvoter_penalty ||= ENVProxy.required_integer('STAMP_DOWNVOTER_PENALTY')
+        @downvoter_penalty ||= ENVProxy.required_integer("#{class_name_env}_DOWNVOTER_PENALTY")
+      end
+
+      def class_name_env
+        self.class.name.upcase
       end
     end
     # rubocop:enable Metrics/BlockLength
