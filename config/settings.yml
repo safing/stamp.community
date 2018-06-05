@@ -10,11 +10,12 @@ BOT:
     STAMP_CREATION_LIMIT: 10_000
 
 STAMP:
-  ACCEPTED:
-    CREATOR_BOUNTY: 10
-    ACCEPT_BOUNTY: 1
-    DENY_PENALTY: -5
-  DENIED:
-    CREATOR_PENALTY: -100
-    ACCEPT_PENALTY: -10
-    DENY_BOUNTY: 5
+  CREATOR:
+    PRIZE: 10 # created good stuff
+    PENALTY: -100 # created trash
+  UPVOTER:
+    PRIZE: 1 # upvoted good stuff
+    PENALTY: -10 # upvoted trash
+  DOWNVOTER:
+    PRIZE: 5 # downvoted trash
+    PENALTY: -5 # downvoted good stuff
