@@ -5,4 +5,18 @@ FactoryBot.define do
     association :user
     association :votable, factory: :stamp
   end
+
+  factory :upvote, class: Vote do
+    accept true
+
+    association :user
+    association :votable, factory: :stamp
+  end
+
+  factory :downvote, class: Vote do
+    accept false
+
+    association :user
+    association :votable, factory: :stamp
+  end
 end
