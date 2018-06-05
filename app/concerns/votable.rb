@@ -23,4 +23,22 @@ module Votable
   def downvote_power
     @downvote_power ||= downvotes.sum(:power)
   end
+
+  def award_creator!
+  end
+
+  def punish_creator!
+  end
+
+  def award_upvoters!
+  end
+
+  def punish_upvoters!
+  end
+
+  def punish_downvoters!
+  end
+
+  def award_downvoters!
+  end
 end
