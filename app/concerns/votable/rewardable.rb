@@ -1,9 +1,23 @@
 module Votable
-  module RewardSystem
+  module Rewardable
     extend ActiveSupport::Concern
 
     # rubocop:disable Metrics/BlockLength
     included do
+      state_machine use_transactions: true do
+        before_transition in_progress: :accepted do |votable, _|
+          votable.award_creator!
+          votable.award_upvoters!
+          votable.punish_downvoters!
+        end
+
+        before_transition in_progress: :denied do |votable, _|
+          votable.punish_creator!
+          votable.punish_upvoters!
+          votable.award_downvoters!
+        end
+      end
+
       def award_creator!
         creator.update(reputation: creator.reputation + creator_prize)
       end

@@ -1,5 +1,6 @@
 RSpec.describe Stamp, type: :model do
   it_behaves_like 'a votable model', model: :stamp
+  it_behaves_like 'a rewardable model', model: :stamp
 
   it 'has a valid factory' do
     expect(FactoryBot.create(:stamp)).to be_valid
