@@ -1,12 +1,13 @@
-- if @domain.stamps.send(title.parameterize.underscore).present?
-  - if local_assigns.fetch :header, true
-    %h5.collapsible
-      - if collapsed ||= false
-        = fa_icon('angle-down')
-      - else
-        = fa_icon('angle-up')
-       
-      \#{title}
-  %span{:class => "#{'hidden' if collapsed}"}
-    - @domain.stamps.send(title.parameterize.underscore).order(percentage: :desc).each do |stamp|
-      = render partial: 'partials/stamp', locals: { stamp: stamp, btn_class: btn_class ||= 'btn-info' }
+%span{data: {controller: 'collapsible'}}
+  - if @domain.stamps.send(title.parameterize.underscore).present?
+    - if local_assigns.fetch :header, true
+      %h5.collapsible{data: {action: 'click->collapsible#toggle'}}
+        - if collapsed ||= false
+          = fa_icon('angle-down', data: {target: 'collapsible.angle'})
+        - else
+          = fa_icon('angle-up', data: {target: 'collapsible.angle'})
+         
+        \#{title}
+    %span{class: "#{'hidden' if collapsed}", data: {target: 'collapsible.details'}}
+      - @domain.stamps.send(title.parameterize.underscore).order(percentage: :desc).each do |stamp|
+        = render partial: 'partials/stamp', locals: { stamp: stamp, btn_class: btn_class ||= 'btn-info' }

@@ -4,7 +4,7 @@
     .col-9.col-md-5.col-lg-6
       .row
         .col-12.text-center
-          %button.btn.btn-info{:type => "button"}
+          %button.btn.btn-info{type: 'button'}
             = @stamp.state.titleize
     .col-12.col-md-3.col-lg-2
       .row
@@ -24,16 +24,16 @@
               = @stamp.creator.reputation
               %span.small.text-muted REP
   .row
-    .col-6
-      .row.collapsible
+    .col-6{data: {controller: 'collapsible'}}
+      .row.collapsible{data: {action: 'click->collapsible#toggle'}}
         .col-1
-          = fa_icon('angle-down')
+          = fa_icon('angle-down', data: {target: 'collapsible.angle'})
         .col-1
           = render partial: 'votes/partials/upvote', locals: { power: @stamp.upvote_power }
         .col-10
           %h5
             Upvotes
-      %span.hidden
+      %span.hidden{data: {target: 'collapsible.details'}}
         .row
           - @stamp.upvotes.ordered.each do |upvote|
             .col-1.pt-2
@@ -41,16 +41,16 @@
             .col-11.pt-2.align-self-center
               = link_to user_path(upvote.user), class: 'default-color' do
                 = upvote.user.username
-    .col-6
-      .row.collapsible
+    .col-6{data: {controller: 'collapsible'}}
+      .row.collapsible{data: {action: 'click->collapsible#toggle'}}
         .col-1
-          = fa_icon('angle-down')
+          = fa_icon('angle-down', data: {target: 'collapsible.angle'})
         .col-1
           = render partial: 'votes/partials/downvote', locals: { power: @stamp.downvote_power }
         .col-10
           %h5
             Downvotes
-      %span.hidden
+      %span.hidden{data: {target: 'collapsible.details'}}
         .row
           - @stamp.downvotes.ordered.each do |downvote|
             .col-1.pt-2
