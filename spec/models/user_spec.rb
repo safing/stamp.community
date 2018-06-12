@@ -116,9 +116,7 @@ RSpec.describe User, type: :model do
     let(:user) { FactoryBot.create(:user) }
     let(:votable) { FactoryBot.create(:stamp) }
 
-    before do
-      allow_required_integer_env('USER_DAILY_VOTING_LIMIT').and_return(3)
-    end
+    before { allow_required_integer_env('USER_DAILY_VOTING_LIMIT').and_return(3) }
 
     context 'user already voted on votable' do
       before { FactoryBot.create(:vote, user: user, votable: votable) }

@@ -87,11 +87,12 @@ RSpec.shared_examples 'a votable model' do |options|
 
   describe 'Votable::RewardSystem' do
     let(:instance) { FactoryBot.create(options[:model]) }
+    let(:class_name_env) { instance.class_name_env }
 
     describe '#award_creator!' do
       subject { instance.award_creator! }
 
-      before { expect_required_integer_env('STAMP_CREATOR_PRIZE').and_return(5) }
+      before { expect_required_integer_env("#{class_name_env}_CREATOR_PRIZE").and_return(5) }
 
       it 'increases the creators reputation by 5' do
         expect { subject }.to change { instance.creator.reputation }.by(5)
@@ -101,7 +102,7 @@ RSpec.shared_examples 'a votable model' do |options|
     describe '#punish_creator!' do
       subject { instance.punish_creator! }
 
-      before { expect_required_integer_env('STAMP_CREATOR_PENALTY').and_return(-10) }
+      before { expect_required_integer_env("#{class_name_env}_CREATOR_PENALTY").and_return(-10) }
 
       it 'decreases the creators reputation by 10' do
         expect { subject }.to change { instance.creator.reputation }.by(-10)
@@ -114,7 +115,7 @@ RSpec.shared_examples 'a votable model' do |options|
       let(:vote_1) { instance.upvotes.first }
       let(:vote_2) { instance.upvotes.second }
 
-      before { expect_required_integer_env('STAMP_UPVOTER_PRIZE').and_return(1) }
+      before { expect_required_integer_env("#{class_name_env}_UPVOTER_PRIZE").and_return(1) }
 
       it 'increases all accept voters reputation by 1' do
         expect { subject }.to change { vote_1.reload.user.reputation }.by(1).and \
@@ -128,7 +129,7 @@ RSpec.shared_examples 'a votable model' do |options|
       let(:vote_1) { instance.upvotes.first }
       let(:vote_2) { instance.upvotes.second }
 
-      before { expect_required_integer_env('STAMP_UPVOTER_PENALTY').and_return(-5) }
+      before { expect_required_integer_env("#{class_name_env}_UPVOTER_PENALTY").and_return(-5) }
 
       it 'decreases all accept voters reputation by -5' do
         expect { subject }.to change { vote_1.reload.user.reputation }.by(-5).and \
@@ -142,7 +143,7 @@ RSpec.shared_examples 'a votable model' do |options|
       let(:vote_1) { instance.downvotes.first }
       let(:vote_2) { instance.downvotes.second }
 
-      before { expect_required_integer_env('STAMP_DOWNVOTER_PRIZE').and_return(1) }
+      before { expect_required_integer_env("#{class_name_env}_DOWNVOTER_PRIZE").and_return(1) }
 
       it 'increases all accept voters reputation by 1' do
         expect { subject }.to change { vote_1.reload.user.reputation }.by(1).and \
@@ -156,7 +157,7 @@ RSpec.shared_examples 'a votable model' do |options|
       let(:vote_1) { instance.downvotes.first }
       let(:vote_2) { instance.downvotes.second }
 
-      before { expect_required_integer_env('STAMP_DOWNVOTER_PENALTY').and_return(-5) }
+      before { expect_required_integer_env("#{class_name_env}_DOWNVOTER_PENALTY").and_return(-5) }
 
       it 'decreases all accept voters reputation by -5' do
         expect { subject }.to change { vote_1.reload.user.reputation }.by(-5).and \
