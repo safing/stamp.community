@@ -2,6 +2,7 @@ module Votable
   module State
     extend ActiveSupport::Concern
 
+    # rubocop:disable Metrics/BlockLength
     included do
       scope :accepted, -> { with_state(:accepted) }
       scope :archived, -> { with_state(:archived) }
@@ -20,6 +21,7 @@ module Votable
           votable.award_creator!
           votable.award_upvoters!
           votable.punish_downvoters!
+          votable.archive_accepted_siblings!
         end
 
         before_transition in_progress: :denied do |votable, _|
@@ -28,6 +30,14 @@ module Votable
           votable.award_downvoters!
         end
       end
+
+      def archive_accepted_siblings!
+        accepted_instance = stampable.send(self.class.name.parameterize.pluralize)
+                                     .where(label: label)
+                                     .accepted
+        accepted_instance.each(&:archive!) if accepted_instance.exists?
+      end
     end
+    # rubocop:enable Metrics/BlockLength
   end
 end

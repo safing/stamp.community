@@ -49,8 +49,11 @@ RSpec.shared_examples 'a votable model' do |options|
         subject
       end
 
-      context 'domain already has a instance for that label' do
-        it 'archives the old instance'
+      context 'domain already has an accepted sibling', focus: true do
+        it 'calls archive_accepted_siblings!' do
+          expect(instance).to receive(:archive_accepted_siblings!).and_return(true)
+          subject
+        end
       end
     end
 
@@ -82,6 +85,19 @@ RSpec.shared_examples 'a votable model' do |options|
     describe '#overrule!' do
       subject { instance.overrule! }
       let(:state) { :accepted }
+    end
+
+    describe '#archive_accepted_siblings!', focus: true do
+      subject { instance.archive_accepted_siblings! }
+      let!(:accepted_sibling) do
+        FactoryBot.create(:stamp, :accepted, stampable: instance.domain, label: instance.label)
+      end
+
+      it 'archives the accepted sibling' do
+        expect { subject }.to change {
+          accepted_sibling.reload.state
+        }.from('accepted').to('archived')
+      end
     end
   end
 

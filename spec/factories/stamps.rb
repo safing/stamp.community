@@ -5,6 +5,10 @@ FactoryBot.define do
     association :creator, factory: :user
     association :stampable, factory: :domain
 
+    trait :accepted do
+      state :accepted
+    end
+
     trait :with_upvotes do
       votes { build_list :upvote, 2 }
     end
