@@ -2,6 +2,9 @@ AllCops:
   Exclude:
     - db/**/*.rb
     - lib/templates/**/*.rb
+    - log/**/*
+    - node_modules/**/*
+    - notes/**/*
 
 Documentation:
   Enabled: false
