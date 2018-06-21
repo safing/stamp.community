@@ -7,11 +7,11 @@ class LicencePolicy < ApplicationPolicy
   end
 
   def new?
-    user.present?
+    user.present? && user.admin?
   end
 
   def create?
-    user.present?
+    user.present? && user.admin?
   end
 
   def show?
@@ -19,10 +19,10 @@ class LicencePolicy < ApplicationPolicy
   end
 
   def edit?
-    user.present?
+    user.present? && user.admin?
   end
 
   def update?
-    user.present?
+    user.present? && user.admin?
   end
 end
