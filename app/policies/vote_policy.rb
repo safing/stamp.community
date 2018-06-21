@@ -6,20 +6,12 @@ class VotePolicy < ApplicationPolicy
     @vote = vote
   end
 
-  def new?
-    user?
-  end
-
   def create?
     user?
   end
 
   def show?
     moderator?
-  end
-
-  def edit?
-    false
   end
 
   def update?

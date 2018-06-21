@@ -6,20 +6,12 @@ class DomainPolicy < ApplicationPolicy
     @domain = domain
   end
 
-  def new?
-    user?
-  end
-
   def create?
     user?
   end
 
   def show?
     true
-  end
-
-  def edit?
-    admin?
   end
 
   def update?

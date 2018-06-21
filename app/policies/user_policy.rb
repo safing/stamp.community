@@ -6,20 +6,12 @@ class UserPolicy < ApplicationPolicy
     @targeted_user = targeted_user
   end
 
-  def new?
-    false
-  end
-
   def create?
     false
   end
 
   def show?
     true
-  end
-
-  def edit?
-    targeted_user == user || admin?
   end
 
   def update?

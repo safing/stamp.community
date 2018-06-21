@@ -6,20 +6,12 @@ class LicencePolicy < ApplicationPolicy
     @stamp = stamp
   end
 
-  def new?
-    admin?
-  end
-
   def create?
     admin?
   end
 
   def show?
     true
-  end
-
-  def edit?
-    admin?
   end
 
   def update?
