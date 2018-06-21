@@ -7,11 +7,11 @@ class DomainPolicy < ApplicationPolicy
   end
 
   def new?
-    user.present?
+    user?
   end
 
   def create?
-    user.present?
+    user?
   end
 
   def show?
@@ -19,10 +19,10 @@ class DomainPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.present?
+    admin?
   end
 
   def update?
-    user.present?
+    admin?
   end
 end

@@ -1,17 +1,17 @@
 class UserPolicy < ApplicationPolicy
-  attr_reader :current_user, :user
+  attr_reader :user, :targeted_user
 
-  def initialize(current_user, user)
-    @current_user = current_user
+  def initialize(user, targeted_user)
     @user = user
+    @targeted_user = targeted_user
   end
 
   def new?
-    current_user.present?
+    false
   end
 
   def create?
-    current_user.present?
+    false
   end
 
   def show?
@@ -19,10 +19,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def edit?
-    current_user.present?
+    targeted_user == user || admin?
   end
 
   def update?
-    current_user.present?
+    targeted_user == user || admin?
   end
 end

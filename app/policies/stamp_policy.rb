@@ -7,11 +7,11 @@ class StampPolicy < ApplicationPolicy
   end
 
   def new?
-    user.present?
+    user?
   end
 
   def create?
-    user.present?
+    user?
   end
 
   def show?
@@ -19,10 +19,10 @@ class StampPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.present?
+    false
   end
 
   def update?
-    user.present?
+    false
   end
 end

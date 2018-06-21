@@ -7,15 +7,15 @@ class VotePolicy < ApplicationPolicy
   end
 
   def new?
-    user.present?
+    user?
   end
 
   def create?
-    user.present?
+    user?
   end
 
   def show?
-    user.present?
+    moderator?
   end
 
   def edit?

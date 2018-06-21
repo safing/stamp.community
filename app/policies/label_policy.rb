@@ -7,11 +7,11 @@ class LabelPolicy < ApplicationPolicy
   end
 
   def new?
-    user.present?
+    admin?
   end
 
   def create?
-    user.present?
+    admin?
   end
 
   def show?
@@ -19,10 +19,10 @@ class LabelPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.present?
+    admin?
   end
 
   def update?
-    user.present?
+    admin?
   end
 end
