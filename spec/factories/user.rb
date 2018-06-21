@@ -13,4 +13,12 @@ FactoryBot.define do
       confirmation_sent_at nil
     end
   end
+
+  factory :moderator, parent: :user do
+    role :moderator
+  end
+
+  factory :admin, parent: :user do
+    role :admin
+  end
 end
