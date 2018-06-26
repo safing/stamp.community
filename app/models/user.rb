@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  ROLES = %w[user moderator admin].freeze
+  include User::Roles
 
   has_one :api_key
 
@@ -11,8 +11,6 @@ class User < ApplicationRecord
 
   devise :confirmable, :database_authenticatable, :registerable, :recoverable,
          :rememberable, :validatable
-
-  validates :role, inclusion: { in: ROLES }
 
   def voting_power
     reputation <= 0 ? 0 : reputation.log10_power
@@ -37,13 +35,5 @@ class User < ApplicationRecord
          .select('labels.name, labels.id, COUNT(labels.name)')
          .order('COUNT(labels.name) DESC, labels.name ASC')
          .limit(limit)
-  end
-
-  def moderator?
-    role == 'moderator' || admin?
-  end
-
-  def admin?
-    role == 'admin'
   end
 end
