@@ -311,7 +311,7 @@ GEM
     seedbank (0.4.0)
     sexp_processor (4.11.0)
     shellany (0.0.1)
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
