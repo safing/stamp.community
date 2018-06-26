@@ -3,9 +3,6 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.create(:user)).to be_valid
   end
 
-  describe 'validations' do
-  end
-
   describe 'relations' do
     it { is_expected.to have_one(:api_key) }
     it { is_expected.to have_many(:domains).with_foreign_key(:creator_id) }

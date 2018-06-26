@@ -12,7 +12,7 @@ Documentation:
 Metrics/BlockLength:
   CountComments: false
   Exclude:
-    - 'spec/*/*.rb'
+    - 'spec/**/*.rb'
 Metrics/LineLength:
   Max: 100
 

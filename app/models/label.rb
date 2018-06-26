@@ -3,6 +3,7 @@ class Label < ApplicationRecord
   belongs_to :parent, class_name: 'Label', optional: true
 
   has_many :stamps
+  has_many :children, class_name: 'Label', foreign_key: :parent_id
 
   # TODO
   def top_contributors
@@ -16,5 +17,9 @@ class Label < ApplicationRecord
 
   def stamps_in_progress
     stamps.in_progress.order(percentage: :desc).limit(5)
+  end
+
+  def stamps_including_child_labels
+    Stamp.where(label_id: [id, children.select(:id)].flatten)
   end
 end

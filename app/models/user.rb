@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include User::Roles
+
   has_one :api_key
 
   has_many :domains, foreign_key: :creator_id

@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 RSpec.shared_examples 'a votable model' do |options|
   let(:instance) { FactoryBot.create(options[:model]) }
 
@@ -68,4 +67,3 @@ RSpec.shared_examples 'a votable model' do |options|
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

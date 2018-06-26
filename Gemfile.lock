@@ -215,6 +215,10 @@ GEM
       byebug (~> 10.0)
       pry (~> 0.10)
     public_suffix (3.0.2)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
+    pundit-matchers (1.6.0)
+      rspec-rails (>= 3.0.0)
     rack (2.0.5)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -376,6 +380,8 @@ DEPENDENCIES
   letter_opener
   pg
   pry-byebug
+  pundit
+  pundit-matchers
   rails (~> 5.1.4)
   rspec-activemodel-mocks
   rspec-rails
