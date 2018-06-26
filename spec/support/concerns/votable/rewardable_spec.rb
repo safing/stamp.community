@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 RSpec.shared_examples 'a rewardable model' do |options|
   let(:instance) { FactoryBot.create(options[:model]) }
   let(:class_name_env) { instance.class_name_env }
@@ -121,4 +120,3 @@ RSpec.shared_examples 'a rewardable model' do |options|
     end
   end
 end
-# rubocop:enable Metrics/BlockLength
