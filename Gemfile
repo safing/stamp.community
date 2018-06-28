@@ -11,6 +11,7 @@ gem 'pg'
 gem 'rails', '~> 5.1.4'
 
 gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/bootstrap_form.git', branch: 'master'
 gem 'font_awesome5_rails'
 gem 'sass-rails'
 
