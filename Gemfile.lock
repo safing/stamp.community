@@ -309,6 +309,8 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     seedbank (0.4.0)
+    semantic-ui-sass (2.3.1.2)
+      sass (>= 3.2)
     sexp_processor (4.11.0)
     shellany (0.0.1)
     sprockets (3.7.2)
@@ -388,6 +390,7 @@ DEPENDENCIES
   sass-rails
   sdoc (~> 0.4.0)
   seedbank
+  semantic-ui-sass
   shoulda-matchers!
   state_machines-activerecord
   state_machines-rspec
@@ -396,4 +399,4 @@ DEPENDENCIES
   webpacker
 
 BUNDLED WITH
-   1.16.1
+   1.16.3
