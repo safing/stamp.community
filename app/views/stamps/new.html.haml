@@ -1,1 +1,8 @@
-weee
+.row
+  .col-12.col-md-4
+    = bootstrap_form_for(@stamp) do |f|
+      = f.number_field :percentage
+      = f.collection_select(:label_id, Label.all, :id, :name)
+      = f.collection_select(:stampable_id, Domain.all, :id, :name)
+      = f.hidden_field(:stampable_type, value: 'Domain')
+      = f.submit 'Create'

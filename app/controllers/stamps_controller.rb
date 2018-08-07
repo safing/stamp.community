@@ -7,9 +7,12 @@ class StampsController < ApplicationController
   def create
     @stamp = Stamp.new(stamp_params)
     authorize @stamp
-    @stamp.save
 
-    redirect_to(stamps_path(@stamp), status: 201)
+    if @stamp.save
+      redirect_to(stamps_url(@stamp.id), status: 201)
+    else
+      render 'new'
+    end
   end
 
   def show
@@ -20,6 +23,8 @@ class StampsController < ApplicationController
   private
 
   def stamp_params
-    params.require(:stamp).permit(:label_id, :percentage, :stampable_id, :stampable_type)
+    params.require(:stamp)
+          .permit(:label_id, :percentage, :stampable_id, :stampable_type)
+          .merge(creator: current_user)
   end
 end
