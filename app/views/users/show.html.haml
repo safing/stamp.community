@@ -1,19 +1,80 @@
-%span#users
-  .row
-    = render partial: 'partials/window', locals: { footer: true }
-    = render partial: 'users/partials/description'
-    = render partial: 'users/partials/stats'
+%div.ui.vertical.stripe.segment
+  %div.ui.middle.aligned.stackable.grid.container
+    %div.row
+      %div.four.wide.column
+        %div.ui.fluid.card
+          %div.image
+            %img{src: '/assets/basic_logo.png'}
+          %div.ui.vertical.stripe.segment
+            %div.ui.middle.aligned.stackable.grid.container
+              %div.row
+                %div.ui.seven.wide.column.center.aligned
+                  %div.ui.mini.horizontal.statistic
+                    %div.label
+                      = fa_icon 'chess-king', size: '1x'
+                    %div.value
+                      &nbsp;&nbsp;4
+                %div.ui.two.wide.column.center.aligned
+                  ⎮
+                %div.ui.seven.wide.column.center.aligned
+                  %div.ui.mini.horizontal.statistic
+                    %div.value
+                      2543
+                    %div.label
+                      rep
+      %div.eight.wide.column
+        %h1.ui.header
+          Karl Marx
+        %div.ui.clearing.divider
+        %p
+          My Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp Story
+          My Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp Story
+          My Stamp StoryMy Stamp StoryMy Stamp Story
 
-  .row
-    .col-12
-      %h4 Top Labels
-    .col-5
-      - @user.top_labels.each do |label|
-        .row.label.bg-light-2
-          .col-12.align-self-center
-            = link_to label_path(label) do
-              .btn.btn-primary
-                = label.name
-            %span{style: "float: right;"}
-              = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;'
-              = label.count
+          My Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp Story
+          My Stamp StoryMy Stamp StoryMy Stamp Storyv
+      %div.four.wide.column
+        %div.ui.list
+          %h2.ui.header
+            = fa_icon 'chart-bar'
+            Stats
+        %div.item
+          %img{src: '/assets/stamp_j3rik0_no_text_icon.png', height: '16px'}
+          %div.ui.mini.horizontal.statistic
+            %div.value
+              4
+            %div.label
+              stamps
+        %div.item
+          = fa_icon 'sort', size: '2x'
+          %div.ui.mini.horizontal.statistic
+            %div.value
+              3
+            %div.label
+              cast votes
+        %div.item
+          = fa_icon 'link', size: '1x'
+          %div.ui.mini.horizontal.statistic
+            %div.value
+              6
+            %div.label
+              domains
+        %div.ui.clearing.divider
+        %div.ui.list
+          %h2.ui.header
+            = fa_icon 'user'
+            User
+        %div.item
+          = fa_icon 'calendar', size: '1x'
+          %div.ui.mini.horizontal.statistic
+            %div.value
+              about 2 months
+            %div.label
+              ago
+        %div.item
+          = fa_icon 'chart-pie', size: '1x'
+          %div.ui.mini.horizontal.statistic
+            %div.value
+              67%
+            %div.label
+              success rate
