@@ -12,10 +12,7 @@ RSpec.describe V1::StampsAPI, type: :request do
       expect(json['stamps'].size).to eq(10)
     end
 
-    it 'returns status code 200' do
-      subject
-      expect(response).to have_http_status(200)
-    end
+    include_examples 'status code', 200
   end
 
   describe 'GET v1/stamps/:id' do
@@ -28,19 +25,13 @@ RSpec.describe V1::StampsAPI, type: :request do
         expect(json['id']).to eq(stamp.id)
       end
 
-      it 'returns status code 200' do
-        subject
-        expect(response).to have_http_status(200)
-      end
+      include_examples 'status code', 200
     end
 
     context 'when the record does not exist' do
       before { stamp.delete }
 
-      it 'returns status code 404' do
-        subject
-        expect(response).to have_http_status(404)
-      end
+      include_examples 'status code', 404
 
       it 'returns a not found message' do
         subject
