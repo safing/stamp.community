@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/bootstrap-ruby/bootstrap_form.git
+  revision: 31376d5eee8c43498b0c70efb48c3854e1c43554
+  branch: master
+  specs:
+    bootstrap_form (4.0.0.alpha1)
+      rails (>= 5.0)
+
+GIT
   remote: https://github.com/ruby-grape/grape-entity.git
   revision: 0e04aa561373b510c2486282979085eaef2ae663
   branch: master
@@ -361,6 +369,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap (~> 4.1.1)
+  bootstrap_form!
   coffee-rails
   database_cleaner
   devise
