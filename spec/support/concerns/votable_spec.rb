@@ -27,7 +27,6 @@ RSpec.shared_examples 'a votable model' do |options|
       it { is_expected.to transition_from :in_progress, to_state: :denied, on_event: :deny }
       it { is_expected.to transition_from :accepted, to_state: :archived, on_event: :archive }
       it do
-        is_expected.to transition_from :accepted, :denied, to_state: :overruled, on_event: :overrule
       end
     end
 

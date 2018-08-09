@@ -13,8 +13,6 @@ module Votable
         transition in_progress: :accepted, on: :accept
         transition in_progress: :denied, on: :deny
         transition accepted: :archived, on: :archive
-        # admins / mods can overrule stamps
-        transition %i[accepted denied] => :overruled, on: :overrule
 
         before_transition in_progress: :accepted do |votable, _|
           votable.archive_accepted_siblings!
