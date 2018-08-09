@@ -23,10 +23,28 @@ RSpec.shared_examples 'a votable model' do |options|
     let(:state) { :in_progress }
 
     describe 'transitions' do
-      it { is_expected.to transition_from :in_progress, to_state: :accepted, on_event: :accept }
-      it { is_expected.to transition_from :in_progress, to_state: :denied, on_event: :deny }
-      it { is_expected.to transition_from :accepted, to_state: :archived, on_event: :archive }
-      it do
+      it ':in_progress => :accepted' do
+        is_expected.to transition_from(
+          :in_progress,
+          to_state: :accepted,
+          on_event: :accept
+        )
+      end
+
+      it ':in_progress => :denied' do
+        is_expected.to transition_from(
+          :in_progress,
+          to_state: :denied,
+          on_event: :deny
+        )
+      end
+
+      it ':accepted => :archive' do
+        is_expected.to transition_from(
+          :accepted,
+          to_state: :archived,
+          on_event: :archive
+        )
       end
     end
 
