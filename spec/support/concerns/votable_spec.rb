@@ -39,6 +39,14 @@ RSpec.shared_examples 'a votable model' do |options|
         )
       end
 
+      it ':in_progress => :disputed' do
+        is_expected.to transition_from(
+          :in_progress,
+          to_state: :disputed,
+          on_event: :dispute
+        )
+      end
+
       it ':accepted => :archive' do
         is_expected.to transition_from(
           :accepted,
