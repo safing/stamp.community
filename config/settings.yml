@@ -19,3 +19,9 @@ STAMP:
   DOWNVOTER:
     PRIZE: 5 # downvoted trash
     PENALTY: -5 # downvoted good stuff
+VOTABLE:
+  POWER:
+    THRESHOLD: 10 # min power a stamp needs to continue conclusion
+    # if a votable falls below this, it will simply get rejected
+  MAJORITY:
+    THRESHOLD: 75 # in percent
