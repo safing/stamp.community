@@ -1,19 +1,76 @@
-#domains.row
-  .col-10
-    %h2= @domain.name
-  .col-md-6.col-sm-12
-    = render partial: 'partials/stamp_group', locals: { title: 'Accepted', header: false, btn_class: 'btn-accepted' }
-    = render partial: 'partials/stamp_group', locals: { title: 'In Progress' }
-    = render partial: 'partials/stamp_group', locals: { title: 'Archived', collapsed: true, btn_class: 'btn-secondary' }
-    = render partial: 'partials/stamp_group', locals: { title: 'Overruled', collapsed: true, btn_class: 'btn-secondary' }
-    = render partial: 'partials/stamp_group', locals: { title: 'Denied', collapsed: true, btn_class: 'btn-denied' }
-  - if @domain.children.present?
-    .col-md-6.col-sm-12
-      %h5 Subdomains
-      - @domain.children.order(name: :asc).each do |child|
-        = link_to child.name, domain_path(child.name)
-        %br/
-  - if @domain.parent.present?
-    .col-md-6.col-sm-12
-      %h5 Top Level Domain
-      = link_to @domain.parent.name, domain_path(@domain.parent.name)
+%div.ui.two.column.grid.container
+  %div.sixteen.wide.column
+    %h2.header
+      safing.io
+      %i.external.alternate.icon
+    %div.ui.clearing.divider
+  %div.eleven.wide.column
+
+    %div.ui.grid
+      %div.three.wide.column
+        %h4.ui.middle.aligned.header
+          Management
+      %div.thirteen.wide.column
+        %div.bar.float.right
+          %div.ui.standard.top.progress
+            39%
+            %div.ui.tiny.buttom.orange.progress
+              49%
+      %div.three.wide.column
+        %h4.ui.middle.aligned.header
+          Business
+      %div.thirteen.wide.column
+        %div.bar.float.right
+          %div.ui.standard.top.progress
+            39%
+            %div.ui.tiny.buttom.orange.progress
+              49%
+      %div.three.wide.column
+        %h4.ui.middle.aligned.header
+          ADS
+      %div.thirteen.wide.column
+        %div.bar.float.right
+          %div.ui.big.progress
+            40%
+    %h2
+      Suggested
+      %button.ui.button
+        Add Stamp
+    %div.ui.clearing.divider
+    %div.ui.grid
+      %div.three.wide.column
+        %h4.ui.middle.aligned.header
+          Sport
+      %div.thirteen.wide.column
+        %div.bar.float.right
+          %div.ui.big.progress
+            40%
+
+      %div.three.wide.column
+        %h4.ui.middle.aligned.header
+          Animals
+      %div.thirteen.wide.column
+        %div.bar.float.right
+          %div.ui.big.progress
+            40%
+  %div.five.wide.column
+    %div.ui.relaxed.list
+      %div.item
+        %i.clock.outline.icon
+        %div.content
+          5 months ago
+      %div.item
+        %i.user.icon
+        %div.content
+          Karl Marx
+      %div.item
+        %i.history.icon
+        %div.content
+          1 months ago
+      %div.ui.clearing.divider
+    %div.ui.relaxed.list
+      %h3.ui.header
+        Subdomains
+      %div.item
+        %a
+          assets.trello.com
