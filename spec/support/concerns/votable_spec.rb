@@ -90,5 +90,136 @@ RSpec.shared_examples 'a votable model' do |options|
         }.from('accepted').to('archived')
       end
     end
+
+    describe '#concludable?', focus: true do
+      subject { instance.concludable? }
+
+      before do
+        allow_required_integer_env('VOTABLE_POWER_THRESHOLD').and_return(10)
+        allow_required_integer_env('VOTABLE_MAJORITY_THRESHOLD').and_return(75)
+        allow(instance).to receive(:total_power).and_return(total_power)
+        allow(instance).to receive(:majority_size).and_return(majority_size)
+      end
+
+      context 'total_power is below power_threshold' do
+        let(:total_power) { 9 }
+
+        context 'majority_size is below majority_threshold' do
+          let(:majority_size) { 74 }
+
+          it 'returns false' do
+            expect(subject).to be false
+          end
+        end
+
+        context 'majority_size equals majority_threshold' do
+          let(:majority_size) { 75 }
+
+          it 'returns false' do
+            expect(subject).to be false
+          end
+        end
+
+        context 'majority_size is above majority_threshold' do
+          let(:majority_size) { 80 }
+
+          it 'returns false' do
+            expect(subject).to be false
+          end
+        end
+      end
+
+      context 'total_power equals power_threshold' do
+        let(:total_power) { 10 }
+
+        context 'majority_size is below majority_threshold' do
+          let(:majority_size) { 74 }
+
+          it 'returns false' do
+            expect(subject).to be false
+          end
+        end
+
+        context 'majority_size equals majority_threshold' do
+          let(:majority_size) { 75 }
+
+          it 'returns true' do
+            expect(subject).to be true
+          end
+        end
+
+        context 'majority_size is above majority_threshold' do
+          let(:majority_size) { 80 }
+
+          it 'returns true' do
+            expect(subject).to be true
+          end
+        end
+      end
+
+      context 'total_power is above power power_threshold' do
+        let(:total_power) { 20 }
+
+        context 'majority_size is below majority_threshold' do
+          let(:majority_size) { 74 }
+
+          it 'returns false' do
+            expect(subject).to be false
+          end
+        end
+
+        context 'majority_size equals majority_threshold' do
+          let(:majority_size) { 75 }
+
+          it 'returns true' do
+            expect(subject).to be true
+          end
+        end
+
+        context 'majority_size is above majority_threshold' do
+          let(:majority_size) { 80 }
+
+          it 'returns true' do
+            expect(subject).to be true
+          end
+        end
+      end
+    end
+
+    describe '#majority_size' do
+      subject { instance.majority_size }
+
+      before do
+        allow(instance).to receive(:upvote_power).and_return(upvote_power)
+        allow(instance).to receive(:downvote_power).and_return(downvote_power)
+      end
+
+      context 'upvoters have majority' do
+        let(:upvote_power) { 140 }
+        let(:downvote_power) { 60 }
+
+        it 'returns 70' do
+          expect(subject).to eq(70)
+        end
+      end
+
+      context 'downvoters have majority' do
+        let(:upvote_power) { 40 }
+        let(:downvote_power) { 60 }
+
+        it 'returns 60' do
+          expect(subject).to eq(60)
+        end
+      end
+
+      context 'votes are even' do
+        let(:upvote_power) { 40 }
+        let(:downvote_power) { 40 }
+
+        it 'returns 50' do
+          expect(subject).to eq(50)
+        end
+      end
+    end
   end
 end

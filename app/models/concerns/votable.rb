@@ -23,4 +23,24 @@ module Votable
   def downvote_power
     @downvote_power ||= downvotes.sum(:power)
   end
+
+  def total_power
+    upvote_power + downvote_power
+  end
+
+  def concludable?
+    total_power >= power_threshold && majority_size >= majority_threshold
+  end
+
+  def power_threshold
+    @power_threshold ||= ENVProxy.required_integer('VOTABLE_POWER_THRESHOLD')
+  end
+
+  def majority_threshold
+    @majority_threshold ||= ENVProxy.required_integer('VOTABLE_MAJORITY_THRESHOLD')
+  end
+
+  def majority_size
+    [upvote_power, downvote_power].max / total_power.to_f * 100
+  end
 end
