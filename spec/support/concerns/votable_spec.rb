@@ -266,7 +266,7 @@ RSpec.shared_examples 'a votable model' do |options|
 
         it 'calls Votable::DisputeWorker' do
           expect(Votable::DisputeWorker).to receive(:perform_async).with(
-            votable_type: instance.class,
+            votable_type: instance.class.to_s,
             votable_id: instance.id
           )
           subject
@@ -281,7 +281,7 @@ RSpec.shared_examples 'a votable model' do |options|
 
           it 'calls Votable::AcceptWorker' do
             expect(Votable::AcceptWorker).to receive(:perform_async).with(
-              votable_type: instance.class,
+              votable_type: instance.class.to_s,
               votable_id: instance.id
             )
             subject
@@ -293,7 +293,7 @@ RSpec.shared_examples 'a votable model' do |options|
 
           it 'calls Votable::DenyWorker' do
             expect(Votable::DenyWorker).to receive(:perform_async).with(
-              votable_type: instance.class,
+              votable_type: instance.class.to_s,
               votable_id: instance.id
             )
             subject

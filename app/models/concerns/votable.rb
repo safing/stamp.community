@@ -29,12 +29,12 @@ module Votable
     if concludable?
       case majority_type
       when :upvoters
-        Votable::AcceptWorker.perform_async(votable_type: self.class, votable_id: id)
+        Votable::AcceptWorker.perform_async(votable_type: self.class.to_s, votable_id: id)
       when :downvoters
-        Votable::DenyWorker.perform_async(votable_type: self.class, votable_id: id)
+        Votable::DenyWorker.perform_async(votable_type: self.class.to_s, votable_id: id)
       end
     else
-      Votable::DisputeWorker.perform_async(votable_type: self.class, votable_id: id)
+      Votable::DisputeWorker.perform_async(votable_type: self.class.to_s, votable_id: id)
     end
   end
 end
