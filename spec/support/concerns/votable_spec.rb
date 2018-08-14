@@ -258,7 +258,7 @@ RSpec.shared_examples 'a votable model' do |options|
       end
     end
 
-    describe '#conclude!', focus: true do
+    describe '#conclude!' do
       subject { instance.conclude! }
 
       context 'votable is not concludable' do
