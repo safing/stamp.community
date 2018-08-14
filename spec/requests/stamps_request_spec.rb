@@ -24,7 +24,7 @@ RSpec.describe 'stamp request', type: :request do
     end
   end
 
-  describe 'create', focus: true do
+  describe 'create' do
     subject(:request) { post stamps_url, params: { stamp: stamp_attributes } }
     let(:stamp_attributes) { FactoryBot.attributes_with_foreign_keys_for(:stamp) }
 

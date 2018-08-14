@@ -1,6 +1,6 @@
 RSpec.describe Votable::AcceptWorker, type: :worker do
   describe '#perform' do
-    subject { accept_worker.perform(votable_type: votable_type, votable_id: votable_id) }
+    subject { accept_worker.perform(votable_type, votable_id) }
     let(:accept_worker) { Votable::AcceptWorker.new }
 
     context 'votable exists' do

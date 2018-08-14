@@ -1,6 +1,6 @@
 RSpec.describe Votable::DenyWorker, type: :worker do
   describe '#perform' do
-    subject { deny_worker.perform(votable_type: votable_type, votable_id: votable_id) }
+    subject { deny_worker.perform(votable_type, votable_id) }
     let(:deny_worker) { Votable::DenyWorker.new }
 
     context 'votable exists' do
