@@ -43,4 +43,23 @@ module Votable
   def majority_size
     [upvote_power, downvote_power].max / total_power.to_f * 100
   end
+
+  def majority_type
+    return :even if upvote_power == downvote_power
+
+    upvote_power > downvote_power ? :upvoters : :downvoters
+  end
+
+  def conclude!
+    if concludable?
+      case majority_type
+      when :upvoters
+        Votable::AcceptWorker.perform_async(votable_type: self.class, votable_id: id)
+      when :downvoters
+        Votable::DenyWorker.perform_async(votable_type: self.class, votable_id: id)
+      end
+    else
+      Votable::DisputeWorker.perform_async(votable_type: self.class, votable_id: id)
+    end
+  end
 end

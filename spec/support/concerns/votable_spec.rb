@@ -91,7 +91,7 @@ RSpec.shared_examples 'a votable model' do |options|
       end
     end
 
-    describe '#concludable?', focus: true do
+    describe '#concludable?' do
       subject { instance.concludable? }
 
       before do
@@ -218,6 +218,86 @@ RSpec.shared_examples 'a votable model' do |options|
 
         it 'returns 50' do
           expect(subject).to eq(50)
+        end
+      end
+    end
+
+    describe '#majority_type' do
+      subject { instance.majority_type }
+
+      before do
+        allow(instance).to receive(:upvote_power).and_return(upvote_power)
+        allow(instance).to receive(:downvote_power).and_return(downvote_power)
+      end
+
+      context 'upvoters have majority' do
+        let(:upvote_power) { 70 }
+        let(:downvote_power) { 30 }
+
+        it 'returns :upvoters' do
+          expect(subject).to eq(:upvoters)
+        end
+      end
+
+      context 'downvoters have majority' do
+        let(:upvote_power) { 10 }
+        let(:downvote_power) { 90 }
+
+        it 'returns :downvoters' do
+          expect(subject).to eq(:downvoters)
+        end
+      end
+
+      context 'votes are even' do
+        let(:upvote_power) { 50 }
+        let(:downvote_power) { 50 }
+
+        it 'returns :even' do
+          expect(subject).to eq(:even)
+        end
+      end
+    end
+
+    describe '#conclude!', focus: true do
+      subject { instance.conclude! }
+
+      context 'votable is not concludable' do
+        before { allow(instance).to receive(:concludable?).and_return(false) }
+
+        it 'calls Votable::DisputeWorker' do
+          expect(Votable::DisputeWorker).to receive(:perform_async).with(
+            votable_type: instance.class,
+            votable_id: instance.id
+          )
+          subject
+        end
+      end
+
+      context 'votable is concludable' do
+        before { allow(instance).to receive(:concludable?).and_return(true) }
+
+        context 'majority of voters are :upvoters' do
+          before { allow(instance).to receive(:majority_type).and_return(:upvoters) }
+
+          it 'calls Votable::AcceptWorker' do
+            expect(Votable::AcceptWorker).to receive(:perform_async).with(
+              votable_type: instance.class,
+              votable_id: instance.id
+            )
+            subject
+          end
+        end
+
+        context 'majority of voters are :downvoters' do
+          before { allow(instance).to receive(:majority_type).and_return(:downvoters) }
+
+          it 'calls Votable::DenyWorker' do
+            expect(Votable::DenyWorker).to receive(:perform_async).with(
+              votable_type: instance.class,
+              votable_id: instance.id
+            )
+            subject
+          end
         end
       end
     end
