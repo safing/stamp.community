@@ -91,6 +91,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.2)
     crass (1.0.4)
     database_cleaner (1.6.2)
     descendants_tracker (0.0.4)
@@ -230,6 +231,8 @@ GEM
     rack (2.0.5)
     rack-accept (0.4.5)
       rack (>= 0.4)
+    rack-protection (2.0.3)
+      rack
     rack-proxy (0.6.4)
       rack
     rack-test (1.0.0)
@@ -263,6 +266,7 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (4.3.0)
+    redis (4.0.1)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -319,6 +323,11 @@ GEM
     seedbank (0.4.0)
     sexp_processor (4.11.0)
     shellany (0.0.1)
+    sidekiq (5.1.3)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -398,6 +407,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   seedbank
   shoulda-matchers!
+  sidekiq
   state_machines-activerecord
   state_machines-rspec
   turbolinks

@@ -1,4 +1,8 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
+
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :domains, param: :name, constraints: { name: Domain::NAME_REGEX }, only: [:show]
