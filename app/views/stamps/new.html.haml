@@ -3,84 +3,126 @@
     %h1.header
       New Stamp for trello.com
       %a
-        %i.external.icon
-    %div.ui.divider
-  %div.ten.wide.column
-    %div.ui.grid
-      %div.sixteen.wide.column
-        %h3
-          Label
-          %div.ui.compact.selection.dropdown
-            %i.dropdown.icon
-            %div.text
-              Compact
-            %div.menu
-              %div.item
-                A
-              %div.item
-                b
-      %div.twelve.wide.column
-        %div.ui.big.progress
-          50%
-      %div.four.wide.column
-        %a
-          %i.hand.caret.up.big.icon
-        %a
-          %i.hand.caret.down.big.icon
-    %h3
-      Comment
-    %div.ui.divider
-      %p
-        Welcome to my lala land Welcome to my lala land Welcome to my lala land
-        Welcome to my lala land Welcome to my lala land Welcome to my lala land
-        Welcome to my lala land Welcome to my lala land Welcome to my lala land
-        Welcome to my lala land Welcome to my lala land Welcome to my lala land
-  %div.six.wide.column
-    %h3
-      Other Stamps of this domain
-    %div.ui.grid
-      %div.five.wide.column
-        %h4.ui.middle.aligned.header
-          Management
-      %div.eleven.wide.column
-        %div.bar.float.right
-          %div.ui.standard.top.progress
-            39%
-            %div.ui.tiny.buttom.orange.progress
-              49%
-      %div.five.wide.column
-        %h4.ui.middle.aligned.header
-          Business
-      %div.eleven.wide.column
-        %div.bar.float.right
-          %div.ui.standard.top.progress
-            39%
-            %div.ui.tiny.buttom.orange.progress
-              49%
-      %div.five.wide.column
-        %h4.ui.middle.aligned.header
-          ADS
-      %div.eleven.wide.column
-        %div.bar.float.right
-          %div.ui.big.progress
-            40%
-    %h3
-      Suggested
-      %button.ui.button
-        Add Stamp
-    %div.ui.divider
-    %div.ui.grid
-      %div.five.wide.column
-        %h4.ui.middle.aligned.header
-          Sport
-      %div.eleven.wide.column
-        %div.bar.float.right
-          %div.ui.big.progress
-            40%
-      %div.five.wide.column
-        %h4.ui.middle.aligned.header
+        %i.purple.external.icon
+    %div.ui.divider{style: "margin-bottom: -5px;"}
+  %div.nine.wide.column
+    %div.ui.basic.segment
+      %h3{style: "margin-bottom: 2rem;"}
+        Label:
+        %button.ui.grey.basic.tiny.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #838383 inset !important; "}
           Animals
-      %div.eleven.wide.column
-        %div.bar.float.right
-          %div.ui.big.progress
-            40%
+      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+        Spam
+      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #838383 inset !important; "}
+        Management
+      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #838383 inset !important; "}
+        Business
+      %button.ui.teal.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #009c95 inset !important; "}
+        ADS
+      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #838383 inset !important; "}
+        Animals
+      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+        Anime
+      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+        E-sport
+      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+        News
+      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+        lala
+      %div.ui.right.aligned.basic.segment
+        %div.ui.relaxed.horizontal.list{style: "border-top: 1px solid rgba(34, 36, 38, 0.15);"}
+          %div.item
+            %h6.ui.purple.header
+              New Stamp
+          %div.item
+            %h6.ui.teal.header
+              Re Stamp
+          %div.item
+            %h6.ui.grey.header
+              Active Stamp
+    %div.ui.grid
+      %div.fourteen.wide.column
+        %div.ui.purple.range#stamp_range
+        %input#stamp_range_input{type:"hidden"}
+      %div.two.wide.column
+        %span#stamp_range_display
+    %div.ui.basic.segment
+      %h3
+        Comment
+      %div.ui.divider
+        %form.ui.form
+          %div.field
+            %textarea
+          %div.ui.submit.labeled.icon.purple.button
+            %i.plus.icon
+            Add Comment
+  %div.six.wide.right.floated.column
+    %div.ui.basic.segment
+      %h3
+        Other Stamps of this domain
+      %div.ui.divider
+      %div.ui.grid
+        %div.five.wide.column
+          %h4.ui.middle.aligned.header
+            Management
+        %div.eleven.wide.column
+          %div.bar.float.right
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 39%; z-index: 10; "}
+                %div.progress
+                  39%
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
+
+        %div.five.wide.column
+          %h4.ui.middle.aligned.header
+            Business
+        %div.eleven.wide.column
+          %div.bar.float.right
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 80%; z-index: 10; "}
+                %div.progress
+                  80%
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar.bartwo{style: "width: 60%; margin-top: -39px;"}
+        %div.five.wide.column
+          %h4.ui.middle.aligned.header
+            ADS
+        %div.eleven.wide.column
+          %div.bar.float.right
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 15%; z-index: 10; "}
+                %div.progress
+                  15%
+    %div.ui.basic.segment
+      %h3
+        Suggested
+      %div.ui.divider
+      %div.ui.grid
+        %div.five.wide.column
+          %h4.ui.middle.aligned.header
+            Management
+        %div.eleven.wide.column
+          %div.bar.float.right
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 49%; z-index: 10; "}
+                %div.progress
+                  49%
+        %div.five.wide.column
+          %h4.ui.middle.aligned.header
+            Business
+        %div.eleven.wide.column
+          %div.bar.float.right
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 60%; z-index: 10; "}
+                %div.progress
+                  60%
+        %div.five.wide.column
+          %h4.ui.middle.aligned.header
+            Animals
+        %div.eleven.wide.column
+          %div.bar.float.right
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 40%; z-index: 10; "}
+                %div.progress
+                  40%
