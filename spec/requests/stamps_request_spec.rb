@@ -1,8 +1,11 @@
-RSpec.describe 'stamp request', type: :request do
-  describe 'new' do
-    subject(:request) { get new_stamp_url }
+# `feature` is in fact just an alias for `describe` , `background` is an alias for `before`,
+# `scenario` for `it`, and `given/given!` aliases for `let/let!`, respectively.
 
-    describe 'authourization' do
+RSpec.describe 'stamp requests', type: :request do
+  describe 'authourization' do
+    describe '#new' do
+      subject(:request) { get new_stamp_url }
+
       context 'role: guest' do
         include_examples 'status code', 401
       end
@@ -22,13 +25,11 @@ RSpec.describe 'stamp request', type: :request do
         include_examples 'status code', 200
       end
     end
-  end
 
-  describe 'create' do
-    subject(:request) { post stamps_url, params: { stamp: stamp_attributes } }
-    let(:stamp_attributes) { FactoryBot.attributes_with_foreign_keys_for(:stamp) }
+    describe '#create' do
+      subject(:request) { post stamps_url, params: { stamp: stamp_attributes } }
+      let(:stamp_attributes) { FactoryBot.attributes_with_foreign_keys_for(:stamp) }
 
-    describe 'authourization' do
       context 'role: guest' do
         include_examples 'status code', 401
       end
@@ -48,14 +49,12 @@ RSpec.describe 'stamp request', type: :request do
         include_examples 'status code', 201
       end
     end
-  end
 
-  describe 'show' do
-    subject(:request) { get stamps_path(stamp) }
+    describe 'show' do
+      subject(:request) { get stamps_path(stamp) }
 
-    let(:stamp) { FactoryBot.create(:stamp) }
+      let(:stamp) { FactoryBot.create(:stamp) }
 
-    describe 'authourization' do
       context 'role: guest' do
         include_examples 'status code', 200
       end
