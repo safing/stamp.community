@@ -3,76 +3,96 @@
     %h1.header
       Stamp for trello.com
       %a
-        %i.external.icon
-    %div.ui.divider
+        %i.purple.external.icon
+    %div.ui.divider{style: "margin-bottom: -5px;"}
   %div.ten.wide.column
-    %div.ui.grid
-      %div.sixteen.wide.column
-        %h3
-          Business
-      %div.twelve.wide.column
-        %div.ui.big.progress
-          50%
-      %div.four.wide.column
-        %a
-          %i.hand.caret.up.big.icon
-        %a
-          %i.hand.caret.down.big.icon
-    %h3
-      Comment
-    %div.ui.divider
-      %p
-        Welcome to my lala land Welcome to my lala land Welcome to my lala land
-        Welcome to my lala land Welcome to my lala land Welcome to my lala land
-        Welcome to my lala land Welcome to my lala land Welcome to my lala land
-        Welcome to my lala land Welcome to my lala land Welcome to my lala land
-  %div.six.wide.column
-    %h3
-      Other Stamps of this domain
-    %nbsp
+    %div.ui.basic.segment
+      %h3.ui.middle.aligned.header
+        Business
       %div.ui.grid
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
+        %div.twelve.wide.column
+          %div.bar.float.right
+            %div.ui.purple.progress{style: "background: white;"}
+              %div.bar{style: "width: 80%; z-index: 10; "}
+                %div.progress
+                  80%
+        %div.four.wide.column
+          %div.ui.icon.buttons{style: "inline_flex;"}
+            %div.ui.basic.purple.button.icon{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important;"}
+              %i.hand.caret.up.big.icon
+            %div.ui.basic.purple.button.icon{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+              %i.hand.caret.down.big.icon
+    %div.ui.basic.segment
+      %h3
+        Comment
+      %div.ui.divider
+        %form.ui.form
+          %div.field
+            %textarea
+          %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+            %i.plus.icon
+            Add Comment
+  %div.six.wide.column
+    %div.ui.basic.segment{style: "margin-bottom: -22px;"}
+      %h3
+        Other Stamps of this domain
+        %div.ui.divider
+      %div.ui.grid
+        %div.four.wide.column
+          %h5.ui.middle.aligned.header
             Management
-        %div.eleven.wide.column
+        %div.twelve.wide.column
           %div.bar.float.right
-            %div.ui.standard.top.progress
-              39%
-              %div.ui.tiny.buttom.orange.progress
-                49%
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 39%; z-index: 10; "}
+                %div.progress
+                  39%
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
+
+        %div.four.wide.column
+          %h5.ui.middle.aligned.header
             Business
-        %div.eleven.wide.column
+        %div.twelve.wide.column
           %div.bar.float.right
-            %div.ui.standard.top.progress
-              39%
-              %div.ui.tiny.buttom.orange.progress
-                49%
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 80%; z-index: 10; "}
+                %div.progress
+                  80%
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar.bartwo{style: "width: 60%; margin-top: -39px;"}
+        %div.four.wide.column
+          %h5.ui.middle.aligned.header
             ADS
-        %div.eleven.wide.column
+        %div.twelve.wide.column
           %div.bar.float.right
-            %div.ui.big.progress
-              40%
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 15%; z-index: 10; "}
+                %div.progress
+                  15%
+    %div.ui.basic.segment
       %h3
         Suggested
-        %button.ui.button
+        %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
           Add Stamp
-      %div.ui.divider
+        %div.ui.divider{ style: "margin-top: 0px;"}
       %div.ui.grid
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
-            Sport
-        %div.eleven.wide.column
-          %div.bar.float.right
-            %div.ui.big.progress
-              40%
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
+        %div.four.wide.column
+          %h5.ui.middle.aligned.header
             Animals
-        %div.eleven.wide.column
+        %div.twelve.wide.column
           %div.bar.float.right
-            %div.ui.big.progress
-              40%
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 70%; z-index: 10; "}
+                %div.progress
+                  70%
+
+        %div.four.wide.column
+          %h5.ui.middle.aligned.header
+            Sport
+        %div.twelve.wide.column
+          %div.bar.float.right
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 55%; z-index: 10; "}
+                %div.progress
+                  55%
