@@ -47,12 +47,14 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'hirb'
   gem 'pry-byebug'
+  gem 'puma'
 end
 
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
   # check if the release is out yet https://github.com/thoughtbot/shoulda-matchers/milestone/13
+  gem 'launchy'
   gem 'pundit-matchers'
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
