@@ -1,76 +1,92 @@
 %div.ui.two.column.grid.container
   %div.sixteen.wide.column
-    %h2.header
+
+    %h1.header
       safing.io
-      %i.external.alternate.icon
-    %div.ui.divider
-  %div.eleven.wide.column
+      %a
+        %i.purple.external.icon
+      %div.ui.divider{style: "margin-bottom: -5px;"}
+  %div.ten.wide.column
+    %div.ui.basic.segment
+      %div.ui.grid
+        %div.three.wide.column
+          %h5.ui.middle.aligned.header
+            Management
+        %div.thirteen.wide.column
+          %div.bar.float.right
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 39%; z-index: 10; "}
+                %div.progress
+                  39%
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
 
-    %div.ui.grid
-      %div.three.wide.column
-        %h4.ui.middle.aligned.header
-          Management
-      %div.thirteen.wide.column
-        %div.bar.float.right
-          %div.ui.standard.top.progress
-            39%
-            %div.ui.tiny.buttom.orange.progress
-              49%
-      %div.three.wide.column
-        %h4.ui.middle.aligned.header
-          Business
-      %div.thirteen.wide.column
-        %div.bar.float.right
-          %div.ui.standard.top.progress
-            39%
-            %div.ui.tiny.buttom.orange.progress
-              49%
-      %div.three.wide.column
-        %h4.ui.middle.aligned.header
-          ADS
-      %div.thirteen.wide.column
-        %div.bar.float.right
-          %div.ui.big.progress
-            40%
-    %h2
-      Suggested
-      %button.ui.button
-        Add Stamp
-    %div.ui.divider
-    %div.ui.grid
-      %div.three.wide.column
-        %h4.ui.middle.aligned.header
-          Sport
-      %div.thirteen.wide.column
-        %div.bar.float.right
-          %div.ui.big.progress
-            40%
+        %div.three.wide.column
+          %h5.ui.middle.aligned.header
+            Business
+        %div.thirteen.wide.column
+          %div.bar.float.right
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 80%; z-index: 10; "}
+                %div.progress
+                  80%
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar.bartwo{style: "width: 60%; margin-top: -39px;"}
+        %div.three.wide.column
+          %h5.ui.middle.aligned.header
+            ADS
+        %div.thirteen.wide.column
+          %div.bar.float.right
+            %div.ui.purple.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 15%; z-index: 10; "}
+                %div.progress
+                  15%
+    %div.ui.basic.segment
+      %h3
+        Suggested
+        %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+          Add Stamp
+        %div.ui.divider{ style: "margin-top: 0px;"}
+      %div.ui.grid
+        %div.three.wide.column
+          %h5.ui.middle.aligned.header
+            Animals
+        %div.thirteen.wide.column
+          %div.bar.float.right
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 70%; z-index: 10; "}
+                %div.progress
+                  70%
 
-      %div.three.wide.column
-        %h4.ui.middle.aligned.header
-          Animals
-      %div.thirteen.wide.column
-        %div.bar.float.right
-          %div.ui.big.progress
-            40%
-  %div.five.wide.column
-    %div.ui.relaxed.list
-      %div.item
-        %i.clock.outline.icon
-        %div.content
-          5 months ago
-      %div.item
-        %i.user.icon
-        %div.content
-          Karl Marx
-      %div.item
-        %i.history.icon
-        %div.content
-          1 months ago
-      %div.ui.divider
-    %div.ui.relaxed.list
-      %h3.ui.header
-        Subdomains
-      %div.item
-        %a
-          assets.trello.com
+        %div.three.wide.column
+          %h5.ui.middle.aligned.header
+            Sport
+        %div.thirteen.wide.column
+          %div.bar.float.right
+            %div.ui.teal.small.progress{style: "background: white;"}
+              %div.bar{style: "width: 55%; z-index: 10; "}
+                %div.progress
+                  55%
+  %div.five.wide.right.floated.column
+    %div.ui.basic.segment
+      %div.ui.relaxed.list
+        %div.item
+          %i.clock.outline.icon
+          %div.content
+            5 months ago
+        %div.item
+          %i.user.icon
+          %div.content
+            Karl Marx
+        %div.item
+          %i.history.icon
+          %div.content
+            1 months ago
+        %div.ui.divider{style: "margin-bottom: -23px;"}
+    %div.ui.basic.segment
+      %div.ui.relaxed.list
+        %h3.ui.header
+          Subdomains
+        %div.item
+          %a
+            assets.trello.com
