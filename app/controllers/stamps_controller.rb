@@ -9,7 +9,7 @@ class StampsController < ApplicationController
     authorize @stamp
 
     if @stamp.save
-      redirect_to(stamps_url(@stamp.id), status: 201)
+      redirect_to(stamp_url(@stamp.id))
     else
       render 'new'
     end
