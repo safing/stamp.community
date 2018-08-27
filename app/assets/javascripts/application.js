@@ -13,6 +13,7 @@
 //= require turbolinks
 //= require font_awesome5
 //= require jquery
+//= require jquery_ujs
 //= require semantic
 //= require semantic_range
 //= require_tree .
