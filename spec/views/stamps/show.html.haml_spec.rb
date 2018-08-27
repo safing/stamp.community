@@ -66,7 +66,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
 
     context 'stamped domain has (accepted/in_progress) sibling-stamps' do
       before do
-        stamp.domain.stamps << FactoryBot.create_list(:stamp, 2)
+        stamp.domain.stamps << FactoryBot.build_list(:stamp, 2)
       end
 
       context 'siblings are only accepted' do

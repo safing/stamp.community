@@ -7,7 +7,7 @@ RSpec.describe 'domains/show.html.haml', type: :view do
   end
 
   context 'domain has stamps' do
-    before { domain.stamps << FactoryBot.create_list(:stamp, 2, state: state) }
+    before { domain.stamps << FactoryBot.build_list(:stamp, 2, state: state) }
 
     context 'domain has accepted stamps' do
       let(:state) { :accepted }
@@ -34,7 +34,7 @@ RSpec.describe 'domains/show.html.haml', type: :view do
 
     context 'domain has both accepted and in_progress stamps' do
       let(:state) { :in_progress }
-      before { domain.stamps << FactoryBot.create_list(:stamp, 2, state: :accepted) }
+      before { domain.stamps << FactoryBot.build_list(:stamp, 2, state: :accepted) }
 
       it 'shows the accepted stamps' do
         expect(rendered).to have_content('Accepted')
@@ -61,7 +61,7 @@ RSpec.describe 'domains/show.html.haml', type: :view do
   end
 
   context 'domain has subdomains' do
-    before { domain.children << FactoryBot.create_list(:domain, 2) }
+    before { domain.children << FactoryBot.build_list(:domain, 2) }
 
     it 'shows the subdomains' do
       expect(rendered).to have_content('Subdomains')
