@@ -9,7 +9,7 @@ class StampsController < ApplicationController
     authorize @stamp
 
     if @stamp.save
-      redirect_to(stamp_url(@stamp.id))
+      redirect_to(stamp_url(@stamp.id), flash: { success: 'Stamp created successfully' })
     else
       render 'new'
     end
