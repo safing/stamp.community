@@ -1,16 +1,35 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .form-group
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, class: 'form-control'
-  .form-group
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: 'off', class: 'form-control'
-  - if devise_mapping.rememberable?
-    .form-group
-      = f.check_box :remember_me
-      = f.label :remember_me
-  = f.submit 'Log in', class: 'btn btn-primary'
-= render 'devise/shared/links'
+%div.ui.grid.container
+  %div.six.wide.column
+  %div.four.wide.column.some{ style: 'box-shadow: 0 20px 20px -20px #333' }
+    %div.ui.form.header
+      %h1
+        Log In
+      %div.field
+        %label
+          Email
+        %div.ui.left.icon.input
+          %input.placeholder.text
+          %i.mail.icon
+      %div.field
+        %label
+          Password
+        %div.ui.left.icon.input
+          %input.password
+          %i.lock.icon
+      %div.ui.checkbox
+        %label
+          Remember Me
+    %div.ui.purple.submit.button
+      Login
+    %div.ui.divider
+    %div.ui.list
+      %div.item
+        %a
+          Sing up
+      %div.item
+        %a
+          Forgot you password?
+      %div.item
+        %a
+          Didn't receive confirmation instructions?
+  %div.six.wide.column

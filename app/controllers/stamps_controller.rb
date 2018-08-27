@@ -27,4 +27,6 @@ class StampsController < ApplicationController
           .permit(:label_id, :percentage, :stampable_id, :stampable_type)
           .merge(creator: current_user)
   end
+
+  def index; end
 end
