@@ -28,6 +28,8 @@ end
 RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::IntegrationHelpers, type: :view
   config.include LoginSpecHelper, type: :request
   config.include LoginSpecHelper, type: :feature
+  config.include LoginSpecHelper, type: :view
 end
