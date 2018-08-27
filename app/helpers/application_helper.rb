@@ -7,7 +7,7 @@ module ApplicationHelper
     current_day.beginning_of_day..current_day.end_of_day
   end
 
-  def bootstrap_class_for(flash_type)
+  def semantic_class_for(flash_type)
     {
       success: 'alert-success',
       error: 'alert-danger',

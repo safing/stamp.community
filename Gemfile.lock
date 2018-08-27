@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/bootstrap-ruby/bootstrap_form.git
-  revision: 31376d5eee8c43498b0c70efb48c3854e1c43554
-  branch: master
-  specs:
-    bootstrap_form (4.0.0.alpha1)
-      rails (>= 5.0)
-
-GIT
   remote: https://github.com/ruby-grape/grape-entity.git
   revision: 0e04aa561373b510c2486282979085eaef2ae663
   branch: master
@@ -67,17 +59,11 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     ast (2.4.0)
-    autoprefixer-rails (8.4.1)
-      execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
-    bootstrap (4.1.1)
-      autoprefixer-rails (>= 6.0.3)
-      popper_js (>= 1.12.9, < 2)
-      sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
     capybara (3.6.0)
@@ -224,7 +210,6 @@ GEM
     parser (2.5.1.0)
       ast (~> 2.4.0)
     pg (1.0.0)
-    popper_js (1.12.9)
     powerpack (0.1.1)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -395,8 +380,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap (~> 4.1.1)
-  bootstrap_form!
   capybara
   coffee-rails
   database_cleaner
