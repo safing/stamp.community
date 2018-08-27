@@ -1,27 +1,10 @@
-.container > span > .row:first-child {
-  padding-top: 5%;
-}
-
-.row {
-  padding: 10px 0 0 0;
-}
-
 .hidden {
   display: none;
 }
 
-.alert:first-child {
-  margin-top: 1em;
-}
-
-.row.label {
-  padding: 2% 0;
-  margin: 2% 0;
-}
-
 .collapsible:hover {
-    border-radius: 5px;
-    background-color: #fbfbfb;
+  border-radius: 5px;
+  background-color: #fbfbfb;
 }
 
 .default-color {
