@@ -10,5 +10,8 @@
       .ui.icon.input
         %input{placeholder: 'Search...', type: 'text'}
         %i.search.link.icon
-    %a.ui{class: 'item'}
-      Logout
+    - if user_signed_in?
+      = link_to 'Profile', user_path(current_user), class: 'item'
+      = link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: 'item'
+    - else
+      = link_to 'Sign In', new_user_session_path, class: 'item'
