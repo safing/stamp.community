@@ -40,4 +40,27 @@ RSpec.describe Stamp, type: :model do
       # end
     end
   end
+
+  describe '#siblings' do
+    subject { stamp.siblings }
+    let(:stamp) { FactoryBot.create(:stamp) }
+
+    context 'stamp has no siblings' do
+      it 'returns an empty array' do
+        expect(subject).to eq([])
+      end
+    end
+
+    context 'stamp has sibling stamps' do
+      before { stamp.domain.stamps << FactoryBot.create_list(:stamp, 2) }
+
+      it 'returns all siblings' do
+        expect(subject.count).to eq(2)
+      end
+
+      it 'does not return itself' do
+        expect(subject.pluck(:id)).not_to include(2)
+      end
+    end
+  end
 end
