@@ -1,9 +1,38 @@
 RSpec.describe 'domains/show.html.haml', type: :view do
-  let(:domain) { FactoryBot.build(:domain) }
+  let(:domain) { FactoryBot.create(:domain) }
 
   before do
     assign(:domain, domain)
     render
+  end
+
+  shared_examples 'show: accepted stamps segment' do |show|
+    if show
+      it 'shows the accepted stamps' do
+        expect(rendered).to have_content('Accepted')
+      end
+    else
+      it 'does not show the accepted stamps' do
+        expect(rendered).not_to have_content('Accepted')
+      end
+    end
+  end
+
+  shared_examples 'show: in_progress stamps segment' do |show|
+    if show
+      it 'shows the in_progress stamps' do
+        expect(rendered).to have_content('Suggested')
+      end
+    else
+      it 'does not show any in_progress stamps' do
+        expect(rendered).not_to have_content('Suggested')
+      end
+    end
+  end
+
+  it 'links to the domain' do
+    expect(rendered).to have_content(domain.name)
+    expect(rendered).to have_link(href: domain.href)
   end
 
   context 'domain has stamps' do
@@ -12,48 +41,29 @@ RSpec.describe 'domains/show.html.haml', type: :view do
     context 'domain has accepted stamps' do
       let(:state) { :accepted }
 
-      it 'shows the accepted stamps' do
-        expect(rendered).to have_content('Accepted')
-      end
-      it 'does not show any in_progress stamps' do
-        expect(rendered).not_to have_content('Suggested')
-      end
+      include_context 'show: accepted stamps segment', true
+      include_context 'show: in_progress stamps segment', false
     end
 
     context 'domain has in_progress stamps' do
       let(:state) { :in_progress }
 
-      it 'does not show any accepted stamps' do
-        expect(rendered).not_to have_content('Accepted')
-      end
-
-      it 'shows the in_progress stamps' do
-        expect(rendered).to have_content('Suggested')
-      end
+      include_context 'show: accepted stamps segment', false
+      include_context 'show: in_progress stamps segment', true
     end
 
     context 'domain has both accepted and in_progress stamps' do
       let(:state) { :in_progress }
       before { domain.stamps << FactoryBot.build_list(:stamp, 2, state: :accepted) }
 
-      it 'shows the accepted stamps' do
-        expect(rendered).to have_content('Accepted')
-      end
-
-      it 'shows the in_progress stamps' do
-        expect(rendered).to have_content('Suggested')
-      end
+      include_context 'show: accepted stamps segment', true
+      include_context 'show: in_progress stamps segment', true
     end
   end
 
   context 'domain has no stamps' do
-    it 'does not show any accepted stamps' do
-      expect(rendered).not_to have_content('Accepted')
-    end
-
-    it 'does not show any in_progress stamps' do
-      expect(rendered).not_to have_content('Suggested')
-    end
+    include_context 'show: accepted stamps segment', false
+    include_context 'show: in_progress stamps segment', false
   end
 
   it 'links to the creator' do
@@ -77,7 +87,7 @@ RSpec.describe 'domains/show.html.haml', type: :view do
   context 'domain has a parent domain' do
     before { domain.update(parent: FactoryBot.create(:domain)) }
 
-    it 'show the parent domain' do
+    it 'show: the parent domain' do
       expect(rendered).to have_content('Main Domain')
     end
   end
