@@ -9,10 +9,10 @@ module ApplicationHelper
 
   def semantic_class_for(flash_type)
     {
-      success: 'alert-success',
-      error: 'alert-danger',
-      alert: 'alert-warning',
-      notice: 'alert-primary'
+      success: 'success',
+      error: 'error',
+      alert: 'warning',
+      notice: 'info'
     }[flash_type.to_sym] || flash_type.to_s
   end
 end

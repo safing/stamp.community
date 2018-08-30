@@ -1,5 +1,4 @@
-%div{:class => "alert #{semantic_class_for(type)} alert-dismissible fade show", :role => "alert"}
-  %button.close{"data-aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-    %span{"aria-hidden" => "true"} ×
-  .text
+.ui.message{class: semantic_class_for(type), data: {controller: 'message', target: 'message.flash'}}
+  %i.close.icon{data: {action: 'click->message#close'}}
+  .header
     = content
