@@ -22,6 +22,8 @@ class StampsController < ApplicationController
     authorize @stamp
   end
 
+  def index; end
+
   private
 
   def stamp_params
@@ -29,6 +31,4 @@ class StampsController < ApplicationController
           .permit(:label_id, :percentage, :stampable_id, :stampable_type)
           .merge(creator: current_user)
   end
-
-  def index; end
 end
