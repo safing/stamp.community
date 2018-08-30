@@ -10,3 +10,26 @@
 .default-color {
   color: $text_color;
 }
+
+.ui.button {
+  margin-bottom: 8px;
+  padding: 6px;
+
+  &.mb0 {
+    margin-bottom: 0px;
+  }
+  &.ml5 {
+    margin-left: 5px;
+  }
+  &.teal {
+    background-color: #c3ffff !important;
+  }
+
+  &.grey {
+    background-color: #E8E8E8 !important;
+  }
+
+  &.purple {
+    background-color: #FFE3FF !important;
+  }
+}

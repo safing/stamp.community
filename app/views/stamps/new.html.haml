@@ -6,55 +6,45 @@
         %i.purple.external.icon
     %div.ui.divider{style: "margin-bottom: -5px;"}
   %div.nine.wide.column
-    %div.ui.basic.segment
-      %h3{style: "margin-bottom: 2rem;"}
-        Label:
-        %button.ui.grey.basic.tiny.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
-          Animals
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        Spam
-      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
-        Management
-      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
-        Business
-      %button.ui.teal.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #c3ffff !important; "}
-        ADS
-      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
-        Animals
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        Anime
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        E-sport
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        News
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        lala
-      %div.ui.right.aligned.basic.segment
-        %div.ui.relaxed.horizontal.list{style: "border-top: 1px solid rgba(34, 36, 38, 0.15);"}
-          %div.item
-            %h6.ui.purple.header
-              New Stamp
-          %div.item
-            %h6.ui.teal.header
-              Re Stamp
-          %div.item
-            %h6.ui.grey.header
-              Active Stamp
-    %div.ui.grid
-      %div.fourteen.wide.column
-        %div.ui.purple.range#stamp_range
-        %input#stamp_range_input{type:"hidden"}
-      %div.two.wide.column
-        %span#stamp_range_display
-    %div.ui.basic.segment
-      %h3
-        Comment
-      %div.ui.divider
-        %form.ui.form
-          %div.field
-            %textarea
-          %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-            Add Comment
+    = render 'partials/errors', object: @stamp
+
+    %div.ui.styled.accordion{data: {controller: 'new-stamp', new_stamp: {set_percentage: @stamp.percentage, set_label_id: @stamp.label_id}}}
+      = form_for @stamp, html: {class: %w[ui form]} do |f|
+        = f.hidden_field :stampable_type, value: 'Domain'
+        = f.hidden_field :stampable_id, value: params[:domain_id]
+        -# render "shared/errors", object: @stamp
+        %div.title
+          1. Select Label
+          = button_tag '', type: 'button', class: %w[ui grey basic tiny button hidden ml5], data: {target: 'new-stamp.selectedLabel'}
+          = f.hidden_field :label_id, data: {target: 'new-stamp.labelId'}
+        %div.content
+          - @labels.each do |label|
+            = button_tag label.name, type: 'button', class: %w[ui grey basic tiny button], data: {action: 'new-stamp#selectLabel', label_id: label.id}
+          %div.ui.right.aligned.basic.segment
+            %div.ui.relaxed.horizontal.list{style: "border-top: 1px solid rgba(34, 36, 38, 0.15);"}
+              %div.item
+                %h6.ui.purple.header
+                  New Stamp
+              %div.item
+                %h6.ui.teal.header
+                  Re Stamp
+              %div.item
+                %h6.ui.grey.header
+                  Active Stamp
+        %div.title
+          2. Define percentage & comment
+          = f.hidden_field :percentage, id: 'stamp_percentage'
+        %div.content
+          %div.ui.grid
+            %div.fourteen.wide.column
+              %div.ui.purple.range#stamp_percentage_range
+            %div.two.wide.column
+              %span#stamp_percentage_display
+          %h3
+            Comment
+          %textarea
+          .ui.divider
+          = f.submit 'Create Stamp', class: %w[ui purple basic big button mb0], style: 'box-shadow: 0px 0px 2px 2px #A333C8 inset !important;'
   %div.six.wide.right.floated.column
     %div.ui.basic.segment
       %h3

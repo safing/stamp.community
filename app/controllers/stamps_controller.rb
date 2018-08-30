@@ -2,11 +2,13 @@ class StampsController < ApplicationController
   def new
     @stamp = Stamp.new
     authorize @stamp
+    @labels = Label.order('LOWER(name) ASC')
   end
 
   def create
     @stamp = Stamp.new(stamp_params)
     authorize @stamp
+    @labels = Label.order('LOWER(name) ASC')
 
     if @stamp.save
       redirect_to(stamp_url(@stamp.id), flash: { success: 'Stamp created successfully' })
