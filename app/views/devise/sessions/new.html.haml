@@ -1,35 +1,23 @@
 %div.ui.grid.container
   %div.six.wide.column
   %div.four.wide.column.some{ style: 'box-shadow: 0 20px 20px -20px #333' }
-    %div.ui.form.header
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: %w[ui form header]}) do |f|
       %h1
         Log In
       %div.field
-        %label
-          Email
+        = f.label :email
         %div.ui.left.icon.input
-          %input.placeholder.text
+          = f.email_field :email, autofocus: true, class: %w[ui left icon input]
           %i.mail.icon
       %div.field
-        %label
-          Password
+        = f.label :password
         %div.ui.left.icon.input
-          %input.password
+          = f.password_field :password, autocomplete: 'off', class: 'form-control'
           %i.lock.icon
-      %div.ui.checkbox
-        %label
-          Remember Me
-    %div.ui.purple.submit.button
-      Login
-    %div.ui.divider
-    %div.ui.list
-      %div.item
-        %a
-          Sing up
-      %div.item
-        %a
-          Forgot you password?
-      %div.item
-        %a
-          Didn't receive confirmation instructions?
+      - if devise_mapping.rememberable?
+        .ui.checkbox
+          = f.check_box :remember_me
+          = f.label :remember_me
+      = f.submit 'Log in', class: 'ui purple submit button'
+    = render 'devise/shared/links'
   %div.six.wide.column
