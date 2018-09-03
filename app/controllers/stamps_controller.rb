@@ -8,6 +8,8 @@ class StampsController < ApplicationController
 
   def create
     @stamp = Stamp.new(stamp_params)
+    # assign current_user
+    @stamp.creator = @stamp.comments.first.user = current_user
     authorize @stamp
 
     if @stamp.save
@@ -29,7 +31,6 @@ class StampsController < ApplicationController
 
   def stamp_params
     params.require(:stamp)
-          .merge(creator: current_user)
           .permit(
             :label_id,
             :percentage,
