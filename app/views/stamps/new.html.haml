@@ -42,7 +42,8 @@
               %span#stamp_percentage_display
           %h3
             Comment
-          %textarea
+          = f.fields_for :comments do |c|
+            = c.text_area :content
           .ui.divider
           = f.submit 'Create Stamp', class: %w[ui purple basic big button mb0], style: 'box-shadow: 0px 0px 2px 2px #A333C8 inset !important;'
   %div.six.wide.right.floated.column
