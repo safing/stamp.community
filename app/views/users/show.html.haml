@@ -5,7 +5,7 @@
       %div.ui.segment{ style: 'box-shadow: 5px 5px 10px -6px #A333C8 ; padding: 0px'}
         %div.ui.fluid.card
           %div.image
-            %img{src: '/assets/basic_logo.png'}
+            %img{src: '/assets/portmaster.png'}
           %div.ui.vertical.stripe.segment
             %div.ui.middle.aligned.stackable.grid.container
               %div.row
@@ -20,12 +20,13 @@
                 %div.ui.seven.wide.column.center.aligned
                   %div.ui.mini.horizontal.statistic
                     %div.value
-                      2543
+                      = @user.reputation
                     %div.label
                       rep
     %div.eight.wide.column
       %h1.ui.header
-        Karl Marx
+        = @user.username
+
       %div.ui.divider
       %p
         My Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp Story
@@ -60,7 +61,8 @@
           %div.item
             %i.calendar.alternate.outline.icon
             %div.content
-              2 months ago
+              = time_ago_in_words(@user.created_at)
+              ago
           %div.item
             %i.chart.pie.icon
             %div.content
