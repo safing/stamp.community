@@ -40,7 +40,7 @@ class StampsController < ApplicationController
   end
 
   def load_domain
-    Domain.find_by(name: params[:domain] || params['stamp']['domain'])
+    Domain.find_by(name: params[:domain_name] || params['stamp']['domain'])
   end
 
   def load_labels
