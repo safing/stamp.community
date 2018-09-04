@@ -15,4 +15,8 @@ class Domain < ApplicationRecord
   def parent_name
     parent.name if parent_id.present?
   end
+
+  def href
+    "http://#{name}"
+  end
 end
