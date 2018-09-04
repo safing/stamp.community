@@ -1,6 +1,7 @@
 class StampsController < ApplicationController
   def new
     @stamp = Stamp.new
+    @stamp.stampable = load_domain
     @stamp.comments.build
     load_labels
     authorize @stamp
@@ -8,12 +9,12 @@ class StampsController < ApplicationController
 
   def create
     @stamp = Stamp.new(stamp_params)
-    # assign current_user
+    @stamp.stampable = load_domain
     @stamp.creator = @stamp.comments.first.user = current_user
     authorize @stamp
 
     if @stamp.save
-      redirect_to(stamp_url(@stamp.id), flash: { success: 'Stamp created successfully' })
+      redirect_to(stamp_path(@stamp.id), flash: { success: 'Stamp created successfully' })
     else
       load_labels
       render 'new'
@@ -34,10 +35,12 @@ class StampsController < ApplicationController
           .permit(
             :label_id,
             :percentage,
-            :stampable_id,
-            :stampable_type,
             comments_attributes: [:content]
           )
+  end
+
+  def load_domain
+    Domain.find_by(name: params[:domain] || params['stamp']['domain'])
   end
 
   def load_labels
