@@ -15,4 +15,12 @@ class Stamp < ApplicationRecord
   def domain
     stampable if domain?
   end
+
+  def siblings
+    stampable.stamps.where.not(id: id)
+  end
+
+  def siblings?
+    siblings.count > 0
+  end
 end

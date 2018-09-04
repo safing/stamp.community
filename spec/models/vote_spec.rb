@@ -14,6 +14,29 @@ RSpec.describe Vote, type: :model do
     subject { FactoryBot.create(:vote) }
 
     it { is_expected.to validate_presence_of(:power) }
+
+    describe 'vote creation validation' do
+      # assure that voted object is in_progress
+      context 'stamp is accepted' do
+        it 'denies user to vote'
+        it 'denies user to comment'
+      end
+
+      context 'stamp is denied' do
+        it 'denies user to vote'
+        it 'denies user to comment'
+      end
+
+      context 'stamp is disputed' do
+        it 'denies user to vote'
+        it 'denies user to comment'
+      end
+
+      context 'stamp is archived' do
+        it 'denies user to vote'
+        it 'denies user to comment'
+      end
+    end
   end
 
   describe 'database' do

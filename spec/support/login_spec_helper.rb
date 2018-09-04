@@ -1,4 +1,4 @@
-module RequestSpecHelper
+module LoginSpecHelper
   include Warden::Test::Helpers
 
   def self.included(base)
@@ -27,5 +27,7 @@ end
 
 RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
-  config.include RequestSpecHelper, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include LoginSpecHelper, type: :request
+  config.include LoginSpecHelper, type: :feature
 end

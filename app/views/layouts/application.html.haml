@@ -8,8 +8,7 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
   %body
-    = render partial: 'partials/header'
-    .container
-      - flash.each do |type, content|
-        = render 'partials/flash', type: type, content: content
-      = yield
+    = render partial: 'semantic/header'
+    - flash.each do |type, content|
+      = render 'partials/flash', type: type, content: content
+    = yield

@@ -9,7 +9,7 @@ class StampsController < ApplicationController
     authorize @stamp
 
     if @stamp.save
-      redirect_to(stamps_url(@stamp.id), status: 201)
+      redirect_to(stamp_url(@stamp.id), flash: { success: 'Stamp created successfully' })
     else
       render 'new'
     end
@@ -27,4 +27,6 @@ class StampsController < ApplicationController
           .permit(:label_id, :percentage, :stampable_id, :stampable_type)
           .merge(creator: current_user)
   end
+
+  def index; end
 end

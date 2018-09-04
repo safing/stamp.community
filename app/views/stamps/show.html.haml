@@ -1,60 +1,78 @@
-%span#stamps
-  .row
-    = render partial: 'partials/window', locals: { header: true, footer: true }
-    .col-9.col-md-5.col-lg-6
-      .row
-        .col-12.text-center
-          %button.btn.btn-info{type: 'button'}
-            = @stamp.state.titleize
-    .col-12.col-md-3.col-lg-2
-      .row
-        %h5
-          Created by
-      .row
-        .col-3.pl-0.d-flex.justify-content-center.align-items-center
-          = link_to user_path(@stamp.creator), class: 'default-color' do
-            = fa_icon 'user', style: 'font-size: 2.4em;'
-        .col-9.pr-0.border-left
-          .row.p-0
-            .col-12
-              = link_to user_path(@stamp.creator) do
-                = @stamp.creator.username
-          .row.p-0
-            .col-12
-              = @stamp.creator.reputation
-              %span.small.text-muted REP
-  .row
-    .col-6{data: {controller: 'collapsible'}}
-      .row.collapsible{data: {action: 'click->collapsible#toggle'}}
-        .col-1
-          = fa_icon('angle-down', data: {target: 'collapsible.angle'})
-        .col-1
-          = render partial: 'votes/partials/upvote', locals: { power: @stamp.upvote_power }
-        .col-10
-          %h5
-            Upvotes
-      %span.hidden{data: {target: 'collapsible.details'}}
-        .row
-          - @stamp.upvotes.ordered.each do |upvote|
-            .col-1.pt-2
-              = render partial: 'votes/partials/upvote', locals: { power: upvote.power }
-            .col-11.pt-2.align-self-center
-              = link_to user_path(upvote.user), class: 'default-color' do
-                = upvote.user.username
-    .col-6{data: {controller: 'collapsible'}}
-      .row.collapsible{data: {action: 'click->collapsible#toggle'}}
-        .col-1
-          = fa_icon('angle-down', data: {target: 'collapsible.angle'})
-        .col-1
-          = render partial: 'votes/partials/downvote', locals: { power: @stamp.downvote_power }
-        .col-10
-          %h5
-            Downvotes
-      %span.hidden{data: {target: 'collapsible.details'}}
-        .row
-          - @stamp.downvotes.ordered.each do |downvote|
-            .col-1.pt-2
-              = render partial: 'votes/partials/downvote', locals: { power: downvote.power }
-            .col-11.pt-2.align-self-center
-              = link_to user_path(downvote.user), class: 'default-color' do
-                = downvote.user.username
+%div.ui.grid.container
+  %div.sixteen.wide.column
+    %h1.header
+      Stamp for
+      = @stamp.domain.name
+
+      %a{href: @stamp.domain.href}
+        %i.purple.external.icon
+
+    %div.ui.divider{style: "margin-bottom: -5px;"}
+  %div.ten.wide.column
+    %div.ui.basic.segment
+      %h3.ui.middle.aligned.header
+        = @stamp.label.name
+      %div.ui.grid
+        %div.twelve.wide.column{style: "padding-top: 30px;"}
+          %div.bar.float.right
+            %div.ui.purple.progress{style: "background: #FDDCFD;"}
+              %div.bar{style: "width: #{@stamp.percentage}%; z-index: 10; "}
+                %div.progress
+                  = @stamp.percentage
+                  \%
+        %div.four.wide.column
+          %div.ui.icon.vertical.buttons
+            %div.ui.button.icon{style: "margin-bottom: 0rem; padding: 2px; border: 0px !important; background-color: white;"}
+              %i.hand.caret.up.big.centered.icon{style: "color: purple"}
+            %div.ui.button.icon{style: "margin-bottom: 0rem; padding: 2px; border: 0px !important; background-color: white;"}
+              %i.vertically.flipped.hand.caret.up.big.icon{style: "color: purple"}
+    %div.ui.basic.segment
+      %h3
+        Comment
+      %div.ui.divider
+        %form.ui.form
+          %div.field
+            %textarea
+          %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+            Add Comment
+  %div.six.wide.column
+    - if @stamp.siblings.exists?
+      %div.ui.basic.segment{style: "margin-bottom: -22px;"}
+        %h3
+          Other Stamps of this domain
+          %div.ui.divider
+        %div.ui.grid
+          - @stamp.siblings.accepted.each do |sibling|
+            %div.four.wide.column
+              %h5.ui.middle.aligned.header
+                = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.purple.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
+    %div.ui.basic.segment
+      - if @stamp.siblings.exists?
+        %h3
+          Suggested
+          %div.ui.divider{ style: "margin-top: 0px;"}
+        %div.ui.grid
+          - @stamp.siblings.in_progress.each do |sibling|
+            %div.four.wide.column
+              %h5.ui.middle.aligned.header
+                = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+        %div.ui.basic.segment{style: "padding: 0;"}
+          %a{href: new_stamp_path}
+            %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; ", }
+              Add Stamp

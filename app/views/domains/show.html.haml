@@ -1,19 +1,74 @@
-#domains.row
-  .col-10
-    %h2= @domain.name
-  .col-md-6.col-sm-12
-    = render partial: 'partials/stamp_group', locals: { title: 'Accepted', header: false, btn_class: 'btn-accepted' }
-    = render partial: 'partials/stamp_group', locals: { title: 'In Progress' }
-    = render partial: 'partials/stamp_group', locals: { title: 'Archived', collapsed: true, btn_class: 'btn-secondary' }
-    = render partial: 'partials/stamp_group', locals: { title: 'Overruled', collapsed: true, btn_class: 'btn-secondary' }
-    = render partial: 'partials/stamp_group', locals: { title: 'Denied', collapsed: true, btn_class: 'btn-denied' }
-  - if @domain.children.present?
-    .col-md-6.col-sm-12
-      %h5 Subdomains
-      - @domain.children.order(name: :asc).each do |child|
-        = link_to child.name, domain_path(child.name)
-        %br/
-  - if @domain.parent.present?
-    .col-md-6.col-sm-12
-      %h5 Top Level Domain
-      = link_to @domain.parent.name, domain_path(@domain.parent.name)
+%div.ui.two.column.grid.container
+  %div.sixteen.wide.column
+    %h1.header
+      = @domain.name
+      %a
+        %i.purple.external.icon{href: @domain.href}
+      %div.ui.divider{style: "margin-bottom: -5px;"}
+  %div.ten.wide.column
+    - if @domain.stamps.accepted.exists?
+      %div.ui.basic.segment
+        %div.ui.grid
+          - @domain.stamps.accepted.each do |stamp|
+            %div.four.wide.column
+              %h5.ui.middle.aligned.header
+                = stamp.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.purple.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{stamp.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = stamp.percentage
+                      \%
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
+    %div.ui.basic.segment
+      - if @domain.stamps.in_progress.exists?
+        %h3
+          Suggested
+          %div.ui.divider{ style: "margin-top: 0px;"}
+        %div.ui.grid
+          - @domain.stamps.in_progress.each do |sibling|
+            %div.four.wide.column
+              %h5.ui.middle.aligned.header
+                = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+        %div.ui.basic.segment{style: "padding: 0;"}
+          %a{href: new_stamp_path}
+            %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+              Add Stamp
+  %div.five.wide.right.floated.column
+    %div.ui.basic.segment
+      %div.ui.relaxed.list
+        %div.item
+          %i.user.icon
+          %div.content
+            = link_to user_path(@domain.creator_id) do
+              = @domain.creator.username
+            = link_to @domain.creator.username, user_path(@domain.creator_id)
+            %a{href: user_path(@domain.creator_id)}
+              = @domain.creator.username
+        %div.item
+          %i.clock.outline.icon
+          %div.content
+            = time_ago_in_words(@domain.created_at)
+            ago
+        %div.item
+          %i.history.icon
+          %div.content
+            = time_ago_in_words(@domain.updated_at)
+            ago
+        %div.ui.divider{style: "margin-bottom: -23px;"}
+    %div.ui.basic.segment
+      %div.ui.relaxed.list
+        %h3.ui.header
+          Subdomains
+        %div.item
+          %a
+            assets.trello.com

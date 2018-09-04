@@ -12,6 +12,8 @@
 //
 //= require turbolinks
 //= require font_awesome5
-//= require popper
-//= require bootstrap-sprockets
+//= require jquery
+//= require jquery_ujs
+//= require semantic
+//= require semantic_range
 //= require_tree .

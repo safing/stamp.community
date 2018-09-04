@@ -11,10 +11,9 @@ gem 'pg'
 gem 'rails', '~> 5.1.4'
 gem 'sidekiq'
 
-gem 'bootstrap', '~> 4.1.1'
-gem 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/bootstrap_form.git', branch: 'master'
 gem 'font_awesome5_rails'
 gem 'sass-rails'
+gem 'semantic-ui-sass'
 
 gem 'coffee-rails'
 gem 'haml-rails'
@@ -47,14 +46,18 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'hirb'
   gem 'pry-byebug'
-  gem 'rspec-activemodel-mocks'
-  gem 'rspec-rails'
+  gem 'puma'
 end
 
 group :test do
+  gem 'capybara'
   gem 'database_cleaner'
   # check if the release is out yet https://github.com/thoughtbot/shoulda-matchers/milestone/13
+  gem 'launchy'
   gem 'pundit-matchers'
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers', branch: 'master'
   gem 'state_machines-rspec'
 end

@@ -6,8 +6,8 @@ module Votable
       scope :accepted, -> { with_state(:accepted) }
       scope :archived, -> { with_state(:archived) }
       scope :denied, -> { with_state(:denied) }
+      scope :dispute, -> { with_state(:disputed) }
       scope :in_progress, -> { with_state(:in_progress) }
-      scope :overruled, -> { with_state(:overruled) }
 
       state_machine initial: :in_progress, use_transactions: true do
         transition in_progress: :accepted, on: :accept
