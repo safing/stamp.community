@@ -9,6 +9,8 @@
     = csrf_meta_tags
   %body
     = render partial: 'semantic/header'
-    - flash.each do |type, content|
-      = render 'partials/flash', type: type, content: content
+    %div.ui.grid.container
+      .sixteen.wide.column
+        - flash.each do |type, content|
+          = render 'partials/flash', type: type, content: content
     = yield

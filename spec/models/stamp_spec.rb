@@ -8,6 +8,7 @@ RSpec.describe Stamp, type: :model do
 
   describe 'relations' do
     it { is_expected.to belong_to(:label).required(true) }
+    it { is_expected.to have_many(:comments) }
   end
 
   describe 'validations' do
