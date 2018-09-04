@@ -1,21 +1,25 @@
 %div.ui.grid.container
   %div.sixteen.wide.column
     %h1.header
-      Stamp for trello.com
-      %a
+      Stamp for
+      = @stamp.domain.name
+
+      %a{href: @stamp.domain.href}
         %i.purple.external.icon
+
     %div.ui.divider{style: "margin-bottom: -5px;"}
   %div.ten.wide.column
     %div.ui.basic.segment
       %h3.ui.middle.aligned.header
-        Business
+        = @stamp.label.name
       %div.ui.grid
         %div.twelve.wide.column{style: "padding-top: 30px;"}
           %div.bar.float.right
             %div.ui.purple.progress{style: "background: #FDDCFD;"}
-              %div.bar{style: "width: 80%; z-index: 10; "}
+              %div.bar{style: "width: #{@stamp.percentage}%; z-index: 10; "}
                 %div.progress
-                  80%
+                  = @stamp.percentage
+                  \%
         %div.four.wide.column
           %div.ui.icon.vertical.buttons
             %div.ui.button.icon{style: "margin-bottom: 0rem; padding: 2px; border: 0px !important; background-color: white;"}
@@ -32,67 +36,43 @@
           %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
             Add Comment
   %div.six.wide.column
-    %div.ui.basic.segment{style: "margin-bottom: -22px;"}
-      %h3
-        Other Stamps of this domain
-        %div.ui.divider
-      %div.ui.grid
-        %div.four.wide.column
-          %h5.ui.middle.aligned.header
-            Management
-        %div.twelve.wide.column
-          %div.bar.float.right
-            %div.ui.purple.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 39%; z-index: 10; "}
-                %div.progress
-                  39%
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
-
-        %div.four.wide.column
-          %h5.ui.middle.aligned.header
-            Business
-        %div.twelve.wide.column
-          %div.bar.float.right
-            %div.ui.purple.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 80%; z-index: 10; "}
-                %div.progress
-                  80%
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar.bartwo{style: "width: 60%; margin-top: -39px;"}
-        %div.four.wide.column
-          %h5.ui.middle.aligned.header
-            ADS
-        %div.twelve.wide.column
-          %div.bar.float.right
-            %div.ui.purple.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 15%; z-index: 10; "}
-                %div.progress
-                  15%
+    - if @stamp.siblings.exists?
+      %div.ui.basic.segment{style: "margin-bottom: -22px;"}
+        %h3
+          Other Stamps of this domain
+          %div.ui.divider
+        %div.ui.grid
+          - @stamp.siblings.accepted.each do |sibling|
+            %div.four.wide.column
+              %h5.ui.middle.aligned.header
+                = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.purple.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
     %div.ui.basic.segment
-      %h3
-        Suggested
-        %div.ui.divider{ style: "margin-top: 0px;"}
-      %div.ui.grid
-        %div.four.wide.column
-          %h5.ui.middle.aligned.header
-            Animals
-        %div.twelve.wide.column
-          %div.bar.float.right
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 70%; z-index: 10; "}
-                %div.progress
-                  70%
-
-        %div.four.wide.column
-          %h5.ui.middle.aligned.header
-            Sport
-        %div.twelve.wide.column
-          %div.bar.float.right
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 55%; z-index: 10; "}
-                %div.progress
-                  55%
-      %div.ui.basic.segment{style: "padding: 0;"}
-        %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-          Add Stamp
+      - if @stamp.siblings.exists?
+        %h3
+          Suggested
+          %div.ui.divider{ style: "margin-top: 0px;"}
+        %div.ui.grid
+          - @stamp.siblings.in_progress.each do |sibling|
+            %div.four.wide.column
+              %h5.ui.middle.aligned.header
+                = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+        %div.ui.basic.segment{style: "padding: 0;"}
+          %a{href: new_stamp_path}
+            %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; ", }
+              Add Stamp
