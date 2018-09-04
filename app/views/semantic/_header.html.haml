@@ -1,13 +1,27 @@
 .ui.inverted.menu.header
-  %a{class: 'item', href: '/'}
+  %a{class: 'item', href: '/', style: 'padding: 0 6px;'}
     %img{src: '/assets/basic_logo.png'}
     %h2{type: 'text'}
       Stamp
-  %a{class: 'item', href: '/users/133'}
-    Leite mich zum magischen Nutzer
+  %a{class: 'item', href: '/users/133', style: 'padding: 0 6px;'}
+    %img.ui.avatar.image{src: '/assets/portmaster.png'}
+    Vance
+  .menu
+
   .right.menu
-    %div{class: 'item'}
-      .ui.icon.input
+    %div.ui.item{style: 'font-size: 1rem; padding: 5px;'}
+      %img{src: '/assets/stamp_j3rik0_no_text_icon.png', style: 'font-size: 0.6rem;'}
+        4
+    %div.item{style: 'font-size: 1rem; padding: 5px;'}
+      %i.sort.icon
+      %div.content
+        3
+    %div.item{style: 'font-size: 1rem; padding: 5px;'}
+      %i.linkify.icon
+      %div.content
+        1
+    %div{class: 'item', style: 'padding: 0 6px;'}
+      .ui.icon.mini.input
         %input{placeholder: 'Search...', type: 'text'}
         %i.search.link.icon
     - if user_signed_in?
