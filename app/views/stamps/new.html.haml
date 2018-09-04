@@ -1,8 +1,9 @@
 %div.ui.grid.container
   %div.sixteen.wide.column
     %h1.header
-      New Stamp for trello.com
-      %a
+      New Stamp for
+      = @stamp.domain.name
+      %a{href: @stamp.domain.href}
         %i.purple.external.icon
     %div.ui.divider{style: "margin-bottom: -5px;"}
   %div.nine.wide.column
@@ -11,24 +12,26 @@
         Label:
         %button.ui.grey.basic.tiny.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
           Animals
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        Spam
-      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
-        Management
-      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
-        Business
-      %button.ui.teal.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #c3ffff !important; "}
-        ADS
-      %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
-        Animals
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        Anime
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        E-sport
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        News
-      %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
-        lala
+      %div.ui.basic.segment{style: "padding: 0;"}
+        %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
+          Spam
+
+        %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
+          Management
+        %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
+          Business
+        %button.ui.teal.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #c3ffff !important; "}
+          ADS
+        %button.ui.grey.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #E8E8E8 !important; "}
+          Animals
+        %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
+          Anime
+        %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
+          E-sport
+        %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
+          News
+        %button.ui.purple.basic.button{style: "margin-bottom: 1rem; padding: 6px; background-color: #FFE3FF !important; "}
+          lala
       %div.ui.right.aligned.basic.segment
         %div.ui.relaxed.horizontal.list{style: "border-top: 1px solid rgba(34, 36, 38, 0.15);"}
           %div.item
@@ -56,72 +59,39 @@
             %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
               Create Stamp
   %div.six.wide.right.floated.column
+    - if @stamp.siblings.exists?
+      %div.ui.basic.segment{style: "margin-bottom: -22px;"}
+        %h3
+          Other Stamps of this domain
+          %div.ui.divider
+        %div.ui.grid
+          - @stamp.siblings.accepted.each do |sibling|
+            %div.four.wide.column
+              %h5.ui.middle.aligned.header
+                = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.purple.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
     %div.ui.basic.segment
-      %h3
-        Other Stamps of this domain
-      %div.ui.divider
-      %div.ui.grid
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
-            Management
-        %div.eleven.wide.column
-          %div.bar.float.right
-            %div.ui.purple.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 39%; z-index: 10; "}
-                %div.progress
-                  39%
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
-
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
-            Business
-        %div.eleven.wide.column
-          %div.bar.float.right
-            %div.ui.purple.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 80%; z-index: 10; "}
-                %div.progress
-                  80%
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar.bartwo{style: "width: 60%; margin-top: -39px;"}
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
-            ADS
-        %div.eleven.wide.column
-          %div.bar.float.right
-            %div.ui.purple.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 15%; z-index: 10; "}
-                %div.progress
-                  15%
-    %div.ui.basic.segment
-      %h3
-        Suggested
-      %div.ui.divider
-      %div.ui.grid
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
-            Management
-        %div.eleven.wide.column
-          %div.bar.float.right
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 49%; z-index: 10; "}
-                %div.progress
-                  49%
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
-            Business
-        %div.eleven.wide.column
-          %div.bar.float.right
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 60%; z-index: 10; "}
-                %div.progress
-                  60%
-        %div.five.wide.column
-          %h4.ui.middle.aligned.header
-            Animals
-        %div.eleven.wide.column
-          %div.bar.float.right
-            %div.ui.teal.small.progress{style: "background: white;"}
-              %div.bar{style: "width: 40%; z-index: 10; "}
-                %div.progress
-                  40%
+      - if @stamp.siblings.exists?
+        %h3
+          Suggested
+          %div.ui.divider{ style: "margin-top: 0px;"}
+        %div.ui.grid
+          - @stamp.siblings.in_progress.each do |sibling|
+            %div.four.wide.column
+              %h5.ui.middle.aligned.header
+                = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
