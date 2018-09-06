@@ -24,6 +24,6 @@ class Stamp < ApplicationRecord
   end
 
   def siblings?
-    siblings.count > 0
+    siblings.count.positive?
   end
 end
