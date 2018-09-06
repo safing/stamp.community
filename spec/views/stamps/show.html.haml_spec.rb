@@ -2,25 +2,25 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
   let(:stamp) { FactoryBot.build(:stamp, state: state) }
   let(:state) { :in_progress }
 
-  def rendered_page
+  def rendered
     assign(:stamp, stamp)
     render
-    rendered
+    super
   end
 
   shared_examples 'show: state' do |state|
     it "shows the state :#{state}" do
-      expect(rendered_page).to have_content(state.to_s.titleize)
+      expect(rendered).to have_content(state.to_s.titleize)
     end
   end
 
   shared_examples 'stamp with results' do
     xit 'shows the stamp results' do
-      expect(rendered_page).to have_content('Results')
+      expect(rendered).to have_content('Results')
     end
 
     it 'does not show the \'Add Comment\' button' do
-      expect(rendered_page).not_to have_button('Add Comment')
+      expect(rendered).not_to have_button('Add Comment')
     end
 
     # add specs to show the correct color of the vote buttons
@@ -28,23 +28,23 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
   end
 
   it 'links to the stamped domain (http://safing.io)' do
-    expect(rendered_page).to have_link(href: stamp.domain.href)
+    expect(rendered).to have_link(href: stamp.domain.href)
   end
 
   it 'links to the stamped domain on stamp (/domains/safing.io)' do
-    expect(rendered_page).to have_link(href: domain_path(stamp.domain))
+    expect(rendered).to have_link(href: domain_path(stamp.domain.name))
   end
 
   it 'shows the stamps label' do
-    expect(rendered_page).to have_css('.container .ui.segment:first', text: stamp.label.name)
+    expect(rendered).to have_css('.container .ui.segment:first', text: stamp.label.name)
   end
 
   it 'shows the stamps percentage' do
-    expect(rendered_page).to have_css('.ui.segment:first .ui.progress', text: stamp.percentage)
+    expect(rendered).to have_css('.ui.segment:first .ui.progress', text: stamp.percentage)
   end
 
   it 'shows: comments section' do
-    expect(rendered_page).not_to have_content('Comments')
+    expect(rendered).not_to have_content('Comments')
   end
 
   context 'stamp is in_progress' do
@@ -53,19 +53,19 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     include_context 'show: state', :in_progress
 
     it 'does not show any results' do
-      expect(rendered_page).not_to have_content('Results')
+      expect(rendered).not_to have_content('Results')
     end
 
     context 'current_user is not set (guest)' do
       it 'does not show the \'Add Comment\' button' do
-        expect(rendered_page).not_to have_button('Add Comment')
+        expect(rendered).not_to have_button('Add Comment')
       end
     end
 
     context 'current_user is set' do
       include_context 'login user'
       it 'shows: \'Add Comment\' button' do
-        expect(rendered_page).to have_button('Add Comment')
+        expect(rendered).to have_button('Add Comment')
       end
     end
   end
@@ -100,11 +100,11 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     shared_examples 'show: other stamps segment' do |show|
       if show
         it 'shows the other stamps of this domain' do
-          expect(rendered_page).to have_content('Other Stamps of this domain')
+          expect(rendered).to have_content('Other Stamps of this domain')
         end
       else
         it 'does not show other stamps of this domain' do
-          expect(rendered_page).not_to have_content('Other Stamps of this domain')
+          expect(rendered).not_to have_content('Other Stamps of this domain')
         end
       end
     end
@@ -112,11 +112,11 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     shared_examples 'show: in_progress stamps segment' do |show|
       if show
         it 'shows the in_progress stamps' do
-          expect(rendered_page).to have_content('Suggested')
+          expect(rendered).to have_content('Suggested')
         end
       else
         it 'does not show any in_progress stamps' do
-          expect(rendered_page).not_to have_content('Suggested')
+          expect(rendered).not_to have_content('Suggested')
         end
       end
     end
@@ -154,7 +154,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
 
     context 'current_user is not set (guest)' do
       it 'does not link to sibling-stamp#new' do
-        expect(rendered_page).not_to have_button('Add Stamp')
+        expect(rendered).not_to have_button('Add Stamp')
       end
     end
 
@@ -162,7 +162,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
       include_context 'login user'
 
       it 'links to sibling-stamp#new' do
-        expect(rendered_page).to have_button('Add Stamp')
+        expect(rendered).to have_button('Add Stamp')
       end
     end
   end
