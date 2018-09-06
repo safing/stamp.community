@@ -3,7 +3,7 @@
     %div.ui.segment
       %h1.header
         Stamp for
-        = link_to domain_path(@stamp.domain) do
+        = link_to domain_path(@stamp.domain.name) do
           = @stamp.domain.name
         = link_to @stamp.domain.href do
           %i.purple.external.tiny.icon

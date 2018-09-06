@@ -1,9 +1,10 @@
 RSpec.describe 'domains/show.html.haml', type: :view do
   let(:domain) { FactoryBot.create(:domain) }
 
-  before do
+  def rendered
     assign(:domain, domain)
     render
+    super
   end
 
   shared_examples 'show: accepted stamps segment' do |show|
@@ -76,6 +77,12 @@ RSpec.describe 'domains/show.html.haml', type: :view do
     it 'shows the subdomains' do
       expect(rendered).to have_content('Subdomains')
     end
+
+    it 'links to the subdomains' do
+      domain.children.each do |subdomain|
+        expect(rendered).to have_link(subdomain.name, href: domain_path(subdomain.name))
+      end
+    end
   end
 
   context 'domain has no subdomains' do
@@ -90,6 +97,10 @@ RSpec.describe 'domains/show.html.haml', type: :view do
     it 'show: the parent domain' do
       expect(rendered).to have_content('Main Domain')
     end
+
+    it 'links to the parent domain' do
+      expect(rendered).to have_link(domain.parent.name, href: domain_path(domain.parent.name))
+    end
   end
 
   context 'domain has no parent' do
@@ -102,13 +113,13 @@ RSpec.describe 'domains/show.html.haml', type: :view do
     include_context 'login user'
 
     it 'shows a link to add a new stamp' do
-      expect(rendered).to have_link('Add Stamp', href: new_stamp_path)
+      expect(rendered).to have_link('Add Stamp', href: new_stamp_path(domain_name: domain.name))
     end
   end
 
   context 'guest' do
     it 'does not show a link to add a new stamp' do
-      expect(rendered).not_to have_link('Add Stamp', href: new_stamp_path)
+      expect(rendered).not_to have_link('Add Stamp', href: new_stamp_path(domain_name: domain.name))
     end
   end
 end
