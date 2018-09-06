@@ -1,7 +1,8 @@
 RSpec.feature 'stamp requests', type: :request do
   describe 'authourization' do
     describe '#new' do
-      subject(:request) { get new_stamp_url }
+      subject(:request) { get new_stamp_url(domain_name: domain.name) }
+      let(:domain) { FactoryBot.create(:domain) }
 
       context 'role: guest' do
         include_examples 'status code', 401
@@ -25,8 +26,14 @@ RSpec.feature 'stamp requests', type: :request do
 
     describe '#create' do
       subject(:request) { post stamps_url, params: { stamp: stamp_attributes } }
-      let(:stamp_attributes) { FactoryBot.attributes_with_foreign_keys_for(:stamp) }
-
+      let(:domain) { FactoryBot.create(:domain) }
+      let(:stamp_attributes) do
+        FactoryBot.attributes_with_foreign_keys_for(:stamp)
+                  .merge(
+                    comments_attributes: { '0': { content: '1' * 40 } },
+                    domain: domain.name
+                  )
+      end
       context 'role: guest' do
         include_examples 'status code', 401
       end

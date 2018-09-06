@@ -1,19 +1,21 @@
 RSpec.describe 'stamps/show.html.haml', type: :view do
-  let(:stamp) { FactoryBot.build(:stamp) }
+  let(:stamp) { FactoryBot.build(:stamp, state: state) }
+  let(:state) { :in_progress }
 
-  before do
+  def rendered
     assign(:stamp, stamp)
     render
+    super
   end
 
   shared_examples 'show: state' do |state|
     it "shows the state :#{state}" do
-      expect(rendered).to have_content(state.titleize)
+      expect(rendered).to have_content(state.to_s.titleize)
     end
   end
 
   shared_examples 'stamp with results' do
-    it 'shows the stamp results' do
+    xit 'shows the stamp results' do
       expect(rendered).to have_content('Results')
     end
 
@@ -25,16 +27,20 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     # depending on results & whether the user voted or not
   end
 
-  it 'links to the stamped domain' do
-    expect(rendered).to have_link(stamp.domain.name)
+  it 'links to the stamped domain (http://safing.io)' do
+    expect(rendered).to have_link(href: stamp.domain.href)
+  end
+
+  it 'links to the stamped domain on stamp (/domains/safing.io)' do
+    expect(rendered).to have_link(href: domain_path(stamp.domain.name))
   end
 
   it 'shows the stamps label' do
-    expect(rendered).to have_css('.container .ui.basic.segment:first', text: stamp.label.name)
+    expect(rendered).to have_css('.container .ui.segment:first', text: stamp.label.name)
   end
 
   it 'shows the stamps percentage' do
-    expect(rendered).to have_css('.ui.basic.segment:first .ui.progress', text: stamp.percentage)
+    expect(rendered).to have_css('.ui.segment:first .ui.progress', text: stamp.percentage)
   end
 
   it 'shows: comments section' do
@@ -42,7 +48,9 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
   end
 
   context 'stamp is in_progress' do
-    include_context 'show: state', 'in_progress'
+    let(:state) { :in_progress }
+
+    include_context 'show: state', :in_progress
 
     it 'does not show any results' do
       expect(rendered).not_to have_content('Results')
@@ -55,6 +63,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     end
 
     context 'current_user is set' do
+      include_context 'login user'
       it 'shows: \'Add Comment\' button' do
         expect(rendered).to have_button('Add Comment')
       end
@@ -62,22 +71,26 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
   end
 
   context 'stamp is accepted' do
-    include_context 'show: state', 'accepted'
+    let(:state) { :accepted }
+    include_context 'show: state', :accepted
     it_behaves_like 'stamp with results'
   end
 
   context 'stamp is denied' do
-    include_context 'show: state', 'denied'
+    let(:state) { :denied }
+    include_context 'show: state', :denied
     it_behaves_like 'stamp with results'
   end
 
   context 'stamp is disputed' do
-    include_context 'show: state', 'disputed'
+    let(:state) { :disputed }
+    include_context 'show: state', :disputed
     it_behaves_like 'stamp with results'
   end
 
   context 'stamp is archived' do
-    include_context 'show: state', 'archived'
+    let(:state) { :archived }
+    include_context 'show: state', :archived
     it_behaves_like 'stamp with results'
 
     it 'links to the currently accepted stamp'
@@ -146,8 +159,10 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     end
 
     context 'current_user is set' do
+      include_context 'login user'
+
       it 'links to sibling-stamp#new' do
-        expect(rendered).to have_button('Add stamp')
+        expect(rendered).to have_button('Add Stamp')
       end
     end
   end

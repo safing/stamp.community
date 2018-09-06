@@ -60,7 +60,7 @@ RSpec.describe Stamp, type: :model do
       end
 
       it 'does not return itself' do
-        expect(subject.pluck(:id)).not_to include(2)
+        expect(subject.pluck(:id)).not_to include(stamp.id)
       end
     end
   end

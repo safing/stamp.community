@@ -47,7 +47,7 @@
           .ui.divider
           = f.submit 'Create Stamp', class: %w[ui purple basic big button mb0], style: 'box-shadow: 0px 0px 2px 2px #A333C8 inset !important;'
   %div.six.wide.right.floated.column
-    - if @stamp.siblings.exists?
+    - if @stamp.siblings.accepted.exists?
       %div.ui.basic.segment{style: "margin-bottom: -22px;"}
         %h3
           Other Stamps of this domain
@@ -66,8 +66,8 @@
                       \%
                 %div.ui.teal.small.progress{style: "background: white;"}
                   %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
-    %div.ui.basic.segment
-      - if @stamp.siblings.exists?
+    - if @stamp.siblings.in_progress.exists?
+      %div.ui.basic.segment
         %h3
           Suggested
           %div.ui.divider{ style: "margin-top: 0px;"}
