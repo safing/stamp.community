@@ -1,23 +1,27 @@
 RSpec.describe 'stamps/new.html.haml', type: :view do
   let(:stamp) { FactoryBot.build(:stamp) }
+  let(:labels) { FactoryBot.create_list(:label, 2) }
 
-  before do
-    FactoryBot.create(:label)
+  def rendered
     assign(:stamp, stamp)
+    assign(:labels, labels)
     render
+    super
   end
 
   it 'shows the labels' do
-    expect(rendered).to have_css('.container .ui.basic.segment:first', text: Label.first.name)
+    expect(rendered).to have_content('Select Label')
+    expect(rendered).to have_content(labels.first.name)
+    expect(rendered).to have_content(labels.last.name)
   end
 
   it 'shows a percentage slider' do
-    expect(rendered).to have_css('.ui.range')
-    expect(rendered).to have_css('.ui.range ~ input#stamp_range_input', visible: false)
+    expect(rendered).to have_content('2. Define percentage & comment')
+    expect(rendered).to have_css('.content:last .purple.range')
   end
 
   it 'shows a comment field' do
-    expect(rendered).to have_content('Comments')
+    expect(rendered).to have_content('Comment')
   end
 
   it "shows a 'Create Stamp' button" do
