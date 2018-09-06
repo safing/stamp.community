@@ -1,6 +1,11 @@
 FactoryBot.define do
   factory :domain do
-    name { Faker::Internet.domain_name }
+    sequence(:name) do |n|
+      # insert the number into the first part of the domain to prevent duplication
+      array = Faker::Internet.domain_name.split('.')
+      array[0] << n.to_s
+      array.join('.')
+    end
     creator { create(:user) }
 
     trait :with_stamps do
