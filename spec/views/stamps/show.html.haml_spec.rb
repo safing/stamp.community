@@ -44,7 +44,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
   end
 
   it 'shows: comments section' do
-    expect(rendered).not_to have_content('Comments')
+    expect(rendered).to have_content('Comments')
   end
 
   context 'stamp is in_progress' do

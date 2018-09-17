@@ -26,15 +26,32 @@
               %i.vertically.flipped.hand.caret.up.big.icon{style: "color: purple"}
       .ui.blue.large.top.right.attached.label
         = @stamp.state.titleize
-      - if user_signed_in? && @stamp.in_progress?
-        %h3
-          Comment
-        %div.ui.divider
-        %form.ui.form
-          %div.field
-            %textarea
-          %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-            Add Comment
+      .ui.comments
+        %h3.ui.dividing.header
+          Comments
+        - if @stamp.comments.present?
+          - @stamp.comments.each do |comment|
+            .comment
+              = link_to user_path(comment.user), class: 'avatar' do
+                %img{src: '/assets/portmaster.png'}
+              .content
+                = link_to comment.user.username, user_path(comment.user), class: 'author'
+                .metadata
+                  .date
+                    = time_ago_in_words(comment.created_at)
+                    ago
+                .text
+                  %pg= comment.content
+                .actions
+                  %a
+                    %i.flag.icon
+                    Flag
+        - if user_signed_in? && @stamp.in_progress?
+          %form.ui.reply.form
+            %div.field
+              %textarea
+            %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+              Add Comment
   %div.six.wide.column
     - if @stamp.siblings.accepted.exists?
       %div.ui.basic.segment{style: "margin-bottom: -22px;"}
