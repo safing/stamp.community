@@ -1,5 +1,7 @@
-- if object.errors.count > 0
-  %div.ui.attached.error.message
+- attached ||= nil
+
+- if object.errors.any?
+  %div.ui.error.message{class: ('attached' if attached)}
     .header
       Invalid
       = object.class.name.titleize
