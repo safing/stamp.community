@@ -34,6 +34,7 @@ RSpec.feature 'stamp requests', type: :request do
                     domain: domain.name
                   )
       end
+
       context 'role: guest' do
         include_examples 'status code', 401
       end
