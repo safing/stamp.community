@@ -4,6 +4,7 @@ FactoryBot.define do
     percentage { Faker::Number.between(1, 100) }
     creator { build(:user) }
     stampable { build(:domain, creator: creator) }
+    comments { build_list(:comment, 1, user: creator, commentable: @instance) }
 
     trait :accepted do
       state :accepted

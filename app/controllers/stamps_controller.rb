@@ -22,7 +22,9 @@ class StampsController < ApplicationController
   end
 
   def show
-    @stamp = Stamp.find(params[:id])
+    @commentable = @stamp = Stamp.find(params[:id])
+    @comments = @commentable.comments
+    @comment = Comment.new
     authorize @stamp
   end
 
