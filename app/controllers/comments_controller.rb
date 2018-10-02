@@ -1,13 +1,9 @@
 class CommentsController < ApplicationController
   before_action :load_commentable
 
-  def new
-    @comment = @commentable.new
-  end
-
   def create
-    authorize(@commentable)
     @comment = @commentable.comments.new(comment_params)
+    authorize(@comment)
     @comment.user = current_user
 
     if @comment.save
