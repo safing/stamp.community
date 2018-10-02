@@ -1,5 +1,5 @@
 RSpec.describe 'stamps/new.html.haml', type: :view do
-  let(:stamp) { FactoryBot.build(:stamp) }
+  let(:stamp) { FactoryBot.create(:stamp) }
   let(:labels) { FactoryBot.create_list(:label, 2) }
 
   def rendered

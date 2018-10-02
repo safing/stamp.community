@@ -28,7 +28,7 @@
         = @stamp.state.titleize
       .ui.small.comments
         = render 'comments/comments'
-        = render 'comments/form'
+        = render 'comments/form' if current_user && @stamp.in_progress?
   %div.six.wide.column
     - if @stamp.siblings.accepted.exists?
       %div.ui.basic.segment{style: "margin-bottom: -22px;"}

@@ -1,9 +1,12 @@
 RSpec.describe 'stamps/show.html.haml', type: :view do
-  let(:stamp) { FactoryBot.build(:stamp, state: state) }
+  let(:stamp) { FactoryBot.create(:stamp, state: state) }
   let(:state) { :in_progress }
 
   def rendered
     assign(:stamp, stamp)
+    assign(:commentable, stamp)
+    assign(:comments, stamp.comments)
+    assign(:comment, Comment.new)
     render
     super
   end
@@ -44,7 +47,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
   end
 
   it 'shows: comments section' do
-    expect(rendered).to have_content('Comments')
+    expect(rendered).to have_css('.ui.comments')
   end
 
   context 'stamp is in_progress' do
