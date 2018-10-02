@@ -6,7 +6,7 @@ FactoryBot.define do
       array[0] << n.to_s
       array.join('.')
     end
-    creator { create(:user) }
+    creator { build(:user) }
 
     trait :with_stamps do
       stamps { build_list :stamp, 3 }
