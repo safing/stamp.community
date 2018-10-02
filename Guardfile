@@ -6,7 +6,7 @@ guard 'rspec',
 
   # match controllers with their request specs
   watch('app/controllers/application_controller.rb') { 'spec/requests' }
-  watch(%r{app/controllers/(.+)_controller\.rb$}) { |m| "spec/requests/#{m[1]}_request_spec.rb" }
+  watch(%r{app/controllers/(.+)s_controller\.rb$}) { |m| "spec/requests/#{m[1]}_requests_spec.rb" }
   watch(%r{(.*)spec/.+_spec\.rb$})
   watch(%r{(.*)app/(.+)\.rb$}) { |m| "#{m[1]}spec/#{m[2]}_spec.rb" }
   watch(%r{(.*)app/(.+)\.haml$}) { |m| "#{m[1]}spec/#{m[2]}.haml_spec.rb" }
