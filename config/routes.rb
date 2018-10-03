@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :labels, only: [:show]
   resources :licences, only: [:show]
   resources :stamps, except: [:delete] do
-    resources :comments
+    resources :comments, only: [:create]
+    resources :votes, only: [:create]
   end
   resources :users, only: [:show]
 
