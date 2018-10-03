@@ -7,6 +7,8 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     assign(:commentable, stamp)
     assign(:comments, stamp.comments)
     assign(:comment, Comment.new)
+    assign(:votable, stamp)
+    assign(:vote, Vote.new)
     render
     super
   end
@@ -50,7 +52,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     expect(rendered).to have_css('.ui.comments')
   end
 
-  context 'stamp is in_progress' do
+  context 'stamp is :in_progress' do
     let(:state) { :in_progress }
 
     include_context 'show: state', :in_progress
@@ -73,30 +75,279 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     end
   end
 
-  context 'stamp is accepted' do
+  context 'stamp is :accepted' do
     let(:state) { :accepted }
     include_context 'show: state', :accepted
     it_behaves_like 'stamp with results'
   end
 
-  context 'stamp is denied' do
+  context 'stamp is :denied' do
     let(:state) { :denied }
     include_context 'show: state', :denied
     it_behaves_like 'stamp with results'
   end
 
-  context 'stamp is disputed' do
+  context 'stamp is :disputed' do
     let(:state) { :disputed }
     include_context 'show: state', :disputed
     it_behaves_like 'stamp with results'
   end
 
-  context 'stamp is archived' do
+  context 'stamp is :archived' do
     let(:state) { :archived }
     include_context 'show: state', :archived
     it_behaves_like 'stamp with results'
 
     it 'links to the currently accepted stamp'
+  end
+
+  describe '-- upvote / downvote buttons --' do
+    shared_examples 'shows upvote button' do |color|
+      it "shows upvote button in #{color}" do
+        expect(rendered).to have_css("button.icon:first i.up.#{color}")
+      end
+    end
+
+    shared_examples 'shows downvote button' do |color|
+      it "shows downvote button in #{color}" do
+        expect(rendered).to have_css("button.icon:last-child i.up.#{color}")
+      end
+    end
+
+    shared_examples 'has: new form for' do |type, has|
+      if has
+        it "has a form for a new #{type}" do
+          expect(rendered).to have_css("form#new_#{type}")
+        end
+      else
+        it "does not have a form for a new #{type}" do
+          expect(rendered).not_to have_css("form#new_#{type}")
+        end
+      end
+    end
+
+    context 'state is :in_progress' do
+      let(:state) { :in_progress }
+
+      context 'current_user is not set (guest)' do
+        include_context 'shows upvote button', :grey
+        include_context 'shows downvote button', :grey
+      end
+
+      context 'current_user is set' do
+        let(:user) { FactoryBot.create(:user) }
+        include_context 'login user'
+
+        context 'user did not vote on stamp' do
+          include_context 'shows upvote button', :grey
+          include_context 'shows downvote button', :grey
+          include_context 'has: new form for', 'upvote', true
+          include_context 'has: new form for', 'downvote', true
+        end
+
+        context 'user voted on stamp' do
+          context 'user upvoted' do
+            before do
+              FactoryBot.create(:upvote, votable: stamp, user: user, created_at: created_at)
+            end
+            let(:created_at) { Time.current }
+
+            include_context 'has: new form for', 'upvote', false
+            include_context 'has: new form for', 'downvote', false
+
+            context 'user voted less than 5 minutes ago' do
+              let(:created_at) { 4.minutes.ago }
+
+              it 'has the downvote form to change his vote'
+              # include_context 'has: new form for', 'downvote', true
+            end
+
+            context 'user voted more than 5 minutes ago' do
+              let(:created_at) { 6.minutes.ago }
+              it 'does no longer have a downvote form to change his vote'
+              # include_context 'has: new form for', 'downvote', false
+            end
+
+            include_context 'shows upvote button', :purple
+            include_context 'shows downvote button', :grey
+          end
+
+          context 'user downvoted' do
+            before do
+              FactoryBot.create(:downvote, votable: stamp, user: user, created_at: created_at)
+            end
+            let(:created_at) { Time.current }
+
+            include_context 'has: new form for', 'upvote', false
+            include_context 'has: new form for', 'downvote', false
+
+            context 'user voted less than 5 minutes ago' do
+              let(:created_at) { 4.minutes.ago }
+              it 'does no longer have a upvote form to change his vote'
+              # include_context 'has: new form for', 'upvote', true
+            end
+
+            context 'user voted more than 5 minutes ago' do
+              let(:created_at) { 6.minutes.ago }
+              it 'has the upvote form to change his vote'
+              # include_context 'has: new form for', 'upvote', false
+            end
+
+            include_context 'shows upvote button', :grey
+            include_context 'shows downvote button', :purple
+          end
+        end
+      end
+    end
+
+    context 'state is :accepted' do
+      let(:state) { :accepted }
+
+      include_context 'has: new form for', 'upvote', false
+      include_context 'has: new form for', 'downvote', false
+
+      context 'current_user is not set (guest)' do
+        include_context 'shows upvote button', :grey
+        include_context 'shows downvote button', :grey
+      end
+
+      context 'current_user is set' do
+        let(:user) { FactoryBot.create(:user) }
+        include_context 'login user'
+
+        context 'user did not vote on stamp' do
+          include_context 'shows upvote button', :grey
+          include_context 'shows downvote button', :grey
+        end
+
+        context 'user voted on stamp' do
+          context 'user upvoted' do
+            before { FactoryBot.create(:upvote, votable: stamp, user: user) }
+
+            include_context 'shows upvote button', :green
+            include_context 'shows downvote button', :grey
+          end
+
+          context 'user downvoted' do
+            before { FactoryBot.create(:downvote, votable: stamp, user: user) }
+
+            include_context 'shows upvote button', :grey
+            include_context 'shows downvote button', :red
+          end
+        end
+      end
+    end
+
+    context 'state is :denied' do
+      let(:state) { :denied }
+
+      include_context 'has: new form for', 'upvote', false
+      include_context 'has: new form for', 'downvote', false
+
+      context 'current_user is not set (guest)' do
+        include_context 'shows upvote button', :grey
+        include_context 'shows downvote button', :grey
+      end
+
+      context 'current_user is set' do
+        let(:user) { FactoryBot.create(:user) }
+        include_context 'login user'
+
+        context 'user did not vote on stamp' do
+          include_context 'shows upvote button', :grey
+          include_context 'shows downvote button', :grey
+        end
+
+        context 'user voted on stamp' do
+          context 'user upvoted' do
+            before { FactoryBot.create(:upvote, votable: stamp, user: user) }
+
+            include_context 'shows upvote button', :red
+            include_context 'shows downvote button', :grey
+          end
+
+          context 'user downvoted' do
+            before { FactoryBot.create(:downvote, votable: stamp, user: user) }
+            include_context 'shows upvote button', :grey
+            include_context 'shows downvote button', :green
+          end
+        end
+      end
+    end
+
+    context 'state is :archived' do
+      let(:state) { :archived }
+
+      include_context 'has: new form for', 'upvote', false
+      include_context 'has: new form for', 'downvote', false
+
+      context 'current_user is not set (guest)' do
+        include_context 'shows upvote button', :grey
+        include_context 'shows downvote button', :grey
+      end
+
+      context 'current_user is set' do
+        let(:user) { FactoryBot.create(:user) }
+        include_context 'login user'
+
+        context 'user did not vote on stamp' do
+          include_context 'shows upvote button', :grey
+          include_context 'shows downvote button', :grey
+        end
+
+        context 'user voted on stamp' do
+          context 'user upvoted' do
+            before { FactoryBot.create(:upvote, votable: stamp, user: user) }
+
+            include_context 'shows upvote button', :purple
+            include_context 'shows downvote button', :grey
+          end
+
+          context 'user downvoted' do
+            before { FactoryBot.create(:downvote, votable: stamp, user: user) }
+            include_context 'shows upvote button', :grey
+            include_context 'shows downvote button', :purple
+          end
+        end
+      end
+    end
+
+    context 'state is :disputed' do
+      let(:state) { :disputed }
+
+      include_context 'has: new form for', 'upvote', false
+      include_context 'has: new form for', 'downvote', false
+
+      context 'current_user is not set (guest)' do
+        include_context 'shows upvote button', :grey
+        include_context 'shows downvote button', :grey
+      end
+
+      context 'current_user is set' do
+        let(:user) { FactoryBot.create(:user) }
+        include_context 'login user'
+
+        context 'user did not vote on stamp' do
+          include_context 'shows upvote button', :grey
+          include_context 'shows downvote button', :grey
+        end
+
+        context 'user voted on stamp' do
+          context 'user upvoted' do
+            before { FactoryBot.create(:upvote, votable: stamp, user: user) }
+
+            include_context 'shows upvote button', :purple
+            include_context 'shows downvote button', :grey
+          end
+
+          context 'user downvoted' do
+            before { FactoryBot.create(:downvote, votable: stamp, user: user) }
+            include_context 'shows upvote button', :grey
+            include_context 'shows downvote button', :purple
+          end
+        end
+      end
+    end
   end
 
   describe '-- right column --' do
