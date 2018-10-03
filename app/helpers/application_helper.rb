@@ -15,4 +15,25 @@ module ApplicationHelper
       notice: 'info'
     }[flash_type.to_sym] || flash_type.to_s
   end
+
+  # rubocop:disable CyclomaticComplexity (7/6 if statements? alltough I only count 6)
+  # TODO: probably should unit test this, currently tested via views/stamps/show
+  def caret_class_for(stamp, type)
+    return 'grey' if return_grey?(stamp, type)
+
+    case stamp.state.to_sym
+    when :archived, :disputed, :in_progress then 'purple'
+    when :accepted then type == 'upvote' ? 'green' : 'red'
+    when :denied then type == 'upvote' ? 'red' : 'green'
+    end
+  end
+  # rubocop:enable CyclomaticComplexity
+
+  private
+
+  def return_grey?(stamp, type)
+    current_user.blank? ||
+      stamp.vote_of(current_user).blank? ||
+      stamp.vote_of(current_user).vote_type != type
+  end
 end

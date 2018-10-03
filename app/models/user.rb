@@ -37,4 +37,8 @@ class User < ApplicationRecord
          .order('COUNT(labels.name) DESC, labels.name ASC')
          .limit(limit)
   end
+
+  def voted?(votable)
+    votable.votes.where(user_id: id).exists?
+  end
 end

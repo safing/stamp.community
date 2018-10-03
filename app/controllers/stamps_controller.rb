@@ -25,7 +25,6 @@ class StampsController < ApplicationController
     @commentable = @votable = @stamp = Stamp.find(params[:id])
     @comments = @commentable.comments
     @comment = Comment.new
-    @vote = Vote.new
 
     authorize @stamp
   end

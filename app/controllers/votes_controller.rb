@@ -22,6 +22,6 @@ class VotesController < ApplicationController
 
   def load_votable
     @resource, id = request.path.split('/')[1, 2]
-    @votable = @resource.singularize.classify.constantize.find(id)
+    @votable = @commentable = @resource.singularize.classify.constantize.find(id)
   end
 end

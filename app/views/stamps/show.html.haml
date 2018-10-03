@@ -19,11 +19,7 @@
                   = @stamp.percentage
                   \%
         .three.wide.column
-          %div.ui.icon.vertical.buttons
-            %div.ui.button.icon{style: "margin-bottom: 0rem; padding: 2px; border: 0px !important; background-color: white;"}
-              %i.hand.caret.up.big.centered.icon{style: "color: purple"}
-            %div.ui.button.icon{style: "margin-bottom: 0rem; padding: 2px; border: 0px !important; background-color: white;"}
-              %i.vertically.flipped.hand.caret.up.big.icon{style: "color: purple"}
+          = render 'votes/carets'
       .ui.blue.large.top.right.attached.label
         = @stamp.state.titleize
       .ui.small.comments

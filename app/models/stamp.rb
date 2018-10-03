@@ -26,4 +26,8 @@ class Stamp < ApplicationRecord
   def siblings?
     siblings.count.positive?
   end
+
+  def vote_of(user)
+    @vote_of ||= votes.find_by(user_id: user.id)
+  end
 end

@@ -1,0 +1,5 @@
+%button.ui.button.icon{style: "margin-bottom: 0rem; padding: 2px; border: 0px !important; background-color: white;"}
+  - if type == 'upvote'
+    %i.hand.caret.up.big.icon{class: caret_class_for(@stamp, type)}
+  - elsif type == 'downvote'
+    %i.vertically.flipped.hand.caret.up.big.icon{class: caret_class_for(@stamp, type)}
