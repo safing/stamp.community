@@ -72,7 +72,7 @@ RSpec.describe CommentPolicy do
       it { is_expected.to permit_new_and_create_actions }
     end
 
-    it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_action(:show) }
     it { is_expected.to forbid_edit_and_update_actions }
   end
 
@@ -104,7 +104,7 @@ RSpec.describe CommentPolicy do
       it { is_expected.to permit_new_and_create_actions }
     end
 
-    it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_action(:show) }
     it { is_expected.to forbid_edit_and_update_actions }
   end
 end
