@@ -2,8 +2,9 @@ FactoryBot.define do
   factory :stamp do
     label
     percentage { Faker::Number.between(1, 100) }
-    association :creator, factory: :user
-    association :stampable, factory: :domain
+    creator { build(:user) }
+    stampable { build(:domain, creator: creator) }
+    comments { build_list(:comment, 1, user: creator, commentable: @instance) }
 
     trait :accepted do
       state :accepted

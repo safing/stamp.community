@@ -11,7 +11,9 @@ shared_examples_for 'status code' do |status|
 end
 
 shared_context 'login user' do
-  before { sign_in(FactoryBot.create(:user)) }
+  before do
+    sign_in(defined?(user) ? user : FactoryBot.create(:user))
+  end
 end
 
 shared_context 'login moderator' do

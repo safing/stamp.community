@@ -7,7 +7,7 @@ class Stamp < ApplicationRecord
   accepts_nested_attributes_for :comments
 
   validates :percentage, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
-  validates_presence_of :percentage, :state
+  validates_presence_of :percentage, :state, :comments
 
   belongs_to :label
 
@@ -25,5 +25,9 @@ class Stamp < ApplicationRecord
 
   def siblings?
     siblings.count.positive?
+  end
+
+  def vote_of(user)
+    @vote_of ||= votes.find_by(user_id: user.id)
   end
 end

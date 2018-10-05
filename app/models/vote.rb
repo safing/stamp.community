@@ -8,6 +8,19 @@ class Vote < ApplicationRecord
   scope :ordered, -> { order(power: :desc, created_at: :desc) }
 
   validates_presence_of :power
+  validates_uniqueness_of :user_id, scope: %i[votable_id votable_type]
+
+  def vote_type
+    upvote? ? 'upvote' : 'downvote'
+  end
+
+  def upvote?
+    accept
+  end
+
+  def downvote?
+    !accept
+  end
 
   private
 

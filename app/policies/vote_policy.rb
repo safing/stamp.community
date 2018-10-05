@@ -7,7 +7,7 @@ class VotePolicy < ApplicationPolicy
   end
 
   def create?
-    user?
+    user? && vote.votable.in_progress?
   end
 
   def show?

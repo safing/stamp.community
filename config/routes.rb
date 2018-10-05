@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :domains, param: :name, constraints: { name: Domain::NAME_REGEX }, only: %i[show new]
   resources :labels, only: [:show]
   resources :licences, only: [:show]
-  resources :stamps, except: [:delete]
+  resources :stamps, except: [:delete] do
+    resources :comments, only: [:create]
+    resources :votes, only: [:create]
+  end
   resources :users, only: [:show]
 
   mount APIRouter => '/'
