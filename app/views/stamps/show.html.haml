@@ -20,7 +20,8 @@
                   \%
         .three.wide.column
           = render 'votes/carets'
-      .ui.blue.large.top.right.attached.label
+      -# the order of classes is important for semantic, hence this is a bit odd
+      %div{class: %w[ui large top right attached label].push(class_for(@stamp.state))}
         = @stamp.state.titleize
       .ui.small.comments
         = render 'comments/comments'
