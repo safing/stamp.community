@@ -20,7 +20,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
   end
 
   shared_examples 'stamp with results' do
-    xit 'shows the stamp results' do
+    it 'shows the stamp results' do
       expect(rendered).to have_content('Results')
     end
 

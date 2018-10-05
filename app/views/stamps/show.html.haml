@@ -67,3 +67,25 @@
         = link_to new_stamp_path(domain_name: @stamp.domain.name) do
           %button.ui.purple.basic.big.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; ", }
             Add Stamp
+  - unless @stamp.in_progress?
+    .sixteen.wide.column
+      .ui.segment
+        %h2.ui.header
+          .content
+            Results
+            .sub.header
+              = @stamp.state.titleize
+              = time_ago_in_words(@stamp.updated_at)
+              ago
+              %i.hand.fitted.caret.up.big.green.icon
+              = @stamp.upvote_power
+              %i.hand.fitted.caret.down.big.red.icon
+              = @stamp.downvote_power
+        .ui.divider
+        - @stamp.votes.order(power: :desc, accept: :desc).each do |vote|
+          = link_to user_path(vote.user), class: %w[ui image label].push(vote.upvote? ? 'green' : 'red') do
+            %img{src: '/assets/portmaster.png'}
+            = vote.user.username
+            .detail
+              %i.chess.queen.icon
+              = vote.power
