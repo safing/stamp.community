@@ -70,7 +70,7 @@
             Add Stamp
   - unless @stamp.in_progress?
     .sixteen.wide.column
-      .ui.segment
+      .ui.segment.results
         %h2.ui.header
           .content
             Results
@@ -84,8 +84,7 @@
               = @stamp.downvote_power
         .ui.divider
         - @stamp.votes.order(power: :desc, accept: :desc).each do |vote|
-          = link_to user_path(vote.user), class: %w[ui image label].push(vote.upvote? ? 'green' : 'red') do
-            %img{src: '/assets/portmaster.png'}
+          = link_to user_path(vote.user), class: %w[ui label].push(vote.upvote? ? 'green' : 'red') do
             = vote.user.username
             .detail
               %i.chess.queen.icon
