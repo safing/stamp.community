@@ -11,7 +11,7 @@ class Domain < ApplicationRecord
   has_many :children, class_name: 'Domain', foreign_key: 'parent_id'
   has_many :stamps, as: :stampable
 
-  validates :name, format: { with: NAME_REGEX_WITH_ANCHORS, message: 'invalid domain name' }
+  validates :name, format: { with: NAME_REGEX_WITH_ANCHORS, message: 'is not a valid domain name' }
 
   def parent_name
     parent.name if parent_id.present?

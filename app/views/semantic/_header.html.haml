@@ -22,7 +22,7 @@
         1
     %div{class: 'item', style: 'padding: 0 6px;'}
       .ui.icon.mini.input
-        %input{placeholder: 'Search...', type: 'text'}
+        %input#search{placeholder: 'Search...', type: 'text'}
         %i.search.link.icon
     - if user_signed_in?
       = link_to 'Profile', user_path(current_user), class: 'item'
