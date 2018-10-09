@@ -3,13 +3,15 @@
     %div.six.wide.column
       %div.ui.segment{ style: 'box-shadow: 5px 5px 20px -2px #A333C8 ; padding-bottom: 20px'}
         %img.ui.centered.small.image{src: '/assets/basic_logo.png'}
-        %div.ui.centered.form.header
+        %div.ui.centered.form.header{data: {controller: 'new-domain'}}
           %h1.ui.icon.header
             New Domain
           %div.ui.search
-            %div.ui.small.icon.input
-              %input.prompt{placeholder: "https://", type: "text"}
-                %i.search.icon
-            %button.ui.purple.basic.huge.button{style: "margin-bottom: 1rem; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-              Create
-            %div.results
+            = form_for @domain, remote: true, html: { class: "ui form" } do |f|
+              .ui.action.fluid.input
+                = f.text_field :name, placeholder: 'https://', type: "text", data: {target: 'new-domain.input'}
+                = f.button type: :submit, class: 'ui purple button' do
+                  Create
+              %div.ui.error.message
+                .header
+                %ul.list

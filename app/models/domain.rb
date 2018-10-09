@@ -1,8 +1,9 @@
 class Domain < ApplicationRecord
   # rubocop:disable LineLength
   # got the regex from https://stackoverflow.com/a/26987741/2235594
-  NAME_REGEX = /(((?!\-))(xn\-\-)?[a-z0-9\-_]{0,61}[a-z0-9]{1,1}\.)*(xn\-\-)?([a-z0-9\-]{1,61}|[a-z0-9\-]{1,30}\.[a-z]{2,})/
-  NAME_REGEX_WITH_ANCHORS = /\A(((?!\-))(xn\-\-)?[a-z0-9\-_]{0,61}[a-z0-9]{1,1}\.)*(xn\-\-)?([a-z0-9\-]{1,61}|[a-z0-9\-]{1,30}\.[a-z]{2,})\z/
+  NAME_REGEX = /(((?!\-))(xn\-\-)?[a-z0-9\-_]{0,61}[a-z0-9]{1,1}\.)*(xn\-\-)?([a-z0-9\-]{1,61}|[a-z0-9\-]{1,30})\.[a-z]{2,}/
+  NAME_REGEX_WITH_ANCHORS = /\A(((?!\-))(xn\-\-)?[a-z0-9\-_]{0,61}[a-z0-9]{1,1}\.)*(xn\-\-)?([a-z0-9\-]{1,61}|[a-z0-9\-]{1,30})\.[a-z]{2,}\z/
+
   # rubocop:enable LineLength
 
   belongs_to :creator, class_name: 'User'
@@ -10,7 +11,7 @@ class Domain < ApplicationRecord
   has_many :children, class_name: 'Domain', foreign_key: 'parent_id'
   has_many :stamps, as: :stampable
 
-  validates :name, format: { with: NAME_REGEX_WITH_ANCHORS, message: 'invalid domain name' }
+  validates :name, format: { with: NAME_REGEX_WITH_ANCHORS, message: 'is not a valid domain name' }
 
   def parent_name
     parent.name if parent_id.present?
