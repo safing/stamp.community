@@ -7,9 +7,11 @@ git_source(:github) do |repo_name|
 end
 
 gem 'fix-db-schema-conflicts'
-gem 'pg'
 gem 'rails', '~> 5.1.4'
 gem 'sidekiq'
+
+gem 'jsonb_accessor'
+gem 'pg'
 
 gem 'font_awesome5_rails'
 gem 'sass-rails'
