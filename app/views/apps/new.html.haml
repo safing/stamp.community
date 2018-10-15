@@ -1,2 +1,28 @@
-%h1 Apps#new
-%p Find me in app/views/apps/new.html.haml
+%div.ui.container
+  %h1
+    New App
+  %div.ui.segment{style: 'padding-bottom: 3rem;'}
+    %div.ui.grid.divided
+      %div.two.wide.column
+        %div.ui.basic.placeholder.center.aligned.segment
+          %div.ui.icon.header
+            %i.file.outline.icon
+          %button.ui.purple.basic.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+            Add Icon
+      %div.four.wide.column{style: 'padding-top: 2.5rem;'}
+        %div.ui.basic.segment
+          %div.ui.input
+            %input{:type=>"text", :required => true, :placeholder=>"App"}
+          %button.ui.purple.basic.button{style: "margin-top: 3px; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+            Add App
+      %div.six.wide.column{style: 'padding-top: 2.5rem;'}
+        %div.ui.basic.segment
+          %div.ui.input{style: 'width: 28rem;'}
+            %input{:type=>"text", :required => true, :placeholder=>"Description"}
+          %button.ui.purple.basic.button{style: "margin-top: 3px; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+            Add Description
+    %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
+      %button.ui.purple.basic.big.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+        Save
+      %button.ui.purple.basic.big.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+        Cancel
