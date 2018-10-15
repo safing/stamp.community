@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 20181009123636) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "api_keys", force: :cascade do |t|
@@ -22,6 +23,18 @@ ActiveRecord::Schema.define(version: 20181009123636) do
     t.bigint "user_id"
     t.index ["token"], name: "index_api_keys_on_token", unique: true
     t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
+
+  create_table "apps", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "link"
+    t.string "name"
+    t.jsonb "os"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.text "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["user_id"], name: "index_apps_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -131,6 +144,7 @@ ActiveRecord::Schema.define(version: 20181009123636) do
   end
 
   add_foreign_key "api_keys", "users"
+  add_foreign_key "apps", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "data_stamps", "users", column: "creator_id"
   add_foreign_key "domains", "domains", column: "parent_id"
