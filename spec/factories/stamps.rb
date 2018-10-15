@@ -3,7 +3,7 @@ FactoryBot.define do
     label
     percentage { Faker::Number.between(1, 100) }
     creator { build(:user) }
-    stampable { build(:domain, creator: creator) }
+    stampable { build(:domain, user: creator) }
     comments { build_list(:comment, 1, user: creator, commentable: @instance) }
 
     trait :accepted do

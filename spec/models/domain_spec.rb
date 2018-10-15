@@ -4,7 +4,7 @@ RSpec.describe Domain, type: :model do
   end
 
   describe 'relations' do
-    it { is_expected.to belong_to(:creator).class_name('User').required(true) }
+    it { is_expected.to belong_to(:user).class_name('User').required(true) }
     it { is_expected.to belong_to(:parent).class_name('Domain').optional }
     it { is_expected.to have_many(:children).class_name('Domain').with_foreign_key(:parent_id) }
     it { is_expected.to have_many(:stamps) }
@@ -31,7 +31,7 @@ RSpec.describe Domain, type: :model do
   end
 
   describe 'database' do
-    it { is_expected.to have_db_index(:creator_id) }
+    it { is_expected.to have_db_index(:user_id) }
     it { is_expected.to have_db_index(:name).unique(true) }
     it { is_expected.to have_db_index(:parent_id) }
   end

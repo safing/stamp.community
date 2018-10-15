@@ -6,7 +6,7 @@ class Domain < ApplicationRecord
 
   # rubocop:enable LineLength
 
-  belongs_to :creator, class_name: 'User'
+  belongs_to :user
   belongs_to :parent, class_name: 'Domain', optional: true
   has_many :children, class_name: 'Domain', foreign_key: 'parent_id'
   has_many :stamps, as: :stampable

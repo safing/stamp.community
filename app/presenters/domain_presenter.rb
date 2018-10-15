@@ -6,7 +6,7 @@ module DomainPresenter
       required: true
     }
 
-    expose :creator_id, documentation: {
+    expose :user_id, documentation: {
       type: 'Integer',
       desc: 'User id of creator',
       required: true

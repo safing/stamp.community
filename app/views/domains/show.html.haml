@@ -53,8 +53,8 @@
         %div.item
           %i.user.icon
           %div.content
-            = link_to user_path(@domain.creator_id) do
-              = @domain.creator.username
+            = link_to user_path(@domain.user_id) do
+              = @domain.user.username
         %div.item
           %i.clock.outline.icon
           %div.content

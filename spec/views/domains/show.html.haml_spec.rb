@@ -67,8 +67,8 @@ RSpec.describe 'domains/show.html.haml', type: :view do
     include_context 'show: in_progress stamps segment', false
   end
 
-  it 'links to the creator' do
-    expect(rendered).to have_link(domain.creator.username, href: user_path(domain.creator))
+  it 'links to the user' do
+    expect(rendered).to have_link(domain.user.username, href: user_path(domain.user))
   end
 
   context 'domain has subdomains' do
