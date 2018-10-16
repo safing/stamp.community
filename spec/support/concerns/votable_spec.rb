@@ -81,7 +81,7 @@ RSpec.shared_examples 'a votable model' do |options|
     describe '#archive_accepted_siblings!' do
       subject { instance.archive_accepted_siblings! }
       let!(:accepted_sibling) do
-        FactoryBot.create(:stamp, :accepted, stampable: instance.domain, label: instance.label)
+        FactoryBot.create(:stamp, :accepted, stampable: instance.domain)
       end
 
       it 'archives the accepted sibling' do

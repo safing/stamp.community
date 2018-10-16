@@ -24,8 +24,7 @@ module Votable
       end
 
       def archive_accepted_siblings!
-        accepted_instance = stampable.send(self.class.name.parameterize.pluralize)
-                                     .where(label: label)
+        accepted_instance = stampable.send(self.class.superclass.name.parameterize.pluralize)
                                      .accepted
         accepted_instance.each(&:archive!) if accepted_instance.exists?
       end

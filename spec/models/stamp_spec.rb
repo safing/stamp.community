@@ -7,17 +7,13 @@ RSpec.describe Stamp, type: :model do
   end
 
   describe 'relations' do
-    it { is_expected.to belong_to(:label).required(true) }
     it { is_expected.to have_many(:comments) }
   end
 
   describe 'validations' do
-    it do
-      is_expected.to validate_numericality_of(:percentage)
-        .is_greater_than(0)
-        .is_less_than_or_equal_to(100)
-    end
     it { is_expected.to validate_presence_of(:comments) }
+    it { is_expected.to validate_presence_of(:type) }
+    it { is_expected.to validate_inclusion_of(:type).in_array(%w[Stamp::Label]) }
     it { is_expected.to validate_presence_of(:creator) }
     it { is_expected.to validate_presence_of(:stampable) }
     it { is_expected.to validate_presence_of(:state) }

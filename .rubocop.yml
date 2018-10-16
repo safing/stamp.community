@@ -17,10 +17,10 @@ Metrics/BlockLength:
 Metrics/LineLength:
   Max: 100
 
-
 Style/ClassAndModuleChildren:
   Exclude:
     - 'app/api/v1/*.rb'
     - 'app/workers/**/*.rb'
+    - 'app/models/**/*.rb'
 Style/FrozenStringLiteralComment:
   Enabled: false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_101643) do
+ActiveRecord::Schema.define(version: 2018_10_16_102602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_101643) do
   end
 
   create_table "labels", force: :cascade do |t|
-    t.jsonb "config", default: "{}", null: false
+    t.jsonb "config", default: {}, null: false
     t.datetime "created_at", null: false
     t.text "description", null: false
     t.bigint "licence_id", null: false
@@ -80,14 +80,13 @@ ActiveRecord::Schema.define(version: 2018_10_16_101643) do
 
   create_table "stamps", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.bigint "label_id"
-    t.integer "percentage"
+    t.jsonb "data", default: {}, null: false
     t.bigint "stampable_id", null: false
     t.string "stampable_type", null: false
     t.text "state", null: false
+    t.string "type", default: "Stamp::Label", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["label_id"], name: "index_stamps_on_label_id"
     t.index ["stampable_type", "stampable_id"], name: "index_stamps_on_stampable_type_and_stampable_id"
     t.index ["user_id"], name: "index_stamps_on_user_id"
   end
@@ -135,7 +134,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_101643) do
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "domains", "users"
   add_foreign_key "labels", "labels", column: "parent_id"
-  add_foreign_key "stamps", "labels"
   add_foreign_key "stamps", "users"
   add_foreign_key "votes", "users"
 end

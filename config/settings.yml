@@ -9,7 +9,7 @@ BOT:
     VOTING_LIMIT: 100_000
     STAMP_CREATION_LIMIT: 10_000
 
-STAMP:
+STAMP::LABEL:
   CREATOR:
     PRIZE: 10 # created good stuff
     PENALTY: -100 # created trash

@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :stamp do
-    label
-    percentage { Faker::Number.between(1, 100) }
     creator { build(:user) }
     stampable { build(:domain, user: creator) }
     comments { build_list(:comment, 1, user: creator, commentable: @instance) }
