@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_083716) do
+ActiveRecord::Schema.define(version: 2018_10_16_101643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -46,20 +46,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_083716) do
     t.bigint "user_id", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "data_stamps", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.binary "data"
-    t.integer "downvote_count"
-    t.bigint "stampable_id"
-    t.string "stampable_type"
-    t.text "state"
-    t.datetime "updated_at", null: false
-    t.integer "upvote_count"
-    t.bigint "user_id"
-    t.index ["stampable_type", "stampable_id"], name: "index_data_stamps_on_stampable_type_and_stampable_id"
-    t.index ["user_id"], name: "index_data_stamps_on_user_id"
   end
 
   create_table "domains", force: :cascade do |t|
@@ -146,7 +132,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_083716) do
   add_foreign_key "api_keys", "users"
   add_foreign_key "apps", "users"
   add_foreign_key "comments", "users"
-  add_foreign_key "data_stamps", "users"
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "domains", "users"
   add_foreign_key "labels", "labels", column: "parent_id"
