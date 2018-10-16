@@ -5,13 +5,13 @@ RSpec.describe User, type: :model do
 
   describe 'relations' do
     it { is_expected.to have_one(:api_key) }
-    it { is_expected.to have_many(:domains).with_foreign_key(:creator_id) }
-    it { is_expected.to have_many(:stamps).with_foreign_key(:creator_id) }
+    it { is_expected.to have_many(:domains).with_foreign_key(:user_id) }
+    it { is_expected.to have_many(:stamps).with_foreign_key(:user_id) }
     it { is_expected.to have_many(:votes) }
     it { is_expected.to have_many(:comments) }
   end
 
-  describe 'indexes' do
+  describe 'database' do
     it { is_expected.to have_db_index(:confirmation_token).unique }
     it { is_expected.to have_db_index(:email).unique }
     it { is_expected.to have_db_index(:reset_password_token).unique }

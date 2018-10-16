@@ -18,7 +18,7 @@ class DomainsController < ApplicationController
 
       if @domain.new_record?
         # TODO: check whether domain is online or not, with ping or sth similar
-        @domain.creator = current_user
+        @domain.user = current_user
         @domain.save!
 
         @state = 'success'
@@ -44,6 +44,6 @@ class DomainsController < ApplicationController
   def domain_params
     params.require(:domain)
           .permit(:name)
-          .merge(creator: current_user)
+          .merge(user: current_user)
   end
 end

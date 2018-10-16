@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181002100933) do
+ActiveRecord::Schema.define(version: 2018_10_15_093148) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "api_keys", force: :cascade do |t|
@@ -22,6 +23,18 @@ ActiveRecord::Schema.define(version: 20181002100933) do
     t.bigint "user_id"
     t.index ["token"], name: "index_api_keys_on_token", unique: true
     t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
+
+  create_table "apps", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "link"
+    t.string "name"
+    t.jsonb "os"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.text "uuid", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["user_id"], name: "index_apps_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -37,7 +50,6 @@ ActiveRecord::Schema.define(version: 20181002100933) do
 
   create_table "data_stamps", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.bigint "creator_id"
     t.binary "data"
     t.integer "downvote_count"
     t.bigint "stampable_id"
@@ -45,22 +57,24 @@ ActiveRecord::Schema.define(version: 20181002100933) do
     t.text "state"
     t.datetime "updated_at", null: false
     t.integer "upvote_count"
-    t.index ["creator_id"], name: "index_data_stamps_on_creator_id"
+    t.bigint "user_id"
     t.index ["stampable_type", "stampable_id"], name: "index_data_stamps_on_stampable_type_and_stampable_id"
+    t.index ["user_id"], name: "index_data_stamps_on_user_id"
   end
 
   create_table "domains", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.bigint "creator_id"
     t.string "name", null: false
     t.bigint "parent_id"
     t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_domains_on_creator_id"
+    t.bigint "user_id"
     t.index ["name"], name: "index_domains_on_name", unique: true
     t.index ["parent_id"], name: "index_domains_on_parent_id"
+    t.index ["user_id"], name: "index_domains_on_user_id"
   end
 
   create_table "labels", force: :cascade do |t|
+    t.jsonb "config", default: {}, null: false
     t.datetime "created_at", null: false
     t.text "description"
     t.bigint "licence_id"
@@ -80,16 +94,16 @@ ActiveRecord::Schema.define(version: 20181002100933) do
 
   create_table "stamps", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.bigint "creator_id"
     t.bigint "label_id"
     t.integer "percentage"
     t.bigint "stampable_id"
     t.string "stampable_type"
     t.text "state"
     t.datetime "updated_at", null: false
-    t.index ["creator_id"], name: "index_stamps_on_creator_id"
+    t.bigint "user_id"
     t.index ["label_id"], name: "index_stamps_on_label_id"
     t.index ["stampable_type", "stampable_id"], name: "index_stamps_on_stampable_type_and_stampable_id"
+    t.index ["user_id"], name: "index_stamps_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -130,12 +144,13 @@ ActiveRecord::Schema.define(version: 20181002100933) do
   end
 
   add_foreign_key "api_keys", "users"
+  add_foreign_key "apps", "users"
   add_foreign_key "comments", "users"
-  add_foreign_key "data_stamps", "users", column: "creator_id"
+  add_foreign_key "data_stamps", "users"
   add_foreign_key "domains", "domains", column: "parent_id"
-  add_foreign_key "domains", "users", column: "creator_id"
+  add_foreign_key "domains", "users"
   add_foreign_key "labels", "labels", column: "parent_id"
   add_foreign_key "stamps", "labels"
-  add_foreign_key "stamps", "users", column: "creator_id"
+  add_foreign_key "stamps", "users"
   add_foreign_key "votes", "users"
 end

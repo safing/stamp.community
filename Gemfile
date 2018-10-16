@@ -7,9 +7,11 @@ git_source(:github) do |repo_name|
 end
 
 gem 'fix-db-schema-conflicts'
-gem 'pg'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2.1'
 gem 'sidekiq'
+
+gem 'jsonb_accessor'
+gem 'pg'
 
 gem 'font_awesome5_rails'
 gem 'sass-rails'
@@ -34,6 +36,7 @@ gem 'grape'
 gem 'grape-entity', github: 'ruby-grape/grape-entity', branch: 'master'
 
 group :development do
+  gem 'bootsnap', require: false
   gem 'grape_on_rails_routes'
   gem 'letter_opener'
   gem 'seedbank'

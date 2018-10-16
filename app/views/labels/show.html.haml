@@ -26,9 +26,9 @@
       - @label.top_contributors.each do |contributor|
         .row.label.bg-light-2
           .col-12.align-self-center
-            = link_to user_path(contributor.creator_id), class: 'default-color' do
+            = link_to user_path(contributor.user_id), class: 'default-color' do
               = fa_icon 'user'
-              = User.find(contributor.creator_id).username
+              = User.find(contributor.user_id).username
             %span{:style => "float: right;"}
               = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;'
               = contributor.count

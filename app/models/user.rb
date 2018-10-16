@@ -4,8 +4,8 @@ class User < ApplicationRecord
   has_one :api_key
 
   has_many :comments
-  has_many :domains, foreign_key: :creator_id
-  has_many :stamps, foreign_key: :creator_id
+  has_many :domains, foreign_key: :user_id
+  has_many :stamps, foreign_key: :user_id
   has_many :votes
 
   before_create :add_reputation
@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   def top_labels(limit: 5)
     Label.joins(:stamps)
-         .where(stamps: { creator_id: id })
+         .where(stamps: { user_id: id })
          .group('labels.id, labels.name')
          .select('labels.name, labels.id, COUNT(labels.name)')
          .order('COUNT(labels.name) DESC, labels.name ASC')
