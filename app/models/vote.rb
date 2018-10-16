@@ -7,7 +7,7 @@ class Vote < ApplicationRecord
   scope :today, -> { where(created_at: ApplicationController.helpers.current_day_range) }
   scope :ordered, -> { order(power: :desc, created_at: :desc) }
 
-  validates_presence_of :power
+  validates_presence_of %i[power user votable]
   validates_uniqueness_of :user_id, scope: %i[votable_id votable_type]
 
   def vote_type

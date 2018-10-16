@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :stamps, foreign_key: :user_id
   has_many :votes
 
+  validates_presence_of %i[role username]
+
   before_create :add_reputation
 
   devise :confirmable, :database_authenticatable, :registerable, :recoverable,

@@ -5,4 +5,6 @@ class App < ApplicationRecord
   after_create :reload
 
   belongs_to :user
+
+  validates_presence_of %i[description link name user uuid]
 end

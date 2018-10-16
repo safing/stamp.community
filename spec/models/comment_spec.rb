@@ -12,6 +12,9 @@ RSpec.describe Comment, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_length_of(:content).is_at_least(40) }
+    it { is_expected.to validate_presence_of(:content) }
+    it { is_expected.to validate_presence_of(:commentable) }
+    it { is_expected.to validate_presence_of(:user) }
   end
 
   describe 'database' do

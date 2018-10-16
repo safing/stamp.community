@@ -18,6 +18,12 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_db_index(:unlock_token).unique }
   end
 
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:role) }
+    it { is_expected.to validate_presence_of(:username) }
+  end
+
   describe '#create' do
     subject { user.save }
     let(:user) { FactoryBot.build(:user, reputation: reputation) }

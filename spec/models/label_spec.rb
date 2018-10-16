@@ -16,6 +16,12 @@ RSpec.describe Label, type: :model do
     it { is_expected.to have_db_index(:parent_id) }
   end
 
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:licence) }
+    it { is_expected.to validate_presence_of(:name) }
+  end
+
   describe '#stamps_including_child_labels' do
     subject { label.stamps_including_child_labels }
     let(:label) { FactoryBot.create(:label, :with_stamps) }
