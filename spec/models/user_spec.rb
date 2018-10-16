@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:comments) }
   end
 
-  describe 'indexes' do
+  describe 'database' do
     it { is_expected.to have_db_index(:confirmation_token).unique }
     it { is_expected.to have_db_index(:email).unique }
     it { is_expected.to have_db_index(:reset_password_token).unique }
