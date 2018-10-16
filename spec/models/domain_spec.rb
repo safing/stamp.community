@@ -11,6 +11,9 @@ RSpec.describe Domain, type: :model do
   end
 
   describe 'validations' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:user) }
+
     describe 'domain name validation' do
       it { is_expected.to allow_value('i.oh1.me').for(:name) }
       it { is_expected.to allow_value('assets.fb.com').for(:name) }

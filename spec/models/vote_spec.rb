@@ -14,6 +14,8 @@ RSpec.describe Vote, type: :model do
     subject { FactoryBot.create(:vote) }
 
     it { is_expected.to validate_presence_of(:power) }
+    it { is_expected.to validate_presence_of(:user) }
+    it { is_expected.to validate_presence_of(:votable) }
 
     describe 'vote creation validation' do
       # assure that voted object is in_progress
@@ -73,7 +75,7 @@ RSpec.describe Vote, type: :model do
 
   describe '#cache_users_voting_power' do
     subject { vote.send('cache_users_voting_power') }
-    let(:vote) { FactoryBot.build(:vote) }
+    let(:vote) { FactoryBot.build(:vote, power: nil) }
 
     it 'saves the users voting power as vote#power' do
       expect { subject }.to change { vote.power }.from(nil).to(vote.user.voting_power)

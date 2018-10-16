@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :vote do
     accept { Faker::Boolean.boolean(0.7) }
+    power { Faker::Number.number(1) }
 
     association :user
     association :votable, factory: :stamp
@@ -8,6 +9,7 @@ FactoryBot.define do
 
   factory :upvote, class: Vote do
     accept true
+    power { Faker::Number.number(1) }
 
     association :user
     association :votable, factory: :stamp
@@ -15,6 +17,7 @@ FactoryBot.define do
 
   factory :downvote, class: Vote do
     accept false
+    power { Faker::Number.number(1) }
 
     association :user
     association :votable, factory: :stamp

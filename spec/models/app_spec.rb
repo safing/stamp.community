@@ -13,6 +13,10 @@ RSpec.describe App, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:content).is_at_least(40) }
+    it { is_expected.to validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:link) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:user) }
+    it { is_expected.to validate_presence_of(:uuid) }
   end
 end

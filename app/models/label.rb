@@ -5,6 +5,8 @@ class Label < ApplicationRecord
   has_many :stamps
   has_many :children, class_name: 'Label', foreign_key: :parent_id
 
+  validates_presence_of %i[description licence name]
+
   jsonb_accessor :config, binary: [:boolean, default: false], steps: [:integer, default: 5]
 
   # TODO

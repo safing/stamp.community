@@ -7,7 +7,7 @@ class Stamp < ApplicationRecord
   accepts_nested_attributes_for :comments
 
   validates :percentage, numericality: { greater_than: 0, less_than_or_equal_to: 100 }
-  validates_presence_of :percentage, :state, :comments
+  validates_presence_of %i[comments creator stampable state]
 
   belongs_to :label
 
