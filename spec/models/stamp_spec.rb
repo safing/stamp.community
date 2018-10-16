@@ -24,7 +24,8 @@ RSpec.describe Stamp, type: :model do
   end
 
   describe 'database' do
-    it { is_expected.to have_db_index(:label_id) }
+    it { is_expected.to have_db_index(:user_id) }
+    it { is_expected.to have_db_index(%i[stampable_type stampable_id]) }
   end
 
   describe '#domain?' do
