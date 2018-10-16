@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_15_093148) do
+ActiveRecord::Schema.define(version: 2018_10_16_083716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -18,21 +18,21 @@ ActiveRecord::Schema.define(version: 2018_10_15_093148) do
 
   create_table "api_keys", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.string "token"
+    t.string "token", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["token"], name: "index_api_keys_on_token", unique: true
     t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
   create_table "apps", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.text "description"
-    t.string "link"
-    t.string "name"
+    t.text "description", null: false
+    t.string "link", null: false
+    t.string "name", null: false
     t.jsonb "os"
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.text "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["user_id"], name: "index_apps_on_user_id"
   end
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2018_10_15_093148) do
   create_table "comments", force: :cascade do |t|
     t.bigint "commentable_id", null: false
     t.string "commentable_type", null: false
-    t.text "content"
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
@@ -67,18 +67,18 @@ ActiveRecord::Schema.define(version: 2018_10_15_093148) do
     t.string "name", null: false
     t.bigint "parent_id"
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["name"], name: "index_domains_on_name", unique: true
     t.index ["parent_id"], name: "index_domains_on_parent_id"
     t.index ["user_id"], name: "index_domains_on_user_id"
   end
 
   create_table "labels", force: :cascade do |t|
-    t.jsonb "config", default: {}, null: false
+    t.jsonb "config", default: "{}", null: false
     t.datetime "created_at", null: false
-    t.text "description"
-    t.bigint "licence_id"
-    t.string "name"
+    t.text "description", null: false
+    t.bigint "licence_id", null: false
+    t.string "name", null: false
     t.bigint "parent_id"
     t.datetime "updated_at", null: false
     t.index ["licence_id"], name: "index_labels_on_licence_id"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2018_10_15_093148) do
 
   create_table "licences", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.text "description"
+    t.text "description", null: false
     t.text "name", null: false
     t.datetime "updated_at", null: false
   end
@@ -96,11 +96,11 @@ ActiveRecord::Schema.define(version: 2018_10_15_093148) do
     t.datetime "created_at", null: false
     t.bigint "label_id"
     t.integer "percentage"
-    t.bigint "stampable_id"
-    t.string "stampable_type"
-    t.text "state"
+    t.bigint "stampable_id", null: false
+    t.string "stampable_type", null: false
+    t.text "state", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["label_id"], name: "index_stamps_on_label_id"
     t.index ["stampable_type", "stampable_id"], name: "index_stamps_on_stampable_type_and_stampable_id"
     t.index ["user_id"], name: "index_stamps_on_user_id"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2018_10_15_093148) do
     t.integer "reputation", null: false
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
-    t.string "role", default: "user"
+    t.string "role", default: "user", null: false
     t.string "unconfirmed_email"
     t.string "unlock_token"
     t.datetime "updated_at", null: false
