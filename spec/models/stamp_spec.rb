@@ -1,9 +1,9 @@
 RSpec.describe Stamp, type: :model do
-  it_behaves_like 'a votable model', model: :stamp
-  it_behaves_like 'a rewardable model', model: :stamp
+  it_behaves_like 'a votable model', factory: :label_stamp
+  it_behaves_like 'a rewardable model', factory: :label_stamp
 
   it 'has a valid factory' do
-    expect(FactoryBot.create(:stamp)).to be_valid
+    expect(FactoryBot.create(:label_stamp)).to be_valid
   end
 
   describe 'relations' do
@@ -26,7 +26,7 @@ RSpec.describe Stamp, type: :model do
 
   describe '#domain?' do
     subject { stamp.domain? }
-    let(:stamp) { FactoryBot.create(:stamp) }
+    let(:stamp) { FactoryBot.create(:label_stamp) }
 
     context 'stampable_type is domain' do
       it 'returns true' do
@@ -44,7 +44,7 @@ RSpec.describe Stamp, type: :model do
 
   describe '#siblings' do
     subject { stamp.siblings }
-    let(:stamp) { FactoryBot.create(:stamp) }
+    let(:stamp) { FactoryBot.create(:label_stamp) }
 
     context 'stamp has no siblings' do
       it 'returns an empty array' do
@@ -53,7 +53,7 @@ RSpec.describe Stamp, type: :model do
     end
 
     context 'stamp has sibling stamps' do
-      before { stamp.domain.stamps << FactoryBot.create_list(:stamp, 2) }
+      before { stamp.domain.stamps << FactoryBot.create_list(:label_stamp, 2) }
 
       it 'returns all siblings' do
         expect(subject.count).to eq(2)

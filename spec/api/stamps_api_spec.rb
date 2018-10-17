@@ -1,6 +1,6 @@
 RSpec.describe V1::StampsAPI, type: :request do
   # initialize test data
-  let!(:stamps) { FactoryBot.create_list(:stamp, 10) }
+  let!(:stamps) { FactoryBot.create_list(:label_stamp, 10) }
   let(:stamp) { stamps.first }
 
   describe 'GET v1/stamps' do

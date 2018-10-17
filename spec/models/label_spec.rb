@@ -26,7 +26,7 @@ RSpec.describe Label, type: :model do
     subject { label.stamps_including_child_labels }
     let(:label) { FactoryBot.create(:label, :with_stamps) }
 
-    before { FactoryBot.create_list(:stamp, 2) }
+    before { FactoryBot.create_list(:label_stamp, 2) }
 
     context 'label has no child labels' do
       it 'return all direct stamps' do

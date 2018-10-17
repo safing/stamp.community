@@ -4,7 +4,7 @@
 RSpec.feature 'User comments on a stamp' do
   include_context 'login user'
 
-  let(:stamp) { FactoryBot.create(:stamp) }
+  let(:stamp) { FactoryBot.create(:label_stamp) }
   let(:invalid_comment) { 'x' * 20 }
   let(:valid_comment) { 'x' * 40 }
 

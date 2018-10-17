@@ -1,5 +1,5 @@
 RSpec.shared_examples 'a votable model' do |options|
-  let(:instance) { FactoryBot.create(options[:model]) }
+  let(:instance) { FactoryBot.create(options[:factory]) }
 
   describe 'relations' do
     it { is_expected.to have_many(:votes) }
@@ -19,7 +19,7 @@ RSpec.shared_examples 'a votable model' do |options|
   describe 'state machine' do
     subject { instance }
 
-    let(:instance) { FactoryBot.create(:stamp, state: state) }
+    let(:instance) { FactoryBot.create(:label_stamp, state: state) }
     let(:state) { :in_progress }
 
     describe 'transitions' do
@@ -81,7 +81,7 @@ RSpec.shared_examples 'a votable model' do |options|
     describe '#archive_accepted_siblings!' do
       subject { instance.archive_accepted_siblings! }
       let!(:accepted_sibling) do
-        FactoryBot.create(:stamp, :accepted, stampable: instance.domain)
+        FactoryBot.create(:label_stamp, :accepted, stampable: instance.domain)
       end
 
       it 'archives the accepted sibling' do

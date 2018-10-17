@@ -4,7 +4,7 @@ RSpec.describe Votable::AcceptWorker, type: :worker do
     let(:accept_worker) { Votable::AcceptWorker.new }
 
     context 'votable exists' do
-      let(:votable) { FactoryBot.create(:stamp, state: state) }
+      let(:votable) { FactoryBot.create(:label_stamp, state: state) }
       let(:votable_type) { votable.class.to_s }
       let(:votable_id) { votable.id }
 
