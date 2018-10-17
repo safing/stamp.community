@@ -2,7 +2,6 @@ class Label < ApplicationRecord
   belongs_to :licence
   belongs_to :parent, class_name: 'Label', optional: true
 
-  has_many :stamps
   has_many :children, class_name: 'Label', foreign_key: :parent_id
 
   validates_presence_of %i[description licence name]
@@ -13,10 +12,14 @@ class Label < ApplicationRecord
   def top_contributors
     User.joins(:stamps)
         .select('stamps.user_id, COUNT(stamps.user_id)')
-        .where(stamps: { label_id: id })
+        .where("stamps.data @> ('{\"label_id\": ?}')::jsonb", id)
         .group('stamps.user_id')
         .order('COUNT(stamps.user_id) DESC')
         .limit(5)
+  end
+
+  def stamps
+    Stamp::Label.jsonb_where(:data, label_id: id)
   end
 
   def stamps_in_progress
