@@ -1,13 +1,8 @@
 FactoryBot.define do
-  factory :label_stamp, class: Stamp::Label do
+  factory :stamp do
     creator { build(:user) }
     stampable { build(:domain, user: creator) }
     comments { build_list(:comment, 1, user: creator, commentable: @instance) }
-
-    label
-    label_id { label.id }
-
-    percentage 5
 
     trait :accepted do
       state :accepted
@@ -20,5 +15,12 @@ FactoryBot.define do
     trait :with_downvotes do
       votes { build_list :downvote, 2 }
     end
+  end
+
+  factory :label_stamp, class: Stamp::Label, parent: :stamp do
+    label
+    label_id { label.id }
+
+    percentage 5
   end
 end
