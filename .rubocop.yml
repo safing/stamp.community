@@ -22,5 +22,6 @@ Style/ClassAndModuleChildren:
     - 'app/api/v1/*.rb'
     - 'app/workers/**/*.rb'
     - 'app/models/**/*.rb'
+    - 'app/policies/**/*.rb'
 Style/FrozenStringLiteralComment:
   Enabled: false
