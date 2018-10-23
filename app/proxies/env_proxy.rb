@@ -13,12 +13,30 @@ module ENVProxy
     ENV[key] || nil
   end
 
-  def required_array(key)
-    (required(key) || '').split(',').map(&:strip)
+  def required_array(key, hashes: false)
+    if hashes
+      JSON.parse(
+        required(key).tr("'", '"')
+                     .gsub('=>', ':')
+                     .prepend('[')
+                     .concat(']')
+      )
+    else
+      (required(key) || '').split(',').map(&:strip)
+    end
   end
 
-  def optional_array(key)
-    (optional(key) || '').split(',').map(&:strip)
+  def optional_array(key, hashes: false)
+    if hashes
+      JSON.parse(
+        (optional(key) || '').tr("'", '"')
+                             .gsub('=>', ':')
+                             .prepend('[')
+                             .concat(']')
+      )
+    else
+      (optional(key) || '').split(',').map(&:strip)
+    end
   end
 
   def required_integer(key)
