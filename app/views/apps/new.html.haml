@@ -1,28 +1,46 @@
-%div.ui.container
-  %h1
-    New App
-  %div.ui.segment{style: 'padding-bottom: 3rem;'}
-    %div.ui.grid.divided
-      %div.two.wide.column
-        %div.ui.basic.placeholder.center.aligned.segment
-          %div.ui.icon.header
-            %i.file.outline.icon
-          %button.ui.purple.basic.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-            Add Icon
-      %div.four.wide.column{style: 'padding-top: 2.5rem;'}
-        %div.ui.basic.segment
-          %div.ui.input
-            %input{:type=>"text", :required => true, :placeholder=>"App"}
-          %button.ui.purple.basic.button{style: "margin-top: 3px; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-            Add App
-      %div.six.wide.column{style: 'padding-top: 2.5rem;'}
-        %div.ui.basic.segment
-          %div.ui.input{style: 'width: 28rem;'}
-            %input{:type=>"text", :required => true, :placeholder=>"Description"}
-          %button.ui.purple.basic.button{style: "margin-top: 3px; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-            Add Description
-    %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
-      %button.ui.purple.basic.big.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-        Save
-      %button.ui.purple.basic.big.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-        Cancel
+%div.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
+  %div.four.wide.column{style: 'padding: 0;'}
+    %div.ui.segment{style: 'margin: 0;'}
+      %form
+        %div.ui.placeholder{style: 'height: 6rem; background-color: lightgray; width: 6rem; position: absolute; right: 28px; top: 56px;'}
+          %div.image
+        %div.ui.form.header{style: 'margin: 0;'}
+          %h1
+            Create App
+          %div.field
+            %label
+              Add icon
+            %a{:href => "/"}
+              %i.file.outline.icon
+          %div.field
+            =label :app, :name, "Name"
+            %div.ui.left.mini.input
+              = text_field :app, :name
+          %div.field
+            =label :app, :name, "Description"
+            %div.ui.left.mini.input
+              = text_field :app, :description
+          %div.field
+            %label
+              Operating System
+            %div.ui.icon.buttons
+              %button.ui.button
+                %i.windows.icon
+              %button.ui.button
+                %i.apple.icon
+              %button.ui.button
+                %i.linux.icon
+      %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
+        %button.ui.purple.basic.big.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+          Save
+        %button.ui.purple.basic.big.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+          Cancel
+%form
+  = label :user, :email, "Email"
+  = text_field :user, :email
+  = label :user, :password
+  = password_field :user, :password
+  = f.submit 'button_name',:class => "form_submit"
+
+
+%input{:type => "submit", :value => "Sign in"}
