@@ -3,19 +3,14 @@ class Stamp < ApplicationRecord
   include Votable::State
   include Votable::Rewardable
 
+  belongs_to :creator, class_name: 'User', foreign_key: :user_id
+  belongs_to :stampable, polymorphic: true
   has_many :comments, as: :commentable, inverse_of: :commentable
+
   accepts_nested_attributes_for :comments
 
   validates_presence_of %i[comments creator stampable state type]
   validates :type, inclusion: { in: %w[Stamp::Flag Stamp::Label] }
-
-  def domain?
-    stampable_type == 'Domain'
-  end
-
-  def domain
-    stampable if domain?
-  end
 
   def siblings
     stampable.stamps.where.not(id: id)

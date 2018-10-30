@@ -25,6 +25,8 @@ FactoryBot.define do
   end
 
   factory :flag_stamp, class: Stamp::Flag, parent: :stamp do
+    stampable { build(:app, user: creator) }
+
     none true
     prompt true
   end

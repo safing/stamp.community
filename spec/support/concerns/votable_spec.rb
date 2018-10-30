@@ -3,8 +3,6 @@ RSpec.shared_examples 'a votable model' do |options|
 
   describe 'relations' do
     it { is_expected.to have_many(:votes) }
-    it { is_expected.to belong_to(:creator).class_name('User').required(true) }
-    it { is_expected.to belong_to(:stampable).required(true) }
   end
 
   describe 'database' do

@@ -9,6 +9,7 @@ RSpec.describe Stamp::Label, type: :model do
   end
 
   describe 'validations' do
+    it { is_expected.to validate_inclusion_of(:stampable_type).in_array(['Domain']) }
     it { is_expected.to validate_presence_of(:label_id) }
     it { is_expected.to validate_presence_of(:percentage) }
   end

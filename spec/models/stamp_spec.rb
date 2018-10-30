@@ -2,12 +2,10 @@ RSpec.describe Stamp, type: :model do
   it_behaves_like 'a votable model', factory: :label_stamp
   it_behaves_like 'a rewardable model', factory: :label_stamp
 
-  it 'has a valid factory' do
-    expect(FactoryBot.create(:label_stamp)).to be_valid
-  end
-
   describe 'relations' do
     it { is_expected.to have_many(:comments) }
+    it { is_expected.to belong_to(:creator).class_name('User').required(true) }
+    it { is_expected.to belong_to(:stampable).required(true) }
   end
 
   describe 'validations' do

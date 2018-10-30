@@ -62,6 +62,8 @@ RSpec.describe Stamp::Flag, type: :model do
   end
 
   describe 'validations' do
+    it { is_expected.to validate_inclusion_of(:stampable_type).in_array(['App']) }
+
     describe 'GroupValidator' do
       describe '#one_in_each_group_must_be_true' do
         subject { flag_stamp.valid? }

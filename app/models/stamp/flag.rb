@@ -6,6 +6,12 @@ class Stamp::Flag < Stamp
                                      h[f['name']] = [:boolean, default: false]
                                    end)
 
+  validates :stampable_type, inclusion: { in: ['App'] }
+
+  def app
+    stampable
+  end
+
   class << self
     # https://stackoverflow.com/a/9463495/2235594
     # might override stuff, a better approach might be:
