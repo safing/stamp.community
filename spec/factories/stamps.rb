@@ -25,5 +25,7 @@ FactoryBot.define do
   end
 
   factory :flag_stamp, class: Stamp::Flag, parent: :stamp do
+    none true
+    prompt true
   end
 end
