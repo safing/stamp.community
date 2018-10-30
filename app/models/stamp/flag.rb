@@ -1,5 +1,5 @@
 class Stamp::Flag < Stamp
-  include Stamp::Flag::GroupValidator
+  include GroupValidator
 
   jsonb_accessor :data, (::ENVProxy.required_array('FLAGS', hashes: true)
                                    .each_with_object({}) do |f, h|
