@@ -35,8 +35,9 @@
         %div.ui.grid
           - @stamp.siblings.accepted.each do |sibling|
             %div.four.wide.column
-              %h5.ui.middle.aligned.header
-                = sibling.label.name
+              =link_to stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
             %div.twelve.wide.column
               %div.bar.float.right
                 %div.ui.purple.small.progress{style: "background: white;"}
@@ -54,8 +55,9 @@
         %div.ui.grid
           - @stamp.siblings.in_progress.each do |sibling|
             %div.four.wide.column
-              %h5.ui.middle.aligned.header
-                = sibling.label.name
+              =link_to stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
             %div.twelve.wide.column
               %div.bar.float.right
                 %div.ui.teal.small.progress{style: "background: white;"}
@@ -84,7 +86,7 @@
               = @stamp.downvote_power
         .ui.divider
         - @stamp.votes.order(power: :desc, accept: :desc).each do |vote|
-          = link_to user_path(vote.user), class: %w[ui label].push(vote.upvote? ? 'green' : 'red') do
+          = link_to user_path(vote.user.id), class: %w[ui label].push(vote.upvote? ? 'green' : 'red') do
             = vote.user.username
             .detail
               %i.chess.queen.icon

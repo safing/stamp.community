@@ -14,8 +14,9 @@
         %div.ui.grid
           - @domain.stamps.accepted.each do |stamp|
             %div.four.wide.column
-              %h5.ui.middle.aligned.header
-                = stamp.label.name
+              =link_to stamp_path(stamp.id) do
+                %h5.ui.middle.aligned.header
+                  = stamp.label.name
             %div.twelve.wide.column
               %div.bar.float.right
                 %div.ui.purple.small.progress{style: "background: white;"}
@@ -33,8 +34,9 @@
         %div.ui.grid
           - @domain.stamps.in_progress.each do |sibling|
             %div.four.wide.column
-              %h5.ui.middle.aligned.header
-                = sibling.label.name
+              =link_to stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
             %div.twelve.wide.column
               %div.bar.float.right
                 %div.ui.teal.small.progress{style: "background: white;"}
