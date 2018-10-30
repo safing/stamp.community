@@ -10,7 +10,7 @@
             = form_for @domain, remote: true, html: { class: "ui form" } do |f|
               .ui.action.fluid.input
                 = f.text_field :name, placeholder: 'https://', type: "text", data: {target: 'new-domain.input'}
-                = f.button type: :submit, class: 'ui purple button' do
+                = f.button type: :submit, class: 'ui purple basic button' do
                   Create
               %div.ui.error.message
                 .header
