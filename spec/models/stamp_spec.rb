@@ -13,7 +13,7 @@ RSpec.describe Stamp, type: :model do
   describe 'validations' do
     it { is_expected.to validate_presence_of(:comments) }
     it { is_expected.to validate_presence_of(:type) }
-    it { is_expected.to validate_inclusion_of(:type).in_array(%w[Stamp::Label]) }
+    it { is_expected.to validate_inclusion_of(:type).in_array(%w[Stamp::Flag Stamp::Label]) }
     it { is_expected.to validate_presence_of(:creator) }
     it { is_expected.to validate_presence_of(:stampable) }
     it { is_expected.to validate_presence_of(:state) }

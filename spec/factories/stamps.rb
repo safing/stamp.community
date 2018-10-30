@@ -23,4 +23,7 @@ FactoryBot.define do
 
     percentage 5
   end
+
+  factory :flag_stamp, class: Stamp::Flag, parent: :stamp do
+  end
 end

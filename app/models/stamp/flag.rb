@@ -1,0 +1,28 @@
+class Stamp::Flag < Stamp
+  include Stamp::Flag::GroupValidator
+
+  jsonb_accessor :data, (::ENVProxy.required_array('FLAGS', hashes: true)
+                                   .each_with_object({}) do |f, h|
+                                     h[f['name']] = [:boolean, default: false]
+                                   end)
+
+  class << self
+    # https://stackoverflow.com/a/9463495/2235594
+    # might override stuff, a better approach might be:
+    # https://gist.github.com/sj26/5843855
+    def model_name
+      base_class.model_name
+    end
+
+    def flag_hashes
+      ::ENVProxy.required_array('FLAGS', hashes: true)
+    end
+
+    def groups
+      @groups ||= flag_hashes.select { |f| f['group'].present? }
+                             .group_by { |f| f['group'] }
+                             .each { |_, v| v.map! { |f| f['name'] } }
+                             .map { |_, v| v }
+    end
+  end
+end
