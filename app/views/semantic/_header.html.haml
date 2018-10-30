@@ -1,4 +1,4 @@
-.ui.inverted.menu.header
+.ui.inverted.menu.header{style: 'border-radius: 0;'}
   %a{class: 'item', href: '/', style: 'padding: 0 6px;'}
     %img{src: '/assets/basic_logo.png'}
     %h2{type: 'text'}
@@ -22,6 +22,8 @@
         %input#search{placeholder: 'Search...', type: 'text'}
         %i.search.link.icon
     - if user_signed_in?
+      %div.item
+        = link_to 'New Domain', new_domain_path
       = link_to 'Profile', user_path(current_user), class: 'item'
       = link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: 'item'
     - else
