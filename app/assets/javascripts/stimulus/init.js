@@ -1,8 +1,10 @@
-/* eslint no-console:0 */
+// Stimulus needs a custom syntax without webpacker / babel
+// https://medium.com/cedarcode/installing-stimulus-js-in-a-rails-app-c8564ba51ea2#6bc7
 
-import { Application } from 'stimulus'
-import { definitionsFromContext } from 'stimulus/webpack-helpers'
+//= require stimulus.umd
 
-const application = Application.start()
-const controllers = require.context('./controllers', true, /\.js$/)
-application.load(definitionsFromContext(controllers))
+(() => {
+  if (!("stimulus" in window)) {
+    window.stimulus = Stimulus.Application.start()
+  }
+})()

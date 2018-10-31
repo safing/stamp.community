@@ -1,9 +1,11 @@
-import { Controller } from 'stimulus'
+(() => {
+  stimulus.register("message", class extends Stimulus.Controller {
+    static get targets() {
+      return [ 'flash' ]
+    }
 
-export default class extends Controller {
-  static targets = [ 'flash' ]
-
-  close(event) {
-    fade(this.flashTarget, 500)
-  }
-}
+    close(event) {
+      fade(this.flashTarget, 500)
+    }
+  })
+})()
