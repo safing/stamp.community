@@ -8,6 +8,8 @@ class Label < ApplicationRecord
 
   jsonb_accessor :config, binary: [:boolean, default: false], steps: [:integer, default: 5]
 
+  validates :steps, inclusion: { in: [nil, 1, 5, 10] }
+
   # TODO
   def top_contributors
     User.joins(:stamps)
