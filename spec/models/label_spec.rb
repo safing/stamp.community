@@ -10,6 +10,22 @@ RSpec.describe Label, type: :model do
     it { is_expected.to have_many(:children).class_name('Label').with_foreign_key(:parent_id) }
   end
 
+  describe 'fields' do
+    let(:label) { Label.new }
+
+    it '#binary is set by default, has getter and setter' do
+      expect(label.binary).to eq(false)
+      label.binary = true
+      expect(label.binary).to eq(true)
+    end
+
+    it '#steps is set by default, has getter and setter' do
+      expect(label.steps).to eq(5)
+      label.steps = 10
+      expect(label.steps).to eq(10)
+    end
+  end
+
   describe 'database' do
     it { is_expected.to have_db_index(:licence_id) }
     it { is_expected.to have_db_index(:parent_id) }
