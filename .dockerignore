@@ -1,0 +1,9 @@
+# Ignore all logfiles and tempfiles.
+/log/*
+/log
+/tmp
+/pgdata
+/notes/*
+*.DS_Store
+notes.md
+Dockerfile
