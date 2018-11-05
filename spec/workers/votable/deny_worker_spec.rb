@@ -4,7 +4,7 @@ RSpec.describe Votable::DenyWorker, type: :worker do
     let(:deny_worker) { Votable::DenyWorker.new }
 
     context 'votable exists' do
-      let(:votable) { FactoryBot.create(:stamp, state: state) }
+      let(:votable) { FactoryBot.create(:label_stamp, state: state) }
       let(:votable_type) { votable.class.to_s }
       let(:votable_id) { votable.id }
 

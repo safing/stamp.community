@@ -1,35 +1,30 @@
 RSpec.describe Stamp, type: :model do
-  it_behaves_like 'a votable model', model: :stamp
-  it_behaves_like 'a rewardable model', model: :stamp
-
-  it 'has a valid factory' do
-    expect(FactoryBot.create(:stamp)).to be_valid
-  end
+  it_behaves_like 'a votable model', factory: :label_stamp
+  it_behaves_like 'a rewardable model', factory: :label_stamp
 
   describe 'relations' do
-    it { is_expected.to belong_to(:label).required(true) }
     it { is_expected.to have_many(:comments) }
+    it { is_expected.to belong_to(:creator).class_name('User').required(true) }
+    it { is_expected.to belong_to(:stampable).required(true) }
   end
 
   describe 'validations' do
-    it do
-      is_expected.to validate_numericality_of(:percentage)
-        .is_greater_than(0)
-        .is_less_than_or_equal_to(100)
-    end
     it { is_expected.to validate_presence_of(:comments) }
+    it { is_expected.to validate_presence_of(:type) }
+    it { is_expected.to validate_inclusion_of(:type).in_array(%w[Stamp::Flag Stamp::Label]) }
     it { is_expected.to validate_presence_of(:creator) }
     it { is_expected.to validate_presence_of(:stampable) }
     it { is_expected.to validate_presence_of(:state) }
   end
 
   describe 'database' do
-    it { is_expected.to have_db_index(:label_id) }
+    it { is_expected.to have_db_index(:user_id) }
+    it { is_expected.to have_db_index(%i[stampable_type stampable_id]) }
   end
 
   describe '#domain?' do
     subject { stamp.domain? }
-    let(:stamp) { FactoryBot.create(:stamp) }
+    let(:stamp) { FactoryBot.create(:label_stamp) }
 
     context 'stampable_type is domain' do
       it 'returns true' do
@@ -47,7 +42,7 @@ RSpec.describe Stamp, type: :model do
 
   describe '#siblings' do
     subject { stamp.siblings }
-    let(:stamp) { FactoryBot.create(:stamp) }
+    let(:stamp) { FactoryBot.create(:label_stamp) }
 
     context 'stamp has no siblings' do
       it 'returns an empty array' do
@@ -56,7 +51,7 @@ RSpec.describe Stamp, type: :model do
     end
 
     context 'stamp has sibling stamps' do
-      before { stamp.domain.stamps << FactoryBot.create_list(:stamp, 2) }
+      before { stamp.domain.stamps << FactoryBot.create_list(:label_stamp, 2) }
 
       it 'returns all siblings' do
         expect(subject.count).to eq(2)

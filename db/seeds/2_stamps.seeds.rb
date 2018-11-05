@@ -4,13 +4,13 @@ begin
 
   Label.all.each_with_index do |label, i|
     unless tryhard
-      FactoryBot.create_list(:stamp, 3, label: label)
+      FactoryBot.create_list(:label_stamp, 3, label: label)
 
       puts "#{i}: @#{label.name}"
     end
 
     if tryhard || i >= 5
-      FactoryBot.create_list(:stamp, 3, label: label, stampable: Domain.order('RANDOM()').first, creator: User.first)
+      FactoryBot.create_list(:label_stamp, 3, label: label, stampable: Domain.order('RANDOM()').first, creator: User.first)
     end
   end
 rescue

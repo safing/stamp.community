@@ -16,4 +16,5 @@
 //= require jquery_ujs
 //= require semantic
 //= require semantic_range
+//= require stimulus/init
 //= require_tree .

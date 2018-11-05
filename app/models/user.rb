@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include User::Roles
+  include Roles
 
   has_one :api_key
 

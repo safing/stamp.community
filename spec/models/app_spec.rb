@@ -5,7 +5,6 @@ RSpec.describe App, type: :model do
 
   describe 'relations' do
     it { is_expected.to belong_to(:user) }
-    xit { is_expected.to have_many(:data_stamps) }
   end
 
   describe 'database' do

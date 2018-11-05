@@ -2,7 +2,7 @@ RSpec.feature 'stamp requests', type: :request do
   describe 'authourization' do
     describe '#create' do
       subject(:request) { post stamp_comments_url(stamp.id), params: comment_attributes }
-      let(:stamp) { FactoryBot.create(:stamp, state: state) }
+      let(:stamp) { FactoryBot.create(:label_stamp, state: state) }
       let(:state) { :in_progress }
       let(:comment_attributes) { { comment: { content: '1' * 40 } } }
 

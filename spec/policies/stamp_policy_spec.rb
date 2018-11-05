@@ -1,6 +1,6 @@
 RSpec.describe StampPolicy do
   subject { described_class.new(user, stamp) }
-  let(:stamp) { FactoryBot.create(:stamp) }
+  let(:stamp) { FactoryBot.create(:label_stamp) }
 
   context 'for a visitor' do
     let(:user) { nil }

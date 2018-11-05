@@ -8,12 +8,12 @@ end
 4.times do
   label = Label.order('RANDOM()').first
   %w[in_progress accepted denied archived overruled].each do |state|
-    FactoryBot.create(:stamp, label: label, stampable: main_domain, creator: User.first, state: state)
+    FactoryBot.create(:label_stamp, label: label, stampable: main_domain, creator: User.first, state: state)
   end
 end
 
 # create main_stamp with plenty of votes
-main_stamp = FactoryBot.create(:stamp, label: Label.order('RANDOM()').first, stampable: main_domain)
+main_stamp = FactoryBot.create(:label_stamp, label: Label.order('RANDOM()').first, stampable: main_domain)
 
 23.times { FactoryBot.create(:vote, votable: main_stamp) }
 

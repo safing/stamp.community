@@ -9,7 +9,7 @@ BOT:
     VOTING_LIMIT: 100_000
     STAMP_CREATION_LIMIT: 10_000
 
-STAMP:
+STAMP::LABEL:
   CREATOR:
     PRIZE: 10 # created good stuff
     PENALTY: -100 # created trash
@@ -25,3 +25,29 @@ VOTABLE:
     # if a votable falls below this, it will simply get rejected
   MAJORITY:
     THRESHOLD: 75 # in percent
+
+FLAGS:
+  # # write access
+  # - any
+  # - user
+  # - admin
+  # - system
+  # internet access
+  - name: internet
+    group: 1
+  - name: lan
+    group: 1
+  - name: localhost
+    group: 1
+  - name: none
+    group: 1
+  # domain decision logic
+  - name: prompt
+    group: 2
+  - name: blacklist
+    group: 2
+  - name: whitelist
+    group: 2
+  # independent flags
+  - name: service # accept incoming  connections
+  - name: p2p # allow connections to IP adresses

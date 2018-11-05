@@ -9,7 +9,7 @@ FactoryBot.define do
     user { build(:user) }
 
     trait :with_stamps do
-      stamps { build_list :stamp, 3 }
+      stamps { build_list :label_stamp, 3 }
     end
   end
 end

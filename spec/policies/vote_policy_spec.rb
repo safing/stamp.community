@@ -1,6 +1,6 @@
 RSpec.describe VotePolicy do
   subject { described_class.new(user, vote) }
-  let(:votable) { FactoryBot.create(:stamp, state: state) }
+  let(:votable) { FactoryBot.create(:label_stamp, state: state) }
   let(:vote) { FactoryBot.create(:vote, votable: votable) }
   let(:state) { :in_progress }
 

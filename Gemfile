@@ -17,13 +17,10 @@ gem 'font_awesome5_rails'
 gem 'sass-rails'
 gem 'semantic-ui-sass'
 
-gem 'coffee-rails'
 gem 'haml-rails'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'uglifier', '>= 1.3.0'
-gem 'webpacker'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc

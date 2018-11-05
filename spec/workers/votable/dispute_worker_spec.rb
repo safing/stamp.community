@@ -4,7 +4,7 @@ RSpec.describe Votable::DisputeWorker, type: :worker do
     let(:dispute_worker) { Votable::DisputeWorker.new }
 
     context 'votable exists' do
-      let(:votable) { FactoryBot.create(:stamp, state: state) }
+      let(:votable) { FactoryBot.create(:label_stamp, state: state) }
       let(:votable_type) { votable.class.to_s }
       let(:votable_id) { votable.id }
 

@@ -118,7 +118,7 @@ RSpec.describe User, type: :model do
     subject { user.can_vote?(votable) }
 
     let(:user) { FactoryBot.create(:user) }
-    let(:votable) { FactoryBot.create(:stamp) }
+    let(:votable) { FactoryBot.create(:label_stamp) }
 
     before { allow_required_integer_env('USER_DAILY_VOTING_LIMIT').and_return(3) }
 

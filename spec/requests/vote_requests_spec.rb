@@ -2,7 +2,7 @@ RSpec.feature 'vote requests', type: :request do
   describe 'authourization' do
     describe '#create' do
       subject(:request) { post stamp_votes_url(stamp.id), params: vote_attributes }
-      let(:stamp) { FactoryBot.create(:stamp, state: state) }
+      let(:stamp) { FactoryBot.create(:label_stamp, state: state) }
       let(:state) { :in_progress }
       let(:vote_attributes) { { vote: { accept: true } } }
 
