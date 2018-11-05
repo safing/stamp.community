@@ -22,24 +22,6 @@ RSpec.describe Stamp, type: :model do
     it { is_expected.to have_db_index(%i[stampable_type stampable_id]) }
   end
 
-  describe '#domain?' do
-    subject { stamp.domain? }
-    let(:stamp) { FactoryBot.create(:label_stamp) }
-
-    context 'stampable_type is domain' do
-      it 'returns true' do
-        expect(subject).to be true
-      end
-    end
-
-    context 'stampable_type is not domain' do
-      # TODO: implement when adding another stampable model
-      # it 'returns false' do
-      #   expect(subject).to be false
-      # end
-    end
-  end
-
   describe '#siblings' do
     subject { stamp.siblings }
     let(:stamp) { FactoryBot.create(:label_stamp) }
