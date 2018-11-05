@@ -1,15 +1,9 @@
-version: '3'
+version: '3.5'
+networks:
+  stamp:
+    driver: overlay
+    attachable: true
 services:
-  app:
-    image: stamp:latest
-    build: .
-    command: rails server -p 3000 -b '0.0.0.0'
-    volumes:
-      - .:/app
-    ports:
-      - '3000:3000'
-    links:
-      - postgres
   postgres:
     image: postgres:9.6.3
     volumes:
@@ -20,4 +14,6 @@ services:
       POSTGRES_PASSWORD:
       PGDATA: /pgdata
     ports:
-      - '5432'
+      - '5432:5432'
+    networks:
+      - stamp
