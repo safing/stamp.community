@@ -15,21 +15,21 @@ RSpec.describe App, type: :model do
     let(:app) { App.new }
 
     it '#linux is set by default, has getter and setter' do
-      expect(app.linux).to eq(false)
+      expect(app.linux).to be false
       app.linux = true
-      expect(app.linux).to eq(true)
+      expect(app.linux).to be true
     end
 
     it '#macos is set by default, has getter and setter' do
-      expect(app.macos).to eq(false)
+      expect(app.macos).to be false
       app.macos = true
-      expect(app.macos).to eq(true)
+      expect(app.macos).to be true
     end
 
     it '#windows is set by default, has getter and setter' do
-      expect(app.windows).to eq(false)
+      expect(app.windows).to be false
       app.windows = true
-      expect(app.windows).to eq(true)
+      expect(app.windows).to be true
     end
   end
 
@@ -57,7 +57,7 @@ RSpec.describe App, type: :model do
 
       context 'no operating system is set to true' do
         it 'returns false' do
-          expect(subject).to eq(false)
+          expect(subject).to be false
           expect(app.errors.full_messages.first).to(
             include('at least one operating system must be supported by the app')
           )
@@ -68,7 +68,7 @@ RSpec.describe App, type: :model do
         let(:windows) { true }
 
         it 'returns true' do
-          expect(subject).to eq(true)
+          expect(subject).to be true
         end
       end
 
@@ -77,7 +77,7 @@ RSpec.describe App, type: :model do
         let(:macos) { true }
 
         it 'returns true' do
-          expect(subject).to eq(true)
+          expect(subject).to be true
         end
       end
 
@@ -87,7 +87,7 @@ RSpec.describe App, type: :model do
         let(:windows) { true }
 
         it 'returns true' do
-          expect(subject).to eq(true)
+          expect(subject).to be true
         end
       end
     end
