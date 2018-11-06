@@ -34,4 +34,7 @@ FactoryBot.define do
     none true
     prompt true
   end
+
+  factory :identifier_stamp, class: Stamp::Identifier, parent: :stamp do
+  end
 end
