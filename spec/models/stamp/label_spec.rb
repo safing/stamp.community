@@ -197,5 +197,40 @@ RSpec.describe Stamp::Label, type: :model do
         end
       end
     end
+
+  describe '#peers' do
+    subject { label_stamp.peers }
+    let(:label_stamp) { FactoryBot.create(:label_stamp, label_id: label.id) }
+    let(:label) { FactoryBot.create(:label) }
+
+    context 'stamp has no peers' do
+      context 'stamp has siblings' do
+        before { label_stamp.domain.stamps << FactoryBot.create_list(:label_stamp, 2) }
+
+        it 'returns an empty array' do
+          expect(subject).to eq([])
+        end
+      end
+
+      context 'stamp has no siblings' do
+        it 'returns an empty array' do
+          expect(subject).to eq([])
+        end
+      end
+    end
+
+    context 'stamp has peer stamps' do
+      before do
+        label_stamp.domain.stamps << FactoryBot.create_list(:label_stamp, 2, label_id: label.id)
+      end
+
+      it 'returns all peers' do
+        expect(subject.count).to eq(2)
+      end
+
+      it 'does not return itself' do
+        expect(subject.pluck(:id)).not_to include(label_stamp.id)
+      end
+    end
   end
 end

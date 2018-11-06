@@ -22,6 +22,16 @@ class Stamp::Label < Stamp
     end
   end
 
+  # siblings == stamps with the same stampable
+  # peers == stamps with the same stampable & with the same label
+  def peers
+    siblings.jsonb_where(:data, label_id: label_id)
+  end
+
+  def peers?
+    peers.count.positive?
+  end
+
   # https://stackoverflow.com/a/9463495/2235594
   # might override stuff, a better approach might be:
   # https://gist.github.com/sj26/5843855
