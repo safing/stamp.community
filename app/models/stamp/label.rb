@@ -22,13 +22,14 @@ class Stamp::Label < Stamp
   end
 
   def complies_to_label_config
-    if label.binary
-      message = 'must equal 0 or 100, since the referenced label is binary'
-      errors.add(:percentage, message) unless [0, 100].include?(percentage)
-    else
-      message = "must be set to steps of #{label.steps}, as defined by the referenced label"
-      errors.add(:percentage, message) if percentage % label.steps != 0
-    end
+    message = if label.binary
+                return true if [0, 100].include?(percentage)
+                'must equal 0 or 100, since the referenced label is binary'
+              else
+                return true if (percentage % label.steps).zero?
+                "must be set to steps of #{label.steps}, as defined by the referenced label"
+              end
+    errors.add(:percentage, message)
   end
 
   # siblings == stamps with the same stampable
