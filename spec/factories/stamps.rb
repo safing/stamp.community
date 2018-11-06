@@ -24,7 +24,7 @@ FactoryBot.define do
     percentage 5
 
     trait :binary do
-      percentage { [0, 100].sample }
+      percentage 100
     end
   end
 
