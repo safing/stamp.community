@@ -22,6 +22,10 @@ FactoryBot.define do
     label_id { label.id }
 
     percentage 5
+
+    trait :binary do
+      percentage { [0, 100].sample }
+    end
   end
 
   factory :flag_stamp, class: Stamp::Flag, parent: :stamp do

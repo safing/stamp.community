@@ -1,5 +1,17 @@
 def import_label(label_hash)
-  Label.find_or_create_by(label_hash.except(:children).merge(licence_id: Licence.first.id))
+  labels = Label.where(label_hash.except(:children, :config).merge(licence_id: Licence.first.id))
+
+  if label_hash[:config].present?
+    labels = labels.config_where(label_hash[:config])
+  end
+
+  if labels.blank?
+    l = Label.create(label_hash.except(:children).merge(licence_id: Licence.first.id))
+  else
+    l = labels.first
+  end
+
+  return l
 end
 
 labels = [
@@ -7,19 +19,19 @@ labels = [
     name: 'Trackers',
     description: 'Trackers',
     children: [
-      {name: 'Analytics', description: 'Analytics', config: {binary: true, steps: 100}},
-      {name: 'Ads', description: 'Ads', config: {binary: true, steps: 100}},
-      {name: 'Other', description: 'Other', config: {binary: true, steps: 100}}
+      {name: 'Analytics', description: 'Analytics', config: {binary: true}},
+      {name: 'Ads', description: 'Ads', config: {binary: true}},
+      {name: 'Other', description: 'Other', config: {binary: true}}
     ]
   },
   {
     name: 'Malware',
     description: 'Malware',
     children: [
-      {name: 'CNC Server', description: 'CNC Server', config: {binary: true, steps: 100}},
-      {name: 'Exploit', description: 'Exploit', config: {binary: true, steps: 100}},
-      {name: 'Payload', description: 'Payload', config: {binary: true, steps: 100}},
-      {name: 'Other', description: 'Other', config: {binary: true, steps: 100}}
+      {name: 'CNC Server', description: 'CNC Server', config: {binary: true}},
+      {name: 'Exploit', description: 'Exploit', config: {binary: true}},
+      {name: 'Payload', description: 'Payload', config: {binary: true}},
+      {name: 'Other', description: 'Other', config: {binary: true}}
     ]
   }
 ]
