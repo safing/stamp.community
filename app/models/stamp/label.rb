@@ -6,10 +6,19 @@ class Stamp::Label < Stamp
 
   validates_presence_of :label_id, :percentage
   validates :stampable_type, inclusion: { in: ['Domain'] }
+
   validate :complies_to_label_config
+  validate :initial_stamp_cannot_be_0
 
   def domain
     stampable
+  end
+
+  def initial_stamp_cannot_be_0
+    return true if percentage != 0
+    return true if peers.accepted.present?
+
+    errors.add(:percentage, 'can only be set to 0 if an accepted sibling stamp is > 0')
   end
 
   def complies_to_label_config

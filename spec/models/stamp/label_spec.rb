@@ -198,6 +198,67 @@ RSpec.describe Stamp::Label, type: :model do
       end
     end
 
+    describe '#initial_stamp_cannot_be_0' do
+      subject { label_stamp.valid? }
+      let!(:label) { FactoryBot.create(:label) }
+      let!(:domain) { FactoryBot.create(:domain) }
+      let(:label_stamp) do
+        FactoryBot.build(
+          :label_stamp,
+          percentage: percentage,
+          label_id: label.id,
+          stampable: domain
+        )
+      end
+
+      context 'percentage is 0' do
+        let(:percentage) { 0 }
+
+        context 'stamp has peers' do
+          before do
+            FactoryBot.create(:label_stamp, state: state, label_id: label.id, stampable: domain)
+          end
+
+          context "peers' state is accepted" do
+            let(:state) { :accepted }
+
+            it 'returns true' do
+              expect(subject).to be true
+            end
+          end
+
+          context "peers' state is not accepted" do
+            let(:state) { :in_progress }
+
+            it 'returns false' do
+              expect(subject).to be false
+              expect(label_stamp.errors.full_messages.first).to(
+                include('Percentage can only be set to 0 if an accepted sibling stamp is > 0')
+              )
+            end
+          end
+        end
+
+        context 'stamp has no peers' do
+          it 'returns false' do
+            expect(subject).to be false
+            expect(label_stamp.errors.full_messages.first).to(
+              include('Percentage can only be set to 0 if an accepted sibling stamp is > 0')
+            )
+          end
+        end
+      end
+
+      context 'percentage is not 0' do
+        let(:percentage) { 100 }
+
+        it 'returns true' do
+          expect(subject).to be true
+        end
+      end
+    end
+  end
+
   describe '#peers' do
     subject { label_stamp.peers }
     let(:label_stamp) { FactoryBot.create(:label_stamp, label_id: label.id) }
