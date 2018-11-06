@@ -49,5 +49,10 @@ FLAGS:
   - name: whitelist
     group: 2
   # independent flags
-  - name: service # accept incoming  connections
+  - name: service # accept incoming connections
   - name: p2p # allow connections to IP adresses
+
+OPERATING_SYSTEMS:
+  - linux
+  - macos
+  - windows
