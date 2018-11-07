@@ -32,14 +32,14 @@ class Stamp::Label < Stamp
     errors.add(:percentage, message)
   end
 
-  # siblings == stamps with the same stampable
-  # peers == stamps with the same stampable & with the same label
-  def peers
-    siblings.jsonb_where(:data, label_id: label_id)
+  #    peers = stamps with the same stampable
+  # siblings = stamps with the same stampable & with the same label
+  def siblings
+    peers.jsonb_where(:data, label_id: label_id)
   end
 
-  def peers?
-    peers.count.positive?
+  def siblings?
+    siblings.count.positive?
   end
 
   # https://stackoverflow.com/a/9463495/2235594

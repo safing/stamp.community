@@ -216,12 +216,12 @@ RSpec.describe Stamp::Label, type: :model do
       context 'percentage is 0' do
         let(:percentage) { 0 }
 
-        context 'stamp has peers' do
+        context 'stamp has siblings' do
           before do
             FactoryBot.create(:label_stamp, state: state, label_id: label.id, stampable: domain)
           end
 
-          context "peers' state is accepted" do
+          context "siblings' state is accepted" do
             let(:state) { :accepted }
 
             it 'returns true' do
@@ -229,7 +229,7 @@ RSpec.describe Stamp::Label, type: :model do
             end
           end
 
-          context "peers' state is not accepted" do
+          context "siblings' state is not accepted" do
             let(:state) { :in_progress }
 
             it 'returns false' do
@@ -241,7 +241,7 @@ RSpec.describe Stamp::Label, type: :model do
           end
         end
 
-        context 'stamp has no peers' do
+        context 'stamp has no siblings' do
           it 'returns false' do
             expect(subject).to be false
             expect(label_stamp.errors.full_messages.first).to(
@@ -261,13 +261,13 @@ RSpec.describe Stamp::Label, type: :model do
     end
   end
 
-  describe '#peers' do
-    subject { label_stamp.peers }
+  describe '#siblings' do
+    subject { label_stamp.siblings }
     let(:label_stamp) { FactoryBot.create(:label_stamp, label_id: label.id) }
     let(:label) { FactoryBot.create(:label) }
 
-    context 'stamp has no peers' do
-      context 'stamp has siblings' do
+    context 'stamp has no siblings' do
+      context 'stamp has peers' do
         before { label_stamp.domain.stamps << FactoryBot.create_list(:label_stamp, 2) }
 
         it 'returns an empty array' do
@@ -275,19 +275,19 @@ RSpec.describe Stamp::Label, type: :model do
         end
       end
 
-      context 'stamp has no siblings' do
+      context 'stamp has no peers' do
         it 'returns an empty array' do
           expect(subject).to eq([])
         end
       end
     end
 
-    context 'stamp has peer stamps' do
+    context 'stamp has sibling stamps' do
       before do
         label_stamp.domain.stamps << FactoryBot.create_list(:label_stamp, 2, label_id: label.id)
       end
 
-      it 'returns all peers' do
+      it 'returns all siblings' do
         expect(subject.count).to eq(2)
       end
 
