@@ -1,2 +1,2 @@
-class Stamp::IdentiferPolicy < StampPolicy
+class Stamp::IdentifierPolicy < StampPolicy
 end
