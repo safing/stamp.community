@@ -1,4 +1,6 @@
 RSpec.describe Stamp::Label, type: :model do
+  it_behaves_like 'a STI child of Stamp', factory: :label_stamp
+
   it 'has a valid factory' do
     expect(FactoryBot.create(:label_stamp)).to be_valid
   end

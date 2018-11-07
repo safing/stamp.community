@@ -1,6 +1,9 @@
-RSpec.describe Stamp, type: :model do
-  it_behaves_like 'a votable model', factory: :label_stamp
-  it_behaves_like 'a rewardable model', factory: :label_stamp
+RSpec.shared_examples 'a STI child of Stamp' do |options|
+  it_behaves_like 'a votable model', factory: options[:factory]
+  it_behaves_like 'a rewardable model', factory: options[:factory]
+
+  subject { stamp }
+  let(:stamp) { FactoryBot.create(options[:factory]) }
 
   describe 'relations' do
     it { is_expected.to have_many(:comments) }
