@@ -10,6 +10,7 @@ class App < ApplicationRecord
                                  end)
 
   belongs_to :user
+  has_many :stamps, as: :stampable
 
   validates_presence_of %i[description link name user uuid]
   validate :supports_one_or_more_operating_systems
