@@ -1,4 +1,5 @@
 class APIRouter < Grape::API
+  include Authenticator
   include ExceptionHandler
 
   version 'v1', using: :path
