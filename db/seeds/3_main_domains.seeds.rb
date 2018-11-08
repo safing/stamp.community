@@ -5,8 +5,7 @@ main_domain = FactoryBot.create(:domain, name: 'safing.io')
   FactoryBot.create(:domain, name: subdomain_key + '.' + main_domain.name, parent: main_domain)
 end
 
-4.times do
-  label = Label.order('RANDOM()').first
+Label.first(4).each do |label|
   %w[accepted archived denied disputed in_progress].each do |state|
     FactoryBot.create(:label_stamp, :binary, label_id: label.id, stampable: main_domain, creator: User.first, state: state)
   end

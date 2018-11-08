@@ -12,7 +12,7 @@ class Domain < ApplicationRecord
   has_many :stamps, as: :stampable
 
   validates :name, format: { with: NAME_REGEX_WITH_ANCHORS, message: 'is not a valid domain name' }
-  validates_presence_of %i[user name]
+  validates_presence_of %i[name user]
 
   def parent_name
     parent.name if parent_id.present?

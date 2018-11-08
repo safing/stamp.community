@@ -7,5 +7,19 @@ FactoryBot.define do
     link { Faker::Internet.url }
     user
     uuid { SecureRandom.uuid }
+
+    linux true
+
+    trait :linux do
+      linux true
+    end
+
+    trait :macos do
+      macos true
+    end
+
+    trait :windows do
+      windows true
+    end
   end
 end

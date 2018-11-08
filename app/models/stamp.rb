@@ -10,10 +10,21 @@ class Stamp < ApplicationRecord
   accepts_nested_attributes_for :comments
 
   validates_presence_of %i[comments creator stampable state type]
-  validates :type, inclusion: { in: %w[Stamp::Flag Stamp::Label] }
+  validates :type, inclusion: { in: %w[Stamp::Flag Stamp::Label Stamp::Identifier] }
 
-  def siblings
+  # peers = stamps with the same stampable
+  def peers
     stampable.stamps.where.not(id: id)
+  end
+
+  def peers?
+    peers.count.positive?
+  end
+
+  # must be implemented @ each subclass
+  # can describe a stronger connection than peers
+  def siblings
+    raise NotImplementedError
   end
 
   def siblings?

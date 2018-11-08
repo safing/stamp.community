@@ -1,6 +1,9 @@
-RSpec.describe Stamp, type: :model do
-  it_behaves_like 'a votable model', factory: :label_stamp
-  it_behaves_like 'a rewardable model', factory: :label_stamp
+RSpec.shared_examples 'a STI child of Stamp' do |options|
+  it_behaves_like 'a votable model', factory: options[:factory]
+  it_behaves_like 'a rewardable model', factory: options[:factory]
+
+  subject { stamp }
+  let(:stamp) { FactoryBot.create(options[:factory]) }
 
   describe 'relations' do
     it { is_expected.to have_many(:comments) }
@@ -9,7 +12,6 @@ RSpec.describe Stamp, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:comments) }
     it { is_expected.to validate_presence_of(:type) }
     it { is_expected.to validate_inclusion_of(:type).in_array(%w[Stamp::Flag Stamp::Label]) }
     it { is_expected.to validate_presence_of(:creator) }
@@ -22,20 +24,19 @@ RSpec.describe Stamp, type: :model do
     it { is_expected.to have_db_index(%i[stampable_type stampable_id]) }
   end
 
-  describe '#siblings' do
-    subject { stamp.siblings }
-    let(:stamp) { FactoryBot.create(:label_stamp) }
+  describe '#peers' do
+    subject { stamp.peers }
 
-    context 'stamp has no siblings' do
+    context 'stamp has no peers' do
       it 'returns an empty array' do
         expect(subject).to eq([])
       end
     end
 
-    context 'stamp has sibling stamps' do
-      before { stamp.domain.stamps << FactoryBot.create_list(:label_stamp, 2) }
+    context 'stamp has peers' do
+      before { stamp.stampable.stamps << FactoryBot.create_list(options[:factory], 2) }
 
-      it 'returns all siblings' do
+      it 'returns all peers' do
         expect(subject.count).to eq(2)
       end
 

@@ -14,9 +14,9 @@ RSpec.describe Label, type: :model do
     let(:label) { Label.new }
 
     it '#binary is set by default, has getter and setter' do
-      expect(label.binary).to eq(false)
+      expect(label.binary).to be false
       label.binary = true
-      expect(label.binary).to eq(true)
+      expect(label.binary).to be true
     end
 
     it '#steps is set by default, has getter and setter' do
