@@ -3,6 +3,6 @@ FactoryBot.define do
     content { Faker::Lorem.paragraph }
 
     association :user
-    association :commentable, factory: :stamp
+    association :commentable, factory: :label_stamp
   end
 end

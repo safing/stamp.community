@@ -1,6 +1,6 @@
 RSpec.describe CommentPolicy do
   subject { described_class.new(user, comment) }
-  let(:commentable) { FactoryBot.create(:stamp, state: state) }
+  let(:commentable) { FactoryBot.create(:label_stamp, state: state) }
   let(:comment) { FactoryBot.create(:comment, commentable: commentable) }
   let(:state) { :in_progress }
 

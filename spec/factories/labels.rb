@@ -5,7 +5,9 @@ FactoryBot.define do
     licence
 
     trait :with_stamps do
-      stamps { build_list :stamp, 2 }
+      after(:create) do |label, _evaluator|
+        create_list(:label_stamp, 2, label_id: label.id)
+      end
     end
   end
 end

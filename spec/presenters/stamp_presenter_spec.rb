@@ -1,7 +1,7 @@
 RSpec.describe StampPresenter::Entity do
   describe '.represent' do
     subject { StampPresenter::Entity.represent(stamp).as_json }
-    let(:stamp) { FactoryBot.create(:stamp) }
+    let(:stamp) { FactoryBot.create(:label_stamp) }
 
     it 'id as Integer' do
       expect(subject[:id]).to be_an(Integer)

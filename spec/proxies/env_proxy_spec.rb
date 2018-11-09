@@ -33,13 +33,28 @@ RSpec.describe ENVProxy do
     end
   end
 
-  describe '.required_array' do
-    subject { ENVProxy.required_array('SOME_ARRAY') }
+  describe '.required_array()' do
+    subject { ENVProxy.required_array('SOME_ARRAY', hashes: hashes) }
 
     context 'ENV is set' do
-      before { ENV['SOME_ARRAY'] = 'a,b,c,d,e' }
+      context 'params: {hashes: true}' do
+        before { ENV['SOME_ARRAY'] = "{'a'=>1, 'b'=>2},{'a'=>2},{'b'=>3}" }
 
-      it { is_expected.to match_array(%w[a b c d e]) }
+        let(:hashes) { true }
+
+        it do
+          expected_array = [{ 'a' => 1, 'b' => 2 }, { 'a' => 2 }, { 'b' => 3 }]
+          expect(subject).to match_array(expected_array)
+        end
+      end
+
+      context 'params: {hashes: false}' do
+        before { ENV['SOME_ARRAY'] = 'a,b,c,d,e' }
+
+        let(:hashes) { false }
+
+        it { is_expected.to match_array(%w[a b c d e]) }
+      end
     end
 
     context 'ENV is not set' do
@@ -51,19 +66,44 @@ RSpec.describe ENVProxy do
     end
   end
 
-  describe '.optional_array' do
-    subject { ENVProxy.optional_array('SOME_ARRAY') }
+  describe '.optional_array()' do
+    subject { ENVProxy.optional_array('SOME_ARRAY', hashes: hashes) }
 
     context 'ENV is set' do
-      before { ENV['SOME_ARRAY'] = 'a,b,c,d,e' }
+      context 'params: {hashes: true}' do
+        before { ENV['SOME_ARRAY'] = "{'a'=>1, 'b'=>2},{'a'=>2},{'b'=>3}" }
 
-      it { is_expected.to match_array(%w[a b c d e]) }
+        let(:hashes) { true }
+
+        it do
+          expected_array = [{ 'a' => 1, 'b' => 2 }, { 'a' => 2 }, { 'b' => 3 }]
+          expect(subject).to match_array(expected_array)
+        end
+      end
+
+      context 'params: {hashes: false}' do
+        before { ENV['SOME_ARRAY'] = 'a,b,c,d,e' }
+
+        let(:hashes) { false }
+
+        it { is_expected.to match_array(%w[a b c d e]) }
+      end
     end
 
     context 'ENV is not set' do
       before { ENV['SOME_ARRAY'] = nil }
 
-      it { is_expected.to eq [] }
+      context 'params: {hashes: true}' do
+        let(:hashes) { true }
+
+        it { is_expected.to eq [] }
+      end
+
+      context 'params: {hashes: false}' do
+        let(:hashes) { false }
+
+        it { is_expected.to eq [] }
+      end
     end
   end
 

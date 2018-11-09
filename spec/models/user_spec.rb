@@ -5,17 +5,23 @@ RSpec.describe User, type: :model do
 
   describe 'relations' do
     it { is_expected.to have_one(:api_key) }
-    it { is_expected.to have_many(:domains).with_foreign_key(:creator_id) }
-    it { is_expected.to have_many(:stamps).with_foreign_key(:creator_id) }
+    it { is_expected.to have_many(:domains).with_foreign_key(:user_id) }
+    it { is_expected.to have_many(:stamps).with_foreign_key(:user_id) }
     it { is_expected.to have_many(:votes) }
     it { is_expected.to have_many(:comments) }
   end
 
-  describe 'indexes' do
+  describe 'database' do
     it { is_expected.to have_db_index(:confirmation_token).unique }
     it { is_expected.to have_db_index(:email).unique }
     it { is_expected.to have_db_index(:reset_password_token).unique }
     it { is_expected.to have_db_index(:unlock_token).unique }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:role) }
+    it { is_expected.to validate_presence_of(:username) }
   end
 
   describe '#create' do
@@ -112,7 +118,7 @@ RSpec.describe User, type: :model do
     subject { user.can_vote?(votable) }
 
     let(:user) { FactoryBot.create(:user) }
-    let(:votable) { FactoryBot.create(:stamp) }
+    let(:votable) { FactoryBot.create(:label_stamp) }
 
     before { allow_required_integer_env('USER_DAILY_VOTING_LIMIT').and_return(3) }
 

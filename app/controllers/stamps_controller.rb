@@ -47,6 +47,6 @@ class StampsController < ApplicationController
   end
 
   def load_labels
-    @labels = Label.order('LOWER(name) ASC')
+    @labels = Label.order(Arel.sql('LOWER(name) ASC'))
   end
 end

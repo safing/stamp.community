@@ -1,0 +1,19 @@
+version: '3.5'
+networks:
+  stamp:
+    driver: overlay
+    attachable: true
+services:
+  postgres:
+    image: postgres:9.6.3
+    volumes:
+      - ./pgdata:/pgdata
+    environment:
+      POSTGRES_DB: stamp_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD:
+      PGDATA: /pgdata
+    ports:
+      - '5432:5432'
+    networks:
+      - stamp

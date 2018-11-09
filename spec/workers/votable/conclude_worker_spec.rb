@@ -13,7 +13,7 @@ RSpec.describe Votable::ConcludeWorker, type: :worker do
     end
 
     context 'votable exists' do
-      let(:votable) { FactoryBot.create(:stamp, state: state) }
+      let(:votable) { FactoryBot.create(:label_stamp, state: state) }
       let(:votable_type) { votable.class.to_s }
       let(:votable_id) { votable.id }
 

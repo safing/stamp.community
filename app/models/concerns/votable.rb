@@ -6,9 +6,6 @@ module Votable
   included do
     include Votable::Results
 
-    belongs_to :creator, class_name: 'User'
-    belongs_to :stampable, polymorphic: true
-
     has_many :votes, as: :votable
   end
 

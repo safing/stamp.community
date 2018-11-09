@@ -11,9 +11,9 @@ RSpec.describe DomainPresenter::Entity do
       expect(subject[:name]).to eq(domain.name)
     end
 
-    it 'creator_id as Integer' do
-      expect(subject[:creator_id]).to be_an(Integer)
-      expect(subject[:creator_id]).to eq(domain.creator_id)
+    it 'user_id as Integer' do
+      expect(subject[:user_id]).to be_an(Integer)
+      expect(subject[:user_id]).to eq(domain.user_id)
     end
 
     context 'domain has a parent' do

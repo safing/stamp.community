@@ -1,5 +1,5 @@
 RSpec.describe 'stamps/show.html.haml', type: :view do
-  let(:stamp) { FactoryBot.create(:stamp, state: state) }
+  let(:stamp) { FactoryBot.create(:label_stamp, state: state) }
   let(:state) { :in_progress }
 
   def rendered
@@ -376,7 +376,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     end
 
     context 'stamped domain has sibling stamps' do
-      before { stamp.domain.stamps << FactoryBot.build_list(:stamp, 2, state: state) }
+      before { stamp.domain.stamps << FactoryBot.build_list(:label_stamp, 2, state: state) }
 
       context 'which are accepted' do
         let(:state) { :accepted }
@@ -394,7 +394,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
 
       context 'which are both accepted and in_progress' do
         let(:state) { :in_progress }
-        before { stamp.domain.stamps << FactoryBot.build_list(:stamp, 2, state: :accepted) }
+        before { stamp.domain.stamps << FactoryBot.build_list(:label_stamp, 2, state: :accepted) }
 
         include_context 'show: other stamps segment', true
         include_context 'show: in_progress stamps segment', true
