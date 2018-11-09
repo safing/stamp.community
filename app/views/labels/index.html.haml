@@ -1,0 +1,10 @@
+%div.ui.middle.aligned.centered.container
+  - @parents.each do |parent|
+    .ui.header
+      = parent.name
+
+    .ui.celled.selection.list
+      - parent.children.each do |child|
+        = link_to label_path(child), class: 'item' do
+          .content
+            .header= child.name
