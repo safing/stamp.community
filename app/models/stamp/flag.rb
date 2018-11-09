@@ -16,6 +16,22 @@ class Stamp::Flag < Stamp
     peers
   end
 
+  def internet?
+    internet
+  end
+
+  def lan?
+    lan || internet?
+  end
+
+  def localhost?
+    localhost || lan?
+  end
+
+  def none?
+    none || localhost?
+  end
+
   class << self
     # https://stackoverflow.com/a/9463495/2235594
     # might override stuff, a better approach might be:
