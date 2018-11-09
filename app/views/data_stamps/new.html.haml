@@ -2,51 +2,65 @@
   %h1
     Data Stamp for
     %i.spotify.icon
-    Spotify
+    = @flag_stamp.inspect
     %i.purple.external.small.icon
 
   %div.ui.segment{style: 'padding-bottom: 3rem; margin-right: 29rem;'}
     %table.ui.celled.table{style: 'margin-bottom: 1px;'}
-      %tbody
-        %tr
-          %td
-            %a{:href => "/"}
-              System
-          %td
-            %a{:href => "/"}
-              Admin
-          %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
-            %a{:href => "/"}
-              User
-          %td{style: 'background-color: lightgray;'}
+      %form
+        %tbody
+          %tr
+            %td
+              %label{:for => "system"}
+                System
+              %input#system{:name => "system", :type => "checkbox", :value => "system"}/
+            %td
+              %label{:for => "admin"}
+                Admin
+              %input#admin{:name => "admin", :type => "checkbox", :value => "admin"}/
+            %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
+              %label{:for => "user"}
+                User
+              %input#user{:name => "user", :type => "checkbox", :value => "user"}/
+            %td{style: 'background-color: lightgray;'}
+          %tr
+            %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
+              %label{:for => "internet"}
+                Internet
+              %input#internet{:name => "internet", :type => "checkbox", :value => "internet"}/
+            %td
+              %label{:for => "localhost"}
+                Localhost
+              %input#localhost{:name => "localhost", :type => "checkbox", :value => "localhost"}/
+            %td
+              %label{:for => "host"}
+                Host
+              %input#host{:name => "host", :type => "checkbox", :value => "host",style: 'display: none;' }/
+            %td{style: 'background-color: lightgray;'}
 
-        %tr
-          %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
-            %a{:href => "/"}
-              Internet
-          %td
-            %a{:href => "/"}
-              Localhost
-          %td
-            %a{:href => "/"}
-              Host
-          %td{style: 'background-color: lightgray;'}
-
-        %tr
-          %td
-            %a{:href => "/"}
-              Rel
-          %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
-            %a{:href => "/"}
-              P2P
-          %td
-            %a{:href => "/"}
-              Service
-          %td
-            %a{:href => "/"}
-              Prompt
+          %tr
+            %td
+              %label{:for => "rel"}
+                Rel
+              %input#rel{:name => "rel", :type => "checkbox", :value => "rel"}/
+            %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
+              %label{:for => "p2p"}
+                P2P
+              %input#p2p{:name => "p2p", :type => "checkbox", :value => "p2p"}/
+            %td
+              %label{:for => "prompt"}
+                Service
+              %input#prompt{:name => "prompt", :type => "checkbox", :value => "prompt"}/
+            %td
+              %label{:for => "rel"}
+                Prompt
+              %input#rel{:name => "rel", :type => "checkbox", :value => "rel"}/
     %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
-      %button.ui.purple.basic.big.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+      %button.ui.purple.basic.big.button
         Save
-      %button.ui.purple.basic.big.button{style: "margin: 0; padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
+      %button.ui.purple.basic.big.button
         Cancel
+:javascript
+  $("input[type=checkbox]").change(function() {
+    $(this).parent('td').toggleClass("positive", this.checked);
+  });
