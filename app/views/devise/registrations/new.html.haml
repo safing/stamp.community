@@ -1,44 +1,35 @@
-%div.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
+.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
+  .four.wide.column
+    .ui.segment{ style: 'box-shadow: 5px 5px 20px -2px #A333C8 ; padding-bottom: 20px'}
+      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        .ui.form.header
+          = devise_error_messages!
+          %h1
+            Sign up
+          .field
+            = f.label :email
+            .ui.left.icon.mini.input
+              = f.email_field :email, autofocus: true
+              %i.mail.icon
+          .field
+            = f.label :username
+            .ui.left.icon.mini.input
+              = f.text_field :username
+              %i.user.icon
+          .field
+            = f.label :password
+            - if @minimum_password_length
+              %em
+                (#{@minimum_password_length} characters minimum)
+            .ui.left.icon.mini.input
+              = f.password_field :password, autocomplete: 'off'
+              %i.unlock.alternate.icon
+          .field
+            = f.label :password_confirmation
+            .ui.left.icon.mini.input
+              = f.password_field :password_confirmation, autocomplete: 'off'
+              %i.unlock.alternate.icon
+          .field
+            = f.submit 'Sign up', class: 'ui purple basic big button', style: "padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "
 
-  %div.four.wide.column
-    %div.ui.segment{ style: 'box-shadow: 5px 5px 20px -2px #A333C8 ; padding-bottom: 20px'}
-      %div.ui.form.header
-        %h1
-          Sign up
-        %div.field
-          %label
-            Email
-          %div.ui.left.icon.mini.input
-            %input.placeholder.text
-            %i.mail.icon
-        %div.field
-          %label
-            Username
-          %div.ui.left.icon.mini.input
-            %input.placeholder.text
-            %i.user.icon
-        %div.field
-          %label
-            Password (1 characters minimum)
-          %div.ui.left.icon.mini.input
-            %input{type: 'password'}
-            %i.unlock.alternate.icon
-        %div.field
-          %label
-            Password confirmation
-          %div.ui.left.icon.mini.input
-            %input{type: 'password'}
-            %i.unlock.alternate.icon
-        %div.ui.checkbox
-          %label
-            Remember Me
-      %button.ui.purple.basic.big.button{style: "padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
-        Login
-      %div.ui.divider
-      %div.ui.list
-        %div.item
-          %a{href: new_user_session_path}
-            Log in
-        %div.item
-          %a
-            Didn't receive confirmation instructions?
+      = render 'devise/shared/links'
