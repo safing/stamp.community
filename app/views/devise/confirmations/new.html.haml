@@ -1,9 +1,28 @@
-%h2 Resend confirmation instructions
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = devise_error_messages!
-  .form-group
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, class: 'form-control', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-  = f.submit 'Resend confirmation instructions', class: 'btn btn-primary'
-= render 'devise/shared/links'
+%div.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
+  %div.six.wide.column
+    %div.ui.segment{ style: 'box-shadow: 5px 5px 20px -2px #A333C8 ; padding-bottom: 20px'}
+      %div.ui.form.header
+        %h1
+          Resend confirmation instructions
+        %div.ui.divider
+        = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+          = devise_error_messages!
+          .form-group
+            = f.label :email
+            %br/
+            = f.email_field :email, autofocus: true, class: 'form-control', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), style: 'font-size: 13px;'
+          = f.submit 'Resend confirmation instructions', class: 'ui purple basic tiny button', style: 'padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; '
+        = render 'devise/shared/links'
+
+
+
+
+-#%h2 Resend confirmation instructions
+  = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+    = devise_error_messages!
+    .form-group
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true, class: 'form-control', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+    = f.submit 'Resend confirmation instructions', class: 'btn btn-primary'
+  = render 'devise/shared/links'

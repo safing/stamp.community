@@ -34,11 +34,4 @@
             Remember Me
       %button.ui.purple.basic.big.button{style: "padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; "}
         Login
-      %div.ui.divider
-      %div.ui.list
-        %div.item
-          %a{href: new_user_session_path}
-            Log in
-        %div.item
-          %a
-            Didn't receive confirmation instructions?
+      = render 'devise/shared/links'

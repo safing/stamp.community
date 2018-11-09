@@ -3,6 +3,10 @@
     %img{src: '/assets/basic_logo.png'}
     %h2{type: 'text'}
       Stamp
+  - if user_signed_in?
+    =link_to user_path(current_user), class: 'item' do
+      %img.ui.avatar.image{src: '/assets/portmaster.png'}
+      = current_user.username
   .menu
 
   .right.menu
