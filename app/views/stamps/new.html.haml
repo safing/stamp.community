@@ -45,7 +45,7 @@
           = f.fields_for :comments do |c|
             = c.text_area :content
           .ui.divider
-          = f.submit 'Create Stamp', class: %w[ui purple basic big button mb0], style: 'box-shadow: 0px 0px 2px 2px #A333C8 inset !important;'
+          = f.submit 'Create Stamp', class: %w[ui purple basic big button mb0]
   %div.six.wide.right.floated.column
     - if @stamp.siblings.accepted.exists?
       %div.ui.basic.segment{style: "margin-bottom: -22px;"}
@@ -55,8 +55,9 @@
         %div.ui.grid
           - @stamp.siblings.accepted.each do |sibling|
             %div.four.wide.column
-              %h5.ui.middle.aligned.header
-                = sibling.label.name
+              = link_to stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
             %div.twelve.wide.column
               %div.bar.float.right
                 %div.ui.purple.small.progress{style: "background: white;"}
@@ -74,8 +75,9 @@
         %div.ui.grid
           - @stamp.siblings.in_progress.each do |sibling|
             %div.four.wide.column
-              %h5.ui.middle.aligned.header
-                = sibling.label.name
+              = link_to stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
             %div.twelve.wide.column
               %div.bar.float.right
                 %div.ui.teal.small.progress{style: "background: white;"}
