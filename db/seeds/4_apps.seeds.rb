@@ -7,7 +7,20 @@ apps = [
     linux: true,
     macos: true,
     windows: true,
-    user_id: user_id
+    user_id: user_id,
+    flag_stamp: {
+      state: 'accepted',
+      user_id: user_id,
+      internet: true,
+      lan: false,
+      localhost: false,
+      none: false,
+      prompt: true,
+      blacklist: false,
+      whitelist: false,
+      service: true,
+      p2p: false,
+    }
   },
   {
     name: 'Wire',
@@ -17,7 +30,20 @@ apps = [
     linux: true,
     macos: true,
     windows: true,
-    user_id: user_id
+    user_id: user_id,
+    flag_stamp: {
+      state: 'accepted',
+      user_id: user_id,
+      internet: true,
+      lan: false,
+      localhost: false,
+      none: false,
+      prompt: true,
+      blacklist: false,
+      whitelist: false,
+      service: true,
+      p2p: false,
+    }
   },
   {
     name: 'Atom',
@@ -26,7 +52,20 @@ apps = [
     linux: true,
     macos: true,
     windows: true,
-    user_id: user_id
+    user_id: user_id,
+    flag_stamp: {
+      state: 'accepted',
+      user_id: user_id,
+      internet: true,
+      lan: false,
+      localhost: false,
+      none: false,
+      prompt: true,
+      blacklist: false,
+      whitelist: false,
+      service: true,
+      p2p: false,
+    }
   },
   {
     name: 'iTerm2',
@@ -35,8 +74,25 @@ apps = [
     linux: false,
     macos: true,
     windows: false,
-    user_id: user_id
+    user_id: user_id,
+    flag_stamp: {
+      state: 'accepted',
+      user_id: user_id,
+      internet: true,
+      lan: false,
+      localhost: false,
+      none: false,
+      prompt: true,
+      blacklist: false,
+      whitelist: false,
+      service: true,
+      p2p: true,
+    }
   }
 ]
 
-apps.each { |app| App.create(app) }
+apps.each do |app_params|
+  app = App.find_by(name: app_params[:name]) || App.create(app_params.except(:flag_stamp))
+
+  Stamp::Flag.create(app_params[:flag_stamp].merge(stampable: app)) if app.stamps.accepted.blank?
+end
