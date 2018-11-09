@@ -1,7 +1,11 @@
 class AppsController < ApplicationController
-  def show; end
+  def show
+    @app = App.find(params[:id])
+  end
 
-  def new; end
+  def new
+    @app = App.new
+  end
 
   def create; end
 end

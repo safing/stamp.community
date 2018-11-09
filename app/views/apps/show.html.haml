@@ -2,51 +2,59 @@
   %div.ui.grid.divided
     %div.four.wide.column
       %h1
-        %i.spotify.icon
-        Spotify
-        %i.purple.external.small.icon
+        %i.icon
+        = @app.name
+        = link_to "https://#{@app.link}" do
+          %i.purple.external.small.icon
     %div.six.wide.column
       %div.ui.basic.segment
-        cdavavacdavavacdavavacdavavacdavavacda
+        = @app.description
+    .six.wide.column
+      %div.ui.basic.segment
+        %i.big.icons
+          %i.linux.icon{ class: ('disabled' unless @app.linux) }
+          %i.corner.icon{ class: @app.linux ? 'checkmark green' : 'x disabled' }
+        %i.big.icons
+          %i.apple.icon{ class: ('disabled' unless @app.macos) }
+          %i.corner.icon{ class: @app.macos ? 'checkmark green' : 'x disabled' }
+        %i.big.icons
+          %i.windows.icon{ class: ('disabled' unless @app.windows) }
+          %i.corner.icon{ class: @app.windows ? 'checkmark green' : 'x disabled' }
   %div.ui.two.column.grid
-    %div.column
-      %div.ui.basic.segment{style: 'padding: 0;'}
-        %h2
-          Flags
-          %i.info.small.blue.circle.icon.activating.element{data: {content: "Add users to your feed",position: "right center"}}
-      %div.ui.segment{style: 'padding-bottom: 3rem;'}
-        %table.ui.celled.table{style: 'margin-bottom: 1px;'}
-          %tbody
-            %tr
-              %td
-                System
-              %td
-                Admin
-              %td.positive
-                User
-              %td{style: 'background-color: lightgray;'}
-
-            %tr
-              %td.positive
-                Internet
-              %td
-                Localhost
-              %td
-                Host
-              %td{style: 'background-color: lightgray;'}
-
-            %tr
-              %td
-                Rel
-              %td.positive
-                P2P
-              %td
-                Service
-              %td
-                Prompt
-        %div.ui.bottom.right.attached.label
-          %i.check.icon
-          %i.gavel.icon
+    - if @app.flag_stamp.present?
+      %div.column
+        %div.ui.basic.segment{style: 'padding: 0;'}
+          %h2
+            Flags
+            %i.info.small.blue.circle.icon.activating.element{data: {content: "TODO: Add description", position: "right center"}}
+        %div.ui.segment{style: 'padding-bottom: 3rem;'}
+          %table.ui.celled.table{style: 'margin-bottom: 1px;'}
+            %tbody
+              %tr
+                %td{ class: ('positive' if @app.flag_stamp.internet?) }
+                  Internet
+                %td{ class: ('positive' if @app.flag_stamp.lan?) }
+                  LAN
+                %td{ class: ('positive' if @app.flag_stamp.localhost?) }
+                  Localhost
+                %td{ class: ('positive' if @app.flag_stamp.none?) }
+                  None
+              %tr
+                %td{ class: ('positive' if @app.flag_stamp.prompt) }
+                  Prompt
+                %td{ class: ('positive' if @app.flag_stamp.blacklist) }
+                  Blacklist
+                %td{ class: ('positive' if @app.flag_stamp.whitelist) }
+                  Whitelist
+                %td{style: 'background-color: lightgray;'}
+              %tr
+                %td{ class: ('positive' if @app.flag_stamp.service) }
+                  Service
+                %td{ class: ('positive' if @app.flag_stamp.p2p) }
+                  P2P
+                %td{style: 'background-color: lightgray;'}
+                %td{style: 'background-color: lightgray;'}
+  -#
     %div.column{style: 'padding-left: 8rem;'}
       %div.ui.basic.segment{style: 'padding: 0;'}
         %h2

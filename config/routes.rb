@@ -5,16 +5,11 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  # resources :apps, only: %i[show new create]
-  # resources :data_stamps, only: %i[show new create]
   get 'data_stamps/show'
   get 'data_stamps/new'
   get 'data_stamps/create'
 
-  get 'apps/show'
-  get 'apps/new'
-  get 'apps/create'
-
+  resources :apps, only: %i[show new create]
   # rubocop:disable LineLength
   resources :domains, param: :name, constraints: { name: Domain::NAME_REGEX }, only: %i[show new create]
   # rubocop:enable LineLength
