@@ -4,7 +4,7 @@ class Stamp::Label < Stamp
 
   belongs_to :label, class_name: '::Label'
 
-  validates_presence_of :label_id, :percentage
+  validates_presence_of :label_id, :percentage, :comments
   validates :stampable_type, inclusion: { in: ['Domain'] }
 
   validate :complies_to_label_config

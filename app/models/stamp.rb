@@ -9,7 +9,7 @@ class Stamp < ApplicationRecord
 
   accepts_nested_attributes_for :comments
 
-  validates_presence_of %i[comments creator stampable state type]
+  validates_presence_of %i[creator stampable state type]
   validates :type, inclusion: { in: %w[Stamp::Flag Stamp::Label Stamp::Identifier] }
 
   # peers = stamps with the same stampable
