@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # rubocop:disable LineLength
   resources :domains, param: :name, constraints: { name: Domain::NAME_REGEX }, only: %i[show new create]
   # rubocop:enable LineLength
-  resources :labels, only: [:show, :index]
+  resources :labels, only: %i[show index]
   resources :licences, only: [:show]
   resources :users, only: [:show]
 
