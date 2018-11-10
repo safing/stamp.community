@@ -56,7 +56,7 @@ RSpec.feature 'stamp requests', type: :request do
     end
 
     describe '#show' do
-      subject(:request) { get stamps_path(stamp) }
+      subject(:request) { get stamp_path(stamp) }
 
       let(:stamp) { FactoryBot.create(:label_stamp) }
 
