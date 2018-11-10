@@ -1,8 +1,7 @@
-RSpec.feature 'stamp requests', type: :request do
+RSpec.feature 'app requests', type: :request do
   describe 'authourization' do
     describe '#new' do
-      subject(:request) { get new_stamp_url(domain_name: domain.name) }
-      let(:domain) { FactoryBot.create(:domain) }
+      subject(:request) { get new_app_url }
 
       context 'role: guest' do
         include_examples 'status code', 401
@@ -10,7 +9,7 @@ RSpec.feature 'stamp requests', type: :request do
 
       context 'role: user' do
         include_context 'login user'
-        include_examples 'status code', 200
+        include_examples 'status code', 401
       end
 
       context 'role: moderator' do
@@ -25,14 +24,9 @@ RSpec.feature 'stamp requests', type: :request do
     end
 
     describe '#create' do
-      subject(:request) { post stamps_url, params: { stamp: stamp_attributes } }
-      let(:domain) { FactoryBot.create(:domain) }
-      let(:stamp_attributes) do
-        FactoryBot.attributes_with_foreign_keys_for(:label_stamp)
-                  .merge(
-                    comments_attributes: { '0': { content: '1' * 40 } },
-                    domain: domain.name
-                  )
+      subject(:request) { post apps_url, params: { app: app_attributes } }
+      let(:app_attributes) do
+        FactoryBot.attributes_with_foreign_keys_for(:app)
       end
 
       context 'role: guest' do
@@ -41,7 +35,7 @@ RSpec.feature 'stamp requests', type: :request do
 
       context 'role: user' do
         include_context 'login user'
-        include_examples 'status code', 302
+        include_examples 'status code', 401
       end
 
       context 'role: moderator' do
@@ -56,9 +50,10 @@ RSpec.feature 'stamp requests', type: :request do
     end
 
     describe '#show' do
-      subject(:request) { get stamp_path(stamp) }
+      subject(:request) { get app_path(some_app) }
 
-      let(:stamp) { FactoryBot.create(:label_stamp) }
+      # app as a variable name will remove all path helpers
+      let(:some_app) { FactoryBot.create(:app) }
 
       context 'role: guest' do
         include_examples 'status code', 200

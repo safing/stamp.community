@@ -12,7 +12,21 @@ class App < ApplicationRecord
   belongs_to :user
   has_many :stamps, as: :stampable
 
-  validates_presence_of %i[description link name user uuid]
+  def flag_stamps
+    stamps.where(type: 'Stamp::Flag')
+  end
+
+  def flag_stamp
+    @flag_stamp ||= flag_stamps.accepted.first
+  end
+
+  def identifier_stamps
+    stamps.where(type: 'Stamp::Identifier')
+  end
+
+  validates_presence_of %i[description link name user]
+  # db will insert a default value
+  validates :uuid, presence: true, unless: proc { |obj| obj.new_record? }
   validate :supports_one_or_more_operating_systems
 
   def operating_systems
