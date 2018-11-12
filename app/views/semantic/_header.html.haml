@@ -4,30 +4,23 @@
     %h2{type: 'text'}
       Stamp
   - if user_signed_in?
-    =link_to user_path(current_user), class: 'item' do
-      %img.ui.avatar.image{src: '/assets/portmaster.png'}
-      = current_user.username
+    = link_to 'New Domain', new_domain_path, class: 'item'
+    = link_to 'New App', new_domain_path, class: 'item'
   .menu
 
   .right.menu
-    %div.ui.item{style: 'font-size: 1rem; padding: 5px;'}
-      %img{src: '/assets/stamp_j3rik0_no_text_icon.png', style: 'font-size: 0.6rem;'}
-        4
-    %div.item{style: 'font-size: 1rem; padding: 5px;'}
-      %i.sort.icon
-      %div.content
-        3
-    %div.item{style: 'font-size: 1rem; padding: 5px;'}
-      %i.linkify.icon
-      %div.content
-        1
-    %div{class: 'item', style: 'padding: 0 6px;'}
-      .ui.icon.mini.input
-        %input#search{placeholder: 'Search...', type: 'text'}
-        %i.search.link.icon
     - if user_signed_in?
-      %div.item
-        = link_to 'New Domain', new_domain_path
+      %div.ui.item{style: 'font-size: 1rem; padding: 5px;'}
+        %img{src: '/assets/stamp_j3rik0_no_text_icon.png', style: 'font-size: 0.6rem;'}
+          4
+      %div.item{style: 'font-size: 1rem; padding: 5px;'}
+        %i.sort.icon
+        %div.content
+          3
+      %div.item{style: 'font-size: 1rem; padding: 5px;'}
+        %i.linkify.icon
+        %div.content
+          1
       = link_to 'Profile', user_path(current_user), class: 'item'
       = link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: 'item'
     - else
