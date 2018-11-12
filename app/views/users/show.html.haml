@@ -14,7 +14,7 @@
                     %div.label
                       = fa_icon 'chess-king', size: '1x'
                     %div.value
-                      &nbsp;&nbsp;4
+                      = @user.voting_power
                 %div.ui.two.wide.column.center.aligned
                   ⎮
                 %div.ui.seven.wide.column.center.aligned
@@ -29,30 +29,9 @@
 
       %div.ui.divider
       %p
-        My Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp Story
-        My Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp Story
-        My Stamp StoryMy Stamp StoryMy Stamp Story
-
-        My Stamp StoryMy Stamp StoryMy Stamp StoryMy Stamp Story
-        My Stamp StoryMy Stamp StoryMy Stamp Storyv
+        The user description will be coming - whenever 🤷🏼‍♂️.
+        It was not part of the MVP 😅
     %div.three.wide.right.floated.column
-      %div.ui.basic.segment
-        %div.ui.relaxed.list
-          %h4.ui.header
-            %i.chart.bar.icon
-            Stats
-          %div.item
-            %img{src: '/assets/stamp_j3rik0_no_text_icon.png', height: '15px'}
-              4 stamps
-          %div.item
-            %i.sort.icon{style: "font-size: 21px;"}
-            %div.content{style: "padding-left: 0;"}
-              3 cast votes
-          %div.item
-            %i.linkify.icon
-            %div.content
-              1 domains
-          %div.ui.divider{style: "margin-bottom: -23px;"}
       %div.ui.basic.segment
         %div.ui.relaxed.list
           %h4.ui.header
@@ -63,53 +42,24 @@
             %div.content
               = time_ago_in_words(@user.created_at)
               ago
-          %div.item
+          -# %div.item
             %i.chart.pie.icon
             %div.content
               \67 %
-
-
-    -#  %div.ui.list
-        %h2.ui.header
-          = fa_icon 'chart-bar'
-          Stats
-      %div.item
-        %img{src: '/assets/stamp_j3rik0_no_text_icon.png', height: '16px'}
-        %div.ui.mini.horizontal.statistic
-          %div.value
-            4
-          %div.label
-            stamps
-      %div.item
-        = fa_icon 'sort', size: '2x'
-        %div.ui.mini.horizontal.statistic
-          %div.value
-            3
-          %div.label
-            cast votes
-      %div.item
-        = fa_icon 'link', size: '1x'
-        %div.ui.mini.horizontal.statistic
-          %div.value
-            6
-          %div.label
-            domains
       %div.ui.divider
-      %div.ui.list
-        %h2.ui.header
-          = fa_icon 'user'
-          User
-      %div.item
-        = fa_icon 'calendar', size: '1x'
-        %div.ui.mini.horizontal.statistic
-          %div.value
-            about 2 months
-          %div.label
-            ago
-      %div.item
-        = fa_icon 'chart-pie', size: '1x'
-        %div.ui.mini.horizontal.statistic
-          %div.value
-            67%
-          %div.label
-            success rate
+      %div.ui.basic.segment
+        %div.ui.relaxed.list
+          %h4.ui.header
+            %i.chart.bar.icon
+            Stats
+          %div.item
+            %img{src: '/assets/stamp_j3rik0_no_text_icon.png', height: '15px'}
+              = pluralize(@user.stamps.count, 'stamp')
+          %div.item
+            %i.sort.icon{style: "font-size: 21px;"}
+            %div.content{style: "padding-left: 0;"}
+              = pluralize(@user.votes.count, 'cast vote')
+          %div.item
+            %i.linkify.icon
+            %div.content
+              = pluralize(@user.domains.count, 'domain')

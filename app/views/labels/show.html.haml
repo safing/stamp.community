@@ -1,34 +1,40 @@
 %span#labels
-  .row
-    .col-12.pt-4.pb-4
+  %div.ui.grid.container
+    %div.five.wide.column
       %h2= @label.name
-    .col-sm-12.col-md-5.offset-right-7
+    %div.eleven.wide.column
       %p= @label.description
-    .col-sm-12.col-md-5.offset-right-1.mt-4
-      .row.mb-3
-        .col-12
-          %h5
-            = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 0.8em;'
-            In Progress
-      - if @label.stamps_in_progress.exists?
-        - @label.stamps_in_progress.each do |stamp|
-          .row.label.bg-light-2
-            .col-12.align-self-center
-              = link_to stamp_path(stamp.id), class: 'default-color' do
-                = fa_icon 'link'
-                = stamp.domain.name
-                %span{:style => "float: right;"}
+    %div.eight.wide.column
+      %table.ui.celled.table
+        %thead
+          %tr
+            %th{:colspan => "2"}
+              %h5
+                = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 0.8em;'
+                In Progress
+        %tbody
+          - if @label.stamps_in_progress.exists?
+            - @label.stamps_in_progress.each do |stamp|
+              %tr
+                %td
+                  = link_to stamp_path(stamp.id), class: 'default-color' do
+                    = fa_icon 'link'
+                    = stamp.domain.name
+                %td
                   = stamp.percentage
-    .col-sm-12.col-md-5.offset-right-1.mt-4
-      .row.mb-3
-        .col-12
-          %h5 Top Contributors
-      - @label.top_contributors.each do |contributor|
-        .row.label.bg-light-2
-          .col-12.align-self-center
-            = link_to user_path(contributor.user_id), class: 'default-color' do
-              = fa_icon 'user'
-              = User.find(contributor.user_id).username
-            %span{:style => "float: right;"}
-              = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;'
-              = contributor.count
+    %div.eight.wide.column
+      %table.ui.celled.table
+        %thead
+          %tr
+            %th{:colspan => "8"}
+              %h5 Top Contributors
+        %tbody
+          - @label.top_contributors.each do |contributor|
+            %tr
+              %td
+                = link_to user_path(contributor.user_id), class: 'default-color' do
+                  = fa_icon 'user'
+                  = User.find(contributor.user_id).username
+              %td
+                = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;'
+                = contributor.count

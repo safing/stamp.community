@@ -11,7 +11,7 @@
             = f.label :email
             %br/
             = f.email_field :email, autofocus: true, class: 'form-control', value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), style: 'font-size: 13px;'
-          = f.submit 'Resend confirmation instructions', class: 'ui purple basic tiny button', style: 'padding: 6px; box-shadow: 0px 0px 2px 2px #A333C8 inset !important; '
+          = f.submit 'Resend confirmation instructions', class: 'ui purple basic tiny button'
         = render 'devise/shared/links'
 
 

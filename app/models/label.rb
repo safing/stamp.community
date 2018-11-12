@@ -21,10 +21,10 @@ class Label < ApplicationRecord
   end
 
   def stamps
-    Stamp::Label.jsonb_where(:data, label_id: id)
+    Stamp::Label.all.jsonb_where(:data, label_id: id)
   end
 
   def stamps_in_progress
-    stamps.in_progress.order(percentage: :desc).limit(5)
+    stamps.in_progress.data_order(percentage: :desc).limit(5)
   end
 end
