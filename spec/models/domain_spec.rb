@@ -23,6 +23,7 @@ RSpec.describe Domain, type: :model do
       it { is_expected.to allow_value('x.com').for(:name) }
       it { is_expected.to allow_value('www.xn--cybr-noa.space').for(:name) }
 
+      it { is_expected.not_to allow_value('https://x.com').for(:name) }
       it { is_expected.not_to allow_value('i.ehthe.oh1.me.').for(:name) }
       it { is_expected.not_to allow_value('e//assets.fb.com').for(:name) }
       it { is_expected.not_to allow_value('uni.').for(:name) }
