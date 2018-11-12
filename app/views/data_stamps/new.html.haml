@@ -2,7 +2,7 @@
   %h1
     Data Stamp for
     %i.spotify.icon
-    = @flag_stamp.inspect
+    = @flag_stamp
     %i.purple.external.small.icon
 
   %div.ui.segment{style: 'padding-bottom: 3rem; margin-right: 29rem;'}
@@ -13,25 +13,25 @@
             %td
               %label{:for => "system"}
                 System
-              %input#system{:name => "system", :type => "checkbox", :value => "system"}/
+              %input#system{:name => "system", :type => "checkbox", :value => "system",style: 'display: none;'}/
             %td
               %label{:for => "admin"}
                 Admin
-              %input#admin{:name => "admin", :type => "checkbox", :value => "admin"}/
-            %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
+              %input#admin{:name => "admin", :type => "checkbox", :value => "admin",style: 'display: none;'}/
+            %td
               %label{:for => "user"}
                 User
-              %input#user{:name => "user", :type => "checkbox", :value => "user"}/
+              %input#user{:name => "user", :type => "checkbox", :value => "user",style: 'display: none;'}/
             %td{style: 'background-color: lightgray;'}
           %tr
-            %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
+            %td
               %label{:for => "internet"}
                 Internet
-              %input#internet{:name => "internet", :type => "checkbox", :value => "internet"}/
+              %input#internet{:name => "internet", :type => "checkbox", :value => "internet",style: 'display: none;'}/
             %td
               %label{:for => "localhost"}
                 Localhost
-              %input#localhost{:name => "localhost", :type => "checkbox", :value => "localhost"}/
+              %input#localhost{:name => "localhost", :type => "checkbox", :value => "localhost",style: 'display: none;'}/
             %td
               %label{:for => "host"}
                 Host
@@ -42,19 +42,19 @@
             %td
               %label{:for => "rel"}
                 Rel
-              %input#rel{:name => "rel", :type => "checkbox", :value => "rel"}/
-            %td.positive{style:' background: #A333C833 !important; color: #A333C8 !important; '}
+              %input#rel{:name => "rel", :type => "checkbox", :value => "rel",style: 'display: none;'}/
+            %td
               %label{:for => "p2p"}
                 P2P
-              %input#p2p{:name => "p2p", :type => "checkbox", :value => "p2p"}/
+              %input#p2p{:name => "p2p", :type => "checkbox", :value => "p2p",style: 'display: none;'}/
             %td
               %label{:for => "prompt"}
                 Service
-              %input#prompt{:name => "prompt", :type => "checkbox", :value => "prompt"}/
+              %input#prompt{:name => "prompt", :type => "checkbox", :value => "prompt",style: 'display: none;'}/
             %td
-              %label{:for => "rel"}
+              %label{:for => "prompt"}
                 Prompt
-              %input#rel{:name => "rel", :type => "checkbox", :value => "rel"}/
+              %input#prompt{:name => "prompt", :type => "checkbox", :value => "prompt",style: 'display: none;'}/
     %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
       %button.ui.purple.basic.big.button
         Save
@@ -62,5 +62,5 @@
         Cancel
 :javascript
   $("input[type=checkbox]").change(function() {
-    $(this).parent('td').toggleClass("positive", this.checked);
+    $(this).parent('td').toggleClass("selected", this.checked);
   });
