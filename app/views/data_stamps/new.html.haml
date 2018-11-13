@@ -1,66 +1,53 @@
 %div.ui.container
   %h1
     Data Stamp for
-    %i.spotify.icon
-    = @flag_stamp
-    %i.purple.external.small.icon
+    =# @stamp.domain.name
+    =#%a{href: @stamp.domain.href}
+    %i.purple.external.icon
 
   %div.ui.segment{style: 'padding-bottom: 3rem; margin-right: 29rem;'}
+    = render 'partials/errors', object: @stamp, attached: true
     %table.ui.celled.table{style: 'margin-bottom: 1px;'}
-      %form
+      = form_for @stamp, html: {class: %w[ui form]} do |f|
+        =# f.hidden_field :domain, value: params[:domain] || @stamp.domain.name
         %tbody
           %tr
             %td
-              %label{:for => "system"}
-                System
-              %input#system{:name => "system", :type => "checkbox", :value => "system",style: 'display: none;'}/
+              = f.label :internet, 'Internet'
+              = f.check_box :internet, style: 'display: none;'
             %td
-              %label{:for => "admin"}
-                Admin
-              %input#admin{:name => "admin", :type => "checkbox", :value => "admin",style: 'display: none;'}/
+              = f.label :lan, 'LAN'
+              = f.check_box :lan, style: 'display: none;'
             %td
-              %label{:for => "user"}
-                User
-              %input#user{:name => "user", :type => "checkbox", :value => "user",style: 'display: none;'}/
-            %td{style: 'background-color: lightgray;'}
+              = f.label :localhost, 'Localhost'
+              = f.check_box :localhost, style: 'display: none;'
+          %tr
+            %td.selected
+              = radio_button_tag 'stamp[prompt_group]', 'prompt', true, style: 'display: none ;'
+              = f.label :prompt_group, 'Prompt', value: 'prompt'
+            %td
+              = radio_button_tag 'stamp[prompt_group]', 'blacklist', false, style: 'display: none ;'
+              = f.label :prompt_group, 'Blacklist', value: 'blacklist'
+            %td
+              = radio_button_tag 'stamp[prompt_group]', 'whitelist', false, style: 'display: none ;'
+              = f.label :prompt_group, 'Whitelist', value: 'whitelist'
           %tr
             %td
-              %label{:for => "internet"}
-                Internet
-              %input#internet{:name => "internet", :type => "checkbox", :value => "internet",style: 'display: none;'}/
+              = f.label :p2p, 'P2P'
+              = f.check_box :p2p, style: 'display: none;'
             %td
-              %label{:for => "localhost"}
-                Localhost
-              %input#localhost{:name => "localhost", :type => "checkbox", :value => "localhost",style: 'display: none;'}/
-            %td
-              %label{:for => "host"}
-                Host
-              %input#host{:name => "host", :type => "checkbox", :value => "host",style: 'display: none;' }/
+              = f.label :service, 'Service'
+              = f.check_box :service, style: 'display: none;'
             %td{style: 'background-color: lightgray;'}
-
-          %tr
-            %td
-              %label{:for => "rel"}
-                Rel
-              %input#rel{:name => "rel", :type => "checkbox", :value => "rel",style: 'display: none;'}/
-            %td
-              %label{:for => "p2p"}
-                P2P
-              %input#p2p{:name => "p2p", :type => "checkbox", :value => "p2p",style: 'display: none;'}/
-            %td
-              %label{:for => "prompt"}
-                Service
-              %input#prompt{:name => "prompt", :type => "checkbox", :value => "prompt",style: 'display: none;'}/
-            %td
-              %label{:for => "prompt"}
-                Prompt
-              %input#prompt{:name => "prompt", :type => "checkbox", :value => "prompt",style: 'display: none;'}/
     %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
-      %button.ui.purple.basic.big.button
-        Save
+      =# f.submit 'Save', class: 'ui purple big basic button'
       %button.ui.purple.basic.big.button
         Cancel
 :javascript
-  $("input[type=checkbox]").change(function() {
-    $(this).parent('td').toggleClass("selected", this.checked);
+  $('input[type=checkbox]').change(function() {
+    $(this).parent('td').toggleClass('selected', this.checked);
+  });
+  $('input[type=radio]').change(function() {
+    $(this).closest('tr').children('td').removeClass('selected');
+    $(this).parent('td').addClass('selected');
   });
