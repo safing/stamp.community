@@ -5,22 +5,22 @@
       Stamp
   - if user_signed_in?
     = link_to 'New Domain', new_domain_path, class: 'item'
-    = link_to 'New App', new_domain_path, class: 'item'
+    = link_to 'New App', new_app_path, class: 'item'
   .menu
 
   .right.menu
     - if user_signed_in?
       %div.ui.item{style: 'font-size: 1rem; padding: 5px;'}
         %img{src: '/assets/stamp_j3rik0_no_text_icon.png', style: 'font-size: 0.6rem;'}
-          4
+        = current_user.stamps.count
       %div.item{style: 'font-size: 1rem; padding: 5px;'}
         %i.sort.icon
         %div.content
-          3
+          = current_user.votes.count
       %div.item{style: 'font-size: 1rem; padding: 5px;'}
         %i.linkify.icon
         %div.content
-          1
+          = current_user.domains.count
       = link_to 'Profile', user_path(current_user), class: 'item'
       = link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: 'item'
     - else
