@@ -17,7 +17,7 @@ apps = [
       prompt: true,
       blacklist: false,
       whitelist: false,
-      service: false,
+      server: false,
       p2p: false,
     }
   },
@@ -39,7 +39,7 @@ apps = [
       prompt: true,
       blacklist: false,
       whitelist: false,
-      service: false,
+      server: false,
       p2p: false,
     }
   },
@@ -60,7 +60,7 @@ apps = [
       prompt: true,
       blacklist: false,
       whitelist: false,
-      service: false,
+      server: false,
       p2p: false,
     }
   },
@@ -81,7 +81,7 @@ apps = [
       prompt: true,
       blacklist: false,
       whitelist: false,
-      service: false,
+      server: false,
       p2p: true,
     }
   }

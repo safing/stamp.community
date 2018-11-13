@@ -44,10 +44,10 @@ RSpec.describe Stamp::Flag, type: :model do
       expect(flag_stamp.whitelist).to be true
     end
 
-    it '#service is set by default, has getter and setter' do
-      expect(flag_stamp.service).to be false
-      flag_stamp.service = true
-      expect(flag_stamp.service).to be true
+    it '#server is set by default, has getter and setter' do
+      expect(flag_stamp.server).to be false
+      flag_stamp.server = true
+      expect(flag_stamp.server).to be true
     end
 
     it '#p2p is set by default, has getter and setter' do
