@@ -14,7 +14,7 @@ class App < ApplicationRecord
 
   # Strip https:// or http://
   before_validation(on: :create) do
-    self.link = link.gsub(%r{https?:\/\//, ''}) if attribute_present?('link')
+    self.link = link.gsub(%r{https?:\/\/}, '') if attribute_present?('link')
   end
 
   validates_presence_of %i[description link name user]
