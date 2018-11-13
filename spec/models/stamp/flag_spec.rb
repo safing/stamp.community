@@ -74,38 +74,6 @@ RSpec.describe Stamp::Flag, type: :model do
           FactoryBot.build(:flag_stamp, **group_hash)
         end
 
-        describe '[:internet, :lan, :localhost, :none]' do
-          let(:group) { %i[internet lan localhost none] }
-          let(:internet) { false }
-          let(:lan) { false }
-          let(:localhost) { false }
-
-          context 'two flags are set to true' do
-            let(:internet) { true }
-            let(:lan) { true }
-
-            it 'returns false' do
-              expect(subject).to be false
-              expect(flag_stamp.errors.full_messages.first).to include('*one* must be set to true')
-            end
-          end
-
-          context 'one flags is set to true' do
-            let(:internet) { true }
-
-            it 'returns true' do
-              expect(subject).to be true
-            end
-          end
-
-          context 'no flag is set to true' do
-            it 'returns false' do
-              expect(subject).to be false
-              expect(flag_stamp.errors.full_messages.first).to include('*one* must be set to true')
-            end
-          end
-        end
-
         describe '[:prompt, :blacklist, :whitelist]' do
           let(:group) { %i[prompt blacklist whitelist] }
           let(:prompt) { false }

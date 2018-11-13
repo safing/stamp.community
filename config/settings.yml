@@ -51,11 +51,8 @@ FLAGS:
   # - system
   # internet access
   - name: internet
-    group: 1
   - name: lan
-    group: 1
   - name: localhost
-    group: 1
   # domain decision logic
   - name: prompt
     group: 2
