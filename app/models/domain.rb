@@ -21,4 +21,20 @@ class Domain < ApplicationRecord
   def href
     "http://#{name}"
   end
+
+  # from https://stackoverflow.com/a/18582395/2235594
+  def url_exists?(https: true)
+    require 'net/http'
+    url = URI.parse("http#{'s' if https}://#{name}")
+    request = Net::HTTP.new(url.host, url.port)
+    request.open_timeout = 3
+    request.use_ssl = https
+
+    # false if it returns 404 - not found
+    request.request_head('/').code != '404'
+  rescue Errno::ENOENT, SocketError, Net::OpenTimeout
+    false
+  rescue Errno::ECONNRESET
+    url_exists?(https: false)
+  end
 end

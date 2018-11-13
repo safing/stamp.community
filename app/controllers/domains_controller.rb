@@ -17,13 +17,18 @@ class DomainsController < ApplicationController
       @domain = Domain.find_or_initialize_by(name: domain_params[:name])
 
       if @domain.new_record?
-        # TODO: check whether domain is online or not, with ping or sth similar
-        @domain.user = current_user
-        @domain.save!
+        if @domain.url_exists?
+          @domain.user = current_user
+          @domain.save!
 
-        @state = 'success'
-        @link = domain_path(@domain.name)
-        @header = 'Succesfully created.'
+          @state = 'success'
+          @link = domain_path(@domain.name)
+          @header = 'Succesfully created.'
+        else
+          @state = 'error'
+          @link = domain_path(@domain.name)
+          @header = 'Domain does not exist or cannot be reached'
+        end
       else
         @state = 'warning'
         @link = domain_path(@domain.name)
