@@ -49,25 +49,26 @@ FLAGS:
   # - user
   # - admin
   # - system
-  # internet access
-  - name: internet
-    group: 1
-  - name: lan
-    group: 1
-  - name: localhost
-    group: 1
-  - name: none
-    group: 1
-  # domain decision logic
   - name: prompt
-    group: 2
+    description: Prompt for decisions on new connections.
+    group: 1
   - name: blacklist
-    group: 2
+    description: Allow all connections except those explicitly denied.
+    group: 1
   - name: whitelist
-    group: 2
-  # independent flags
-  - name: service # accept incoming connections
-  - name: p2p # allow connections to IP adresses
+    group: 1
+    description: Block all connections except those explicitly allowed.
+  #  ↓ independent flags ↓
+  - name: internet
+    description: Allow connections to the Internet.
+  - name: lan
+    description: Allow connections to the local area network.
+  - name: localhost
+    description: Allow connections to the local host.
+  - name: server
+    description: Allow program to accept incoming connections and act as a server for other devices.
+  - name: p2p
+    description: Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.
 
 OPERATING_SYSTEMS:
   - linux

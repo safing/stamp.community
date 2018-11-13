@@ -26,12 +26,6 @@ RSpec.describe Stamp::Flag, type: :model do
       expect(flag_stamp.localhost).to be true
     end
 
-    it '#none is set by default, has getter and setter' do
-      expect(flag_stamp.none).to be false
-      flag_stamp.none = true
-      expect(flag_stamp.none).to be true
-    end
-
     it '#prompt is set by default, has getter and setter' do
       expect(flag_stamp.prompt).to be false
       flag_stamp.prompt = true
@@ -50,10 +44,10 @@ RSpec.describe Stamp::Flag, type: :model do
       expect(flag_stamp.whitelist).to be true
     end
 
-    it '#service is set by default, has getter and setter' do
-      expect(flag_stamp.service).to be false
-      flag_stamp.service = true
-      expect(flag_stamp.service).to be true
+    it '#server is set by default, has getter and setter' do
+      expect(flag_stamp.server).to be false
+      flag_stamp.server = true
+      expect(flag_stamp.server).to be true
     end
 
     it '#p2p is set by default, has getter and setter' do
@@ -72,45 +66,12 @@ RSpec.describe Stamp::Flag, type: :model do
         let(:group_hash) { {} }
 
         # rubocop:disable Security/Eval
-        # =>  {internet: false, lan: false, localhost: false, none: false}
+        # =>  {internet: false, lan: false, localhost: false}
         before { group.map { |e| group_hash[e] = eval(e.to_s) } }
         # rubocop:enable Security/Eval
 
         let(:flag_stamp) do
           FactoryBot.build(:flag_stamp, **group_hash)
-        end
-
-        describe '[:internet, :lan, :localhost, :none]' do
-          let(:group) { %i[internet lan localhost none] }
-          let(:internet) { false }
-          let(:lan) { false }
-          let(:localhost) { false }
-          let(:none) { false }
-
-          context 'two flags are set to true' do
-            let(:internet) { true }
-            let(:lan) { true }
-
-            it 'returns false' do
-              expect(subject).to be false
-              expect(flag_stamp.errors.full_messages.first).to include('*one* must be set to true')
-            end
-          end
-
-          context 'one flags is set to true' do
-            let(:internet) { true }
-
-            it 'returns true' do
-              expect(subject).to be true
-            end
-          end
-
-          context 'no flag is set to true' do
-            it 'returns false' do
-              expect(subject).to be false
-              expect(flag_stamp.errors.full_messages.first).to include('*one* must be set to true')
-            end
-          end
         end
 
         describe '[:prompt, :blacklist, :whitelist]' do

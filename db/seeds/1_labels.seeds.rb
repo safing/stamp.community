@@ -17,21 +17,22 @@ end
 labels = [
   {
     name: 'Trackers',
-    description: 'Trackers',
+    description: 'Services that track and profile people online.',
     children: [
-      {name: 'Analytics', description: 'Analytics', config: {binary: true}},
-      {name: 'Ads', description: 'Ads', config: {binary: true}},
-      {name: 'Other', description: 'Other', config: {binary: true}}
+      {name: 'Analytics', description: 'Services that provide visitor analysis/profiling.', config: {binary: true}},
+      {name: 'Ads', description: 'Services that serve ads and track their audiences.', config: {binary: true}},
+      {name: 'Other', description: 'Services that engage in tracking and profiling in another way.', config: {binary: true}}
     ]
   },
   {
     name: 'Malware',
-    description: 'Malware',
+    description: 'Domains and Websites used in Malware Operations. This does not include social engineering (such as phishing), which will later be covered by another label.',
     children: [
-      {name: 'CNC Server', description: 'CNC Server', config: {binary: true}},
-      {name: 'Exploit', description: 'Exploit', config: {binary: true}},
-      {name: 'Payload', description: 'Payload', config: {binary: true}},
-      {name: 'Other', description: 'Other', config: {binary: true}}
+      {name: 'CNC Server', description: 'Domains used by a malware command and control infrastructure.', config: {binary: true}},
+      {name: 'Exploit', description: 'Websites that directly execute exploits against browsers', config: {binary: true}},
+      {name: 'Payload', description: 'Domains used for second stage download/infections', config: {binary: true}},
+      {name: 'Download', description: 'Websites serving infected software or files.', config: {binary: true}},
+      {name: 'Other', description: 'Domains and Websites used in other malicious way. This does not include social engineering (such as phishing), which will later be covered by another label.', config: {binary: true}}
     ]
   }
 ]

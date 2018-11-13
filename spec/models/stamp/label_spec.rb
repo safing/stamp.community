@@ -242,6 +242,32 @@ RSpec.describe Stamp::Label, type: :model do
         end
 
         context 'stamp has no siblings' do
+          context 'stamp has peers' do
+            before { FactoryBot.create(:label_stamp, state: state, stampable: domain) }
+
+            context "peers' state is accepted" do
+              let(:state) { :accepted }
+
+              it 'returns false' do
+                expect(subject).to be false
+                expect(label_stamp.errors.full_messages.first).to(
+                  include('Percentage can only be set to 0 if an accepted sibling stamp is > 0')
+                )
+              end
+            end
+
+            context "siblings' state is not accepted" do
+              let(:state) { :in_progress }
+
+              it 'returns false' do
+                expect(subject).to be false
+                expect(label_stamp.errors.full_messages.first).to(
+                  include('Percentage can only be set to 0 if an accepted sibling stamp is > 0')
+                )
+              end
+            end
+          end
+
           it 'returns false' do
             expect(subject).to be false
             expect(label_stamp.errors.full_messages.first).to(

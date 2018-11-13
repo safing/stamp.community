@@ -16,7 +16,7 @@ class Stamp::Label < Stamp
 
   def initial_stamp_cannot_be_0
     return true if percentage != 0
-    return true if peers.accepted.present?
+    return true if siblings.accepted.present?
 
     errors.add(:percentage, 'can only be set to 0 if an accepted sibling stamp is > 0')
   end
