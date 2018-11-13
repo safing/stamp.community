@@ -26,12 +26,6 @@ RSpec.describe Stamp::Flag, type: :model do
       expect(flag_stamp.localhost).to be true
     end
 
-    it '#none is set by default, has getter and setter' do
-      expect(flag_stamp.none).to be false
-      flag_stamp.none = true
-      expect(flag_stamp.none).to be true
-    end
-
     it '#prompt is set by default, has getter and setter' do
       expect(flag_stamp.prompt).to be false
       flag_stamp.prompt = true
@@ -72,7 +66,7 @@ RSpec.describe Stamp::Flag, type: :model do
         let(:group_hash) { {} }
 
         # rubocop:disable Security/Eval
-        # =>  {internet: false, lan: false, localhost: false, none: false}
+        # =>  {internet: false, lan: false, localhost: false}
         before { group.map { |e| group_hash[e] = eval(e.to_s) } }
         # rubocop:enable Security/Eval
 
@@ -85,7 +79,6 @@ RSpec.describe Stamp::Flag, type: :model do
           let(:internet) { false }
           let(:lan) { false }
           let(:localhost) { false }
-          let(:none) { false }
 
           context 'two flags are set to true' do
             let(:internet) { true }

@@ -56,8 +56,6 @@ FLAGS:
     group: 1
   - name: localhost
     group: 1
-  - name: none
-    group: 1
   # domain decision logic
   - name: prompt
     group: 2
