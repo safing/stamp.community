@@ -6,6 +6,7 @@
 
     connect() {
       var initial_percentage = 50
+      var element_to_open = 0
 
       if (this.data.has('setLabelId')) {
         var button = document.querySelector("[data-label-id='" + this.data.get('setLabelId') + "']")
@@ -14,9 +15,8 @@
         if (this.data.has('setPercentage')) {
           initial_percentage = this.data.get('setPercentage')
         }
-      }
-      else {
-        $('.accordion[data-controller="new-stamp"]').accordion('open', 0)
+
+        element_to_open = 1
       }
 
       $('#stamp_percentage_range').range({
@@ -29,6 +29,8 @@
           $('#stamp_percentage_display').html(value);
         }
       });
+
+      $('.accordion[data-controller="new-stamp"]').accordion('open', element_to_open)
     }
 
     selectLabel(event) {
