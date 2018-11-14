@@ -39,6 +39,6 @@
             %button.ui.purple.basic.big.button{style: 'margin: 0;'}
               Choose Me
         %div.ui.bottom.right.attached.label
-          %i.windows.large.icon
-          %i.apple.large.icon
-          %i.linux.large.icon
+          %i.windows.large.icon{ class: ('purple' if @stamp.windows) }
+          %i.apple.large.icon{ class: ('purple' if @stamp.apple) }
+          %i.linux.large.icon{ class: ('purple' if @stamp.linux) }
