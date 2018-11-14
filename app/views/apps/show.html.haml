@@ -31,26 +31,24 @@
           %table.ui.celled.table{style: 'margin-bottom: 1px;'}
             %tbody
               %tr
-                %td{ class: ('positive' if @app.flag_stamp.internet?) }
+                %td{ class: ('selected' if @app.flag_stamp.internet?) }
                   Internet
-                %td{ class: ('positive' if @app.flag_stamp.lan?) }
+                %td{ class: ('selected' if @app.flag_stamp.lan?) }
                   LAN
-                %td{ class: ('positive' if @app.flag_stamp.localhost?) }
+                %td{ class: ('selected' if @app.flag_stamp.localhost?) }
                   Localhost
               %tr
-                %td{ class: ('positive' if @app.flag_stamp.prompt) }
+                %td{ class: ('selected' if @app.flag_stamp.prompt) }
                   Prompt
-                %td{ class: ('positive' if @app.flag_stamp.blacklist) }
+                %td{ class: ('selected' if @app.flag_stamp.blacklist) }
                   Blacklist
-                %td{ class: ('positive' if @app.flag_stamp.whitelist) }
+                %td{ class: ('selected' if @app.flag_stamp.whitelist) }
                   Whitelist
-                %td{style: 'background-color: lightgray;'}
               %tr
-                %td{ class: ('positive' if @app.flag_stamp.server) }
+                %td{ class: ('selected' if @app.flag_stamp.server) }
                   Service
-                %td{ class: ('positive' if @app.flag_stamp.p2p) }
+                %td{ class: ('selected' if @app.flag_stamp.p2p) }
                   P2P
-                %td{style: 'background-color: lightgray;'}
                 %td{style: 'background-color: lightgray;'}
   -#
     %div.column{style: 'padding-left: 8rem;'}
