@@ -1,0 +1,44 @@
+- header ||= nil; choose_me ||= nil
+- skip_card ||= nil
+
+- if skip_card
+  %button.ui.purple.basic.big.button
+    Discard Me
+- else
+  %div.ui.segment{style: 'padding-bottom: 3rem;'}
+    - if header
+      %h2
+        %i.spotify.icon
+        Spotify
+        %i.purple.external.small.icon
+    %table.ui.celled.table{style: 'margin-bottom: 1px;'}
+      %tbody
+        %tbody
+          %tr
+            %td{ class: ('selected' if @stamp.internet?) }
+              Internet
+            %td{ class: ('selected' if @stamp.lan?) }
+              LAN
+            %td{ class: ('selected' if @stamp.localhost?) }
+              Localhost
+          %tr
+            %td{ class: ('selected' if @stamp.prompt) }
+              Prompt
+            %td{ class: ('selected' if @stamp.blacklist) }
+              Blacklist
+            %td{ class: ('selected' if @stamp.whitelist) }
+              Whitelist
+          %tr
+            %td{ class: ('selected' if @stamp.server) }
+              Service
+            %td{ class: ('selected' if @stamp.p2p) }
+              P2P
+            %td{style: 'background-color: lightgray;'}
+        - if choose_me
+          %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
+            %button.ui.purple.basic.big.button{style: 'margin: 0;'}
+              Choose Me
+        %div.ui.bottom.right.attached.label
+          %i.windows.large.icon
+          %i.apple.large.icon
+          %i.linux.large.icon
