@@ -1,9 +1,9 @@
 %div.ui.container
   %h1
     Stamp for
-    %i.spotify.icon
-    Spotify
-    %i.purple.external.small.icon
+    = @stamp.app.name
+    = link_to "https://#{@stamp.app.link}" do
+      %i.purple.external.small.icon
   %div.ui.basic.segment
     %div.ui.two.column.stackable.center.aligned.grid
       %div.ui.vertical.divider
