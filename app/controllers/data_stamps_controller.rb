@@ -1,7 +1,11 @@
 class DataStampsController < ApplicationController
-  def show; end
+  def show
+    @stamp = Stamp::Flag.last
+  end
 
-  def new; end
+  def new
+    @stamp = Stamp::Flag.new
+  end
 
   def create; end
 end

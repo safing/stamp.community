@@ -31,28 +31,41 @@
           %table.ui.celled.table{style: 'margin-bottom: 1px;'}
             %tbody
               %tr
-                %td{ class: ('positive' if @app.flag_stamp.internet?) }
+                %td{ class: ('selected' if @app.flag_stamp.internet?) }
                   Internet
-                %td{ class: ('positive' if @app.flag_stamp.lan?) }
+                  %i.info.circle.icon.small.link{"data-content" => "Allow connections to the Internet.", "data-variation" => "mini"}
+                %td{ class: ('selected' if @app.flag_stamp.lan?) }
                   LAN
-                %td{ class: ('positive' if @app.flag_stamp.localhost?) }
+                  %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local area network.", "data-variation" => "mini"}
+                %td{ class: ('selected' if @app.flag_stamp.localhost?) }
                   Localhost
+                  %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
               %tr
-                %td{ class: ('positive' if @app.flag_stamp.prompt) }
+                %td{ class: ('selected' if @app.flag_stamp.prompt) }
                   Prompt
-                %td{ class: ('positive' if @app.flag_stamp.blacklist) }
+                  %i.info.circle.icon.small.link{"data-content" => "Prompt for decisions on new connections.", "data-variation" => "mini"}
+                %td{ class: ('selected' if @app.flag_stamp.blacklist) }
                   Blacklist
-                %td{ class: ('positive' if @app.flag_stamp.whitelist) }
+                  %i.info.circle.icon.small.link{"data-content" => "Allow all connections except those explicitly denied.", "data-variation" => "mini"}
+                %td{ class: ('selected' if @app.flag_stamp.whitelist) }
                   Whitelist
-                %td{style: 'background-color: lightgray;'}
+                  %i.info.circle.icon.small.link{"data-content" => "Block all connections except those explicitly allowed.", "data-variation" => "mini"}
               %tr
-                %td{ class: ('positive' if @app.flag_stamp.server) }
-                  Service
-                %td{ class: ('positive' if @app.flag_stamp.p2p) }
+                %td{ class: ('selected' if @app.flag_stamp.p2p) }
                   P2P
+                  %i.info.circle.icon.small.link{"data-content" => "Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.", "data-variation" => "mini"}
+                %td{ class: ('selected' if @app.flag_stamp.server) }
+                  Server
+                  %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
                 %td{style: 'background-color: lightgray;'}
-                %td{style: 'background-color: lightgray;'}
-  -#
+
+:javascript
+  $('.info.circle.icon.link')
+    .popup({
+      position: 'right center'
+  });
+
+-#
     %div.column{style: 'padding-left: 8rem;'}
       %div.ui.basic.segment{style: 'padding: 0;'}
         %h2

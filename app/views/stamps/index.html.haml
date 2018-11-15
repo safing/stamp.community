@@ -30,44 +30,8 @@
     %div.eight.wide.column
       %h1
         Apps Stamps:
-      %div.ui.segment{style: 'padding-bottom: 3rem;'}
-        %h2
-          %i.spotify.icon
-          Spotify
-          %i.purple.external.small.icon
-        %table.ui.celled.table{style: 'margin-bottom: 1px;'}
-          %tbody
-            %tr
-              %td
-                System
-              %td
-                Admin
-              %td.selected
-                User
-              %td{style: 'background-color: lightgray;'}
+      = render 'partials/flag_stamp', header: true
 
-            %tr
-              %td.selected
-                Internet
-              %td
-                Localhost
-              %td
-                Host
-              %td{style: 'background-color: lightgray;'}
-
-            %tr
-              %td
-                Rel
-              %td.selected
-                P2P
-              %td
-                Service
-              %td
-                Prompt
-        %div.ui.bottom.right.attached.label
-          %i.windows.large.icon
-          %i.apple.large.icon
-          %i.linux.large.icon
   %h1.header
     Recent Stamps
     %div.ui.divider{style: "margin-bottom: -5px;"}
@@ -95,41 +59,4 @@
                   %div.ui.teal.small.progress{style: "background: white;"}
                     %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
     %div.eight.wide.column
-      %div.ui.segment{style: 'padding-bottom: 3rem;'}
-        %h2
-          %i.spotify.icon
-          Spotify
-          %i.purple.external.small.icon
-        %table.ui.celled.table{style: 'margin-bottom: 1px;'}
-          %tbody
-            %tr
-              %td
-                System
-              %td
-                Admin
-              %td.selected
-                User
-              %td{style: 'background-color: lightgray;'}
-
-            %tr
-              %td.selected
-                Internet
-              %td
-                Localhost
-              %td
-                Host
-              %td{style: 'background-color: lightgray;'}
-
-            %tr
-              %td
-                Rel
-              %td.selected
-                P2P
-              %td
-                Service
-              %td
-                Prompt
-        %div.ui.bottom.right.attached.label
-          %i.windows.large.icon
-          %i.apple.large.icon
-          %i.linux.large.icon
+      = render 'partials/flag_stamp', header: true
