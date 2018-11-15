@@ -19,7 +19,7 @@
           = f.hidden_field :label_id, data: {target: 'new-stamp.labelId'}
         %div.content
           - @labels.each do |label|
-            = button_tag label.name, type: 'button', class: %w[ui grey basic tiny button], data: {action: 'new-stamp#selectLabel', label_id: label.id}
+            = button_tag label.name, type: 'button', class: %w[ui grey basic tiny button], data: {action: 'new-stamp#selectLabel', label_id: label.id, content: label.description , variatio: "mini"}
           %div.ui.right.aligned.basic.segment
             %div.ui.relaxed.horizontal.list{style: "border-top: 1px solid rgba(34, 36, 38, 0.15);"}
               %div.item
@@ -85,3 +85,10 @@
                     %div.progress
                       = sibling.percentage
                       \%
+
+
+:javascript
+  $('.ui.grey.basic.tiny.button')
+  .popup({
+    position   : 'bottom left',
+  });
