@@ -1,4 +1,6 @@
 class Stamp < ApplicationRecord
+  TYPES = %w[Stamp::Flag Stamp::Label Stamp::Identifier].freeze
+
   include Votable
   include Votable::State
   include Votable::Rewardable
@@ -10,7 +12,7 @@ class Stamp < ApplicationRecord
   accepts_nested_attributes_for :comments
 
   validates_presence_of %i[creator stampable state type]
-  validates :type, inclusion: { in: %w[Stamp::Flag Stamp::Label Stamp::Identifier] }
+  validates :type, inclusion: { in: TYPES }
 
   # peers = stamps with the same stampable
   def peers
