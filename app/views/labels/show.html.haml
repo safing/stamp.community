@@ -17,7 +17,7 @@
             - @label.stamps_in_progress.each do |stamp|
               %tr
                 %td
-                  = link_to stamp_path(stamp.id), class: 'default-color' do
+                  = link_to label_stamp_path(stamp.id), class: 'default-color' do
                     = fa_icon 'link'
                     = stamp.domain.name
                 %td

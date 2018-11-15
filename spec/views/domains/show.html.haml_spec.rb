@@ -113,13 +113,17 @@ RSpec.describe 'domains/show.html.haml', type: :view do
     include_context 'login user'
 
     it 'shows a link to add a new stamp' do
-      expect(rendered).to have_link('Add Stamp', href: new_stamp_path(domain_name: domain.name))
+      expect(rendered).to have_link(
+        'Add Stamp', href: new_label_stamp_path(domain_name: domain.name)
+      )
     end
   end
 
   context 'guest' do
     it 'does not show a link to add a new stamp' do
-      expect(rendered).not_to have_link('Add Stamp', href: new_stamp_path(domain_name: domain.name))
+      expect(rendered).not_to have_link(
+        'Add Stamp', href: new_label_stamp_path(domain_name: domain.name)
+      )
     end
   end
 end

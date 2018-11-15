@@ -9,18 +9,18 @@ RSpec.feature 'User comments on a stamp' do
   let(:valid_comment) { 'x' * 40 }
 
   scenario 'with valid content' do
-    visit stamp_path(stamp)
+    visit label_stamp_path(stamp)
 
     page.find('#new_comment #comment_content').set(valid_comment)
     page.click_button 'Add Comment'
 
-    expect(page).to have_current_path(stamp_path(stamp.id))
+    expect(page).to have_current_path(label_stamp_path(stamp.id))
     expect(page).to have_content('Comment created')
     expect(page).to have_content(valid_comment)
   end
 
   scenario 'with invalid content' do
-    visit stamp_path(stamp)
+    visit label_stamp_path(stamp)
 
     page.find('#new_comment #comment_content').set(invalid_comment)
     page.click_button 'Add Comment'
@@ -30,7 +30,7 @@ RSpec.feature 'User comments on a stamp' do
   end
 
   scenario 'with invalid content, but then corrects it' do
-    visit stamp_path(stamp)
+    visit label_stamp_path(stamp)
 
     page.find('#new_comment #comment_content').set(invalid_comment)
     page.click_button 'Add Comment'
@@ -42,7 +42,7 @@ RSpec.feature 'User comments on a stamp' do
     page.find('#new_comment #comment_content').set(valid_comment)
     page.click_button 'Add Comment'
 
-    expect(page).to have_current_path(stamp_path(stamp.id))
+    expect(page).to have_current_path(label_stamp_path(stamp.id))
     expect(page).to have_content('Comment created')
     expect(page).to have_content(valid_comment)
   end
