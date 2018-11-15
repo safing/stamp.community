@@ -33,5 +33,5 @@ Rails.application.routes.draw do
 
   mount APIRouter => '/'
 
-  root to: 'stamps#index'
+  root to: 'stamps/labels#index'
 end
