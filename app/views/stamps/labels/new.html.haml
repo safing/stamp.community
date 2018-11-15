@@ -10,7 +10,7 @@
     = render 'partials/errors', object: @stamp, attached: true
 
     %div.ui.styled.fluid.accordion{data: {controller: 'new-stamp', new_stamp: {set_percentage: @stamp.percentage, set_label_id: @stamp.label_id}}}
-      = form_for @stamp, html: {class: %w[ui form]} do |f|
+      = form_for @stamp, url: label_stamp_index_path, html: {class: %w[ui form]} do |f|
         = f.hidden_field :domain, value: params[:domain] || @stamp.domain.name
         -# render "shared/errors", object: @stamp
         %div.title
