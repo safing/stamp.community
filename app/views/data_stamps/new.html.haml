@@ -47,10 +47,10 @@
               = f.check_box :server, style: 'display: none;'
               %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
             %td{style: 'background-color: lightgray;'}
-    %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
-      =# f.submit 'Save', class: 'ui purple big basic button'
-      %button.ui.purple.basic.big.button
-        Cancel
+        %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
+          = f.submit 'Save', class: 'ui purple big basic button'
+          %button.ui.purple.basic.big.button
+            Cancel
 :javascript
   $('input[type=checkbox]').change(function() {
     $(this).parent('td').toggleClass('selected', this.checked);
