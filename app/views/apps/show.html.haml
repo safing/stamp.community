@@ -31,13 +31,13 @@
           %table.ui.celled.table{style: 'margin-bottom: 1px;'}
             %tbody
               %tr
-                %td{ class: ('selected' if @app.flag_stamp.internet?) }
+                %td{ class: ('selected' if @app.flag_stamp.internet) }
                   Internet
                   %i.info.circle.icon.small.link{"data-content" => "Allow connections to the Internet.", "data-variation" => "mini"}
-                %td{ class: ('selected' if @app.flag_stamp.lan?) }
+                %td{ class: ('selected' if @app.flag_stamp.lan) }
                   LAN
                   %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local area network.", "data-variation" => "mini"}
-                %td{ class: ('selected' if @app.flag_stamp.localhost?) }
+                %td{ class: ('selected' if @app.flag_stamp.localhost) }
                   Localhost
                   %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
               %tr

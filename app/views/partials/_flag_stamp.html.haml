@@ -15,13 +15,13 @@
       %tbody
         %tbody
           %tr
-            %td{ class: ('selected' if @stamp.internet?) }
+            %td{ class: ('selected' if @stamp.internet) }
               Internet
               %i.info.circle.icon.small.link{"data-content" => "Allow connections to the Internet.", "data-variation" => "mini"}
-            %td{ class: ('selected' if @stamp.lan?) }
+            %td{ class: ('selected' if @stamp.lan) }
               LAN
               %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local area network.", "data-variation" => "mini"}
-            %td{ class: ('selected' if @stamp.localhost?) }
+            %td{ class: ('selected' if @stamp.localhost) }
               Localhost
               %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
           %tr
