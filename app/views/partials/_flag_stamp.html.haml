@@ -35,12 +35,12 @@
               Whitelist
               %i.info.circle.icon.small.link{"data-content" => "Block all connections except those explicitly allowed.", "data-variation" => "mini"}
           %tr
-            %td{ class: ('selected' if @stamp.server) }
-              Server
-              %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
             %td{ class: ('selected' if @stamp.p2p) }
               P2P
               %i.info.circle.icon.small.link{"data-content" => "Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.", "data-variation" => "mini"}
+            %td{ class: ('selected' if @stamp.server) }
+              Server
+              %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
             %td{style: 'background-color: lightgray;'}
         - if choose_me
           %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
