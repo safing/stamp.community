@@ -1,59 +1,55 @@
-class StampsController < ApplicationController
-  def new
-    @stamp = Stamp.new
-    @stamp.stampable = load_stampable
-    @stamp.comments.build
-    load_labels
-    authorize @stamp
-  end
+module Stamps
+  class LabelsController < ApplicationController
+    def new
+      @stamp = Stamp::Label.new
 
-  def create
-    @stamp = Stamp.new(stamp_params)
-    @stamp.stampable = load_stampable
-    @stamp.creator = @stamp.comments.first.user = current_user
-    authorize @stamp
-
-    if @stamp.save
-      redirect_to(stamp_path(@stamp.id), flash: { success: 'Stamp created successfully' })
-    else
+      @stamp.stampable = load_domain
+      @stamp.comments.build
       load_labels
-      render 'new'
+      authorize @stamp
     end
-  end
 
-  def show
-    @commentable = @votable = @stamp = Stamp.find(params[:id])
-    @comments = @commentable.comments
-    @comment = Comment.new
+    def create
+      @stamp = Stamp::Label.new(stamp_params)
+      @stamp.stampable = load_domain
+      @stamp.creator = @stamp.comments.first.user = current_user
+      authorize @stamp
 
-    authorize @stamp
-  end
+      if @stamp.save
+        redirect_to(label_stamp_path(@stamp.id), flash: { success: 'Stamp created successfully' })
+      else
+        load_labels
+        render 'new'
+      end
+    end
 
-  def index; end
+    def show
+      @commentable = @votable = @stamp = Stamp::Label.find(params[:id])
+      @comments = @commentable.comments
+      @comment = Comment.new
 
-  private
+      authorize @stamp
+    end
 
-  def stamp_type
-    @stamp_type ||= params[:type] if params[:type].in? Stamp::TYPES
-  end
+    def index; end
 
-  def stamp_params
-    params.require(:stamp)
-          .permit(
-            :label_id,
-            :percentage
-          )
-  end
+    private
 
-  def load_stampable
-    if stamp_type == 'Stamp::Label'
+    def stamp_params
+      params.require(:stamp)
+            .permit(
+              :label_id,
+              :percentage,
+              comments_attributes: [:content]
+            )
+    end
+
+    def load_domain
       Domain.find_by(name: params[:domain_name] || params['stamp']['domain'])
-    elsif stamp_type == 'Stamp::Flag'
-      App.first
     end
-  end
 
-  def load_labels
-    @labels = Label.order(Arel.sql('LOWER(name) ASC'))
+    def load_labels
+      @labels = Label.order(Arel.sql('LOWER(name) ASC'))
+    end
   end
 end

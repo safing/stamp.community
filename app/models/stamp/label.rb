@@ -42,10 +42,12 @@ class Stamp::Label < Stamp
     siblings.count.positive?
   end
 
-  # https://stackoverflow.com/a/9463495/2235594
-  # might override stuff, a better approach might be:
-  # https://gist.github.com/sj26/5843855
-  def self.model_name
-    base_class.model_name
+  class << self
+    # https://stackoverflow.com/a/9463495/2235594
+    # might override stuff, a better approach might be:
+    # https://gist.github.com/sj26/5843855
+    def model_name
+      base_class.model_name
+    end
   end
 end
