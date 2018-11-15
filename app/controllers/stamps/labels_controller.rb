@@ -2,9 +2,9 @@ module Stamps
   class LabelsController < ApplicationController
     def new
       @stamp = Stamp::Label.new
-
       @stamp.stampable = load_domain
       @stamp.comments.build
+
       load_labels
       authorize @stamp
     end
