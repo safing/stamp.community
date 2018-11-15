@@ -15,29 +15,37 @@
             %td
               = f.label :internet, 'Internet'
               = f.check_box :internet, style: 'display: none;'
+              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the Internet.", "data-variation" => "mini"}
             %td
               = f.label :lan, 'LAN'
               = f.check_box :lan, style: 'display: none;'
+              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local area network.", "data-variation" => "mini"}
             %td
               = f.label :localhost, 'Localhost'
               = f.check_box :localhost, style: 'display: none;'
+              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
           %tr
             %td.selected
               = radio_button_tag 'stamp[prompt_group]', 'prompt', true, style: 'display: none ;'
               = f.label :prompt_group, 'Prompt', value: 'prompt'
+              %i.info.circle.icon.small.link{"data-content" => "Prompt for decisions on new connections.", "data-variation" => "mini"}
             %td
               = radio_button_tag 'stamp[prompt_group]', 'blacklist', false, style: 'display: none ;'
               = f.label :prompt_group, 'Blacklist', value: 'blacklist'
+              %i.info.circle.icon.small.link{"data-content" => "Allow all connections except those explicitly denied.", "data-variation" => "mini"}
             %td
               = radio_button_tag 'stamp[prompt_group]', 'whitelist', false, style: 'display: none ;'
               = f.label :prompt_group, 'Whitelist', value: 'whitelist'
+              %i.info.circle.icon.small.link{"data-content" => "Block all connections except those explicitly allowed.", "data-variation" => "mini"}
           %tr
             %td
               = f.label :p2p, 'P2P'
               = f.check_box :p2p, style: 'display: none;'
+              %i.info.circle.icon.small.link{"data-content" => "Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.", "data-variation" => "mini"}
             %td
               = f.label :server, 'Server'
               = f.check_box :server, style: 'display: none;'
+              %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
             %td{style: 'background-color: lightgray;'}
     %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
       =# f.submit 'Save', class: 'ui purple big basic button'
@@ -50,4 +58,8 @@
   $('input[type=radio]').change(function() {
     $(this).closest('tr').children('td').removeClass('selected');
     $(this).parent('td').addClass('selected');
+  });
+  $('.info.circle.icon.link')
+    .popup({
+      position   : 'right center',
   });
