@@ -58,6 +58,9 @@
                   Server
                   %i.info.circle.icon.small.link{ data: { content: 'Allow program to accept incoming connections and act as a server for other devices.', variation: 'mini' } }
                 %td{style: 'background-color: lightgray;'}
+          %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
+            = link_to flag_stamp_path(@app.flag_stamp), class: 'ui basic purple button', style: 'margin: 0;' do
+              Show Stamp
 
 :javascript
   $('.info.circle.icon.link')
