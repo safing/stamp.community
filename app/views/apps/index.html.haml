@@ -1,0 +1,31 @@
+%div.ui.middle.aligned.centered.container{style: 'cursor: pointer;'}
+  %h1
+    All Apps:
+    = link_to 'New App', new_app_path, class: 'ui basic purple right floated massive button'
+  %table.ui.selectable.celled.table
+    %thead
+      %tr
+        %th
+          App
+        %th
+          Description
+        %th{:colspan => "3"}
+          Operating System
+        %th
+          User
+    %tbody
+      - @apps.each do |app|
+        %tr{ onclick: "location.href='#{app_path(app)}'" }
+          %td
+            %h4.ui.purple.header 
+              = app.name
+          %td
+            = app.description
+          %td
+            %i.windows.large.icon{ class: ('purple' if app.windows) }
+          %td
+            %i.apple.large.icon{ class: ('purple' if app.macos) }
+          %td
+            %i.linux.large.icon{ class: ('purple' if app.linux) }
+          %td
+            = app.user.username
