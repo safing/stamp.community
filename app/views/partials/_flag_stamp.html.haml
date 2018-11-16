@@ -9,38 +9,38 @@
     - if header
       %h2
         %i.spotify.icon
-        Spotify
+        = link_to @stamp.app.name, app_path(@stamp.app)
         %i.purple.external.small.icon
     %table.ui.celled.table{style: 'margin-bottom: 1px;'}
       %tbody
         %tbody
           %tr
-            %td{ class: ('selected' if @stamp.internet?) }
+            %td{ class: ('selected' if @stamp.internet) }
               Internet
-              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the Internet.", "data-variation" => "mini"}
-            %td{ class: ('selected' if @stamp.lan?) }
+              %i.info.circle.icon.small.link{ data: { content: 'Allow connections to the Internet.', variation: 'mini' } }
+            %td{ class: ('selected' if @stamp.lan) }
               LAN
-              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local area network.", "data-variation" => "mini"}
-            %td{ class: ('selected' if @stamp.localhost?) }
+              %i.info.circle.icon.small.link{ data: { content: 'Allow connections to the local area network.', variation: 'mini' } }
+            %td{ class: ('selected' if @stamp.localhost) }
               Localhost
-              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
+              %i.info.circle.icon.small.link{ data: { content: 'Allow connections to the local host.', variation: 'mini' } }
           %tr
             %td{ class: ('selected' if @stamp.prompt) }
               Prompt
-              %i.info.circle.icon.small.link{"data-content" => "Prompt for decisions on new connections.", "data-variation" => "mini"}
+              %i.info.circle.icon.small.link{ data: { content: 'Prompt for decisions on new connections.', variation: 'mini' } }
             %td{ class: ('selected' if @stamp.blacklist) }
               Blacklist
-              %i.info.circle.icon.small.link{"data-content" => "Allow all connections except those explicitly denied.", "data-variation" => "mini"}
+              %i.info.circle.icon.small.link{ data: { content: 'Allow all connections except those explicitly denied.', variation: 'mini' } }
             %td{ class: ('selected' if @stamp.whitelist) }
               Whitelist
-              %i.info.circle.icon.small.link{"data-content" => "Block all connections except those explicitly allowed.", "data-variation" => "mini"}
+              %i.info.circle.icon.small.link{ data: { content: 'Block all connections except those explicitly allowed.', variation: 'mini' } }
           %tr
             %td{ class: ('selected' if @stamp.p2p) }
               P2P
-              %i.info.circle.icon.small.link{"data-content" => "Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.", "data-variation" => "mini"}
+              %i.info.circle.icon.small.link{ data: { content: 'Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.', variation: 'mini' } }
             %td{ class: ('selected' if @stamp.server) }
               Server
-              %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
+              %i.info.circle.icon.small.link{ data: { content: 'Allow program to accept incoming connections and act as a server for other devices.', variation: 'mini' } }
             %td{style: 'background-color: lightgray;'}
         - if choose_me
           %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}

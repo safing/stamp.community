@@ -14,7 +14,7 @@
         %div.ui.grid
           - @domain.stamps.accepted.each do |stamp|
             %div.four.wide.column
-              =link_to stamp_path(stamp.id) do
+              =link_to label_stamp_path(stamp.id) do
                 %h5.ui.middle.aligned.header
                   = stamp.label.name
             %div.twelve.wide.column
@@ -34,7 +34,7 @@
         %div.ui.grid
           - @domain.stamps.in_progress.each do |sibling|
             %div.four.wide.column
-              =link_to stamp_path(sibling.id) do
+              =link_to label_stamp_path(sibling.id) do
                 %h5.ui.middle.aligned.header
                   = sibling.label.name
             %div.twelve.wide.column
@@ -46,7 +46,7 @@
                       \%
     - if user_signed_in?
       %div.ui.basic.segment
-        = link_to new_stamp_path(domain_name: @domain.name) do
+        = link_to new_label_stamp_path(domain_name: @domain.name) do
           %button.ui.purple.basic.big.button
             Add Stamp
   %div.five.wide.right.floated.column

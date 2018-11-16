@@ -1,15 +1,15 @@
 %div.ui.container
   %h1
-    Data Stamp for
-    =# @stamp.domain.name
-    =#%a{href: @stamp.domain.href}
-    %i.purple.external.icon
+    Flag Stamp for
+    = @stamp.app.name
+    = link_to @stamp.app.link do
+      %i.purple.external.icon
 
   %div.ui.segment{style: 'padding-bottom: 3rem; margin-right: 29rem;'}
     = render 'partials/errors', object: @stamp, attached: true
     %table.ui.celled.table{style: 'margin-bottom: 1px;'}
-      = form_for @stamp, html: {class: %w[ui form]} do |f|
-        =# f.hidden_field :domain, value: params[:domain] || @stamp.domain.name
+      = form_for @stamp, url: flag_stamp_index_path, html: {class: %w[ui form]} do |f|
+        = f.hidden_field :app_id, value: params[:app_id] || @stamp.app.id
         %tbody
           %tr
             %td
@@ -25,16 +25,16 @@
               = f.check_box :localhost, style: 'display: none;'
               %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
           %tr
-            %td.selected
-              = radio_button_tag 'stamp[prompt_group]', 'prompt', true, style: 'display: none ;'
+            %td{ class: ('selected' if @stamp.prompt) }
+              = radio_button_tag 'stamp[prompt_group]', 'prompt', @stamp.prompt, style: 'display: none ;'
               = f.label :prompt_group, 'Prompt', value: 'prompt'
               %i.info.circle.icon.small.link{"data-content" => "Prompt for decisions on new connections.", "data-variation" => "mini"}
-            %td
-              = radio_button_tag 'stamp[prompt_group]', 'blacklist', false, style: 'display: none ;'
+            %td{ class: ('selected' if @stamp.blacklist) }
+              = radio_button_tag 'stamp[prompt_group]', 'blacklist', @stamp.blacklist, style: 'display: none ;'
               = f.label :prompt_group, 'Blacklist', value: 'blacklist'
               %i.info.circle.icon.small.link{"data-content" => "Allow all connections except those explicitly denied.", "data-variation" => "mini"}
-            %td
-              = radio_button_tag 'stamp[prompt_group]', 'whitelist', false, style: 'display: none ;'
+            %td{ class: ('selected' if @stamp.whitelist) }
+              = radio_button_tag 'stamp[prompt_group]', 'whitelist', @stamp.whitelist, style: 'display: none ;'
               = f.label :prompt_group, 'Whitelist', value: 'whitelist'
               %i.info.circle.icon.small.link{"data-content" => "Block all connections except those explicitly allowed.", "data-variation" => "mini"}
           %tr
@@ -47,10 +47,10 @@
               = f.check_box :server, style: 'display: none;'
               %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
             %td{style: 'background-color: lightgray;'}
-    %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
-      =# f.submit 'Save', class: 'ui purple big basic button'
-      %button.ui.purple.basic.big.button
-        Cancel
+        %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
+          = f.submit 'Save', class: 'ui purple big basic button'
+          %button.ui.purple.basic.big.button
+            Cancel
 :javascript
   $('input[type=checkbox]').change(function() {
     $(this).parent('td').toggleClass('selected', this.checked);

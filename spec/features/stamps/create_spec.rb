@@ -13,7 +13,7 @@ RSpec.feature 'User creates a stamp', js: true do
   end
 
   scenario 'with valid attributes' do
-    visit new_stamp_path(domain_name: domain.name)
+    visit new_label_stamp_path(domain_name: domain.name)
 
     # select a label
     page.first("[data-action='new-stamp#selectLabel']").click
@@ -23,14 +23,14 @@ RSpec.feature 'User creates a stamp', js: true do
     page.find('#stamp_comments_attributes_0_content').set(valid_comment)
     page.click_button 'Create'
 
-    expect(page).to have_current_path(stamp_path(Stamp.last.id))
+    expect(page).to have_current_path(label_stamp_path(Stamp.last.id))
     expect(page).to have_content('Stamp created successfully')
     expect(page).to have_content('In Progress')
     expect(page).to have_content(valid_comment)
   end
 
   scenario 'with invalid attributes' do
-    visit new_stamp_path(domain_name: domain.name)
+    visit new_label_stamp_path(domain_name: domain.name)
 
     # select a label
     page.first("[data-action='new-stamp#selectLabel']").click
@@ -40,12 +40,12 @@ RSpec.feature 'User creates a stamp', js: true do
     page.find('#stamp_comments_attributes_0_content').set(invalid_comment)
     page.click_button 'Create'
 
-    expect(page).to have_current_path(stamps_path)
+    expect(page).to have_current_path(label_stamp_index_path)
     expect(page).to have_content('Comments content is too short')
   end
 
   scenario 'with invalid attributes, but then corrects them' do
-    visit new_stamp_path(domain_name: domain.name)
+    visit new_label_stamp_path(domain_name: domain.name)
 
     # select a label
     page.first("[data-action='new-stamp#selectLabel']").click
@@ -55,14 +55,14 @@ RSpec.feature 'User creates a stamp', js: true do
     page.find('#stamp_comments_attributes_0_content').set(invalid_comment)
     page.click_button 'Create'
 
-    expect(page).to have_current_path(stamps_path)
+    expect(page).to have_current_path(label_stamp_index_path)
     expect(page).to have_content('Comments content is too short')
 
     # insert valid comment
     page.find('#stamp_comments_attributes_0_content').set(valid_comment)
     page.click_button 'Create'
 
-    expect(page).to have_current_path(stamp_path(Stamp.last.id))
+    expect(page).to have_current_path(label_stamp_path(Stamp.last.id))
     expect(page).to have_content('Stamp created successfully')
     expect(page).to have_content('In Progress')
     expect(page).to have_content(valid_comment)
