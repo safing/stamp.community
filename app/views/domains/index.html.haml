@@ -1,0 +1,28 @@
+%div.ui.middle.aligned.centered.container{style: 'cursor: pointer;'}
+  %h1
+    All Domain:
+    = link_to 'New Domain', new_domain_path, class: 'ui basic purple right floated massive button'
+  %table.ui.selectable.celled.table
+    %thead
+      %tr
+        %th
+          Domain
+        %th
+          Stamps
+        %th
+          User
+        %th
+          Link
+    %tbody
+      - @domains.each do |domain|
+        %tr{ onclick: "location.href='#{domain_path(domain.name)}'" }
+          %td
+            %h4.ui.purple.header
+              = domain.name
+          %td
+            = domain.stamps.count
+          %td
+            = domain.user.username
+          %td
+            = link_to domain.href do
+              %i.purple.external.icon
