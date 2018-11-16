@@ -21,6 +21,10 @@ class AppsController < ApplicationController
     end
   end
 
+  def index
+    @apps = App.all
+  end
+
   private
 
   def app_params

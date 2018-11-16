@@ -43,6 +43,11 @@ class DomainsController < ApplicationController
       format.js
     end
   end
+
+  def index
+    @domains = Domain.all
+  end
+
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 

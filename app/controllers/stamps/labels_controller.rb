@@ -31,7 +31,9 @@ module Stamps
       authorize @stamp
     end
 
-    def index; end
+    def index
+      @stamp = Stamp::Flag.first
+    end
 
     private
 
