@@ -9,7 +9,7 @@
     %div.six.wide.column
       %div.ui.basic.segment
         = @app.description
-    .six.wide.column
+    %div.six.wide.column
       %div.ui.basic.segment
         %i.big.icons
           %i.linux.icon{ class: ('disabled' unless @app.linux) }
@@ -61,6 +61,8 @@
           %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
             = link_to flag_stamp_path(@app.flag_stamp), class: 'ui basic purple button', style: 'margin: 0;' do
               Show Stamp
+    - else 
+      = link_to 'New Stamp', new_flag_stamp_path(app_id: @app.id), class: 'ui purple basic button'
 
 :javascript
   $('.info.circle.icon.link')
