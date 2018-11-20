@@ -4,6 +4,20 @@ networks:
     driver: overlay
     attachable: true
 services:
+  rails_app:
+    image: "toolset.safing.network/rails:latest"
+    entrypoint: /bin/bash -c "sleep infinity"
+    volumes:
+      - .:/rails_app
+    env_file: .docker_rails_env
+  web:
+    image: toolset.safing.network/rails:latest
+    entrypoint: /bin/bash -c "cd /rails_app && bundle exec rails s -b 0.0.0.0"
+    volumes:
+      - .:/rails_app
+    ports:
+      - '3000:3000'
+    env_file: .docker_rails_env
   postgres:
     image: postgres:9.6.3
     volumes:
@@ -13,7 +27,14 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD:
       PGDATA: /pgdata
-    ports:
-      - '5432:5432'
-    networks:
-      - stamp
+  redis:
+    image: redis:latest
+    command: redis-server
+    volumes:
+      - ${STAMP}/data/redis:/data
+  sidekiq:
+    image: toolset.safing.network/rails:latest
+    entrypoint: /bin/bash -c "cd /rails_app && bundle exec sidekiq -C config/sidekiq.yml"
+    volumes:
+      - '.:/rails_app'
+    env_file: .docker_rails_env
