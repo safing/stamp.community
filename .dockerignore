@@ -2,7 +2,7 @@
 /log/*
 /log
 /tmp
-/pgdata
+/data
 /notes/*
 *.DS_Store
 notes.md
