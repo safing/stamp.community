@@ -7,7 +7,7 @@ services:
   postgres:
     image: postgres:9.6.3
     volumes:
-      - ./pgdata:/pgdata
+      - ${STAMP}/data/pg:/pgdata
     environment:
       POSTGRES_DB: stamp_development
       POSTGRES_USER: postgres
