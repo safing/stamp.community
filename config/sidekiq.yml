@@ -5,6 +5,7 @@ staging:
   :concurrency: 10
 production:
   :concurrency: 20
+  :logfile: /dev/stdout
 :queues:
   - critical
   - default
