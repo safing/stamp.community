@@ -1,3 +1,4 @@
+# used to build images which are deployed to production
 FROM ruby:2.5
 MAINTAINER david@safing.io
 
@@ -10,8 +11,8 @@ RUN apt-get update && apt-get install -y \
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
 # commands.
-RUN mkdir -p /app
-WORKDIR /app
+RUN mkdir -p /stamp
+WORKDIR /stamp
 
 # Copy the Gemfile as well as the Gemfile.lock and install
 # the RubyGems. This is a separate step so the dependencies
@@ -20,18 +21,13 @@ WORKDIR /app
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
+# Set Rails to run in production
+ENV RAILS_ENV production
+ENV RACK_ENV production
+
 # Copy the main application.
 COPY . ./
 
-# Expose port 3000 to the Docker host, so we can access it
-# from the outside.
-EXPOSE 3000
-
 # Configure an entry point, so we don't need to specify
 # "bundle exec" for each of our commands.
-# ENTRYPOINT ["bundle", "exec"]
-
-# The main command to run when the container starts. Also
-# tell the Rails dev server to bind to all interfaces by
-# default.
-# CMD ["rails", "server", "-b", "0.0.0.0"]
+ENTRYPOINT ["bundle", "exec"]
