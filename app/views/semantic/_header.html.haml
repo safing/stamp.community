@@ -4,8 +4,8 @@
     %h2{type: 'text'}
       Stamp
   - if user_signed_in?
-    = link_to 'New Domain', new_domain_path, class: 'item'
-    = link_to 'New App', new_app_path, class: 'item'
+    = link_to 'All Domains', domains_path, class: 'item'
+    = link_to 'All Apps', apps_path, class: 'item'
   .menu
 
   .right.menu

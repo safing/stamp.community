@@ -1,44 +1,44 @@
 - header ||= nil; choose_me ||= nil
-- skip_card ||= nil
+- skip_card ||= nil; show_stamp ||= nil
 
 - if skip_card
   %button.ui.purple.basic.big.button
     Discard Me
 - else
-  %div.ui.segment{style: 'padding-bottom: 3rem;'}
+  %div.ui.segment{style: 'padding: 3rem 0;'}
     - if header
       %h2
         %i.spotify.icon
-        = link_to @stamp.app.name, app_path(@stamp.app)
+        = link_to stamp.app.name, app_path(stamp.app)
         %i.purple.external.small.icon
     %table.ui.celled.table{style: 'margin-bottom: 1px;'}
       %tbody
         %tbody
           %tr
-            %td{ class: ('selected' if @stamp.internet) }
+            %td{ class: ('selected' if stamp.internet) }
               Internet
               %i.info.circle.icon.small.link{ data: { content: 'Allow connections to the Internet.', variation: 'mini' } }
-            %td{ class: ('selected' if @stamp.lan) }
+            %td{ class: ('selected' if stamp.lan) }
               LAN
               %i.info.circle.icon.small.link{ data: { content: 'Allow connections to the local area network.', variation: 'mini' } }
-            %td{ class: ('selected' if @stamp.localhost) }
+            %td{ class: ('selected' if stamp.localhost) }
               Localhost
               %i.info.circle.icon.small.link{ data: { content: 'Allow connections to the local host.', variation: 'mini' } }
           %tr
-            %td{ class: ('selected' if @stamp.prompt) }
+            %td{ class: ('selected' if stamp.prompt) }
               Prompt
               %i.info.circle.icon.small.link{ data: { content: 'Prompt for decisions on new connections.', variation: 'mini' } }
-            %td{ class: ('selected' if @stamp.blacklist) }
+            %td{ class: ('selected' if stamp.blacklist) }
               Blacklist
               %i.info.circle.icon.small.link{ data: { content: 'Allow all connections except those explicitly denied.', variation: 'mini' } }
-            %td{ class: ('selected' if @stamp.whitelist) }
+            %td{ class: ('selected' if stamp.whitelist) }
               Whitelist
               %i.info.circle.icon.small.link{ data: { content: 'Block all connections except those explicitly allowed.', variation: 'mini' } }
           %tr
-            %td{ class: ('selected' if @stamp.p2p) }
+            %td{ class: ('selected' if stamp.p2p) }
               P2P
               %i.info.circle.icon.small.link{ data: { content: 'Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.', variation: 'mini' } }
-            %td{ class: ('selected' if @stamp.server) }
+            %td{ class: ('selected' if stamp.server) }
               Server
               %i.info.circle.icon.small.link{ data: { content: 'Allow program to accept incoming connections and act as a server for other devices.', variation: 'mini' } }
             %td{style: 'background-color: lightgray;'}
@@ -46,10 +46,16 @@
           %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
             %button.ui.purple.basic.big.button{style: 'margin: 0;'}
               Choose Me
+        %div{class: %w[ui large top right attached label].push(class_for(stamp.state))}
+          = stamp.state.titleize
+        - if show_stamp
+          %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
+            = link_to flag_stamp_path(stamp), class: 'ui basic purple button', style: 'margin: 0;' do
+              Show Stamp
         %div.ui.bottom.right.attached.label
-          %i.windows.large.icon{ class: ('purple' if @stamp.app.windows) }
-          %i.apple.large.icon{ class: ('purple' if @stamp.app.macos) }
-          %i.linux.large.icon{ class: ('purple' if @stamp.app.linux) }
+          %i.windows.large.icon{ class: ('purple' if stamp.app.windows) }
+          %i.apple.large.icon{ class: ('purple' if stamp.app.macos) }
+          %i.linux.large.icon{ class: ('purple' if stamp.app.linux) }
 
 :javascript
   $('.info.circle.icon.link')
