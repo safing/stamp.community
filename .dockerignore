@@ -1,0 +1,10 @@
+# Ignore all logfiles and tempfiles.
+/.bundle
+/log/*
+/log
+/tmp
+/data
+/notes/*
+*.DS_Store
+notes.md
+Dockerfile

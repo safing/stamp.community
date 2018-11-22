@@ -1,0 +1,62 @@
+%div.ui.container
+  %h1.header
+    Most Activity
+    %div.ui.divider{style: "margin-bottom: -5px;"}
+  %div.ui.internally.celled.grid
+    %div.eight.wide.column
+      %h1
+        Label Stamps:
+      %div.ui.segment
+        %div.sixteen.wide.column
+          %h2.header
+            safing.io
+            %a
+              %i.purple.external.icon
+            %div.ui.divider{style: "margin-bottom: -5px;"}
+        %div.ten.wide.column
+          %div.ui.basic.segment
+            %div.ui.grid
+              %div.three.wide.column
+                %h5.ui.middle.aligned.header
+                  Management
+              %div.thirteen.wide.column
+                %div.bar.float.right
+                  %div.ui.purple.small.progress{style: "background: white;"}
+                    %div.bar{style: "width: 39%; z-index: 10; "}
+                      %div.progress
+                        39%
+                  %div.ui.teal.small.progress{style: "background: white;"}
+                    %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
+    %div.eight.wide.column
+      %h1
+        Apps Stamps:
+      = render 'partials/flag_stamp', header: true, stamp: @stamp
+
+  %h1.header
+    Recent Stamps
+    %div.ui.divider{style: "margin-bottom: -5px;"}
+  %div.ui.internally.celled.grid
+    %div.eight.wide.column
+      %div.ui.segment
+        %div.sixteen.wide.column
+          %h2.header
+            safing.io
+            %a
+              %i.purple.external.icon
+            %div.ui.divider{style: "margin-bottom: -5px;"}
+        %div.ten.wide.column
+          %div.ui.basic.segment
+            %div.ui.grid
+              %div.three.wide.column
+                %h5.ui.middle.aligned.header
+                  Management
+              %div.thirteen.wide.column
+                %div.bar.float.right
+                  %div.ui.purple.small.progress{style: "background: white;"}
+                    %div.bar{style: "width: 39%; z-index: 10; "}
+                      %div.progress
+                        39%
+                  %div.ui.teal.small.progress{style: "background: white;"}
+                    %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
+    %div.eight.wide.column
+      = render 'partials/flag_stamp', header: true, stamp: @stamp

@@ -1,0 +1,27 @@
+.ui.inverted.menu.header{style: 'border-radius: 0;'}
+  %a{class: 'item', href: '/', style: 'padding: 0 6px;'}
+    %img{src: '/assets/basic_logo.png'}
+    %h2{type: 'text'}
+      Stamp
+  - if user_signed_in?
+    = link_to 'All Domains', domains_path, class: 'item'
+    = link_to 'All Apps', apps_path, class: 'item'
+  .menu
+
+  .right.menu
+    - if user_signed_in?
+      %div.ui.item{style: 'font-size: 1rem; padding: 5px;'}
+        %img{src: '/assets/stamp_j3rik0_no_text_icon.png', style: 'font-size: 0.6rem;'}
+        = current_user.stamps.count
+      %div.item{style: 'font-size: 1rem; padding: 5px;'}
+        %i.sort.icon
+        %div.content
+          = current_user.votes.count
+      %div.item{style: 'font-size: 1rem; padding: 5px;'}
+        %i.linkify.icon
+        %div.content
+          = current_user.domains.count
+      = link_to 'Profile', user_path(current_user), class: 'item'
+      = link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: 'item'
+    - else
+      = link_to 'Sign In', new_user_session_path, class: 'item'

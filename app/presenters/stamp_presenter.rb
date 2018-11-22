@@ -18,11 +18,11 @@ module StampPresenter
       required: true
     }
 
-    expose :domain_id, if: proc { |stamp, _| stamp.domain? } do |stamp, _|
+    expose :domain_id do |stamp, _|
       stamp.stampable_id
     end
 
-    expose :domain, if: proc { |stamp, _| stamp.domain? } do |stamp, _|
+    expose :domain do |stamp, _|
       stamp.stampable.name
     end
   end

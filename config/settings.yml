@@ -9,7 +9,7 @@ BOT:
     VOTING_LIMIT: 100_000
     STAMP_CREATION_LIMIT: 10_000
 
-STAMP:
+STAMP::LABEL:
   CREATOR:
     PRIZE: 10 # created good stuff
     PENALTY: -100 # created trash
@@ -19,3 +19,58 @@ STAMP:
   DOWNVOTER:
     PRIZE: 5 # downvoted trash
     PENALTY: -5 # downvoted good stuff
+VOTABLE:
+  POWER:
+    THRESHOLD: 10 # min power a stamp needs to continue conclusion
+    # if a votable falls below this, it will simply get rejected
+  MAJORITY:
+    THRESHOLD: 75 # in percent
+
+STAMP::FLAG:
+  CREATOR:
+    PRIZE: 10 # created good stuff
+    PENALTY: -100 # created trash
+  UPVOTER:
+    PRIZE: 1 # upvoted good stuff
+    PENALTY: -10 # upvoted trash
+  DOWNVOTER:
+    PRIZE: 5 # downvoted trash
+    PENALTY: -5 # downvoted good stuff
+VOTABLE:
+  POWER:
+    THRESHOLD: 10 # min power a stamp needs to continue conclusion
+    # if a votable falls below this, it will simply get rejected
+  MAJORITY:
+    THRESHOLD: 75 # in percent
+
+FLAGS:
+  # # write access
+  # - any
+  # - user
+  # - admin
+  # - system
+  - name: prompt
+    description: Prompt for decisions on new connections.
+    group: 1
+  - name: blacklist
+    description: Allow all connections except those explicitly denied.
+    group: 1
+  - name: whitelist
+    group: 1
+    description: Block all connections except those explicitly allowed.
+  #  ↓ independent flags ↓
+  - name: internet
+    description: Allow connections to the Internet.
+  - name: lan
+    description: Allow connections to the local area network.
+  - name: localhost
+    description: Allow connections to the local host.
+  - name: server
+    description: Allow program to accept incoming connections and act as a server for other devices.
+  - name: p2p
+    description: Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.
+
+OPERATING_SYSTEMS:
+  - linux
+  - macos
+  - windows

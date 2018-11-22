@@ -1,0 +1,10 @@
+- attached ||= nil
+
+- if object.errors.any?
+  %div.ui.error.message{class: ('attached' if attached)}
+    .header
+      Invalid
+      = object.class.name.titleize
+    %ul.list
+      - object.errors.full_messages.each do |message|
+        %li=message

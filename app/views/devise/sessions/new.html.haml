@@ -1,16 +1,23 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .form-group
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, class: 'form-control'
-  .form-group
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: 'off', class: 'form-control'
-  - if devise_mapping.rememberable?
-    .form-group
-      = f.check_box :remember_me
-      = f.label :remember_me
-  = f.submit 'Log in', class: 'btn btn-primary'
-= render 'devise/shared/links'
+%div.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
+
+  %div.four.wide.column
+    %div.ui.segment{ style: 'box-shadow: 5px 5px 20px -2px #A333C8 ; padding-bottom: 20px'}
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: %w[ui form header]}) do |f|
+        %h1
+          Log In
+        %div.field
+          = f.label :email
+          %div.ui.left.icon.input
+            = f.email_field :email, autofocus: true, class: %w[ui left icon input]
+            %i.mail.icon
+        %div.field
+          = f.label :password
+          %div.ui.left.icon.input
+            = f.password_field :password, autocomplete: 'off', class: 'form-control'
+            %i.lock.icon
+        - if devise_mapping.rememberable?
+          .ui.checkbox
+            = f.check_box :remember_me
+            = f.label :remember_me
+        = f.submit 'Log in', class: 'ui purple basic big button'
+      = render 'devise/shared/links'

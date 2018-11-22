@@ -1,0 +1,15 @@
+%div.ui.container
+  %h1
+    Stamp for
+    = @stamp.app.name
+    = link_to "https://#{@stamp.app.link}" do
+      %i.purple.external.small.icon
+  %div.ui.basic.segment
+    %div.ui.two.column.stackable.center.aligned.grid
+      %div.ui.vertical.divider
+        or
+      %div.middle.aligned.row
+        %div.column{style: 'padding-right: 30px;'}
+          = render 'partials/flag_stamp', choose_me: true, stamp: @stamp
+        %div.column{style: 'padding-left: 30px;'}
+          = render 'partials/flag_stamp', skip_card: true, stamp: @stamp

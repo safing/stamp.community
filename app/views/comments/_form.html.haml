@@ -1,0 +1,5 @@
+= render 'partials/errors', object: @comment
+= form_for [@commentable, @comment], html: { class: 'ui reply form' } do |f|
+  %div.ui.fluid.action.input
+    = f.text_field :content
+    = f.button 'Add Comment', class: 'ui purple basic button'

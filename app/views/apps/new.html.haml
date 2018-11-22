@@ -1,0 +1,36 @@
+%div.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
+  %div.four.wide.column
+    = render 'partials/errors', object: @app, attached: true
+    %div.ui.segment{style: 'margin: 0;'}
+      = form_for @app, html: { class: 'ui form header' } do |f|
+        %h1
+          Create App
+        %div.field
+          = f.label :name, "Name"
+          %div.ui.left.mini.input
+            = f.text_field :name
+        %div.field
+          = f.label :link, "Link"
+          %div.ui.left.mini.input
+            = f.text_field :link
+        %div.field
+          = f.label :name, "Description"
+          %div.ui.left.mini.input
+            = f.text_area :description
+        %div.field
+          %label
+            Operating Systems
+          .grouped.fields
+            .ui.checkbox
+              = f.check_box :linux
+              = f.label :linux do
+                %i.linux.icon
+            .ui.checkbox
+              = f.check_box :macos
+              = f.label :macos do
+                %i.apple.icon
+            .ui.checkbox
+              = f.check_box :windows
+              = f.label :windows do
+                %i.windows.icon
+        = f.submit 'Create', class: 'ui purple basic big button'

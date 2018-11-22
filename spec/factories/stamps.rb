@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :stamp do
-    label
-    percentage { Faker::Number.between(1, 100) }
-    association :creator, factory: :user
-    association :stampable, factory: :domain
+    creator { build(:user) }
+    stampable { build(:domain, user: creator) }
+    comments { build_list(:comment, 1, user: creator, commentable: @instance) }
 
     trait :accepted do
       state :accepted
@@ -16,5 +15,25 @@ FactoryBot.define do
     trait :with_downvotes do
       votes { build_list :downvote, 2 }
     end
+  end
+
+  factory :label_stamp, class: Stamp::Label, parent: :stamp do
+    label
+    label_id { label.id }
+
+    percentage 5
+
+    trait :binary do
+      percentage 100
+    end
+  end
+
+  factory :flag_stamp, class: Stamp::Flag, parent: :stamp do
+    stampable { build(:app, user: creator) }
+
+    prompt true
+  end
+
+  factory :identifier_stamp, class: Stamp::Identifier, parent: :stamp do
   end
 end

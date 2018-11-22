@@ -1,29 +1,29 @@
-.container > span > .row:first-child {
-  padding-top: 5%;
-}
-
-.row {
-  padding: 10px 0 0 0;
-}
-
 .hidden {
-  display: none;
-}
-
-.alert:first-child {
-  margin-top: 1em;
-}
-
-.row.label {
-  padding: 2% 0;
-  margin: 2% 0;
+  display: none !important;
 }
 
 .collapsible:hover {
-    border-radius: 5px;
-    background-color: #fbfbfb;
+  border-radius: 5px;
+  background-color: #fbfbfb;
 }
 
 .default-color {
   color: $text_color;
+}
+
+.ui.button {
+  margin-bottom: 8px;
+  padding: 6px;
+
+  &.mb0 {
+    margin-bottom: 0px;
+  }
+  &.ml5 {
+    margin-left: 5px;
+  }
+}
+
+.results .ui.label {
+  margin-top: 0.34em !important;
+  margin-bottom: 0.34em !important;
 }

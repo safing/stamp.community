@@ -8,7 +8,22 @@ RSpec.describe Label, type: :model do
     it { is_expected.to belong_to(:parent).class_name('Label').optional }
 
     it { is_expected.to have_many(:children).class_name('Label').with_foreign_key(:parent_id) }
-    it { is_expected.to have_many(:stamps) }
+  end
+
+  describe 'fields' do
+    let(:label) { Label.new }
+
+    it '#binary is set by default, has getter and setter' do
+      expect(label.binary).to be false
+      label.binary = true
+      expect(label.binary).to be true
+    end
+
+    it '#steps is set by default, has getter and setter' do
+      expect(label.steps).to eq(5)
+      label.steps = 10
+      expect(label.steps).to eq(10)
+    end
   end
 
   describe 'database' do
@@ -16,34 +31,10 @@ RSpec.describe Label, type: :model do
     it { is_expected.to have_db_index(:parent_id) }
   end
 
-  describe 'stamps_including_child_labels' do
-    subject { label.stamps_including_child_labels }
-    let(:label) { FactoryBot.create(:label, :with_stamps) }
-
-    before { FactoryBot.create_list(:stamp, 2) }
-
-    context 'label has no child labels' do
-      it 'return all direct stamps' do
-        expect(subject.count).to eq(2)
-      end
-    end
-
-    context 'label has child labels' do
-      before do
-        FactoryBot.create_list(:label, 2, :with_stamps, parent_id: label.id)
-      end
-
-      it 'returns the labels stamps and the child labels stamps' do
-        expect(subject.count).to eq(6)
-      end
-
-      it 'returns all of the labels stamps' do
-        expect(subject.where(stamps: { label_id: label.id }).count).to eq(2)
-      end
-
-      it 'returns all of child labels stamps' do
-        expect(subject.where.not(stamps: { label_id: label.id }).count).to eq(4)
-      end
-    end
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:description) }
+    it { is_expected.to validate_presence_of(:licence) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_inclusion_of(:steps).in_array([1, 5, 10]) }
   end
 end

@@ -1,0 +1,79 @@
+%div.ui.container
+  %div.ui.grid.divided
+    %div.four.wide.column
+      %h1
+        %i.icon
+        = @app.name
+        = link_to "https://#{@app.link}" do
+          %i.purple.external.small.icon
+    %div.six.wide.column
+      %div.ui.basic.segment
+        = @app.description
+    %div.six.wide.column
+      %div.ui.basic.segment
+        %i.big.icons
+          %i.linux.icon{ class: ('disabled' unless @app.linux) }
+          %i.corner.icon{ class: @app.linux ? 'checkmark green' : 'x disabled' }
+        %i.big.icons
+          %i.apple.icon{ class: ('disabled' unless @app.macos) }
+          %i.corner.icon{ class: @app.macos ? 'checkmark green' : 'x disabled' }
+        %i.big.icons
+          %i.windows.icon{ class: ('disabled' unless @app.windows) }
+          %i.corner.icon{ class: @app.windows ? 'checkmark green' : 'x disabled' }
+  %div.ui.two.column.grid
+    - if @app.flag_stamp.present?
+      %div.column
+        %div.ui.basic.segment{style: 'padding: 0;'}
+          %h2
+            Flags
+            %i.info.small.blue.circle.icon.activating.element{ data: { content: "TODO: Add description", position: "right center" } }
+        = render 'partials/flag_stamp', show_stamp: true, stamp: @app.flag_stamp
+
+    - else
+      = link_to 'New Stamp', new_flag_stamp_path(app_id: @app.id), class: 'ui purple basic button'
+
+:javascript
+  $('.info.circle.icon.link')
+    .popup({
+      position: 'right center'
+  });
+
+-#
+    %div.column{style: 'padding-left: 8rem;'}
+      %div.ui.basic.segment{style: 'padding: 0;'}
+        %h2
+          Identifier
+          %i.info.small.blue.circle.icon.activating.element{ data: {content: "Add users to your feed",position: "right center"}}
+      %div.ui.segments
+        %div.ui.segment
+          %div.ui.grid
+            %div.two.wide.column
+              %i.windows.big.icon{style: 'float: left;'}
+            %div.ten.wide.column
+              %p{style: 'margin: 0;'}
+                Path: C:/veqffvev
+              %p
+                id: sdvdvsvv
+          %div.ui.bottom.right.attached.label
+            %i.gavel.icon
+        %div.ui.segment
+          %div.ui.grid
+            %div.two.wide.column
+              %i.apple.big.icon{style: 'float: left;'}
+            %div.ten.wide.column
+              %p{style: 'margin: 0;'}
+                Path: C:/veqffvev
+              %p
+                id: sdvdvsvv
+          %div.ui.bottom.right.attached.label
+            %i.check.icon
+            %i.add.icon
+        %div.ui.segment
+          %div.ui.middle.aligned.grid
+            %div.two.wide.column
+              %i.big.icons{style: 'float: left;'}
+                %i.linux.icon{style: 'float: left;'}
+                %i.purple.left.corner.add.icon
+            %div.ten.wide.column
+              %h2
+                Help Us!

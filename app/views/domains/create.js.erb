@@ -1,0 +1,24 @@
+// set the correct classes for the form and message div
+var message_div = document.querySelector('div.ui.message');
+var new_domain_form = document.getElementById('new_domain');
+
+message_div.classList.remove('error', 'warning', 'success');
+message_div.classList.add('<%= @state %>');
+
+new_domain_form.classList.remove('error', 'warning', 'success');
+new_domain_form.classList.add('<%= @state %>');
+
+// set the header & content
+message_div.querySelector('.header').textContent = '<%= @header %>'
+var ul = message_div.querySelector('.list')
+<% if @link.present? %>
+  var link = "<a href='<%= @link %>'><%= @domain.name %></a>";
+  ul.innerHTML = "<li>Go to " + link + "</li>";
+<% else %>
+  ul.innerHTML = '';
+  <% @domain.errors.full_messages.each do |message|%>
+    var li = document.createElement('li')
+    li.appendChild(document.createTextNode('<%= message %>'))
+    ul.appendChild(li)
+  <% end %>
+<% end %>

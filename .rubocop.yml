@@ -1,5 +1,7 @@
 AllCops:
+  TargetRubyVersion: 2.4
   Exclude:
+    - pgdata/**/*
     - db/**/*.rb
     - lib/templates/**/*.rb
     - log/**/*
@@ -15,10 +17,14 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
 Metrics/LineLength:
   Max: 100
-
+Metrics/AbcSize:
+  Max: 17 # default = 15
 
 Style/ClassAndModuleChildren:
   Exclude:
     - 'app/api/v1/*.rb'
+    - 'app/workers/**/*.rb'
+    - 'app/models/**/*.rb'
+    - 'app/policies/**/*.rb'
 Style/FrozenStringLiteralComment:
   Enabled: false

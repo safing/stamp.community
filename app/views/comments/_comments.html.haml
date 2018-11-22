@@ -1,0 +1,17 @@
+%h3.ui.dividing.header
+- @comments.each do |comment|
+  .comment
+    = link_to user_path(comment.user), class: 'avatar' do
+      %img{src: '/assets/portmaster.png'}
+    .content
+      = link_to comment.user.username, user_path(comment.user), class: 'author'
+      .metadata
+        .date
+          = time_ago_in_words(comment.created_at)
+          ago
+      .text
+        %pg= comment.content
+      .actions
+        %a
+          %i.flag.icon
+          Flag

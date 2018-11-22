@@ -1,0 +1,92 @@
+%div.ui.grid.container
+  %div.sixteen.wide.column
+    %h1.header
+      New Stamp for
+      = @stamp.domain.name
+      %a{href: @stamp.domain.href}
+        %i.purple.external.icon
+    %div.ui.divider{style: "margin-bottom: -5px;"}
+  %div.nine.wide.column
+    = render 'partials/errors', object: @stamp, attached: true
+
+    %div.ui.styled.fluid.accordion{data: {controller: 'new-stamp', new_stamp: {set_percentage: @stamp.percentage, set_label_id: @stamp.label_id}}}
+      = form_for @stamp, url: label_stamp_index_path, html: {class: %w[ui form]} do |f|
+        = f.hidden_field :domain, value: params[:domain_name] || @stamp.domain.name
+        %div.title
+          1. Select Label
+          = button_tag '', type: 'button', class: %w[ui grey basic tiny button hidden ml5], data: {target: 'new-stamp.selectedLabel'}
+          = f.hidden_field :label_id, data: {target: 'new-stamp.labelId'}
+        %div.content
+          - @labels.each do |label|
+            = button_tag label.name, type: 'button', class: %w[ui grey basic tiny button], data: {action: 'new-stamp#selectLabel', label_id: label.id, content: label.description , variation: "mini"}
+          %div.ui.right.aligned.basic.segment
+            %div.ui.relaxed.horizontal.list{style: "border-top: 1px solid rgba(34, 36, 38, 0.15);"}
+              %div.item
+                %h6.ui.purple.header
+                  New Stamp
+              %div.item
+                %h6.ui.teal.header
+                  Re Stamp
+              %div.item
+                %h6.ui.grey.header
+                  Active Stamp
+        %div.title
+          2. Define percentage & comment
+          = f.hidden_field :percentage, id: 'stamp_percentage'
+        %div.content
+          %div.ui.grid
+            %div.fourteen.wide.column
+              %div.ui.purple.range#stamp_percentage_range
+            %div.two.wide.column
+              %span#stamp_percentage_display
+          %h3
+            Comment
+          = f.fields_for :comments do |c|
+            = c.text_area :content
+          .ui.divider
+          = f.submit 'Create Stamp', class: %w[ui purple basic big button mb0]
+  %div.six.wide.right.floated.column
+    - if @stamp.siblings.accepted.exists?
+      %div.ui.basic.segment{style: "margin-bottom: -22px;"}
+        %h3
+          Other Stamps of this domain
+          %div.ui.divider
+        %div.ui.grid
+          - @stamp.siblings.accepted.each do |sibling|
+            %div.four.wide.column
+              = link_to label_stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.purple.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
+    - if @stamp.siblings.in_progress.exists?
+      %div.ui.basic.segment
+        %h3
+          Suggested
+          %div.ui.divider{ style: "margin-top: 0px;"}
+        %div.ui.grid
+          - @stamp.siblings.in_progress.each do |sibling|
+            %div.four.wide.column
+              = link_to label_stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+
+:javascript
+  $('.ui.grey.basic.tiny.button')
+  .popup({
+    position: 'bottom left'
+  });

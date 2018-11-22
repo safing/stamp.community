@@ -1,0 +1,93 @@
+%div.ui.grid.container
+  %div.ten.wide.column
+    %div.ui.segment
+      %h1.header
+        Stamp for
+        = link_to domain_path(@stamp.domain.name) do
+          = @stamp.domain.name
+        = link_to @stamp.domain.href do
+          %i.purple.external.tiny.icon
+      .ui.divider
+      %span.ui.grid.centered.middle.aligned
+        .three.wide.column
+          %h3= @stamp.label.name
+        %div.ten.wide.column{style: "padding-top: 30px;"}
+          %div.bar.float.right
+            %div.ui.purple.progress{style: "background: #FDDCFD;"}
+              %div.bar{style: "width: #{@stamp.percentage}%; z-index: 10; "}
+                %div.progress
+                  = @stamp.percentage
+                  \%
+        .three.wide.column
+          = render 'votes/carets'
+      -# the order of classes is important for semantic, hence this is a bit odd
+      %div{class: %w[ui large top right attached label].push(class_for(@stamp.state))}
+        = @stamp.state.titleize
+      .ui.small.comments
+        = render 'comments/comments'
+        = render 'comments/form' if current_user && @stamp.in_progress?
+  %div.six.wide.column
+    - if @stamp.siblings.accepted.exists?
+      %div.ui.basic.segment{style: "margin-bottom: -22px;"}
+        %h3
+          Other Stamps of this domain
+          %div.ui.divider
+        %div.ui.grid
+          - @stamp.siblings.accepted.each do |sibling|
+            %div.four.wide.column
+              =link_to label_stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.purple.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
+    %div.ui.basic.segment
+      - if @stamp.siblings.in_progress.exists?
+        %h3
+          Suggested
+          %div.ui.divider{ style: "margin-top: 0px;"}
+        %div.ui.grid
+          - @stamp.siblings.in_progress.each do |sibling|
+            %div.four.wide.column
+              =link_to label_stamp_path(sibling.id) do
+                %h5.ui.middle.aligned.header
+                  = sibling.label.name
+            %div.twelve.wide.column
+              %div.bar.float.right
+                %div.ui.teal.small.progress{style: "background: white;"}
+                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                    %div.progress
+                      = sibling.percentage
+                      \%
+    - if user_signed_in?
+      %div.ui.basic.segment{style: "padding: 0;"}
+        = link_to new_label_stamp_path(domain_name: @stamp.domain.name) do
+          %button.ui.purple.basic.big.button
+            Add Stamp
+  - unless @stamp.in_progress?
+    .sixteen.wide.column
+      .ui.segment.results
+        %h2.ui.header
+          .content
+            Results
+            .sub.header
+              = @stamp.state.titleize
+              = time_ago_in_words(@stamp.updated_at)
+              ago
+              %i.hand.fitted.caret.up.big.green.icon
+              = @stamp.upvote_power
+              %i.hand.fitted.caret.down.big.red.icon
+              = @stamp.downvote_power
+        .ui.divider
+        - @stamp.votes.order(power: :desc, accept: :desc).each do |vote|
+          = link_to user_path(vote.user.id), class: %w[ui label].push(vote.upvote? ? 'green' : 'red') do
+            = vote.user.username
+            .detail
+              %i.chess.queen.icon
+              = vote.power

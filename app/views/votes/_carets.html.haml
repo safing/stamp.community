@@ -1,0 +1,17 @@
+%div.ui.icon.vertical.buttons
+  - if @votable.state == 'in_progress'
+    - if current_user.blank? || current_user.voted?(@votable)
+      = render 'votes/caret', type: 'upvote'
+    - else
+      = form_for [@votable, Vote.new], html: { id: 'new_upvote' } do |f|
+        = f.hidden_field :accept, value: true
+        = render 'votes/caret', type: 'upvote'
+    - if current_user.blank? || current_user.voted?(@votable)
+      = render 'votes/caret', type: 'downvote'
+    - else
+      = form_for [@votable, Vote.new], html: { id: 'new_downvote' } do |f|
+        = f.hidden_field :accept, value: false
+        = render 'votes/caret', type: 'downvote'
+  - else
+    = render 'votes/caret', type: 'upvote'
+    = render 'votes/caret', type: 'downvote'
