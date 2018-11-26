@@ -10,7 +10,7 @@ services:
     image: registry.safing.network/dev/stamp:latest
     command: rails s -b 0.0.0.0
     volumes:
-      - .:/rails_app
+      - .:/stamp
     ports:
       - '3000:3000'
     env_file: .docker_rails_env
@@ -32,5 +32,5 @@ services:
     image: registry.safing.network/dev/stamp:latest
     entrypoint: sidekiq -C config/sidekiq.yml
     volumes:
-      - .:/rails_app
+      - .:/stamp
     env_file: .docker_rails_env
