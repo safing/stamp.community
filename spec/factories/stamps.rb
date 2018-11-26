@@ -5,7 +5,7 @@ FactoryBot.define do
     comments { build_list(:comment, 1, user: creator, commentable: @instance) }
 
     trait :accepted do
-      state :accepted
+      state { :accepted }
     end
 
     trait :with_upvotes do
@@ -21,17 +21,17 @@ FactoryBot.define do
     label
     label_id { label.id }
 
-    percentage 5
+    percentage { 5 }
 
     trait :binary do
-      percentage 100
+      percentage { 100 }
     end
   end
 
   factory :flag_stamp, class: Stamp::Flag, parent: :stamp do
     stampable { build(:app, user: creator) }
 
-    prompt true
+    prompt { true }
   end
 
   factory :identifier_stamp, class: Stamp::Identifier, parent: :stamp do

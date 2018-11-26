@@ -1,4 +1,4 @@
-guard 'rspec',
+guard :rspec,
       results_file: File.expand_path('tmp/rspec_guard_result'),
       cmd: 'bundle exec rspec -fd',
       spec_paths: ['spec'] do

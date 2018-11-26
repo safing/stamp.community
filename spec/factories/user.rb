@@ -9,16 +9,16 @@ FactoryBot.define do
     confirmation_sent_at { 5.minutes.ago }
 
     trait :unconfirmed do
-      confirmed_at nil
-      confirmation_sent_at nil
+      confirmed_at { nil }
+      confirmation_sent_at { nil }
     end
   end
 
   factory :moderator, parent: :user do
-    role :moderator
+    role { :moderator }
   end
 
   factory :admin, parent: :user do
-    role :admin
+    role { :admin }
   end
 end
