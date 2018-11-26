@@ -1,6 +1,6 @@
 ---
 :concurrency: 5
-:logfile: ./log/sidekiq.log
+:logfile: /dev/stdout
 staging:
   :concurrency: 10
 production:
