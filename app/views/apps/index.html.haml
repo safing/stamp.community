@@ -22,10 +22,16 @@
           %td
             = app.description
           %td
-            %i.windows.large.icon{ class: ('purple' if app.windows) }
+            %i.large.icons
+              %i.linux.icon{ class: ('disabled' unless app.linux) }
+              %i.corner.icon{ class: app.linux ? 'checkmark green' : 'x disabled' }
           %td
-            %i.apple.large.icon{ class: ('purple' if app.macos) }
+            %i.large.icons
+              %i.apple.icon{ class: ('disabled' unless app.macos) }
+              %i.corner.icon{ class: app.macos ? 'checkmark green' : 'x disabled' }
           %td
-            %i.linux.large.icon{ class: ('purple' if app.linux) }
+            %i.large.icons
+              %i.windows.icon{ class: ('disabled' unless app.windows) }
+              %i.corner.icon{ class: app.windows ? 'checkmark green' : 'x disabled' }
           %td
             = app.user.username

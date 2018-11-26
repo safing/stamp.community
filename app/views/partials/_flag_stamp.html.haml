@@ -1,17 +1,18 @@
 - header ||= nil; choose_me ||= nil
 - skip_card ||= nil; show_stamp ||= nil
+- operating_system ||= nil
 
 - if skip_card
   %button.ui.purple.basic.big.button
     Discard Me
 - else
-  %div.ui.segment{style: 'padding: 3rem 0;'}
+  %div.ui.segment{style: 'padding: 3rem 0 3rem 0;'}
     - if header
-      %h2
+      %h2{style: 'top: 0.4rem; position: absolute;'}
         %i.spotify.icon
         = link_to stamp.app.name, app_path(stamp.app)
         %i.purple.external.small.icon
-    %table.ui.celled.table{style: 'margin-bottom: 1px;'}
+    %table.ui.celled.table{style: 'margin: 1px 0 !important;'}
       %tbody
         %tbody
           %tr
@@ -52,10 +53,17 @@
           %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
             = link_to flag_stamp_path(stamp), class: 'ui basic purple button', style: 'margin: 0;' do
               Show Stamp
-        %div.ui.bottom.right.attached.label
-          %i.windows.large.icon{ class: ('purple' if stamp.app.windows) }
-          %i.apple.large.icon{ class: ('purple' if stamp.app.macos) }
-          %i.linux.large.icon{ class: ('purple' if stamp.app.linux) }
+        -if operating_system
+          %div.ui.bottom.right.attached.label{style: 'padding: 5px;'}
+            %i.big.icons
+              %i.linux.icon{ class: ('disabled' unless stamp.app.linux) }
+              %i.corner.icon{ class: stamp.app.linux ? 'checkmark green' : 'x disabled' }
+            %i.big.icons
+              %i.apple.icon{ class: ('disabled' unless stamp.app.macos) }
+              %i.corner.icon{ class: stamp.app.macos ? 'checkmark green' : 'x disabled' }
+            %i.big.icons
+              %i.windows.icon{ class: ('disabled' unless stamp.app.windows) }
+              %i.corner.icon{ class: stamp.app.windows ? 'checkmark green' : 'x disabled' }
 
 :javascript
   $('.info.circle.icon.link')
