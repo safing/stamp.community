@@ -42,7 +42,6 @@ end
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'hirb'
   gem 'pry-byebug'

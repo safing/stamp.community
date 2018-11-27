@@ -3,3 +3,4 @@ TMP=/tmp
 TEMP=/tmp
 REDIS_URL=redis://redis:6379
 RAILS_ENV=development
+RACK_ENV=development

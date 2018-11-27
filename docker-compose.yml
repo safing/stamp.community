@@ -34,3 +34,12 @@ services:
     volumes:
       - .:/stamp
     env_file: .docker_rails_env
+  guard:
+    image: registry.safing.network/dev/stamp:latest
+    command: guard --no-bundler-warning --no-interactions
+    volumes:
+      - .:/stamp
+    tty: true # color the logs
+    environment:
+      RAILS_ENV: test
+      RACK_ENV: test

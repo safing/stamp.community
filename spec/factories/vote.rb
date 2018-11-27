@@ -8,7 +8,7 @@ FactoryBot.define do
   end
 
   factory :upvote, class: Vote do
-    accept true
+    accept { true }
     power { Faker::Number.number(1) }
 
     association :user
@@ -16,7 +16,7 @@ FactoryBot.define do
   end
 
   factory :downvote, class: Vote do
-    accept false
+    accept { false }
     power { Faker::Number.number(1) }
 
     association :user
