@@ -1,0 +1,13 @@
+%footer{style: 'flex-shrink: 0; margin-top: 10rem;'}
+  .ui.grid.center.aligned.stackable.container
+    .ui.seven.wide.column
+      .ui.list
+        = link_to 'All Domains', domains_path, class: 'item'
+        = link_to 'All Apps', apps_path, class: 'item'
+    .ui.two.wide.column
+      %img{src: '/assets/basic_logo.png', style: 'height: 5rem;'}
+    .ui.seven.wide.column
+      .ui.list
+        = link_to 'All Users', users_path, class: 'item'
+        = link_to 'All Labels', labels_path, class: 'item'
+        = link_to 'All Licence', licences_path, class: 'item'
