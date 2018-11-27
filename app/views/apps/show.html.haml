@@ -11,7 +11,7 @@
         = @app.description
     %div.six.wide.column
       %div.ui.basic.segment
-        = render 'partials/icons', app: @app
+        = render 'apps/partials/icons', app: @app
 
   %div.ui.two.column.grid
     - if @app.flag_stamp.present?
@@ -20,7 +20,7 @@
           %h2
             Flags
             %i.info.small.blue.circle.icon.activating.element{ data: { content: "TODO: Add description", position: "right center" } }
-        = render 'partials/flag_stamp', show_stamp: true, stamp: @app.flag_stamp
+        = render 'stamps/flags/partials/flag_stamp', show_stamp: true, stamp: @app.flag_stamp
 
     - else
       = link_to 'New Stamp', new_flag_stamp_path(app_id: @app.id), class: 'ui purple basic button'

@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :domains, param: :name, constraints: { name: Domain::NAME_REGEX }, only: %i[show new create index]
   # rubocop:enable LineLength
   resources :labels, only: %i[show index]
-  resources :licences, only: [:show, :index]
-  resources :users, only: [:show, :index]
+  resources :licences, only: %i[show index]
+  resources :users, only: %i[show index]
 
   # neat patterns for different Stamp::TYPES =>
   #  Prefix                URI Pattern                       Controller#Action
