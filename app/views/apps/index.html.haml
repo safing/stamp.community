@@ -9,8 +9,8 @@
           App
         %th
           Description
-        %th{:colspan => "3"}
-          Operating System
+        %th
+          Operating Systems
         %th
           User
     %tbody
@@ -22,16 +22,6 @@
           %td
             = app.description
           %td
-            %i.large.icons
-              %i.linux.icon{ class: ('disabled' unless app.linux) }
-              %i.corner.icon{ class: app.linux ? 'checkmark green' : 'x disabled' }
-          %td
-            %i.large.icons
-              %i.apple.icon{ class: ('disabled' unless app.macos) }
-              %i.corner.icon{ class: app.macos ? 'checkmark green' : 'x disabled' }
-          %td
-            %i.large.icons
-              %i.windows.icon{ class: ('disabled' unless app.windows) }
-              %i.corner.icon{ class: app.windows ? 'checkmark green' : 'x disabled' }
+            = render 'apps/partials/icons', app: app
           %td
             = app.user.username

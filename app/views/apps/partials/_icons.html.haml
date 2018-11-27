@@ -1,0 +1,5 @@
+- size ||= 'big'
+- {linux: 'linux', apple: 'macos', windows: 'windows'}.each do |class_name, os|
+  %i.icons{class: size}
+    %i.icon{class: "#{class_name} #{('disabled' unless app.send(os))}"}
+    %i.corner.icon{class: app.send(os) ? 'checkmark green' : 'x disabled'}

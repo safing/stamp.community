@@ -1,9 +1,0 @@
-%header
-  %nav.navbar.navbar-light.bg-light
-    = link_to root_url do
-      = image_tag('basic_logo.png', alt: 'Stamp Logo', width: 40, height: 40)
-    - if user_signed_in?
-      = link_to 'Profile', user_path(current_user)
-      = link_to 'Sign Out', destroy_user_session_path, method: 'delete'
-    - else
-      = link_to 'Sign In', new_user_session_path

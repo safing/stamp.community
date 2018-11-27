@@ -6,11 +6,13 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags
-  %body
+  %body{style: 'display: flex; flex-direction: column;'}
     = render partial: 'semantic/header'
-    - if flash.count > 0
-      %div.ui.grid.container
-        .sixteen.wide.column
-          - flash.each do |type, content|
-            = render 'partials/flash', type: type, content: content
-    = yield
+    %container{style: 'flex: 1 0 auto'}
+      - if flash.count > 0
+        %div.ui.grid.container
+          .sixteen.wide.column
+            - flash.each do |type, content|
+              = render 'partials/flash', type: type, content: content
+      = yield
+    = render partial: 'semantic/footer'
