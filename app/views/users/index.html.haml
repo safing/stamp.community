@@ -1,0 +1,24 @@
+%div.ui.middle.aligned.centered.container{style: 'cursor: pointer;'}
+  %table.ui.selectable.celled.table
+    %thead
+      %tr
+        %th
+          Name
+        %th
+          %img{src: '/assets/stamp_j3rik0_no_text_icon.png', style: 'height: 1rem;'}
+        %th
+          %i.sort.icon
+        %th
+          %i.linkify.icon
+        %th
+          %i.calendar.alternate.outline.icon
+    %tbody
+      - @users.each do |user|
+        %tr{ onclick: "location.href='#{user_path(user)}'"}
+          %td= user.username
+          %td= user.stamps.count
+          %td= user.votes.count
+          %td= user.domains.count
+          %td
+            = time_ago_in_words(user.created_at)
+            ago

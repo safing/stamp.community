@@ -1,3 +1,5 @@
+DEFAULT_EMAIL: noreply@safing.community
+
 USER:
   INITIAL_REPUTATION: 0
   DAILY:

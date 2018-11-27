@@ -5,10 +5,12 @@ networks:
     attachable: true
 services:
   web:
-    image: toolset.safing.network/rails:latest
-    entrypoint: /bin/bash -c "cd /rails_app && bundle exec rails s -b 0.0.0.0"
+    # dev image:        registry.safing.network/dev/stamp:latest
+    # production image: registry.safing.network/server/stamp:latest
+    image: registry.safing.network/dev/stamp:latest
+    command: rails s -b 0.0.0.0
     volumes:
-      - .:/rails_app
+      - .:/stamp
     ports:
       - '3000:3000'
     env_file: .docker_rails_env
@@ -27,8 +29,17 @@ services:
     volumes:
       - ${STAMP}/data/redis:/data
   sidekiq:
-    image: toolset.safing.network/rails:latest
-    entrypoint: /bin/bash -c "cd /rails_app && bundle exec sidekiq -C config/sidekiq.yml"
+    image: registry.safing.network/dev/stamp:latest
+    entrypoint: sidekiq -C config/sidekiq.yml
     volumes:
-      - '.:/rails_app'
+      - .:/stamp
     env_file: .docker_rails_env
+  guard:
+    image: registry.safing.network/dev/stamp:latest
+    command: guard --no-bundler-warning --no-interactions
+    volumes:
+      - .:/stamp
+    tty: true # color the logs
+    environment:
+      RAILS_ENV: test
+      RACK_ENV: test

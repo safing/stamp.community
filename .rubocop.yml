@@ -10,6 +10,8 @@ AllCops:
 
 Documentation:
   Enabled: false
+EmptyLineAfterGuardClause:
+  Enabled: false
 
 Metrics/BlockLength:
   CountComments: false

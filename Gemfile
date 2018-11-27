@@ -23,7 +23,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc'
 
 gem 'devise'
 gem 'pundit'
@@ -42,7 +42,6 @@ end
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'hirb'
   gem 'pry-byebug'

@@ -8,18 +8,18 @@ FactoryBot.define do
     user
     uuid { SecureRandom.uuid }
 
-    linux true
+    linux { true }
 
     trait :linux do
-      linux true
+      linux { true }
     end
 
     trait :macos do
-      macos true
+      macos { true }
     end
 
     trait :windows do
-      windows true
+      windows { true }
     end
   end
 end

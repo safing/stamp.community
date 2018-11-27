@@ -30,7 +30,7 @@
     %div.eight.wide.column
       %h1
         Apps Stamps:
-      = render 'partials/flag_stamp', header: true, stamp: @stamp
+      = render 'stamps/flags/partials/flag_stamp', header: true, operating_system: true, stamp: @stamp
 
   %h1.header
     Recent Stamps
@@ -59,4 +59,4 @@
                   %div.ui.teal.small.progress{style: "background: white;"}
                     %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
     %div.eight.wide.column
-      = render 'partials/flag_stamp', header: true, stamp: @stamp
+      = render 'stamps/flags/partials/flag_stamp', header: true, operating_system: true, stamp: @stamp
