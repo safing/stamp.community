@@ -55,15 +55,7 @@
               Show Stamp
         -if operating_system
           %div.ui.bottom.right.attached.label{style: 'padding: 5px;'}
-            %i.big.icons
-              %i.linux.icon{ class: ('disabled' unless stamp.app.linux) }
-              %i.corner.icon{ class: stamp.app.linux ? 'checkmark green' : 'x disabled' }
-            %i.big.icons
-              %i.apple.icon{ class: ('disabled' unless stamp.app.macos) }
-              %i.corner.icon{ class: stamp.app.macos ? 'checkmark green' : 'x disabled' }
-            %i.big.icons
-              %i.windows.icon{ class: ('disabled' unless stamp.app.windows) }
-              %i.corner.icon{ class: stamp.app.windows ? 'checkmark green' : 'x disabled' }
+            = render 'partials/icons', app: @stamp.app
 
 :javascript
   $('.info.circle.icon.link')
