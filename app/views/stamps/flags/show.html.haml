@@ -9,7 +9,7 @@
       %div.ui.vertical.divider
         or
       %div.middle.aligned.row
-        %div.column{style: 'padding-right: 30px;'}
+        %div.column.flag-column
           = render 'stamps/flags/partials/flag_stamp', choose_me: true, operating_system: true, stamp: @stamp
-        %div.column{style: 'padding-left: 30px;'}
+        %div.column.flag-column
           = render 'stamps/flags/partials/flag_stamp', skip_card: true, stamp: @stamp

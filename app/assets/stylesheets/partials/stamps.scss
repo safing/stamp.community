@@ -1,4 +1,35 @@
+/*Global:*/
 .selected {
   background: #A333C833 !important;
   color: #A333C8 !important;
+}
+
+/*Label:*/
+.ui.progress {
+  background: white;
+}
+
+.second-bar {
+   z-index: 10;
+}
+
+/*Flag:*/
+.flag-column {
+  padding: 0 30px !important;
+}
+
+.new-flag-segment {
+  padding-bottom: 3rem !important;
+  margin-right: 29rem !important;
+}
+
+.ui.attached.label {
+  padding: 5px;
+}
+.battle-button {
+  margin: 0 !important;
+}
+
+.hidden-check {
+  display: none;
 }
