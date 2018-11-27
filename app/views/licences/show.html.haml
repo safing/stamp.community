@@ -1,15 +1,10 @@
-.row
-  .col-1.text-center.pt-4.pb-4
-    %h2= image_tag 'licence_icon', style: 'height: 1em;'
-  .col-11.pt-4.pb-4.align-self-center
-    %h2.mb-0= @licence.name
-  .col-sm-12.col-md-5.offset-right-7
+.ui.container
+  .ui.segment
+    %h2
+      = image_tag 'licence_icon', style: 'height: 1em;'
+      = @licence.name
     %p= @licence.description
-  .col-sm-12.col-md-12.mt-4
-    .row.mb-3
-      .col-12
-        %h5 used by
-      .col-12
-        - @licence.labels.each do |label|
-          = link_to label_path(label), class: 'btn btn-info mr-2 mb-2' do
-            = label.name
+    %h5 used by
+    - @licence.labels.each do |label|
+      = link_to label_path(label), class: 'btn btn-info mr-2 mb-2' do
+        = label.name
