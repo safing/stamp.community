@@ -9,7 +9,7 @@
           %div.ui.search
             = form_for @domain, remote: true, html: { class: "ui form" } do |f|
               .ui.action.fluid.input
-                = f.text_field :name, placeholder: 'https://', type: "text", data: {target: 'new-domain.input'}
+                = f.text_field :name, placeholder: 'example.com', type: "text", data: {target: 'new-domain.input'}
                 = f.button type: :submit, class: 'ui purple basic button' do
                   Create
               %div.ui.error.message

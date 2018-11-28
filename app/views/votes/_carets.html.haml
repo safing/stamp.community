@@ -3,13 +3,13 @@
     - if current_user.blank? || current_user.voted?(@votable)
       = render 'votes/caret', type: 'upvote'
     - else
-      = form_for [@votable, Vote.new], html: { id: 'new_upvote' } do |f|
+      = form_for [@votable, Vote.new], url: stamp_votes_path(@votable.id), html: { id: 'new_upvote' } do |f|
         = f.hidden_field :accept, value: true
         = render 'votes/caret', type: 'upvote'
     - if current_user.blank? || current_user.voted?(@votable)
       = render 'votes/caret', type: 'downvote'
     - else
-      = form_for [@votable, Vote.new], html: { id: 'new_downvote' } do |f|
+      = form_for [@votable, Vote.new], url: stamp_votes_path(@votable.id), html: { id: 'new_downvote' } do |f|
         = f.hidden_field :accept, value: false
         = render 'votes/caret', type: 'downvote'
   - else

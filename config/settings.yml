@@ -1,7 +1,8 @@
 DEFAULT_EMAIL: noreply@safing.community
 
 USER:
-  INITIAL_REPUTATION: 0
+  INITIAL_REPUTATION: 1 # for the Alpha, users get a head start
+  # INITIAL_REPUTATION: 0
   DAILY:
     VOTING_LIMIT: 1_000
     STAMP_CREATION_LIMIT: 100
@@ -23,10 +24,10 @@ STAMP::LABEL:
     PENALTY: -5 # downvoted good stuff
 VOTABLE:
   POWER:
-    THRESHOLD: 10 # min power a stamp needs to continue conclusion
+    THRESHOLD: 4 # min power a stamp needs to continue conclusion
     # if a votable falls below this, it will simply get rejected
   MAJORITY:
-    THRESHOLD: 75 # in percent
+    THRESHOLD: 100 # in percent
 
 STAMP::FLAG:
   CREATOR:
@@ -40,10 +41,10 @@ STAMP::FLAG:
     PENALTY: -5 # downvoted good stuff
 VOTABLE:
   POWER:
-    THRESHOLD: 10 # min power a stamp needs to continue conclusion
+    THRESHOLD: 4 # min power a stamp needs to continue conclusion
     # if a votable falls below this, it will simply get rejected
   MAJORITY:
-    THRESHOLD: 75 # in percent
+    THRESHOLD: 100 # in percent
 
 FLAGS:
   # # write access
