@@ -1,4 +1,4 @@
-%footer{style: 'flex-shrink: 0; margin-top: 10rem;'}
+%footer
   .ui.divider
   .ui.grid.center.aligned.stackable.container
     .ui.seven.wide.column
@@ -7,8 +7,8 @@
           = link_to 'All Domains', domains_path, class: 'item'
           = link_to 'All Apps', apps_path, class: 'item'
     .ui.two.wide.column
-      %a{class: 'item', href: '/', style: 'padding: 0 6px;'}
-        %img{src: '/assets/basic_logo.png', style: 'height: 5rem;'}
+      %a{class: 'item img_item', href: '/'}
+        %img.footer_stamp_img{src: '/assets/basic_logo.png'}
     .ui.seven.wide.column
       - if user_signed_in?
         .ui.list

@@ -1,0 +1,22 @@
+/*both*/
+  .img_item {
+    padding: 0 6px !important;
+    i {
+      font-size: 0.8em;
+    }
+  }
+/*header*/
+  .ui.header {
+    border-radius: 0;
+  }
+  .small_stamp {
+    font-size: 0.6rem;
+  }
+/*footer*/
+  footer {
+    flex-shrink: 0;
+    margin-top: 10rem;
+  }
+  .footer_stamp_img {
+    height: 5rem;
+  }

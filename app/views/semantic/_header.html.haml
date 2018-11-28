@@ -1,5 +1,5 @@
-.ui.inverted.menu.header{style: 'border-radius: 0;'}
-  %a{class: 'item', href: '/', style: 'padding: 0 6px;'}
+.ui.inverted.menu.header
+  %a{class: 'item img_item', href: '/'}
     %img{src: '/assets/basic_logo.png'}
     %h2{type: 'text'}
       Stamp
@@ -10,14 +10,14 @@
 
   .right.menu
     - if user_signed_in?
-      %div.ui.item{style: 'font-size: 1rem; padding: 5px;'}
-        %img{src: '/assets/stamp_j3rik0_no_text_icon.png', style: 'font-size: 0.6rem;'}
+      %div.ui.item.img_item
+        %img.small_stamp{src: '/assets/stamp_j3rik0_no_text_icon.png'}
         = current_user.stamps.count
-      %div.item{style: 'font-size: 1rem; padding: 5px;'}
+      %div.item.img_item
         %i.sort.icon
         %div.content
           = current_user.votes.count
-      %div.item{style: 'font-size: 1rem; padding: 5px;'}
+      %div.item.img_item
         %i.linkify.icon
         %div.content
           = current_user.domains.count
