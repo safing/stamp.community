@@ -42,4 +42,31 @@ class Stamp < ApplicationRecord
   def sti_name
     to_s
   end
+
+  class << self
+    # ActiveModel::Naming.model_name has provides Model helpers, such as #route_key, #param_key...
+    # https://github.com/rails/rails/blob/master/activemodel/lib/active_model/naming.rb
+    #
+    # BUT:
+    # our routes are not set up like the conventional way (stamp_labels/:id)
+    # but the other way around (label_stamps/:id)
+    #
+    # so we (only) need to overwrite ActiveModel::Name._singularize (line #211)
+    # all other methods we need depend on it
+    #
+    # and then we call Stamp::Name.new instead of ActiveModel::Name.new
+    #
+    # PS: Maybe a helpful gist when problems occur: https://gist.github.com/sj26/5843855
+    def model_name
+      @model_name ||= Stamp::Name.new(self)
+    end
+  end
+
+  class Name < ActiveModel::Name
+    private
+
+    def _singularize(string)
+      super.split('_').reverse.join('_')
+    end
+  end
 end

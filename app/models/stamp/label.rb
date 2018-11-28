@@ -41,13 +41,4 @@ class Stamp::Label < Stamp
   def siblings?
     siblings.count.positive?
   end
-
-  class << self
-    # https://stackoverflow.com/a/9463495/2235594
-    # might override stuff, a better approach might be:
-    # https://gist.github.com/sj26/5843855
-    def model_name
-      base_class.model_name
-    end
-  end
 end
