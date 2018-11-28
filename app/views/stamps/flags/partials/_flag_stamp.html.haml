@@ -3,8 +3,10 @@
 - operating_system ||= nil
 
 - if skip_card
-  %button.ui.purple.basic.big.button
-    Discard Me
+  = form_for [@votable, Vote.new], url: stamp_votes_path(@votable.id), html: { id: 'new_downvote' } do |f|
+    = f.hidden_field :accept, value: false
+    %button.ui.purple.basic.big.button
+      Discard Me
 - else
   %div.ui.segment{style: 'padding: 3rem 0 3rem 0;'}
     - if header
@@ -45,8 +47,10 @@
             %td{style: 'background-color: lightgray;'}
         - if choose_me
           %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
-            %button.ui.purple.basic.big.button{style: 'margin: 0;'}
-              Choose Me
+            = form_for [@votable, Vote.new], url: stamp_votes_path(@votable.id), html: { id: 'new_upvote' } do |f|
+              = f.hidden_field :accept, value: true
+              %button.ui.purple.basic.big.button{style: 'margin: 0;'}
+                Choose Me
         %div{class: %w[ui large top right attached label].push(class_for(stamp.state))}
           = stamp.state.titleize
         - if show_stamp
