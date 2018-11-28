@@ -1,0 +1,23 @@
+/*header*/
+.item.slim {
+  padding: 0 6px !important;
+  i {
+    font-size: 0.8em;
+  }
+}
+.ui.header {
+  border-radius: 0;
+}
+
+.small_stamp {
+  font-size: 0.6rem;
+}
+
+/*footer*/
+footer {
+  flex-shrink: 0;
+  margin-top: 10rem;
+  img {
+    height: 5rem;
+  }
+}

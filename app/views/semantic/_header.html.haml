@@ -1,5 +1,5 @@
 .ui.inverted.menu.header
-  %a{class: 'item img_item', href: '/'}
+  %a{class: 'item slim', href: '/'}
     %img{src: '/assets/basic_logo.png'}
     %h2{type: 'text'}
       Stamp
@@ -10,14 +10,14 @@
 
   .right.menu
     - if user_signed_in?
-      %div.ui.item.img_item
+      %div.ui.item.slim
         %img.small_stamp{src: '/assets/stamp_j3rik0_no_text_icon.png'}
         = current_user.stamps.count
-      %div.item.img_item
+      %div.item.slim
         %i.sort.icon
         %div.content
           = current_user.votes.count
-      %div.item.img_item
+      %div.item.slim
         %i.linkify.icon
         %div.content
           = current_user.domains.count
