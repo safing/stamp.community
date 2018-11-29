@@ -12,6 +12,8 @@ BOT:
     VOTING_LIMIT: 100_000
     STAMP_CREATION_LIMIT: 10_000
 
+STAMP:
+  CONCLUDE_IN_HOURS: 72 # three days
 STAMP::LABEL:
   CREATOR:
     PRIZE: 10 # created good stuff

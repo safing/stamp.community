@@ -3,6 +3,8 @@ module Votable
     extend ActiveSupport::Concern
 
     included do
+      after_create :trigger_conclude_worker
+
       scope :accepted, -> { with_state(:accepted) }
       scope :archived, -> { with_state(:archived) }
       scope :denied, -> { with_state(:denied) }
@@ -25,6 +27,13 @@ module Votable
 
       def archive_accepted_siblings!
         siblings.accepted.each(&:archive!)
+      end
+
+      def trigger_conclude_worker
+        if in_progress?
+          perform_in_hours = ENVProxy.required_integer('STAMP_CONCLUDE_IN_HOURS')
+          Votable::ConcludeWorker.perform_in(perform_in_hours.hours, self.class.name, id)
+        end
       end
     end
   end
