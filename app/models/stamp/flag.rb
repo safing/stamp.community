@@ -17,13 +17,6 @@ class Stamp::Flag < Stamp
   end
 
   class << self
-    # https://stackoverflow.com/a/9463495/2235594
-    # might override stuff, a better approach might be:
-    # https://gist.github.com/sj26/5843855
-    def model_name
-      base_class.model_name
-    end
-
     def flag_hashes
       ::ENVProxy.required_array('FLAGS', hashes: true)
     end

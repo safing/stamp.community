@@ -38,7 +38,7 @@ module Stamps
     private
 
     def stamp_params
-      params.require(:stamp)
+      params.require(:label_stamp)
             .permit(
               :label_id,
               :percentage,
@@ -47,7 +47,7 @@ module Stamps
     end
 
     def load_domain
-      Domain.find_by(name: params[:domain_name] || params['stamp']['domain'])
+      Domain.find_by(name: params[:domain_name] || params[:label_stamp][:domain])
     end
 
     def load_labels

@@ -3,6 +3,8 @@ module Votable
     extend ActiveSupport::Concern
 
     included do
+      after_create :schedule!
+
       scope :accepted, -> { with_state(:accepted) }
       scope :archived, -> { with_state(:archived) }
       scope :denied, -> { with_state(:denied) }
@@ -22,10 +24,36 @@ module Votable
           votable.archive_accepted_siblings!
         end
       end
+    end
 
-      def archive_accepted_siblings!
-        siblings.accepted.each(&:archive!)
+    def scheduled_at
+      created_at + ENVProxy.required_integer('STAMP_CONCLUDE_IN_HOURS').hours
+    end
+
+    def schedule!
+      if in_progress? && scheduled_job.blank?
+        Votable::ConcludeWorker.perform_in(
+          scheduled_at.to_i,
+          self.class.name,
+          id
+        )
       end
+    end
+
+    def scheduled_job
+      return nil unless in_progress?
+
+      Sidekiq::ScheduledSet.new.select do |scheduled|
+        scheduled.klass == 'Votable::ConcludeWorker' &&
+        scheduled.args[0] == self.class.name &&
+        scheduled.args[1] == id
+      end.first
+    end
+
+    private
+
+    def archive_accepted_siblings!
+      siblings.accepted.each(&:archive!)
     end
   end
 end
