@@ -14,7 +14,7 @@
         %div.ten.wide.column{style: "padding-top: 30px;"}
           %div.bar.float.right
             %div.ui.purple.progress{style: "background: #FDDCFD;"}
-              %div.bar{style: "width: #{@stamp.percentage}%; z-index: 10; "}
+              %div.bar.second-bar{style: "width: #{@stamp.percentage}%;"}
                 %div.progress
                   = @stamp.percentage
                   \%
@@ -40,12 +40,12 @@
                   = sibling.label.name
             %div.twelve.wide.column
               %div.bar.float.right
-                %div.ui.purple.small.progress{style: "background: white;"}
-                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                %div.ui.purple.small.progress
+                  %div.bar.second-bar{style: "width: #{sibling.percentage}%;"}
                     %div.progress
                       = sibling.percentage
                       \%
-                %div.ui.teal.small.progress{style: "background: white;"}
+                %div.ui.teal.small.progress
                   %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
     %div.ui.basic.segment
       - if @stamp.siblings.in_progress.exists?
@@ -60,8 +60,8 @@
                   = sibling.label.name
             %div.twelve.wide.column
               %div.bar.float.right
-                %div.ui.teal.small.progress{style: "background: white;"}
-                  %div.bar{style: "width: #{sibling.percentage}%; z-index: 10; "}
+                %div.ui.teal.small.progress
+                  %div.bar.second-bar{style: "width: #{sibling.percentage}%;"}
                     %div.progress
                       = sibling.percentage
                       \%

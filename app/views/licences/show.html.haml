@@ -1,10 +1,10 @@
 .ui.container
   .ui.segment
     %h2
-      = image_tag 'licence_icon', style: 'height: 1em;'
+      = image_tag 'licence_icon', class: 'ss'
       = @licence.name
     %p= @licence.description
     %h5 used by
     - @licence.labels.each do |label|
-      = link_to label_path(label), class: 'btn btn-info mr-2 mb-2' do
+      = link_to label_path(label) do
         = label.name

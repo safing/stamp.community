@@ -10,7 +10,7 @@
           %tr
             %th{:colspan => "2"}
               %h5
-                = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 0.8em;'
+                = image_tag 'stamp_j3rik0_no_text_icon', class: 'ss'
                 In Progress
         %tbody
           - if @label.stamps_in_progress.exists?
@@ -36,5 +36,5 @@
                   = fa_icon 'user'
                   = User.find(contributor.user_id).username
               %td
-                = image_tag 'stamp_j3rik0_no_text_icon', style: 'height: 1em;'
+                = image_tag 'stamp_j3rik0_no_text_icon', class: 'ss'
                 = contributor.count
