@@ -35,7 +35,7 @@ module Stamps
     private
 
     def stamp_params
-      params.require(:stamp)
+      params.require(:flag_stamp)
             .permit(
               :internet,
               :lan,
@@ -47,7 +47,7 @@ module Stamps
     end
 
     def load_stampable
-      App.find(params[:app_id] || params['stamp']['app_id'])
+      App.find(params[:app_id] || params[:flag_stamp][:app_id])
     end
   end
 end
