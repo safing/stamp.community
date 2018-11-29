@@ -22,11 +22,10 @@ class VotesController < ApplicationController
 
   def load_votable
     @resource, id = request.path.split('/')[1, 2]
-    @votable = @commentable = @resource.singularize.classify.constantize.find(id)
+    @votable = @resource.singularize.classify.constantize.find(id)
 
     # route helpers rely on the correct STI class
-    if @votable.respond_to? :type
-      @votable = @commentable = @votable.type.constantize.find(id)
-    end
+    @votable = @votable.type.constantize.find(id) if @votable.respond_to? :type
+    @commentable = @votable
   end
 end
