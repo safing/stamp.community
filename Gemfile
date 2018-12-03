@@ -11,6 +11,7 @@ gem 'sidekiq'
 
 gem 'jsonb_accessor'
 gem 'pg'
+gem 'hirb'
 
 gem 'font_awesome5_rails'
 gem 'sass-rails'
@@ -24,6 +25,8 @@ gem 'turbolinks'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc'
 
+gem 'bootsnap', require: false
+
 gem 'devise'
 gem 'pundit'
 gem 'state_machines-activerecord'
@@ -32,7 +35,6 @@ gem 'grape'
 gem 'grape-entity', github: 'ruby-grape/grape-entity', branch: 'master'
 
 group :development do
-  gem 'bootsnap', require: false
   gem 'fix-db-schema-conflicts'
   gem 'grape_on_rails_routes'
   gem 'letter_opener'
@@ -42,7 +44,6 @@ end
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'hirb'
   gem 'pry-byebug'
   gem 'puma'
 end
