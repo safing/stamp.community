@@ -158,9 +158,6 @@ GEM
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     jaro_winkler (1.5.1)
-    jbuilder (2.8.0)
-      activesupport (>= 4.2.0)
-      multi_json (>= 1.2)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -379,7 +376,6 @@ DEPENDENCIES
   guard-rspec
   haml-rails
   hirb
-  jbuilder
   jquery-rails
   jsonb_accessor
   launchy

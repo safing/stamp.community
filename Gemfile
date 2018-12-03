@@ -18,7 +18,6 @@ gem 'sass-rails'
 gem 'semantic-ui-sass'
 
 gem 'haml-rails'
-gem 'jbuilder'
 gem 'jquery-rails'
 gem 'turbolinks'
 
