@@ -45,14 +45,12 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'pry-byebug'
-  gem 'puma'
 end
 
 group :test do
   gem 'database_cleaner'
   gem 'guard-rspec'
   gem 'pundit-matchers'
-  gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
   gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers', branch: 'master'
   gem 'state_machines-rspec'

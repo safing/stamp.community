@@ -215,7 +215,6 @@ GEM
       byebug (~> 10.0)
       pry (~> 0.10)
     public_suffix (3.0.3)
-    puma (3.12.0)
     pundit (2.0.0)
       activesupport (>= 3.0.0)
     pundit-matchers (1.6.0)
@@ -266,10 +265,6 @@ GEM
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
       rspec-mocks (~> 3.8.0)
-    rspec-activemodel-mocks (1.1.0)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
-      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.2)
@@ -391,11 +386,9 @@ DEPENDENCIES
   letter_opener
   pg
   pry-byebug
-  puma
   pundit
   pundit-matchers
   rails (~> 5.2.1)
-  rspec-activemodel-mocks
   rspec-rails
   sass-rails
   sdoc
