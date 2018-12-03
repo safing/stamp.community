@@ -24,7 +24,7 @@ module Stamps
 
     def show
       @commentable = @votable = @stamp = Stamp::Flag.find(params[:id])
-      @comments = @commentable.comments
+      @comments = @commentable.comments.order(created_at: :desc)
       @comment = Comment.new
 
       authorize @stamp
