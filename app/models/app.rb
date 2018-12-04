@@ -52,4 +52,8 @@ class App < ApplicationRecord
     os_hash = operating_systems.each_with_object({}) { |f, h| h[f] = send(f) }
     errors.add(:os, "- at least one operating system must be supported by the app #{os_hash}")
   end
+
+  def href
+    "https://#{link}"
+  end
 end

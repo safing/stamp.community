@@ -2,7 +2,7 @@
   %h1
     Stamp for
     = @stamp.app.name
-    = link_to "https://#{@stamp.app.link}" do
+    = link_to @stamp.app.href do
       %i.purple.external.small.icon
   %div.ui.basic.segment
     %div.ui.two.column.stackable.center.aligned.grid
