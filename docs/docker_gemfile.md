@@ -6,6 +6,16 @@
 
 Rebuilding your dev image is *only* necessary when changing your **Gemfile** or **Gemfile.lock**. Almost all file changes are automatically loaded. The exceptions, such as initializer files can be manually reloaded by redeploying your stack. (1.3.2)
 
+##### 1.1.2 docker-rm-server-pid.sh
+
+This file is used to remove **tmp/pids/server.pid** if it exists. You may have to make the file executable before building the image via `docker build`. If so, first run:
+
+```
+chmod +x docker-rm-server-pid.sh
+```
+
+src: https://github.com/docker/compose/issues/4039#issuecomment-276037199
+
 ##### 1.2 Build the dev image
 
 ```
