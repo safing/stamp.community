@@ -1,0 +1,26 @@
+- header ||= nil;
+
+%div.ui.segment
+  %div.sixteen.wide.column
+    - if header
+      %h2
+        = link_to stamp.domain.name, domain_path(stamp.domain.name)
+        = link_to stamp.domain.href do
+          %i.purple.external.tiny.icon
+    %div.ui.divider{style: "margin-bottom: -5px;"}
+  %div.ten.wide.column
+    %div.ui.basic.segment
+      %div.ui.grid
+        %div.three.wide.column
+          =link_to label_stamp_path(stamp.id) do
+            %h5.ui.middle.aligned.header
+              = stamp.label.name
+        %div.thirteen.wide.column
+          %div.bar.float.right
+            %div.ui.purple.small.progress{style: "background: #FDDCFD;"}
+              %div.bar.second-bar{style: "width: #{stamp.percentage}%;"}
+                %div.progress
+                  = stamp.percentage
+                  \%
+    %div{class: %w[ui large top right attached label].push(class_for(stamp.state))}
+      = stamp.state.titleize
