@@ -8,7 +8,8 @@ services:
     # dev image:        registry.safing.network/dev/stamp:latest
     # production image: registry.safing.network/server/stamp:latest
     image: registry.safing.network/dev/stamp:latest
-    command: rails s -b 0.0.0.0
+    entrypoint: /stamp/docker-rm-server-pid.sh
+    command: ["rails", "server", "-b", "0.0.0.0"]
     volumes:
       - .:/stamp
     ports:
