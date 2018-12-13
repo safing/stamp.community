@@ -29,6 +29,11 @@
             .ui.left.icon.mini.input
               = f.password_field :password_confirmation, autocomplete: 'off'
               %i.unlock.alternate.icon
+          .ui.message{ style: 'font-size: 0.7em;'}
+            %p{ style: 'font-weight: normal;' }
+              By clicking 'Sign up' you agree to our
+              = link_to 'Terms of Service', tos_path
+              and that your continued use of Stamp is subject to these policies.
           .field
             = f.submit 'Sign up', class: 'ui purple basic big button'
 
