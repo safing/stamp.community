@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type'}/
     %title Stamp
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -9,7 +9,8 @@
   %body{style: 'display: flex; flex-direction: column;'}
     = render partial: 'semantic/header'
     - # %content is needed so footer nicely stays in place
-    %content{style: 'flex: 1 0 auto'}
+    %content
+      - # again, hacky so class order is assured, which is important for semnatic ui
       %div{class: yield(:container_class).split(' ').push('ui container'), style: yield(:container_style)}
         - if flash.count > 0
           %div.ui.grid.container
