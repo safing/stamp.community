@@ -9,9 +9,9 @@ end
 gem 'rails', '~> 5.2.1'
 gem 'sidekiq'
 
+gem 'hirb'
 gem 'jsonb_accessor'
 gem 'pg'
-gem 'hirb'
 
 gem 'font_awesome5_rails'
 gem 'sass-rails'

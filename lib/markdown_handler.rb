@@ -7,8 +7,8 @@ module MarkdownHandler
 
   def self.call(template)
     options = {
-      fenced_code_blocks:           true,
-      autolink:                     true
+      fenced_code_blocks: true,
+      autolink: true
     }
 
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
