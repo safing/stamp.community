@@ -17,9 +17,11 @@ gem 'font_awesome5_rails'
 gem 'sass-rails'
 gem 'semantic-ui-sass'
 
-gem 'haml-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
+
+gem 'haml-rails'
+gem 'redcarpet'
 
 gem 'bootsnap', require: false
 
