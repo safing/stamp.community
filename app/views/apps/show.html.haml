@@ -1,29 +1,28 @@
-%div.ui.container
-  %div.ui.grid.divided
-    %div.four.wide.column
-      %h1
-        %i.icon
-        = @app.name
-        = link_to "https://#{@app.link}" do
-          %i.purple.external.small.icon
-    %div.six.wide.column
-      %div.ui.basic.segment
-        = @app.description
-    %div.six.wide.column
-      %div.ui.basic.segment
-        = render 'apps/partials/icons', app: @app
+%div.ui.grid.divided
+  %div.four.wide.column
+    %h1
+      %i.icon
+      = @app.name
+      = link_to "https://#{@app.link}" do
+        %i.purple.external.small.icon
+  %div.six.wide.column
+    %div.ui.basic.segment
+      = @app.description
+  %div.six.wide.column
+    %div.ui.basic.segment
+      = render 'apps/partials/icons', app: @app
 
-  %div.ui.two.column.grid
-    - if @app.flag_stamp.present?
-      %div.column
-        %div.ui.basic.segment{style: 'padding: 0;'}
-          %h2
-            Flags
-            %i.info.small.blue.circle.icon.activating.element{ data: { content: "TODO: Add description", position: "right center" } }
-        = render 'stamps/flags/partials/flag_stamp', show_stamp: true, stamp: @app.flag_stamp
+%div.ui.two.column.grid
+  - if @app.flag_stamp.present?
+    %div.column
+      %div.ui.basic.segment{style: 'padding: 0;'}
+        %h2
+          Flags
+          %i.info.small.blue.circle.icon.activating.element{ data: { content: "TODO: Add description", position: "right center" } }
+      = render 'stamps/flags/partials/flag_stamp', show_stamp: true, stamp: @app.flag_stamp
 
-    - else
-      = link_to 'New Stamp', new_flag_stamp_path(app_id: @app.id), class: 'ui purple basic button'
+  - else
+    = link_to 'New Stamp', new_flag_stamp_path(app_id: @app.id), class: 'ui purple basic button'
 
 :javascript
   $('.info.circle.icon.link')

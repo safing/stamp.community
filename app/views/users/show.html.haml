@@ -1,65 +1,66 @@
+- content_for :container_class, 'middle aligned centered grid'
+- content_for :container_style, 'height: 70%;'
 
-%div.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
-  %div.row
-    %div.four.wide.column
-      %div.ui.segment.purple_shiny{ style: 'padding: 0px'}
-        %div.ui.fluid.card
-          %div.image
-            %img{src: '/assets/portmaster.png'}
-          %div.ui.vertical.stripe.segment
-            %div.ui.middle.aligned.stackable.grid.container
-              %div.row
-                %div.ui.seven.wide.column.center.aligned
-                  %div.ui.mini.horizontal.statistic
-                    %div.label
-                      = fa_icon 'chess-king', size: '1x'
-                    %div.value
-                      = @user.voting_power
-                %div.ui.two.wide.column.center.aligned
-                  ⎮
-                %div.ui.seven.wide.column.center.aligned
-                  %div.ui.mini.horizontal.statistic
-                    %div.value
-                      = @user.reputation
-                    %div.label
-                      rep
-    %div.eight.wide.column
-      %h1.ui.header
-        = @user.username
+%div.row
+  %div.four.wide.column
+    %div.ui.segment.purple_shiny{ style: 'padding: 0px'}
+      %div.ui.fluid.card
+        %div.image
+          %img{src: '/assets/portmaster.png'}
+        %div.ui.vertical.stripe.segment
+          %div.ui.middle.aligned.stackable.grid.container
+            %div.row
+              %div.ui.seven.wide.column.center.aligned
+                %div.ui.mini.horizontal.statistic
+                  %div.label
+                    = fa_icon 'chess-king', size: '1x'
+                  %div.value
+                    = @user.voting_power
+              %div.ui.two.wide.column.center.aligned
+                ⎮
+              %div.ui.seven.wide.column.center.aligned
+                %div.ui.mini.horizontal.statistic
+                  %div.value
+                    = @user.reputation
+                  %div.label
+                    rep
+  %div.eight.wide.column
+    %h1.ui.header
+      = @user.username
 
-      %div.ui.divider
-      %p
-        The user description will be coming - whenever 🤷🏼‍♂️.
-        It was not part of the MVP 😅
-    %div.three.wide.right.floated.column
-      %div.ui.basic.segment
-        %div.ui.relaxed.list
-          %h4.ui.header
-            %i.user.circle.outline.icon
-            User
-          %div.item
-            %i.calendar.alternate.outline.icon
-            %div.content
-              = time_ago_in_words(@user.created_at)
-              ago
-          -# %div.item
-            %i.chart.pie.icon
-            %div.content
-              \67 %
-      %div.ui.divider
-      %div.ui.basic.segment
-        %div.ui.relaxed.list
-          %h4.ui.header
-            %i.chart.bar.icon
-            Stats
-          %div.item
-            %img{src: '/assets/stamp_j3rik0_no_text_icon.png', height: '15px'}
-              = pluralize(@user.stamps.count, 'stamp')
-          %div.item
-            %i.sort.icon{style: "font-size: 21px;"}
-            %div.content{style: "padding-left: 0;"}
-              = pluralize(@user.votes.count, 'cast vote')
-          %div.item
-            %i.linkify.icon
-            %div.content
-              = pluralize(@user.domains.count, 'domain')
+    %div.ui.divider
+    %p
+      The user description will be coming - whenever 🤷🏼‍♂️.
+      It was not part of the MVP 😅
+  %div.three.wide.right.floated.column
+    %div.ui.basic.segment
+      %div.ui.relaxed.list
+        %h4.ui.header
+          %i.user.circle.outline.icon
+          User
+        %div.item
+          %i.calendar.alternate.outline.icon
+          %div.content
+            = time_ago_in_words(@user.created_at)
+            ago
+        -# %div.item
+          %i.chart.pie.icon
+          %div.content
+            \67 %
+    %div.ui.divider
+    %div.ui.basic.segment
+      %div.ui.relaxed.list
+        %h4.ui.header
+          %i.chart.bar.icon
+          Stats
+        %div.item
+          %img{src: '/assets/stamp_j3rik0_no_text_icon.png', height: '15px'}
+            = pluralize(@user.stamps.count, 'stamp')
+        %div.item
+          %i.sort.icon{style: "font-size: 21px;"}
+          %div.content{style: "padding-left: 0;"}
+            = pluralize(@user.votes.count, 'cast vote')
+        %div.item
+          %i.linkify.icon
+          %div.content
+            = pluralize(@user.domains.count, 'domain')

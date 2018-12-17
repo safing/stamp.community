@@ -1,13 +1,15 @@
-%div.ui.middle.aligned.centered.container{style: 'cursor: pointer;'}
-  %table.ui.selectable.celled.table
-    %thead
-      %tr
-        %th
-          Name
-        %th
-          Description
-    %tbody
-      - @licences.each do |licence|
-        %tr{ onclick: "location.href='#{licence_path(licence)}'"}
-          %td= licence.name
-          %td= licence.description
+- content_for :container_class, 'middle aligned centered'
+- content_for :container_style, 'cursor: pointer;'
+
+%table.ui.selectable.celled.table
+  %thead
+    %tr
+      %th
+        Name
+      %th
+        Description
+  %tbody
+    - @licences.each do |licence|
+      %tr{ onclick: "location.href='#{licence_path(licence)}'"}
+        %td= licence.name
+        %td= licence.description

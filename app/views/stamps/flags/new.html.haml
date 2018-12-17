@@ -1,56 +1,55 @@
-%div.ui.container
-  %h1
-    Flag Stamp for
-    = @stamp.app.name
-    = link_to @stamp.app.href do
-      %i.purple.external.icon
+%h1
+  Flag Stamp for
+  = @stamp.app.name
+  = link_to @stamp.app.href do
+    %i.purple.external.icon
 
-  %div.ui.segment.new-flag-segment
-    = render 'partials/errors', object: @stamp, attached: true
-    %table.ui.celled.table{style: 'margin-bottom: 1px;'}
-      = form_for @stamp, url: flag_stamp_index_path, html: {class: %w[ui form]} do |f|
-        = f.hidden_field :app_id, value: params[:app_id] || @stamp.app.id
-        %tbody
-          %tr
-            %td
-              = f.label :internet, 'Internet'
-              = f.check_box :internet, class: 'hidden'
-              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the Internet.", "data-variation" => "mini"}
-            %td
-              = f.label :lan, 'LAN'
-              = f.check_box :lan, class: 'hidden'
-              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local area network.", "data-variation" => "mini"}
-            %td
-              = f.label :localhost, 'Localhost'
-              = f.check_box :localhost, class: 'hidden'
-              %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
-          %tr
-            %td{ class: ('selected' if @stamp.prompt) }
-              = radio_button_tag 'stamp[prompt_group]', 'prompt', @stamp.prompt, class: 'hidden'
-              = f.label :prompt_group, 'Prompt', value: 'prompt'
-              %i.info.circle.icon.small.link{"data-content" => "Prompt for decisions on new connections.", "data-variation" => "mini"}
-            %td{ class: ('selected' if @stamp.blacklist) }
-              = radio_button_tag 'stamp[prompt_group]', 'blacklist', @stamp.blacklist, class: 'hidden'
-              = f.label :prompt_group, 'Blacklist', value: 'blacklist'
-              %i.info.circle.icon.small.link{"data-content" => "Allow all connections except those explicitly denied.", "data-variation" => "mini"}
-            %td{ class: ('selected' if @stamp.whitelist) }
-              = radio_button_tag 'stamp[prompt_group]', 'whitelist', @stamp.whitelist, class: 'hidden'
-              = f.label :prompt_group, 'Whitelist', value: 'whitelist'
-              %i.info.circle.icon.small.link{"data-content" => "Block all connections except those explicitly allowed.", "data-variation" => "mini"}
-          %tr
-            %td
-              = f.label :p2p, 'P2P'
-              = f.check_box :p2p, class: 'hidden'
-              %i.info.circle.icon.small.link{"data-content" => "Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.", "data-variation" => "mini"}
-            %td
-              = f.label :server, 'Server'
-              = f.check_box :server, class: 'hidden'
-              %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
-            %td{style: 'background-color: lightgray;'}
-        %div.ui.bottom.right.attached.label
-          = f.submit 'Save', class: 'ui purple big basic button'
-          %button.ui.purple.basic.big.button
-            Cancel
+%div.ui.segment.new-flag-segment
+  = render 'partials/errors', object: @stamp, attached: true
+  %table.ui.celled.table{style: 'margin-bottom: 1px;'}
+    = form_for @stamp, url: flag_stamp_index_path, html: {class: %w[ui form]} do |f|
+      = f.hidden_field :app_id, value: params[:app_id] || @stamp.app.id
+      %tbody
+        %tr
+          %td
+            = f.label :internet, 'Internet'
+            = f.check_box :internet, class: 'hidden'
+            %i.info.circle.icon.small.link{"data-content" => "Allow connections to the Internet.", "data-variation" => "mini"}
+          %td
+            = f.label :lan, 'LAN'
+            = f.check_box :lan, class: 'hidden'
+            %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local area network.", "data-variation" => "mini"}
+          %td
+            = f.label :localhost, 'Localhost'
+            = f.check_box :localhost, class: 'hidden'
+            %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
+        %tr
+          %td{ class: ('selected' if @stamp.prompt) }
+            = radio_button_tag 'stamp[prompt_group]', 'prompt', @stamp.prompt, class: 'hidden'
+            = f.label :prompt_group, 'Prompt', value: 'prompt'
+            %i.info.circle.icon.small.link{"data-content" => "Prompt for decisions on new connections.", "data-variation" => "mini"}
+          %td{ class: ('selected' if @stamp.blacklist) }
+            = radio_button_tag 'stamp[prompt_group]', 'blacklist', @stamp.blacklist, class: 'hidden'
+            = f.label :prompt_group, 'Blacklist', value: 'blacklist'
+            %i.info.circle.icon.small.link{"data-content" => "Allow all connections except those explicitly denied.", "data-variation" => "mini"}
+          %td{ class: ('selected' if @stamp.whitelist) }
+            = radio_button_tag 'stamp[prompt_group]', 'whitelist', @stamp.whitelist, class: 'hidden'
+            = f.label :prompt_group, 'Whitelist', value: 'whitelist'
+            %i.info.circle.icon.small.link{"data-content" => "Block all connections except those explicitly allowed.", "data-variation" => "mini"}
+        %tr
+          %td
+            = f.label :p2p, 'P2P'
+            = f.check_box :p2p, class: 'hidden'
+            %i.info.circle.icon.small.link{"data-content" => "Allow program to directly communicate with peers (ie. anyone), without resolving DNS first.", "data-variation" => "mini"}
+          %td
+            = f.label :server, 'Server'
+            = f.check_box :server, class: 'hidden'
+            %i.info.circle.icon.small.link{"data-content" => "Allow program to accept incoming connections and act as a server for other devices.", "data-variation" => "mini"}
+          %td{style: 'background-color: lightgray;'}
+      %div.ui.bottom.right.attached.label
+        = f.submit 'Save', class: 'ui purple big basic button'
+        %button.ui.purple.basic.big.button
+          Cancel
 :javascript
   $('input[type=checkbox]').change(function() {
     $(this).parent('td').toggleClass('selected', this.checked);

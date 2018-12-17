@@ -1,17 +1,16 @@
-%div.ui.container
-  %h1
-    Stamp for
-    = @stamp.app.name
-    = link_to @stamp.app.href do
-      %i.purple.external.small.icon
-  %div.ui.basic.segment
-    %div.ui.two.column.stackable.center.aligned.grid
+%h1
+  Stamp for
+  = @stamp.app.name
+  = link_to @stamp.app.href do
+    %i.purple.external.small.icon
+%div.ui.basic.segment
+  %div.ui.two.column.stackable.center.aligned.grid
+    - if @stamp.in_progress?
+      %div.ui.vertical.divider
+        or
+    %div.middle.aligned.row
+      %div.column.flag-column
+        = render 'stamps/flags/partials/flag_stamp', choose_me: @stamp.in_progress?, operating_system: true, stamp: @stamp
       - if @stamp.in_progress?
-        %div.ui.vertical.divider
-          or
-      %div.middle.aligned.row
         %div.column.flag-column
-          = render 'stamps/flags/partials/flag_stamp', choose_me: @stamp.in_progress?, operating_system: true, stamp: @stamp
-        - if @stamp.in_progress?
-          %div.column.flag-column
-            = render 'stamps/flags/partials/flag_stamp', skip_card: true, stamp: @stamp
+          = render 'stamps/flags/partials/flag_stamp', skip_card: true, stamp: @stamp
