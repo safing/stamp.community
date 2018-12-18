@@ -1,13 +1,15 @@
-%div.ui.middle.aligned.centered.container{style: 'cursor: pointer;'}
-  - @parents.each do |parent|
-    %table.ui.selectable.celled.table
-      %thead
-        %tr{ onclick: "location.href='#{label_path(parent)}'" }
-          %th= parent.name
-          %th= parent.description
+- content_for :container_class, 'middle aligned centered'
+- content_for :container_style, 'cursor: pointer;'
 
-      %tbody
-        - parent.children.each do |child|
-          %tr{ onclick: "location.href='#{label_path(child)}'"}
-            %td= child.name
-            %td= child.description
+- @parents.each do |parent|
+  %table.ui.selectable.celled.table
+    %thead
+      %tr{ onclick: "location.href='#{label_path(parent)}'" }
+        %th= parent.name
+        %th= parent.description
+
+    %tbody
+      - parent.children.each do |child|
+        %tr{ onclick: "location.href='#{label_path(child)}'"}
+          %td= child.name
+          %td= child.description
