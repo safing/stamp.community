@@ -11,8 +11,9 @@ module MarkdownHandler
       autolink: true
     }
 
+    erb = ERB.new(template.source).result
     @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
-    "#{@markdown.render(template.source).inspect}.html_safe"
+    "#{@markdown.render(erb).inspect}.html_safe"
   end
 end
 
