@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   mount APIRouter => '/'
   get 'terms', to: 'static#terms', as: :tos
+  get 'tour', to: 'guides#tour', as: :tour
 
   root to: 'stamps/labels#index'
 end
