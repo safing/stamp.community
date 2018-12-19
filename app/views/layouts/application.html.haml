@@ -11,7 +11,7 @@
     - # %content is needed so footer nicely stays in place
     %content
       - # again, hacky so class order is assured, which is important for semnatic ui
-      %div{class: yield(:container_class).split(' ').push('ui container'), style: yield(:container_style)}
+      %div{class: yield(:container_class).split(' ').push('ui container'), style: yield(:container_style), id: yield(:container_id)}
         - if flash.count > 0
           %div.ui.grid.container
             .sixteen.wide.column

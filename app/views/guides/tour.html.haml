@@ -1,5 +1,6 @@
-.row
-  .twelve.wide.centered.column{style: 'font-size: 1.15em; padding: 3em 0 4em 0'}
+- content_for(:container_id, 'tour')
+.row#welcome
+  .twelve.wide.centered.column
     %h1.ui.center.aligned.huge.icon.header{style: 'padding-bottom: 1em;'}
       = image_tag 'stamp_j3rik0_no_text'
       .content Welcome to Stamp
@@ -18,25 +19,28 @@
       = link_to 'Community Forums.', forums_path, target: '_blank'
 .ui.divider
 
-.row
+.row#stamps
   .seven.wide.middle.aligned.column
-    %h1.ui.large.header Stamp a Domain
+    %h1.ui.large.header Stamp Domains
 
-    %p We categorize the web.
-
-    %p
-      As an example, we tag domains that serve ads:
-      "adservice.google.com" is a perfect example.
+    %p We categorize the web. For example, we tag domains that serve ads.
 
     %p
-      This is an example of a stamp
-      %b suggestion.
+      This
+      %b suggestion
+      is perfect:
+      %br
+      it stamps "adservice.google.com" as Ads
+      &nbsp;
+      &nbsp;
+      %i.arrow.right.purple.icon
+
   .nine.wide.column
     = render partial: 'guides/partials/example_stamp'
 
 .ui.divider
 
-.row
+.row#votes
   .seven.wide.middle.aligned.column
     %h2.ui.large.header Vote on Stamps
 
@@ -45,12 +49,15 @@
       %span.ui.label.purple
         In Progress
       the community can vote whether to accept or deny the suggestion.
-  .nine.wide.center.aligned.column
+    %p
+      Votes are open for
+      = voting_period_in_words + '.'
+  .nine.wide.column
     = render partial: 'guides/partials/example_votes'
 
 .ui.divider
 
-.row
+.row#reputation
   .seven.wide.column
     %h2.ui.large.header Earn reputation
 
@@ -58,19 +65,33 @@
       If the stamp reaches a majority vote, the creator and all upvoters receive reputation while downvoters lose.
     %p
       If the stamp fails, the creator and upvoters lose while the downvoters gain reputation.
-  .nine.wide.column
+  .nine.wide.column.middle.aligned
+    = render partial: 'guides/partials/example_conclusion'
+
 .ui.divider
 
-.row
+.row#privileges
   .seven.wide.middle.aligned.column
     %h2.ui.large.header Gain privileges & power
 
     %p
-      As you earn reputation, you'll increase your voting power, unlock new privileges, and gain access to new Stamp types.
+      As you earn reputation, you'll increase your voting power, unlock new privileges and gain access to new Stamp types.
 
     %p
-      Also, your vote counts more the higher your reputation goes.
+      Also, your vote counts more, the higher your reputation goes.
   .nine.wide.column
     = render partial: 'guides/partials/example_users'
 
--# row with call to action / sign up / create stamp
+.ui.divider
+
+.centered.row#actions
+  .sixteen.wide.middle.aligned.column
+    %h1.ui.header
+      Join our Community
+  .five.wide.middle.aligned.column
+    - if user_signed_in?
+      = link_to 'View recent stamps', label_stamp_index_path, class: 'ui blue button'
+    - else
+      = link_to 'Sign up', new_user_registration_path, class: 'ui blue button'
+  .five.wide.middle.aligned.column
+    = link_to 'Visit our forums', forums_path, class: 'ui blue button'

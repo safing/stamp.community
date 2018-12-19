@@ -1,0 +1,63 @@
+#tour {
+  .cards {
+    font-size: 0.75em;
+  }
+
+  .row {
+    padding: 7% 0;
+  }
+
+  #welcome {
+    font-size: 1.15em;
+    padding: 3em 0 4em 0;
+  }
+
+  #votes .cards {
+    .card:first-child {
+      margin-bottom: 55px;
+    }
+
+    .card:last-child {
+      margin-top: 55px;
+    }
+  }
+
+  #privileges .cards {
+    .card:first-child {
+      margin-top: 40px;
+    }
+
+    .card:nth-child(2) {
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+
+    .card:last-child {
+      margin-top: 40px;
+    }
+  }
+
+  #reputation {
+    .column .column:last-child {
+      font-size: 0.75em;
+    }
+  }
+
+  #actions {
+    .button {
+      width: 100%;
+      padding: 1.5em 0;
+      font-size: 1.25em;
+    }
+
+    h1 {
+      padding-bottom: 1.4em;
+      font-size: 2.7em;
+    }
+
+    .column:last-child {
+      border-left: 1px solid rgba(34, 36, 38, 0.15);
+    }
+  }
+
+}
