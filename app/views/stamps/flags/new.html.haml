@@ -25,15 +25,15 @@
             %i.info.circle.icon.small.link{"data-content" => "Allow connections to the local host.", "data-variation" => "mini"}
         %tr
           %td{ class: ('selected' if @stamp.prompt) }
-            = radio_button_tag 'stamp[prompt_group]', 'prompt', @stamp.prompt, class: 'hidden'
+            = radio_button_tag 'flag_stamp[prompt_group]', 'prompt', @stamp.prompt, class: 'hidden'
             = f.label :prompt_group, 'Prompt', value: 'prompt'
             %i.info.circle.icon.small.link{"data-content" => "Prompt for decisions on new connections.", "data-variation" => "mini"}
           %td{ class: ('selected' if @stamp.blacklist) }
-            = radio_button_tag 'stamp[prompt_group]', 'blacklist', @stamp.blacklist, class: 'hidden'
+            = radio_button_tag 'flag_stamp[prompt_group]', 'blacklist', @stamp.blacklist, class: 'hidden'
             = f.label :prompt_group, 'Blacklist', value: 'blacklist'
             %i.info.circle.icon.small.link{"data-content" => "Allow all connections except those explicitly denied.", "data-variation" => "mini"}
           %td{ class: ('selected' if @stamp.whitelist) }
-            = radio_button_tag 'stamp[prompt_group]', 'whitelist', @stamp.whitelist, class: 'hidden'
+            = radio_button_tag 'flag_stamp[prompt_group]', 'whitelist', @stamp.whitelist, class: 'hidden'
             = f.label :prompt_group, 'Whitelist', value: 'whitelist'
             %i.info.circle.icon.small.link{"data-content" => "Block all connections except those explicitly allowed.", "data-variation" => "mini"}
         %tr
