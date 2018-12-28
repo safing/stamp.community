@@ -43,7 +43,7 @@ module Stamps
               :p2p,
               :server
             )
-            .merge("#{params[:stamp][:prompt_group]}": true)
+            .merge("#{params[:flag_stamp][:prompt_group]}": true)
     end
 
     def load_stampable
