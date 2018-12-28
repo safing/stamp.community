@@ -307,8 +307,6 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
-    semantic-ui-sass (2.4.0.1)
-      sass (>= 3.2)
     sexp_processor (4.11.0)
     shellany (0.0.1)
     sidekiq (5.2.3)
@@ -388,7 +386,6 @@ DEPENDENCIES
   sass-rails
   seedbank
   selenium-webdriver
-  semantic-ui-sass
   shoulda-matchers!
   sidekiq
   state_machines-activerecord
@@ -396,4 +393,4 @@ DEPENDENCIES
   turbolinks
 
 BUNDLED WITH
-   1.17.1
+   1.17.3

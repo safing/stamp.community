@@ -19,14 +19,16 @@
         element_to_open = 1
       }
 
-      $('#stamp_percentage_range').range({
+      $('#stamp_percentage_slider').slider({
         min: 0,
         max: 100,
         start: initial_percentage,
         step: 5,
         input: '#stamp_percentage',
-        onChange: function(value) {
+        smooth: true,
+        onMove: function(value) {
           $('#stamp_percentage_display').html(value);
+          $('#stamp_percentage').val(value);
         }
       });
 
