@@ -1,0 +1,97 @@
+- content_for(:container_id, 'tour')
+.row#welcome
+  .twelve.wide.centered.column
+    %h1.ui.center.aligned.huge.icon.header{style: 'padding-bottom: 1em;'}
+      = image_tag 'stamp_j3rik0_no_text'
+      .content Welcome to Stamp
+    %p
+      %b Stamp
+      is a
+      = link_to 'Community', forums_path, target: '_blank'
+      , which crowd sources web & application intelligence. It is built and run by
+      %i you.
+      With your help, we're working together to become the backbone of
+      = link_to 'Application Firewalls,', 'https://safing.io', target: '_blank'
+      Ad-Blockers and other security & privacy related software.
+
+    %p
+      Here, we're only interested in generating and managing our data. To share ideas, discuss features & chit-chat head over to our
+      = link_to 'Community Forums.', forums_path, target: '_blank'
+.ui.divider
+
+.row#stamps
+  .seven.wide.middle.aligned.column
+    %h1.ui.large.header Stamp Domains
+
+    %p We categorize the web. For example, we tag domains that serve ads.
+
+    %p
+      This
+      %b suggestion
+      is perfect:
+      %br
+      it stamps "adservice.google.com" as Ads
+      &nbsp;
+      &nbsp;
+      %i.arrow.right.purple.icon
+
+  .nine.wide.column
+    = render partial: 'guides/partials/example_stamp'
+
+.ui.divider
+
+.row#votes
+  .seven.wide.middle.aligned.column
+    %h2.ui.large.header Vote on Stamps
+
+    %p
+      While stamps are
+      %span.ui.label.purple
+        In Progress
+      the community can vote whether to accept or deny the suggestion.
+    %p
+      Votes are open for
+      = voting_period_in_words + '.'
+  .nine.wide.column
+    = render partial: 'guides/partials/example_votes'
+
+.ui.divider
+
+.row#reputation
+  .seven.wide.column
+    %h2.ui.large.header Earn reputation
+
+    %p
+      If the stamp reaches a majority vote, the creator and all upvoters receive reputation while downvoters lose.
+    %p
+      If the stamp fails, the creator and upvoters lose while the downvoters gain reputation.
+  .nine.wide.column.middle.aligned
+    = render partial: 'guides/partials/example_conclusion'
+
+.ui.divider
+
+.row#privileges
+  .seven.wide.middle.aligned.column
+    %h2.ui.large.header Gain privileges & power
+
+    %p
+      As you earn reputation, you'll increase your voting power, unlock new privileges and gain access to new Stamp types.
+
+    %p
+      Also, your vote counts more, the higher your reputation goes.
+  .nine.wide.column
+    = render partial: 'guides/partials/example_users'
+
+.ui.divider
+
+.centered.row#actions
+  .sixteen.wide.middle.aligned.column
+    %h1.ui.header
+      Join our Community
+  .five.wide.middle.aligned.column
+    - if user_signed_in?
+      = link_to 'View recent stamps', label_stamp_index_path, class: 'ui blue button'
+    - else
+      = link_to 'Sign up', new_user_registration_path, class: 'ui blue button'
+  .five.wide.middle.aligned.column
+    = link_to 'Visit our forums', forums_path, class: 'ui blue button'

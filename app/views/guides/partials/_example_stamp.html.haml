@@ -1,0 +1,37 @@
+.ui.segment
+  %h3.header
+    Stamp for
+    %a{href: '#'}adservice.google.com
+  .ui.divider
+  %span.ui.centered.middle.aligned.grid
+    .three.wide.column
+      %h4 Ads
+    .ten.wide.column{style: 'padding-top: 30px;'}
+      .bar.float.right
+        .ui.purple.progress{style: 'background: #FDDCFD;'}
+          .bar.second-bar{style: 'width: 100%;'}
+            .progress
+              100
+              \%
+    .three.wide.column
+      .ui.icon.vertical.buttons
+        %button.ui.button.icon{style: "padding: 0px; background-color: white;"}
+          %i.fitted.huge.grey.caret.up.icon
+        %button.ui.button.icon{style: "padding: 0px; background-color: white;"}
+          %i.fitted.vertically.flipped.huge.grey.caret.up.icon
+  .ui.large.top.right.attached.purple.label
+    In Progress
+  .ui.small.comments
+    %h3.ui.dividing.header
+    .comment
+      %a.avatar{href: '#'}
+        = image_tag 'portmaster.png'
+      .content
+        %a.author{href: '#'}
+          Portmaster
+        .metadata
+          .date
+            about 3 hours ago
+        .text
+          %pg
+            google.com does not serve ads directly, but does this through subdomains such as adservice.google.com

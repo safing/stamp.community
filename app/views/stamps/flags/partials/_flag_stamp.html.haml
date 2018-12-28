@@ -13,7 +13,6 @@
       %h2{style: 'top: 0.4rem; position: absolute;'}
         %i.spotify.icon
         = link_to stamp.app.name, app_path(stamp.app)
-        %i.purple.external.small.icon
     %table.ui.celled.table{style: 'margin: 1px 0 !important;'}
       %tbody
         %tbody
@@ -57,9 +56,14 @@
           %div.ui.bottom.left.attached.label
             = link_to flag_stamp_path(stamp), class: 'ui basic purple button battle-button' do
               Show Stamp
-        -if operating_system
-          %div.ui.bottom.right.attached.label
-            = render 'apps/partials/icons', app: @stamp.app
+        - elsif stamp.state == "accepted"
+          %div.ui.bottom.left.attached.label{style: 'padding: 4px;'}
+            = link_to new_flag_stamp_path(app_id: stamp.app.id), class: 'ui basic purple button', style: 'margin: 0;' do
+              Battle Me
+        - if operating_system
+          %div.ui.bottom.right.attached.label{style: 'padding: 4px;'}
+            = render 'apps/partials/icons', app: stamp.app
+
 
 :javascript
   $('.info.circle.icon.link')

@@ -1,17 +1,19 @@
-%div.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
-  %div.row
-    %div.six.wide.column
-      %div.ui.segment.purple_shiny{ style: ' padding-bottom: 20px'}
-        %img.ui.centered.small.image{src: '/assets/basic_logo.png'}
-        %div.ui.centered.form.header{data: {controller: 'new-domain'}}
-          %h1.ui.icon.header
-            New Domain
-          %div.ui.search
-            = form_for @domain, remote: true, html: { class: "ui form" } do |f|
-              .ui.action.fluid.input
-                = f.text_field :name, placeholder: 'example.com', type: "text", data: {target: 'new-domain.input'}
-                = f.button type: :submit, class: 'ui purple basic button' do
-                  Create
-              %div.ui.error.message
-                .header
-                %ul.list
+- content_for :container_class, 'middle aligned centered grid'
+- content_for :container_style, 'height: 70%;'
+
+%div.row
+  %div.six.wide.column
+    %div.ui.segment.purple_shiny{ style: ' padding-bottom: 20px'}
+      %img.ui.centered.small.image{src: '/assets/basic_logo.png'}
+      %div.ui.centered.form.header{data: {controller: 'new-domain'}}
+        %h1.ui.icon.header
+          New Domain
+        %div.ui.search
+          = form_for @domain, remote: true, html: { class: "ui form" } do |f|
+            .ui.action.fluid.input
+              = f.text_field :name, placeholder: 'example.com', type: "text", data: {target: 'new-domain.input'}
+              = f.button type: :submit, class: 'ui purple basic button' do
+                Create
+            %div.ui.error.message
+              .header
+              %ul.list

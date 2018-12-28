@@ -1,35 +1,42 @@
-.ui.middle.aligned.centered.grid.container{style: 'height: 70%;'}
-  .four.wide.column
-    .ui.segment{ style: 'box-shadow: 5px 5px 20px -2px #A333C8 ; padding-bottom: 20px'}
-      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-        .ui.form.header
-          = devise_error_messages!
-          %h1
-            Sign up
-          .field
-            = f.label :email
-            .ui.left.icon.mini.input
-              = f.email_field :email, autofocus: true
-              %i.mail.icon
-          .field
-            = f.label :username
-            .ui.left.icon.mini.input
-              = f.text_field :username
-              %i.user.icon
-          .field
-            = f.label :password
-            - if @minimum_password_length
-              %em
-                (#{@minimum_password_length} characters minimum)
-            .ui.left.icon.mini.input
-              = f.password_field :password, autocomplete: 'off'
-              %i.unlock.alternate.icon
-          .field
-            = f.label :password_confirmation
-            .ui.left.icon.mini.input
-              = f.password_field :password_confirmation, autocomplete: 'off'
-              %i.unlock.alternate.icon
-          .field
-            = f.submit 'Sign up', class: 'ui purple basic big button'
+- content_for :container_class, 'middle aligned centered grid'
+- content_for :container_style, 'height: 70%;'
 
-      = render 'devise/shared/links'
+.four.wide.column
+  .ui.segment{ style: 'box-shadow: 5px 5px 20px -2px #A333C8 ; padding-bottom: 20px'}
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .ui.form.header
+        = devise_error_messages!
+        %h1
+          Sign up
+        .field
+          = f.label :email
+          .ui.left.icon.mini.input
+            = f.email_field :email, autofocus: true
+            %i.mail.icon
+        .field
+          = f.label :username
+          .ui.left.icon.mini.input
+            = f.text_field :username
+            %i.user.icon
+        .field
+          = f.label :password
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length} characters minimum)
+          .ui.left.icon.mini.input
+            = f.password_field :password, autocomplete: 'off'
+            %i.unlock.alternate.icon
+        .field
+          = f.label :password_confirmation
+          .ui.left.icon.mini.input
+            = f.password_field :password_confirmation, autocomplete: 'off'
+            %i.unlock.alternate.icon
+        .ui.message{ style: 'font-size: 0.7em;'}
+          %p{ style: 'font-weight: normal;' }
+            By clicking 'Sign up' you agree to our
+            = link_to 'Terms of Service', tos_path
+            and that your continued use of Stamp is subject to these policies.
+        .field
+          = f.submit 'Sign up', class: 'ui purple basic big button'
+
+    = render 'devise/shared/links'

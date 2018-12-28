@@ -32,6 +32,10 @@ Rails.application.routes.draw do
   end
 
   mount APIRouter => '/'
+  get 'terms', to: 'static#terms', as: :tos
+  get 'tour', to: 'guides#tour', as: :tour
 
-  root to: 'stamps/labels#index'
+  get '/forums', to: redirect('https://discourse.safing.community/c/stamp'), as: :forums
+
+  root to: 'guides#tour'
 end

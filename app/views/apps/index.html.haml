@@ -1,27 +1,29 @@
-%div.ui.middle.aligned.centered.container{style: 'cursor: pointer;'}
-  %h1
-    All Apps:
-    = link_to 'New App', new_app_path, class: 'ui basic purple right floated massive button'
-  %table.ui.selectable.celled.table
-    %thead
-      %tr
-        %th
-          App
-        %th
-          Description
-        %th
-          Operating Systems
-        %th
-          User
-    %tbody
-      - @apps.each do |app|
-        %tr{ onclick: "location.href='#{app_path(app)}'" }
-          %td
-            %h4.ui.purple.header
-              = app.name
-          %td
-            = app.description
-          %td
-            = render 'apps/partials/icons', app: app
-          %td
-            = app.user.username
+- content_for :container_class, 'middle aligned center'
+- content_for :container_style, 'cursor: pointer'
+
+%h1
+  All Apps:
+  = link_to 'New App', new_app_path, class: 'ui basic purple right floated massive button'
+%table.ui.selectable.celled.table
+  %thead
+    %tr
+      %th
+        App
+      %th
+        Description
+      %th
+        Operating Systems
+      %th
+        User
+  %tbody
+    - @apps.each do |app|
+      %tr{ onclick: "location.href='#{app_path(app)}'" }
+        %td
+          %h4.ui.purple.header
+            = app.name
+        %td
+          = app.description
+        %td
+          = render 'apps/partials/icons', app: app
+        %td
+          = app.user.username

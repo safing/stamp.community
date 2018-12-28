@@ -25,14 +25,15 @@ module Stamps
 
     def show
       @commentable = @votable = @stamp = Stamp::Label.find(params[:id])
-      @comments = @commentable.comments
+      @comments = @commentable.comments.order(:created_at)
       @comment = Comment.new
 
       authorize @stamp
     end
 
     def index
-      @stamp = Stamp::Flag.first
+      @recent_label_stamps = Stamp::Label.order(created_at: :desc).limit(5)
+      @recent_flag_stamps = Stamp::Flag.order(created_at: :desc).limit(5)
     end
 
     private

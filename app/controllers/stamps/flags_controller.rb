@@ -24,7 +24,7 @@ module Stamps
 
     def show
       @commentable = @votable = @stamp = Stamp::Flag.find(params[:id])
-      @comments = @commentable.comments
+      @comments = @commentable.comments.order(:created_at)
       @comment = Comment.new
 
       authorize @stamp
@@ -43,7 +43,7 @@ module Stamps
               :p2p,
               :server
             )
-            .merge("#{params[:stamp][:prompt_group]}": true)
+            .merge("#{params[:flag_stamp][:prompt_group]}": true)
     end
 
     def load_stampable
