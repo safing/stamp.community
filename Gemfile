@@ -15,7 +15,6 @@ gem 'pg'
 
 gem 'font_awesome5_rails'
 gem 'sass-rails'
-gem 'semantic-ui-sass'
 
 gem 'jquery-rails'
 gem 'turbolinks'
