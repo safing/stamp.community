@@ -21,7 +21,7 @@
 
 .row#stamps
   .seven.wide.middle.aligned.column
-    %h1.ui.large.header Stamp Domains
+    %h2.ui.large.header Stamp Domains
 
     %p We categorize the web. For example, we tag domains that serve ads.
 
@@ -86,7 +86,7 @@
 
 .centered.row#actions
   .sixteen.wide.middle.aligned.column
-    %h1.ui.header
+    %h2.ui.header
       Join our Community
   .five.wide.middle.aligned.column
     - if user_signed_in?
@@ -94,4 +94,4 @@
     - else
       = link_to 'Sign up', new_user_registration_path, class: 'ui blue button'
   .five.wide.middle.aligned.column
-    = link_to 'Visit our forums', forums_path, class: 'ui blue button'
+    = link_to 'Visit our forums', forums_path, target: '_blank', class: 'ui blue button'

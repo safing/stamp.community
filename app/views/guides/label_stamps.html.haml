@@ -17,7 +17,7 @@
 
 .row#creation
   .sixteen.wide.column
-    %h1.ui.large.header
+    %h2.ui.large.header
       Create a Label Stamp
 
   .seven.wide.left.floated.column
@@ -75,7 +75,7 @@
 
 .row
   .six.wide.middle.aligned.column
-    %h1.ui.large.header
+    %h2.ui.large.header
       Current Labels
 
     %p
@@ -94,14 +94,14 @@
 
 .row
   .eight.wide.middle.aligned.column
-    %h1.ui.large.header
+    %h2.ui.large.header
       Differentiate 1st- & 3rd-party domains
     %p
       Most sites, such as semantic-ui.com, do not serve ads and track their users directly. Instead, they implement 3rd-party domains who do the job for them. Take a look
       &nbsp;
       %i.arrow.right.purple.icon
 
-    %h2.ui.small.header
+    %h3.ui.small.header
       Three points are clear
 
     %ul
@@ -120,11 +120,16 @@
   .eight.wide.center.aligned.column
     = image_tag 'guides/label_stamps/umatrix-semantic-ui.png', class: 'ui bordered image'
 
+
 .ui.divider
 
-.centered.row
+.centered.row#action-content
+  .sixteen.wide.middle.aligned.column
+    %h2.ui.header
+      Start stamping
+
   .ten.wide.column
-    %h1.ui.large.center.aligned.icon.header
+    %h3.ui.large.center.aligned.icon.header
       %i.massive.grey.toolbox.icon
       Tools for Contribution
     %p
