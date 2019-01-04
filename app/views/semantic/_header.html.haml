@@ -3,26 +3,36 @@
     %img{src: '/assets/basic_logo.png'}
     %h2{type: 'text'}
       Stamp
+  .ui.simple.inverted.dropdown.item
+    Guides
+    %i.dropdown.icon
+    .menu
+      = link_to 'Tour', tour_path, class: 'item'
+      = link_to 'Label Stamps', label_stamps_guide_path, class: 'item'
   - if user_signed_in?
-    = link_to 'Recents', label_stamp_index_path, class: 'item'
-    = link_to 'All Domains', domains_path, class: 'item'
-    = link_to 'All Apps', apps_path, class: 'item'
-  .menu
+    .ui.simple.inverted.dropdown.item
+      Go To...
+      %i.dropdown.icon
+      .menu
+        = link_to 'Recents', label_stamp_index_path, class: 'item'
+        = link_to 'All Domains', domains_path, class: 'item'
+        = link_to 'All Apps', apps_path, class: 'item'
 
   .right.menu
     - if user_signed_in?
-      %div.ui.item.slim
+      = link_to user_path(current_user), class: 'item' do
         %img.small_stamp{src: '/assets/stamp_j3rik0_no_text_icon.png'}
         = current_user.stamps.count
-      %div.item.slim
-        %i.sort.icon
-        %div.content
-          = current_user.votes.count
-      %div.item.slim
-        %i.linkify.icon
-        %div.content
-          = current_user.domains.count
-      = link_to 'Profile', user_path(current_user), class: 'item'
-      = link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: 'item'
+        .content
+        %i.fitted.sort.icon
+        = current_user.votes.count
+        .content
+        %i.fitted.linkify.icon
+        = current_user.domains.count
+      .ui.simple.inverted.dropdown.item
+        %i.bars.icon
+        .menu
+          = link_to 'Profile', user_path(current_user), class: 'item'
+          = link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: 'item'
     - else
       = link_to 'Sign In', new_user_session_path, class: 'item'
