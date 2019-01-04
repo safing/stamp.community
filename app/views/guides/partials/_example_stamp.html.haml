@@ -1,7 +1,8 @@
 .ui.segment
   %h3.header
     Stamp for
-    %a{href: '#'}adservice.google.com
+    %a.disabled
+      adservice.google.com
   .ui.divider
   %span.ui.centered.middle.aligned.grid
     .three.wide.column
@@ -24,10 +25,10 @@
   .ui.small.comments
     %h3.ui.dividing.header
     .comment
-      %a.avatar{href: '#'}
+      %a.disabled.avatar
         = image_tag 'portmaster.png'
       .content
-        %a.author{href: '#'}
+        %a.disabled.author
           Portmaster
         .metadata
           .date

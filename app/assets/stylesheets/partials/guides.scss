@@ -50,7 +50,7 @@
       font-size: 1.25em;
     }
 
-    h1 {
+    h2 {
       padding-bottom: 1.4em;
       font-size: 2.7em;
     }
@@ -59,5 +59,53 @@
       border-left: 1px solid rgba(34, 36, 38, 0.15);
     }
   }
+}
 
+#label-stamps-guide {
+  .row {
+    padding: 7% 0;
+  }
+
+  .ui.tag.label {
+    margin: 0.2em 0 0.2em 1em;
+  }
+
+  .big.ribbon {
+    margin-bottom: 0.5em;
+  }
+
+  i.hand.pointer {
+    margin: 1em 0 0 -2em;
+  }
+
+  #creation.row > .column {
+    margin-top: 1.5em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  #action-content {
+    padding-bottom: 5%;
+
+    h2:first-child {
+      padding-bottom: 0.8em;
+      font-size: 2.7em;
+    }
+  }
+
+  #action-buttons {
+    padding-top: 0;
+
+    .button {
+      width: 100%;
+      padding: 1.5em 0;
+      font-size: 1.25em;
+    }
+
+    .column:last-child {
+      border-left: 1px solid rgba(34, 36, 38, 0.15);
+    }
+  }
 }

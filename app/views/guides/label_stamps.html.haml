@@ -1,0 +1,148 @@
+- content_for(:container_id, 'label-stamps-guide')
+
+.centered.row
+  .ten.wide.column
+    %h1.ui.huge.header
+      Introduction to Label Stamps
+    .content
+      .sub.header
+        Label Stamps are a way to tag domains or subdomains.
+        %br
+        For instance, we want to tag
+        %a.disabled adservice.google.com
+        as
+        = render partial: 'labels/partials/label_link', locals: { label: @ad_label }
+
+.ui.divider
+
+.row#creation
+  .sixteen.wide.column
+    %h2.ui.large.header
+      Create a Label Stamp
+
+  .seven.wide.left.floated.column
+    %h3.ui.medium.header
+      Pick a Domain
+    %p
+      To create a Label Stamp, you first need to go to the domain you would want to stamp. If the domain does not yet exist, you can simply add it to our database.
+
+    %p
+      When you're viewing your desired domain, you can then 'Add a Stamp'.
+
+  .nine.wide.middle.aligned.right.floated.column
+    .ui.vertical.menu
+      .active.item
+        %b 1. Domains
+      = link_to 'safing.io', 'https://safing.io', target: '_blank', class: 'item'
+      = link_to 'safing.community', 'https://safing.community', target: '_blank', class: 'item'
+      = link_to 'brave.com', 'https://brave.com', target: '_blank', class: 'item'
+      = link_to new_domain_path, class: 'blue active item' do
+        %i.blue.plus.icon
+        Add Domain
+  .six.wide.middle.aligned.left.floated.column
+    %h3.ui.medium.header
+      Pick a Label & Percentage
+    %p
+      You start off by picking a Label, and then defining how strong the label applies. When selecting a binary label, the value
+      %b must
+      be 0 or 100.
+  .seven.wide.right.floated.column
+    .ui.segment
+      .ui.grid
+        .six.wide.column
+          .ui.tiny.header
+            2. Label
+        .ten.wide.column
+          .ui.tiny.header
+            3. Percentage
+      .ui.divider
+      .ui.grid
+        .six.wide.middle.aligned.column
+          - @parent_labels.first.children.each do |child|
+            = render partial: 'labels/partials/label_link', locals: { label: child }
+            %br
+        .eight.wide.middle.aligned.column
+          .ui.black.disabled.slider
+            .inner
+              .track
+              .track-fill{style: "left: 0%; right: 50%;"}
+              .thumb{style: "left: calc(50% - 10.5px); right: auto;"}
+        .two.wide.middle.aligned.column
+          50
+  .two.wide.column.right.floated
+
+.ui.divider
+
+.row
+  .six.wide.middle.aligned.column
+    %h2.ui.large.header
+      Current Labels
+
+    %p
+      Currently, we only collect data on Trackers & Malware. By narrowing our field we can focus more on the system and add additional labels lateron. Have a look at
+      = link_to 'all our Labels.', labels_path
+  - @parent_labels.each do |parent|
+    .five.wide.column
+      .ui.raised.segment
+        %h4
+          = render partial: 'labels/partials/label_link', locals: { label: parent, tag_type: 'black big ribbon' }
+        - parent.children.each do |child|
+          = render partial: 'labels/partials/label_link', locals: { label: child }
+          %br
+
+.ui.divider
+
+.row
+  .eight.wide.middle.aligned.column
+    %h2.ui.large.header
+      Differentiate 1st- & 3rd-party domains
+    %p
+      Most sites, such as semantic-ui.com, do not serve ads and track their users directly. Instead, they implement 3rd-party domains who do the job for them. Take a look
+      &nbsp;
+      %i.arrow.right.purple.icon
+
+    %h3.ui.small.header
+      Three points are clear
+
+    %ul
+      %li
+        %a.disabled semantic-ui.com
+        by itself is clean. It should
+        %b not be stamped
+      %li
+        %a.disabled google-analytics.com
+        should be stamped as
+        = render partial: 'labels/partials/label_link', locals: { label: @analytics_label }
+      %li
+        %a.disabled carbonads.com
+        should be stamped as
+        = render partial: 'labels/partials/label_link', locals: { label: @ad_label }
+  .eight.wide.center.aligned.column
+    = image_tag 'guides/label_stamps/umatrix-semantic-ui.png', class: 'ui bordered image'
+
+
+.ui.divider
+
+.centered.row#action-content
+  .sixteen.wide.middle.aligned.column
+    %h2.ui.header
+      Start stamping
+
+  .ten.wide.column
+    %h3.ui.large.center.aligned.icon.header
+      %i.massive.grey.toolbox.icon
+      Tools for Contribution
+    %p
+      If you want to contribute it is
+      %i highly
+      advised to use tools such as
+      = link_to 'uMatrix.', umatrix_path, target: '_blank'
+      It shows 3rd-party requests of a domain, as shown in the above screenshot.
+.centered.row#action-buttons
+  .five.wide.middle.aligned.column
+    = link_to 'Download uMatrix', umatrix_path, class: 'ui blue button', target: '_blank'
+  .five.wide.middle.aligned.column
+    - if user_signed_in?
+      = link_to 'View recent stamps', label_stamp_index_path, class: 'ui blue button'
+    - else
+      = link_to 'Sign up', new_user_registration_path, class: 'ui blue button'
