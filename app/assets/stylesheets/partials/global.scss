@@ -46,3 +46,8 @@
 div {
   word-wrap: break-word !important;
 }
+
+a.disabled {
+  pointer-events: none;
+  cursor: text;
+}
