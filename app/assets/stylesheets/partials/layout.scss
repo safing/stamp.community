@@ -7,6 +7,16 @@
 }
 .ui.header {
   border-radius: 0;
+
+  .right.menu {
+    i {
+      padding-right: 4px;
+    }
+
+    .content {
+      padding-left: 11px;
+    }
+  }
 }
 
 .small_stamp {
