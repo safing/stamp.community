@@ -85,4 +85,27 @@
       margin-top: 0;
     }
   }
+
+  #action-content {
+    padding-bottom: 5%;
+
+    h2:first-child {
+      padding-bottom: 0.8em;
+      font-size: 2.7em;
+    }
+  }
+
+  #action-buttons {
+    padding-top: 0;
+
+    .button {
+      width: 100%;
+      padding: 1.5em 0;
+      font-size: 1.25em;
+    }
+
+    .column:last-child {
+      border-left: 1px solid rgba(34, 36, 38, 0.15);
+    }
+  }
 }

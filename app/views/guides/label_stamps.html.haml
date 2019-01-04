@@ -138,3 +138,11 @@
       advised to use tools such as
       = link_to 'uMatrix.', umatrix_path, target: '_blank'
       It shows 3rd-party requests of a domain, as shown in the above screenshot.
+.centered.row#action-buttons
+  .five.wide.middle.aligned.column
+    = link_to 'Download uMatrix', umatrix_path, class: 'ui blue button', target: '_blank'
+  .five.wide.middle.aligned.column
+    - if user_signed_in?
+      = link_to 'View recent stamps', label_stamp_index_path, class: 'ui blue button'
+    - else
+      = link_to 'Sign up', new_user_registration_path, class: 'ui blue button'
