@@ -16,7 +16,7 @@
         - @domain.stamps.accepted.each do |stamp|
           %div.four.wide.column
             =link_to label_stamp_path(stamp.id) do
-              %h5.ui.middle.aligned.header
+              %h5.ui.small.blue.tag.label
                 = stamp.label.name
           %div.twelve.wide.column
             %div.bar.float.right
@@ -36,7 +36,7 @@
         - @domain.stamps.in_progress.each do |sibling|
           %div.four.wide.column
             =link_to label_stamp_path(sibling.id) do
-              %h5.ui.middle.aligned.header
+              %h5.ui.small.blue.tag.label
                 = sibling.label.name
           %div.twelve.wide.column
             %div.bar.float.right

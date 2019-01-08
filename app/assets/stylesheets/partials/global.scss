@@ -18,9 +18,6 @@
   &.mb0 {
     margin-bottom: 0px;
   }
-  &.ml5 {
-    margin-left: 5px;
-  }
 }
 
 .results .ui.label {
@@ -50,4 +47,9 @@ div {
 a.disabled {
   pointer-events: none;
   cursor: text;
+}
+
+.ui.tag.label {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
 }

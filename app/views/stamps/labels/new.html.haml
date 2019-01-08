@@ -15,11 +15,21 @@
       = f.hidden_field :domain, value: params[:domain_name] || @stamp.domain.name
       %div.title
         1. Select Label
-        = button_tag '', type: 'button', class: %w[ui grey basic tiny button hidden ml5], data: {target: 'new-stamp.selectedLabel'}
+        = content_tag 'a', '', class: %w[ui blue tag label hidden], data: {target: 'new-stamp.selectedLabel'}
         = f.hidden_field :label_id, data: {target: 'new-stamp.labelId'}
       %div.content
-        - @labels.each do |label|
-          = button_tag label.name, type: 'button', class: %w[ui grey basic tiny button], data: {action: 'new-stamp#selectLabel', label_id: label.id, content: label.description , variation: "mini"}
+        .ui.two.column.grid
+          .row
+            - @parent_labels.each do |parent|
+              .eight.wide.mobile.four.wide.tablet.three.wide.computer.column
+                .ui.raised.segment
+                  %h4
+                    .ui.black.large.ribbon.label
+                      = parent.name
+                  - parent.children.each do |child|
+                    = content_tag 'a', child.name, class: %w[ui blue tag label], data: {action: 'new-stamp#selectLabel', label_id: child.id, content: child.description, variation: "mini"}
+                    %br
+
         %div.ui.right.aligned.basic.segment
           %div.ui.relaxed.horizontal.list{style: "border-top: 1px solid rgba(34, 36, 38, 0.15);"}
             %div.item
