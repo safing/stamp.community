@@ -52,7 +52,7 @@ module Stamps
     end
 
     def load_labels
-      @labels = Label.order(Arel.sql('LOWER(name) ASC'))
+      @parent_labels = Label.where(parent_id: nil).order(Arel.sql('LOWER(name) ASC'))
     end
   end
 end

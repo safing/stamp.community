@@ -11,7 +11,7 @@
     .ui.divider
     %span.ui.grid.centered.middle.aligned
       .three.wide.column
-        %h3= @stamp.label.name
+        %h3.ui.blue.tag.label= @stamp.label.name
       %div.ten.wide.column{style: "padding-top: 30px;"}
         %div.bar.float.right
           %div.ui.purple.progress{style: "background: #FDDCFD;"}
@@ -21,9 +21,7 @@
                 \%
       .three.wide.column
         = render 'votes/carets'
-    -# the order of classes is important for semantic, hence this is a bit odd
-    %div{class: %w[ui large top right attached label].push(class_for(@stamp.state))}
-      = @stamp.state.titleize
+    = render partial: 'stamps/partials/attached_label', locals: { stamp: @stamp }
     .ui.small.comments
       = render 'comments/comments'
       = render 'comments/form' if current_user && @stamp.in_progress?

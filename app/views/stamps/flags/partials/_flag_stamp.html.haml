@@ -50,8 +50,7 @@
               = f.hidden_field :accept, value: true
               %button.ui.purple.basic.big.button.battle-button
                 Choose Me
-        %div{class: %w[ui large top right attached label].push(class_for(stamp.state))}
-          = stamp.state.titleize
+        = render partial: 'stamps/partials/attached_label', locals: { stamp: stamp }
         - if show_stamp
           %div.ui.bottom.left.attached.label
             = link_to flag_stamp_path(stamp), class: 'ui basic purple button battle-button' do

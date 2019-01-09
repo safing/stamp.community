@@ -37,6 +37,14 @@ class Stamp < ApplicationRecord
     @vote_of ||= votes.find_by(user_id: user.id)
   end
 
+  def conclusion_at
+    created_at + ENVProxy.required_integer('STAMP_CONCLUDE_IN_HOURS').hours
+  end
+
+  def concluded_at
+    conclusion_at
+  end
+
   # overwrites https://apidock.com/rails/ActiveRecord/Inheritance/ClassMethods/sti_name
   # because otherwise the type would just be Label - we already have a model called that
   def sti_name

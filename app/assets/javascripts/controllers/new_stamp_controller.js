@@ -32,6 +32,10 @@
         }
       });
 
+      $('.ui.blue.tag.label').popup({
+        position: 'right center'
+      });
+
       $('.accordion[data-controller="new-stamp"]').accordion('open', element_to_open)
     }
 

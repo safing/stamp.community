@@ -13,7 +13,7 @@
       %div.ui.grid
         %div.three.wide.column
           =link_to label_stamp_path(stamp.id) do
-            %h5.ui.middle.aligned.header
+            %h5.ui.mini.blue.tag.label
               = stamp.label.name
         %div.thirteen.wide.column
           %div.bar.float.right
@@ -22,5 +22,4 @@
                 %div.progress
                   = stamp.percentage
                   \%
-    %div{class: %w[ui large top right attached label].push(class_for(stamp.state))}
-      = stamp.state.titleize
+  = render partial: 'stamps/partials/attached_label', locals: { stamp: stamp }

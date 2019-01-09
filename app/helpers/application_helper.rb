@@ -29,16 +29,6 @@ module ApplicationHelper
   end
   # rubocop:enable CyclomaticComplexity
 
-  def class_for(state)
-    case state.to_sym
-    when :accepted then 'green'
-    when :archived then 'grey'
-    when :denied then 'red'
-    when :disputed then 'grey'
-    when :in_progress then 'purple'
-    end
-  end
-
   private
 
   def return_grey?(stamp, type)
