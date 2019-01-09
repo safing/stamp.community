@@ -5,19 +5,21 @@
     }
 
     connect() {
-      var initial_percentage = 50
       var element_to_open = 0
 
       if (this.data.has('setLabelId')) {
         var button = document.querySelector("[data-label-id='" + this.data.get('setLabelId') + "']")
-        // without the setTimeout it just won't click the button...
-        setTimeout(function() {button.click()}, 1)
 
-        if (this.data.has('setPercentage')) {
-          initial_percentage = this.data.get('setPercentage')
-        }
+        // without the setTimeout it just won't click the button...
+        setTimeout(function() {button.click()}, 150)
 
         element_to_open = 1
+      }
+      $('.accordion[data-controller="new-stamp"]').accordion('open', element_to_open)
+
+      var initial_percentage = 50
+      if (this.data.has('setPercentage')) {
+        initial_percentage = this.data.get('setPercentage')
       }
 
       $('#stamp_percentage_slider').slider({
@@ -36,8 +38,6 @@
       $('.ui.blue.tag.label').popup({
         position: 'right center'
       });
-
-      $('.accordion[data-controller="new-stamp"]').accordion('open', element_to_open)
     }
 
     selectLabel(event) {
