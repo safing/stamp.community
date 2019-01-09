@@ -10,7 +10,8 @@
 
       if (this.data.has('setLabelId')) {
         var button = document.querySelector("[data-label-id='" + this.data.get('setLabelId') + "']")
-        button.click()
+        // without the setTimeout it just won't click the button...
+        setTimeout(function() {button.click()}, 1)
 
         if (this.data.has('setPercentage')) {
           initial_percentage = this.data.get('setPercentage')
