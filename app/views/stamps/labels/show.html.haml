@@ -21,9 +21,7 @@
                 \%
       .three.wide.column
         = render 'votes/carets'
-    -# the order of classes is important for semantic, hence this is a bit odd
-    %div{class: %w[ui large top right attached label].push(class_for(@stamp.state))}
-      = @stamp.state.titleize
+    = render partial: 'stamps/partials/attached_label', locals: { stamp: @stamp }
     .ui.small.comments
       = render 'comments/comments'
       = render 'comments/form' if current_user && @stamp.in_progress?

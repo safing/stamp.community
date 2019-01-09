@@ -22,5 +22,4 @@
                 %div.progress
                   = stamp.percentage
                   \%
-    %div{class: %w[ui large top right attached label].push(class_for(stamp.state))}
-      = stamp.state.titleize
+  = render partial: 'stamps/partials/attached_label', locals: { stamp: stamp }
