@@ -41,6 +41,7 @@ services:
     volumes:
       - .:/stamp
     tty: true # color the logs
+    stdin_open: true
     environment:
       RAILS_ENV: test
       RACK_ENV: test
