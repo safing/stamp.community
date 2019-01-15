@@ -75,4 +75,23 @@ RSpec.feature 'app requests', type: :request do
       end
     end
   end
+
+  describe 'activities' do
+    describe '#create' do
+      subject(:request) { post apps_url, params: { app: app_attributes } }
+      let(:app_attributes) do
+        FactoryBot.attributes_with_foreign_keys_for(:app)
+      end
+      include_context 'login admin'
+
+      it "creates an 'app.create' activity with {owner: current_user}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(controller.current_user).to eq(activity.owner)
+        end
+      end
+    end
+  end
 end
