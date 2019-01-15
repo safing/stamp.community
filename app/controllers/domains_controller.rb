@@ -23,6 +23,7 @@ class DomainsController < ApplicationController
         if @domain.url_exists?
           @domain.user = current_user
           @domain.save!
+          @domain.create_activity :create, owner: current_user
 
           @state = 'success'
           @link = domain_path(@domain.name)

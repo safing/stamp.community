@@ -52,4 +52,28 @@ RSpec.feature 'domain requests', type: :request do
       end
     end
   end
+
+  describe 'activities' do
+    describe '#create' do
+      include_context 'login user'
+
+      subject(:request) { post domains_url, xhr: true, params: { domain: domain_attributes } }
+      let(:domain_attributes) do
+        FactoryBot.attributes_with_foreign_keys_for(:domain)
+      end
+
+      before do
+        allow_any_instance_of(Domain).to receive(:url_exists?).and_return(true)
+      end
+
+      it "creates an 'domain.create' activity with {owner: current_user}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(controller.current_user).to eq(activity.owner)
+        end
+      end
+    end
+  end
 end
