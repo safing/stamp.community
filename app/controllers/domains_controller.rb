@@ -1,10 +1,12 @@
 class DomainsController < ApplicationController
   def show
     @domain = Domain.find_by(name: params[:name])
+    authorize(@domain)
   end
 
   def new
     @domain = Domain.new
+    authorize(@domain)
   end
 
   # TODO: refactor this
@@ -12,6 +14,7 @@ class DomainsController < ApplicationController
   # rubocop:disable Metrics/AbcSize
   def create
     @domain = Domain.new(domain_params)
+    authorize(@domain)
 
     if @domain.valid?
       @domain = Domain.find_or_initialize_by(name: domain_params[:name])
