@@ -25,6 +25,7 @@ gem 'redcarpet'
 gem 'bootsnap', require: false
 
 gem 'devise'
+gem 'public_activity'
 gem 'pundit'
 gem 'state_machines-activerecord'
 
