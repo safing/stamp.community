@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_102602) do
+ActiveRecord::Schema.define(version: 2019_01_15_111735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -51,9 +51,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_102602) do
     t.string "name", null: false
     t.jsonb "os"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.text "uuid", default: -> { "gen_random_uuid()" }, null: false
-    t.index ["user_id"], name: "index_apps_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -148,7 +146,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_102602) do
   end
 
   add_foreign_key "api_keys", "users"
-  add_foreign_key "apps", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "domains", "users"

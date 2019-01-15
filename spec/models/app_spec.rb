@@ -4,12 +4,10 @@ RSpec.describe App, type: :model do
   end
 
   describe 'relations' do
-    it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:stamps) }
   end
 
   describe 'database' do
-    it { is_expected.to have_db_index(:user_id) }
   end
 
   describe 'fields' do
@@ -38,7 +36,6 @@ RSpec.describe App, type: :model do
     it { is_expected.to validate_presence_of(:description) }
     it { is_expected.to validate_presence_of(:link) }
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:user) }
 
     describe '#supports_one_or_more_operating_systems' do
       subject { app.valid? }

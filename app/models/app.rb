@@ -11,7 +11,6 @@ class App < ApplicationRecord
                                    h[os] = [:boolean, default: false]
                                  end)
 
-  belongs_to :user
   has_many :stamps, as: :stampable
 
   # Strip https:// or http://
@@ -19,7 +18,7 @@ class App < ApplicationRecord
     self.link = link.gsub(%r{https?:\/\/}, '') if attribute_present?('link')
   end
 
-  validates_presence_of %i[description link name user]
+  validates_presence_of %i[description link name]
   # db will insert a default value
   validates :uuid, presence: true, unless: proc { |obj| obj.new_record? }
   validate :supports_one_or_more_operating_systems

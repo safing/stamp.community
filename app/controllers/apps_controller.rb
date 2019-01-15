@@ -11,7 +11,6 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(app_params)
-    @app.user = current_user
     authorize(@app)
 
     if @app.save
