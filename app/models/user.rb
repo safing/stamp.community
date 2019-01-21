@@ -43,4 +43,12 @@ class User < ApplicationRecord
   def voted?(votable)
     votable.votes.where(user_id: id).exists?
   end
+
+  def activities
+    PublicActivity::Activity.where(owner_id: self.id)
+  end
+
+  def domains
+    Domain.where(id: activities.where(key: 'domain.create').select(:trackable_id))
+  end
 end
