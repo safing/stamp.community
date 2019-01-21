@@ -56,5 +56,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'fakeredis'
   # check if the release is out yet https://github.com/thoughtbot/shoulda-matchers/milestone/13
 end

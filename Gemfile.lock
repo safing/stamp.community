@@ -108,6 +108,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.9.1)
       i18n (>= 0.7)
+    fakeredis (0.7.0)
+      redis (>= 3.2, < 5.0)
     ffi (1.9.25)
     fix-db-schema-conflicts (3.0.2)
       rubocop (>= 0.38.0)
@@ -369,6 +371,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
+  fakeredis
   fix-db-schema-conflicts
   font_awesome5_rails
   grape
