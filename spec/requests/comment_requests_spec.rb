@@ -1,4 +1,4 @@
-RSpec.feature 'stamp requests', type: :request do
+RSpec.feature 'comment requests', type: :request do
   describe 'authourization' do
     describe '#create' do
       subject(:request) { post stamp_comments_url(stamp.id), params: comment_attributes }
@@ -47,6 +47,31 @@ RSpec.feature 'stamp requests', type: :request do
       context 'role: admin' do
         include_context 'login admin'
         include_examples 'status code', 302
+      end
+    end
+  end
+
+  describe 'activities' do
+    describe '#create' do
+      include_context 'login user'
+
+      subject(:request) do
+        post stamp_comments_url(stamp.id), params: { comment: comment_attributes }
+      end
+
+      let(:stamp) { FactoryBot.create(:label_stamp) }
+      let(:comment_attributes) do
+        FactoryBot.attributes_with_foreign_keys_for(:comment)
+      end
+
+      it "creates an 'comment.create' activity with {owner: current_user}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.owner).to eq(controller.current_user)
+          expect(activity.recipient).to eq(stamp)
+        end
       end
     end
   end
