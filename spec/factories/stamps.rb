@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :stamp do
     creator { build(:user) }
-    stampable { build(:domain, user: creator) }
+    stampable { build(:domain) }
     comments { build_list(:comment, 1, user: creator, commentable: @instance) }
 
     trait :accepted do
@@ -29,7 +29,7 @@ FactoryBot.define do
   end
 
   factory :flag_stamp, class: Stamp::Flag, parent: :stamp do
-    stampable { build(:app, user: creator) }
+    stampable { build(:app) }
 
     prompt { true }
   end

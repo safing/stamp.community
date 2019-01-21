@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_15_111735) do
+ActiveRecord::Schema.define(version: 2019_01_15_133555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -70,10 +70,8 @@ ActiveRecord::Schema.define(version: 2019_01_15_111735) do
     t.string "name", null: false
     t.bigint "parent_id"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.index ["name"], name: "index_domains_on_name", unique: true
     t.index ["parent_id"], name: "index_domains_on_parent_id"
-    t.index ["user_id"], name: "index_domains_on_user_id"
   end
 
   create_table "labels", force: :cascade do |t|
@@ -148,7 +146,6 @@ ActiveRecord::Schema.define(version: 2019_01_15_111735) do
   add_foreign_key "api_keys", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "domains", "domains", column: "parent_id"
-  add_foreign_key "domains", "users"
   add_foreign_key "labels", "labels", column: "parent_id"
   add_foreign_key "stamps", "users"
   add_foreign_key "votes", "users"

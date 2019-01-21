@@ -21,7 +21,6 @@ class DomainsController < ApplicationController
 
       if @domain.new_record?
         if @domain.url_exists?
-          @domain.user = current_user
           @domain.save!
           @domain.create_activity :create, owner: current_user
 
@@ -56,8 +55,6 @@ class DomainsController < ApplicationController
   # rubocop:enable Metrics/AbcSize
 
   def domain_params
-    params.require(:domain)
-          .permit(:name)
-          .merge(user: current_user)
+    params.require(:domain).permit(:name)
   end
 end
