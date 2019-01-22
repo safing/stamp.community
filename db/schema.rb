@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_01_15_133555) do
     t.string "key"
     t.bigint "owner_id"
     t.string "owner_type"
-    t.text "parameters"
+    t.jsonb "parameters", default: {}, null: false
     t.bigint "recipient_id"
     t.string "recipient_type"
     t.bigint "trackable_id"
