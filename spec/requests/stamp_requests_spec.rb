@@ -1,7 +1,7 @@
 RSpec.feature 'stamp requests', type: :request do
   describe 'authourization' do
     describe '#new' do
-      subject(:request) { get new_stamp_url(domain_name: domain.name) }
+      subject(:request) { get new_label_stamp_path(domain_name: domain.name) }
       let(:domain) { FactoryBot.create(:domain) }
 
       context 'role: guest' do
@@ -25,7 +25,7 @@ RSpec.feature 'stamp requests', type: :request do
     end
 
     describe '#create' do
-      subject(:request) { post stamps_url, params: { stamp: stamp_attributes } }
+      subject(:request) { post label_stamp_index_path, params: { label_stamp: stamp_attributes } }
       let(:domain) { FactoryBot.create(:domain) }
       let(:stamp_attributes) do
         FactoryBot.attributes_with_foreign_keys_for(:label_stamp)
@@ -77,6 +77,61 @@ RSpec.feature 'stamp requests', type: :request do
       context 'role: admin' do
         include_context 'login admin'
         include_examples 'status code', 200
+      end
+    end
+  end
+
+  describe 'activities' do
+    describe 'Stamp::Label#create' do
+      include_context 'login user'
+
+      subject(:request) { post label_stamp_index_url, params: { label_stamp: stamp_attributes } }
+
+      let(:domain) { FactoryBot.create(:domain) }
+      let(:stamp_attributes) do
+        FactoryBot.attributes_with_foreign_keys_for(:label_stamp)
+                  .merge(
+                    comments_attributes: { '0': { content: '1' * 40 } },
+                    domain: domain.name
+                  )
+      end
+
+      it "creates a 'stamp.create' activity with {owner: current_user, recipient: stampable}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.owner).to eq(controller.current_user)
+          expect(activity.recipient).to eq(domain)
+        end
+      end
+    end
+
+    describe 'Stamp::Flag#create' do
+      include_context 'login user'
+
+      subject(:request) do
+        post flag_stamp_index_path, params: { flag_stamp: stamp_attributes }
+      end
+
+      let(:app) { FactoryBot.create(:app) }
+      let(:stamp_attributes) do
+        FactoryBot.attributes_with_foreign_keys_for(:flag_stamp)
+                  .merge(
+                    comments_attributes: { '0': { content: '1' * 40 } },
+                    app_id: app.id
+                  )
+      end
+
+      # somehow flag_stamp_index_path is not accessible here... :|
+      xit "creates a 'stamp.create' activity with {owner: current_user, recipient: stampable}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.owner).to eq(controller.current_user)
+          expect(activity.recipient).to eq(app)
+        end
       end
     end
   end

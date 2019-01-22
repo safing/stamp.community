@@ -1,4 +1,6 @@
 class Stamp < ApplicationRecord
+  include PublicActivity::Common
+
   TYPES = %w[Stamp::Flag Stamp::Label Stamp::Identifier].freeze
 
   include Votable
