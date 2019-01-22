@@ -8,6 +8,7 @@ class VotesController < ApplicationController
     @vote.power = current_user.voting_power
 
     if @vote.save
+      @vote.create_activity :create, owner: current_user, recipient: @votable
       redirect_to(@votable, flash: { success: 'Successfully voted ' })
     else
       redirect_to(@votable, flash: { error: 'Cannot vote twice' })

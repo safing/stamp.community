@@ -1,4 +1,6 @@
 class Vote < ApplicationRecord
+  include PublicActivity::Common
+
   before_validation :cache_users_voting_power, on: :create
 
   belongs_to :user
