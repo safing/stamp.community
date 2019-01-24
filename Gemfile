@@ -24,6 +24,9 @@ gem 'redcarpet'
 
 gem 'bootsnap', require: false
 
+# WARNING: when updating public_activity
+# assert our patch works: models/concerns/public_activity
+# and the specs:    specs/models/concerns/public_activity
 gem 'devise'
 gem 'public_activity'
 gem 'pundit'
