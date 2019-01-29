@@ -50,8 +50,6 @@ module Votable
       end.first
     end
 
-    private
-
     def archive_accepted_siblings!
       siblings.accepted.each(&:archive!)
     end

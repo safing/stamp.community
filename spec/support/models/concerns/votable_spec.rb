@@ -105,6 +105,7 @@ RSpec.shared_examples 'a votable model' do |options|
     subject { instance.concludable? }
 
     before do
+      allow_required_integer_env('STAMP_CONCLUDE_IN_HOURS').and_return(48)
       allow_required_integer_env('VOTABLE_POWER_THRESHOLD').and_return(10)
       allow_required_integer_env('VOTABLE_MAJORITY_THRESHOLD').and_return(75)
       allow(instance).to receive(:total_power).and_return(total_power)
