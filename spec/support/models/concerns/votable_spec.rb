@@ -66,13 +66,18 @@ RSpec.shared_examples 'a votable model' do |options|
       end
     end
 
-    describe '#archive!' do
-      subject { instance.archive! }
-      let(:state) { :accepted }
+    describe '#deny!' do
+      subject { instance.deny! }
+      let(:state) { :in_progress }
     end
 
-    describe '#overrule!' do
-      subject { instance.overrule! }
+    describe '#dispute!' do
+      subject { instance.dispute! }
+      let(:state) { :in_progress }
+    end
+
+    describe '#archive!' do
+      subject { instance.archive! }
       let(:state) { :accepted }
     end
 
