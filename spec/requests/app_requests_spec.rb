@@ -52,7 +52,7 @@ RSpec.feature 'app requests', type: :request do
     describe '#show' do
       subject(:request) { get app_path(some_app) }
 
-      # app as a variable name will remove all path helpers
+      # IMPORTANT: 'app' as a variable name will remove all path helpers
       let(:some_app) { FactoryBot.create(:app) }
 
       context 'role: guest' do

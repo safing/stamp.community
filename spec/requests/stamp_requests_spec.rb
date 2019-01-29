@@ -101,6 +101,7 @@ RSpec.feature 'stamp requests', type: :request do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
           activity = PublicActivity::Activity.first
+          expect(activity.key).to eq('stamp.create')
           expect(activity.owner).to eq(controller.current_user)
           expect(activity.recipient).to eq(domain)
         end
@@ -110,27 +111,26 @@ RSpec.feature 'stamp requests', type: :request do
     describe 'Stamp::Flag#create' do
       include_context 'login user'
 
-      subject(:request) do
-        post flag_stamp_index_path, params: { flag_stamp: stamp_attributes }
-      end
+      subject(:request) { post(flag_stamp_index_url, params: { flag_stamp: stamp_attributes }) }
 
-      let(:app) { FactoryBot.create(:app) }
+      # IMPORTANT: 'app' as a variable name will remove all path helpers
+      let(:some_app) { FactoryBot.create(:app) }
       let(:stamp_attributes) do
         FactoryBot.attributes_with_foreign_keys_for(:flag_stamp)
                   .merge(
-                    comments_attributes: { '0': { content: '1' * 40 } },
-                    app_id: app.id
+                    app_id: some_app.id,
+                    prompt_group: :prompt # must be set
                   )
       end
 
-      # somehow flag_stamp_index_path is not accessible here... :|
-      xit "creates a 'stamp.create' activity with {owner: current_user, recipient: stampable}" do
+      it "creates a 'stamp.create' activity with {owner: current_user, recipient: stampable}" do
         PublicActivity.with_tracking do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
           activity = PublicActivity::Activity.first
+          expect(activity.key).to eq('stamp.create')
           expect(activity.owner).to eq(controller.current_user)
-          expect(activity.recipient).to eq(app)
+          expect(activity.recipient).to eq(some_app)
         end
       end
     end
