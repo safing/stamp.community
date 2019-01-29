@@ -1,6 +1,6 @@
 guard :rspec,
       results_file: File.expand_path('tmp/rspec_guard_result'),
-      cmd: 'bundle exec rspec -fd',
+      cmd: 'bundle exec rspec -fd --exclude-pattern "**/features/**/*_spec.rb"',
       spec_paths: ['spec'] do
   watch('spec/spec_helper.rb') { 'spec' }
 
