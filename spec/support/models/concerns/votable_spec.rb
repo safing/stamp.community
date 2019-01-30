@@ -312,4 +312,84 @@ RSpec.shared_examples 'a votable model' do |options|
       end
     end
   end
+
+  describe 'activities' do
+    subject { instance }
+
+    let(:instance) { FactoryBot.create(options[:factory], state: state) }
+    let(:state) { :in_progress }
+
+    describe '#accept!' do
+      subject { instance.accept! }
+      let(:state) { :in_progress }
+
+      it "creates an 'stamp.accepted' activity with {owner_type: System, owner_id: -1}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.key).to eq("#{instance.param_key}.accepted")
+          expect(activity.owner_type).to eq('System')
+          expect(activity.owner_id).to eq(-1)
+          expect(activity.trackable).to eq(instance)
+          expect(activity.recipient).to eq(instance.stampable)
+        end
+      end
+    end
+
+    describe '#deny!' do
+      subject { instance.deny! }
+      let(:state) { :in_progress }
+
+      it "creates an 'stamp.denied' activity with {owner_type: System, owner_id: -1}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.key).to eq("#{instance.param_key}.denied")
+          expect(activity.owner_type).to eq('System')
+          expect(activity.owner_id).to eq(-1)
+          expect(activity.trackable).to eq(instance)
+          expect(activity.recipient).to eq(instance.stampable)
+        end
+      end
+    end
+
+    describe '#dispute!' do
+      subject { instance.dispute! }
+      let(:state) { :in_progress }
+
+      it "creates an 'stamp.disputed' activity with {owner_type: System, owner_id: -1}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+
+          activity = PublicActivity::Activity.first
+          expect(activity.key).to eq("#{instance.param_key}.disputed")
+          expect(activity.owner_type).to eq('System')
+          expect(activity.owner_id).to eq(-1)
+          expect(activity.trackable).to eq(instance)
+          expect(activity.recipient).to eq(instance.stampable)
+        end
+      end
+    end
+
+    describe '#archive!' do
+      subject { instance.archive! }
+      let(:state) { :accepted }
+
+      it "creates an 'stamp.archived' activity with {owner_type: System, owner_id: -1}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.key).to eq("#{instance.param_key}.archived")
+          expect(activity.owner_type).to eq('System')
+          expect(activity.owner_id).to eq(-1)
+          expect(activity.trackable).to eq(instance)
+          expect(activity.recipient).to eq(instance.stampable)
+        end
+      end
+    end
+  end
 end
