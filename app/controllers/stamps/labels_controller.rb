@@ -16,7 +16,7 @@ module Stamps
       authorize @stamp
 
       if @stamp.save
-        @stamp.create_activity :create, owner: current_user, recipient: @stamp.stampable
+        @stamp.create_activity key: @stamp.key_for(action: :create), owner: current_user, recipient: @stamp.stampable
         redirect_to(label_stamp_path(@stamp.id), flash: { success: 'Stamp created successfully' })
       else
         load_labels
