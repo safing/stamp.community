@@ -45,4 +45,62 @@ RSpec.shared_examples 'a STI child of Stamp' do |options|
       end
     end
   end
+
+  describe 'stamp#param_key(base_class:)' do
+    subject { stamp.param_key(base_class: base_class) }
+
+    context 'base_class is true' do
+      let(:base_class) { true }
+
+      context "instance is a :#{options[:factory]}" do
+        it 'returns :stamp' do
+          expect(subject).to eq('stamp')
+        end
+      end
+
+      context 'instance is a :stamp' do
+        let(:stamp) { Stamp.new(type: 'Stamp') }
+
+        it 'returns :stamp' do
+          expect(subject).to eq('stamp')
+        end
+      end
+    end
+
+    context 'base_class is false' do
+      let(:base_class) { false }
+
+      context "instance is a :#{options[:factory]}" do
+        it "returns :#{options[:factory]}" do
+          expect(subject).to eq(options[:factory].to_s)
+        end
+      end
+
+      context 'instance is a :stamp' do
+        let(:stamp) { Stamp.new(type: 'Stamp') }
+
+        it 'returns :stamp' do
+          expect(subject).to eq('stamp')
+        end
+      end
+    end
+  end
+
+  describe "#key_for(action: 'create')" do
+    subject { stamp.key_for(base_class: false, action: 'create') }
+
+    context "instance is a :#{options[:factory]}" do
+      it 'returns flag_stamp.create' do
+        expect(subject).to eq('flag_stamp.create')
+      end
+    end
+
+    context 'instance is a :stamp' do
+      let(:stamp) { Stamp.new(type: 'Stamp') }
+
+      it 'returns stamp.create' do
+        expect(subject).to eq('stamp.create')
+      end
+    end
+  end
 end

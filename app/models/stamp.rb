@@ -53,6 +53,14 @@ class Stamp < ApplicationRecord
     to_s
   end
 
+  def param_key(base_class: true)
+    (base_class ? self.class.base_class : self.class).model_name.param_key
+  end
+
+  def key_for(base_class: true, action:)
+    [param_key(base_class: base_class), action].join('.')
+  end
+
   class << self
     # ActiveModel::Naming.model_name has provides Model helpers, such as #route_key, #param_key...
     # https://github.com/rails/rails/blob/master/activemodel/lib/active_model/naming.rb
