@@ -50,4 +50,26 @@ RSpec.feature 'vote requests', type: :request do
       end
     end
   end
+
+  describe 'activities' do
+    describe '#create' do
+      include_context 'login user'
+
+      subject(:request) do
+        post stamp_votes_url(stamp.id), params: { vote: { accept: true } }
+      end
+
+      let(:stamp) { FactoryBot.create(:label_stamp) }
+
+      it "creates a 'vote.create' activity with {owner: current_user, recipient: stamp}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.owner).to eq(controller.current_user)
+          expect(activity.recipient).to eq(stamp)
+        end
+      end
+    end
+  end
 end

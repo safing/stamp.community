@@ -5,7 +5,6 @@ FactoryBot.define do
     description { Faker::Lorem.paragraph }
     name { Faker::App.name }
     link { Faker::Internet.domain_name }
-    user
     uuid { SecureRandom.uuid }
 
     linux { true }

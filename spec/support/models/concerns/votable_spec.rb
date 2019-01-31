@@ -66,13 +66,18 @@ RSpec.shared_examples 'a votable model' do |options|
       end
     end
 
-    describe '#archive!' do
-      subject { instance.archive! }
-      let(:state) { :accepted }
+    describe '#deny!' do
+      subject { instance.deny! }
+      let(:state) { :in_progress }
     end
 
-    describe '#overrule!' do
-      subject { instance.overrule! }
+    describe '#dispute!' do
+      subject { instance.dispute! }
+      let(:state) { :in_progress }
+    end
+
+    describe '#archive!' do
+      subject { instance.archive! }
       let(:state) { :accepted }
     end
 
@@ -94,182 +99,199 @@ RSpec.shared_examples 'a votable model' do |options|
         }.from('accepted').to('archived')
       end
     end
+  end
 
-    describe '#concludable?' do
-      subject { instance.concludable? }
+  describe '#concludable?' do
+    subject { instance.concludable? }
 
-      before do
-        allow_required_integer_env('VOTABLE_POWER_THRESHOLD').and_return(10)
-        allow_required_integer_env('VOTABLE_MAJORITY_THRESHOLD').and_return(75)
-        allow(instance).to receive(:total_power).and_return(total_power)
-        allow(instance).to receive(:majority_size).and_return(majority_size)
-      end
+    before do
+      allow_required_integer_env('STAMP_CONCLUDE_IN_HOURS').and_return(48)
+      allow_required_integer_env('VOTABLE_POWER_THRESHOLD').and_return(10)
+      allow_required_integer_env('VOTABLE_MAJORITY_THRESHOLD').and_return(75)
+      allow(instance).to receive(:total_power).and_return(total_power)
+      allow(instance).to receive(:majority_size).and_return(majority_size)
+    end
 
-      context 'total_power is below power_threshold' do
-        let(:total_power) { 9 }
+    context 'total_power is below power_threshold' do
+      let(:total_power) { 9 }
 
-        context 'majority_size is below majority_threshold' do
-          let(:majority_size) { 74 }
+      context 'majority_size is below majority_threshold' do
+        let(:majority_size) { 74 }
 
-          it 'returns false' do
-            expect(subject).to be false
-          end
-        end
-
-        context 'majority_size equals majority_threshold' do
-          let(:majority_size) { 75 }
-
-          it 'returns false' do
-            expect(subject).to be false
-          end
-        end
-
-        context 'majority_size is above majority_threshold' do
-          let(:majority_size) { 80 }
-
-          it 'returns false' do
-            expect(subject).to be false
-          end
+        it 'returns false' do
+          expect(subject).to be false
         end
       end
 
-      context 'total_power equals power_threshold' do
-        let(:total_power) { 10 }
+      context 'majority_size equals majority_threshold' do
+        let(:majority_size) { 75 }
 
-        context 'majority_size is below majority_threshold' do
-          let(:majority_size) { 74 }
-
-          it 'returns false' do
-            expect(subject).to be false
-          end
-        end
-
-        context 'majority_size equals majority_threshold' do
-          let(:majority_size) { 75 }
-
-          it 'returns true' do
-            expect(subject).to be true
-          end
-        end
-
-        context 'majority_size is above majority_threshold' do
-          let(:majority_size) { 80 }
-
-          it 'returns true' do
-            expect(subject).to be true
-          end
+        it 'returns false' do
+          expect(subject).to be false
         end
       end
 
-      context 'total_power is above power power_threshold' do
-        let(:total_power) { 20 }
+      context 'majority_size is above majority_threshold' do
+        let(:majority_size) { 80 }
 
-        context 'majority_size is below majority_threshold' do
-          let(:majority_size) { 74 }
-
-          it 'returns false' do
-            expect(subject).to be false
-          end
-        end
-
-        context 'majority_size equals majority_threshold' do
-          let(:majority_size) { 75 }
-
-          it 'returns true' do
-            expect(subject).to be true
-          end
-        end
-
-        context 'majority_size is above majority_threshold' do
-          let(:majority_size) { 80 }
-
-          it 'returns true' do
-            expect(subject).to be true
-          end
+        it 'returns false' do
+          expect(subject).to be false
         end
       end
     end
 
-    describe '#majority_size' do
-      subject { instance.majority_size }
+    context 'total_power equals power_threshold' do
+      let(:total_power) { 10 }
 
-      before do
-        allow(instance).to receive(:upvote_power).and_return(upvote_power)
-        allow(instance).to receive(:downvote_power).and_return(downvote_power)
-      end
+      context 'majority_size is below majority_threshold' do
+        let(:majority_size) { 74 }
 
-      context 'upvoters have majority' do
-        let(:upvote_power) { 140 }
-        let(:downvote_power) { 60 }
-
-        it 'returns 70' do
-          expect(subject).to eq(70)
+        it 'returns false' do
+          expect(subject).to be false
         end
       end
 
-      context 'downvoters have majority' do
-        let(:upvote_power) { 40 }
-        let(:downvote_power) { 60 }
+      context 'majority_size equals majority_threshold' do
+        let(:majority_size) { 75 }
 
-        it 'returns 60' do
-          expect(subject).to eq(60)
+        it 'returns true' do
+          expect(subject).to be true
         end
       end
 
-      context 'votes are even' do
-        let(:upvote_power) { 40 }
-        let(:downvote_power) { 40 }
+      context 'majority_size is above majority_threshold' do
+        let(:majority_size) { 80 }
 
-        it 'returns 50' do
-          expect(subject).to eq(50)
+        it 'returns true' do
+          expect(subject).to be true
         end
       end
     end
 
-    describe '#majority_type' do
-      subject { instance.majority_type }
+    context 'total_power is above power power_threshold' do
+      let(:total_power) { 20 }
 
-      before do
-        allow(instance).to receive(:upvote_power).and_return(upvote_power)
-        allow(instance).to receive(:downvote_power).and_return(downvote_power)
-      end
+      context 'majority_size is below majority_threshold' do
+        let(:majority_size) { 74 }
 
-      context 'upvoters have majority' do
-        let(:upvote_power) { 70 }
-        let(:downvote_power) { 30 }
-
-        it 'returns :upvoters' do
-          expect(subject).to eq(:upvoters)
+        it 'returns false' do
+          expect(subject).to be false
         end
       end
 
-      context 'downvoters have majority' do
-        let(:upvote_power) { 10 }
-        let(:downvote_power) { 90 }
+      context 'majority_size equals majority_threshold' do
+        let(:majority_size) { 75 }
 
-        it 'returns :downvoters' do
-          expect(subject).to eq(:downvoters)
+        it 'returns true' do
+          expect(subject).to be true
         end
       end
 
-      context 'votes are even' do
-        let(:upvote_power) { 50 }
-        let(:downvote_power) { 50 }
+      context 'majority_size is above majority_threshold' do
+        let(:majority_size) { 80 }
 
-        it 'returns :even' do
-          expect(subject).to eq(:even)
+        it 'returns true' do
+          expect(subject).to be true
         end
       end
     end
+  end
 
-    describe '#conclude!' do
-      subject { instance.conclude! }
+  describe '#majority_size' do
+    subject { instance.majority_size }
 
-      context 'votable is not concludable' do
-        before { allow(instance).to receive(:concludable?).and_return(false) }
+    before do
+      allow(instance).to receive(:upvote_power).and_return(upvote_power)
+      allow(instance).to receive(:downvote_power).and_return(downvote_power)
+    end
 
-        it 'calls Votable::DisputeWorker' do
-          expect(Votable::DisputeWorker).to receive(:perform_async).with(
+    context 'upvoters have majority' do
+      let(:upvote_power) { 140 }
+      let(:downvote_power) { 60 }
+
+      it 'returns 70' do
+        expect(subject).to eq(70)
+      end
+    end
+
+    context 'downvoters have majority' do
+      let(:upvote_power) { 40 }
+      let(:downvote_power) { 60 }
+
+      it 'returns 60' do
+        expect(subject).to eq(60)
+      end
+    end
+
+    context 'votes are even' do
+      let(:upvote_power) { 40 }
+      let(:downvote_power) { 40 }
+
+      it 'returns 50' do
+        expect(subject).to eq(50)
+      end
+    end
+  end
+
+  describe '#majority_type' do
+    subject { instance.majority_type }
+
+    before do
+      allow(instance).to receive(:upvote_power).and_return(upvote_power)
+      allow(instance).to receive(:downvote_power).and_return(downvote_power)
+    end
+
+    context 'upvoters have majority' do
+      let(:upvote_power) { 70 }
+      let(:downvote_power) { 30 }
+
+      it 'returns :upvoters' do
+        expect(subject).to eq(:upvoters)
+      end
+    end
+
+    context 'downvoters have majority' do
+      let(:upvote_power) { 10 }
+      let(:downvote_power) { 90 }
+
+      it 'returns :downvoters' do
+        expect(subject).to eq(:downvoters)
+      end
+    end
+
+    context 'votes are even' do
+      let(:upvote_power) { 50 }
+      let(:downvote_power) { 50 }
+
+      it 'returns :even' do
+        expect(subject).to eq(:even)
+      end
+    end
+  end
+
+  describe '#conclude!' do
+    subject { instance.conclude! }
+
+    context 'votable is not concludable' do
+      before { allow(instance).to receive(:concludable?).and_return(false) }
+
+      it 'calls Votable::DisputeWorker' do
+        expect(Votable::DisputeWorker).to receive(:perform_async).with(
+          instance.class.to_s,
+          instance.id
+        )
+        subject
+      end
+    end
+
+    context 'votable is concludable' do
+      before { allow(instance).to receive(:concludable?).and_return(true) }
+
+      context 'majority of voters are :upvoters' do
+        before { allow(instance).to receive(:majority_type).and_return(:upvoters) }
+
+        it 'calls Votable::AcceptWorker' do
+          expect(Votable::AcceptWorker).to receive(:perform_async).with(
             instance.class.to_s,
             instance.id
           )
@@ -277,31 +299,95 @@ RSpec.shared_examples 'a votable model' do |options|
         end
       end
 
-      context 'votable is concludable' do
-        before { allow(instance).to receive(:concludable?).and_return(true) }
+      context 'majority of voters are :downvoters' do
+        before { allow(instance).to receive(:majority_type).and_return(:downvoters) }
 
-        context 'majority of voters are :upvoters' do
-          before { allow(instance).to receive(:majority_type).and_return(:upvoters) }
-
-          it 'calls Votable::AcceptWorker' do
-            expect(Votable::AcceptWorker).to receive(:perform_async).with(
-              instance.class.to_s,
-              instance.id
-            )
-            subject
-          end
+        it 'calls Votable::DenyWorker' do
+          expect(Votable::DenyWorker).to receive(:perform_async).with(
+            instance.class.to_s,
+            instance.id
+          )
+          subject
         end
+      end
+    end
+  end
 
-        context 'majority of voters are :downvoters' do
-          before { allow(instance).to receive(:majority_type).and_return(:downvoters) }
+  describe 'activities' do
+    subject { instance }
 
-          it 'calls Votable::DenyWorker' do
-            expect(Votable::DenyWorker).to receive(:perform_async).with(
-              instance.class.to_s,
-              instance.id
-            )
-            subject
-          end
+    let(:instance) { FactoryBot.create(options[:factory], state: state) }
+    let(:state) { :in_progress }
+
+    describe '#accept!' do
+      subject { instance.accept! }
+      let(:state) { :in_progress }
+
+      it "creates an 'stamp.accepted' activity with {owner_type: System, owner_id: -1}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.key).to eq("#{instance.param_key}.accepted")
+          expect(activity.owner_type).to eq('System')
+          expect(activity.owner_id).to eq(-1)
+          expect(activity.trackable).to eq(instance)
+          expect(activity.recipient).to eq(instance.stampable)
+        end
+      end
+    end
+
+    describe '#deny!' do
+      subject { instance.deny! }
+      let(:state) { :in_progress }
+
+      it "creates an 'stamp.denied' activity with {owner_type: System, owner_id: -1}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.key).to eq("#{instance.param_key}.denied")
+          expect(activity.owner_type).to eq('System')
+          expect(activity.owner_id).to eq(-1)
+          expect(activity.trackable).to eq(instance)
+          expect(activity.recipient).to eq(instance.stampable)
+        end
+      end
+    end
+
+    describe '#dispute!' do
+      subject { instance.dispute! }
+      let(:state) { :in_progress }
+
+      it "creates an 'stamp.disputed' activity with {owner_type: System, owner_id: -1}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+
+          activity = PublicActivity::Activity.first
+          expect(activity.key).to eq("#{instance.param_key}.disputed")
+          expect(activity.owner_type).to eq('System')
+          expect(activity.owner_id).to eq(-1)
+          expect(activity.trackable).to eq(instance)
+          expect(activity.recipient).to eq(instance.stampable)
+        end
+      end
+    end
+
+    describe '#archive!' do
+      subject { instance.archive! }
+      let(:state) { :accepted }
+
+      it "creates an 'stamp.archived' activity with {owner_type: System, owner_id: -1}" do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
+
+          activity = PublicActivity::Activity.first
+          expect(activity.key).to eq("#{instance.param_key}.archived")
+          expect(activity.owner_type).to eq('System')
+          expect(activity.owner_id).to eq(-1)
+          expect(activity.trackable).to eq(instance)
+          expect(activity.recipient).to eq(instance.stampable)
         end
       end
     end

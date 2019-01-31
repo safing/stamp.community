@@ -6,12 +6,6 @@ module DomainPresenter
       required: true
     }
 
-    expose :user_id, documentation: {
-      type: 'Integer',
-      desc: 'User id of creator',
-      required: true
-    }
-
     with_options(expose_nil: false) do
       expose :parent_id, documentation: {
         type: 'Integer',

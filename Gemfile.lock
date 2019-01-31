@@ -108,6 +108,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.9.1)
       i18n (>= 0.7)
+    fakeredis (0.7.0)
+      redis (>= 3.2, < 5.0)
     ffi (1.9.25)
     fix-db-schema-conflicts (3.0.2)
       rubocop (>= 0.38.0)
@@ -211,6 +213,11 @@ GEM
     pry-byebug (3.6.0)
       byebug (~> 10.0)
       pry (~> 0.10)
+    public_activity (1.6.3)
+      actionpack (>= 3.0.0)
+      activerecord (>= 3.0)
+      i18n (>= 0.5.0)
+      railties (>= 3.0.0)
     public_suffix (3.0.3)
     pundit (2.0.0)
       activesupport (>= 3.0.0)
@@ -364,6 +371,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
+  fakeredis
   fix-db-schema-conflicts
   font_awesome5_rails
   grape
@@ -378,6 +386,7 @@ DEPENDENCIES
   letter_opener
   pg
   pry-byebug
+  public_activity
   pundit
   pundit-matchers
   rails (~> 5.2.1)

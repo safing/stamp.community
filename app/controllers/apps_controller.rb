@@ -11,15 +11,17 @@ class AppsController < ApplicationController
 
   def create
     @app = App.new(app_params)
-    @app.user = current_user
     authorize(@app)
 
     if @app.save
+      @app.create_activity :create, owner: current_user
       redirect_to(app_path(@app.id), flash: { success: 'App created successfully' })
     else
       render 'new'
     end
   end
+
+  # NOTE: create activity when adding #edit #update actions
 
   def index
     @apps = App.all

@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+      @comment.create_activity :create, owner: current_user, recipient: @commentable
       redirect_to(@commentable, flash: { success: 'Comment created' })
     else
       instance_variable_set "@#{@resource.singularize}".to_sym, @commentable

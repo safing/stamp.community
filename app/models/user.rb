@@ -1,12 +1,6 @@
 class User < ApplicationRecord
   include Roles
-
-  has_one :api_key
-
-  has_many :comments
-  has_many :domains, foreign_key: :user_id
-  has_many :stamps, foreign_key: :user_id
-  has_many :votes
+  include Relations
 
   validates_presence_of %i[role username]
 

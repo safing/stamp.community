@@ -1,4 +1,6 @@
 class Stamp < ApplicationRecord
+  include PublicActivity::CommonWithSystem
+
   TYPES = %w[Stamp::Flag Stamp::Label Stamp::Identifier].freeze
 
   include Votable
@@ -49,6 +51,14 @@ class Stamp < ApplicationRecord
   # because otherwise the type would just be Label - we already have a model called that
   def sti_name
     to_s
+  end
+
+  def param_key(base_class: true)
+    (base_class ? self.class.base_class : self.class).model_name.param_key
+  end
+
+  def key_for(base_class: true, action:)
+    [param_key(base_class: base_class), action].join('.')
   end
 
   class << self

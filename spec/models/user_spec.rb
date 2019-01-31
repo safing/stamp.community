@@ -3,14 +3,6 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.create(:user)).to be_valid
   end
 
-  describe 'relations' do
-    it { is_expected.to have_one(:api_key) }
-    it { is_expected.to have_many(:domains).with_foreign_key(:user_id) }
-    it { is_expected.to have_many(:stamps).with_foreign_key(:user_id) }
-    it { is_expected.to have_many(:votes) }
-    it { is_expected.to have_many(:comments) }
-  end
-
   describe 'database' do
     it { is_expected.to have_db_index(:confirmation_token).unique }
     it { is_expected.to have_db_index(:email).unique }
@@ -120,7 +112,10 @@ RSpec.describe User, type: :model do
     let(:user) { FactoryBot.create(:user) }
     let(:votable) { FactoryBot.create(:label_stamp) }
 
-    before { allow_required_integer_env('USER_DAILY_VOTING_LIMIT').and_return(3) }
+    before do
+      allow_required_integer_env('STAMP_CONCLUDE_IN_HOURS').and_return(72)
+      allow_required_integer_env('USER_DAILY_VOTING_LIMIT').and_return(3)
+    end
 
     context 'user already voted on votable' do
       before { FactoryBot.create(:vote, user: user, votable: votable) }

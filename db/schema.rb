@@ -10,11 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_102602) do
+ActiveRecord::Schema.define(version: 2019_01_22_144056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "key"
+    t.bigint "owner_id"
+    t.string "owner_type"
+    t.jsonb "parameters", default: {}, null: false
+    t.bigint "recipient_id"
+    t.string "recipient_type"
+    t.bigint "trackable_id"
+    t.string "trackable_type"
+    t.datetime "updated_at", null: false
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
+  end
 
   create_table "api_keys", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -32,9 +51,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_102602) do
     t.string "name", null: false
     t.jsonb "os"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.text "uuid", default: -> { "gen_random_uuid()" }, null: false
-    t.index ["user_id"], name: "index_apps_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -53,10 +70,8 @@ ActiveRecord::Schema.define(version: 2018_10_16_102602) do
     t.string "name", null: false
     t.bigint "parent_id"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.index ["name"], name: "index_domains_on_name", unique: true
     t.index ["parent_id"], name: "index_domains_on_parent_id"
-    t.index ["user_id"], name: "index_domains_on_user_id"
   end
 
   create_table "labels", force: :cascade do |t|
@@ -129,10 +144,8 @@ ActiveRecord::Schema.define(version: 2018_10_16_102602) do
   end
 
   add_foreign_key "api_keys", "users"
-  add_foreign_key "apps", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "domains", "domains", column: "parent_id"
-  add_foreign_key "domains", "users"
   add_foreign_key "labels", "labels", column: "parent_id"
   add_foreign_key "stamps", "users"
   add_foreign_key "votes", "users"

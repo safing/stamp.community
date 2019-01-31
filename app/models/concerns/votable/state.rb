@@ -23,6 +23,13 @@ module Votable
         before_transition in_progress: :accepted do |votable, _|
           votable.archive_accepted_siblings!
         end
+
+        before_transition do |votable, transition|
+          votable.create_system_activity(
+            key: votable.key_for(action: transition.to_name),
+            recipient: votable.stampable
+          )
+        end
       end
     end
 
@@ -49,8 +56,6 @@ module Votable
           scheduled.args[1] == id
       end.first
     end
-
-    private
 
     def archive_accepted_siblings!
       siblings.accepted.each(&:archive!)

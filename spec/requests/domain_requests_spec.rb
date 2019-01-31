@@ -1,7 +1,7 @@
-RSpec.feature 'app requests', type: :request do
+RSpec.feature 'domain requests', type: :request do
   describe 'authourization' do
     describe '#new' do
-      subject(:request) { get new_app_url }
+      subject(:request) { get new_domain_url }
 
       context 'role: guest' do
         include_examples 'status code', 401
@@ -9,7 +9,7 @@ RSpec.feature 'app requests', type: :request do
 
       context 'role: user' do
         include_context 'login user'
-        include_examples 'status code', 401
+        include_examples 'status code', 200
       end
 
       context 'role: moderator' do
@@ -24,36 +24,13 @@ RSpec.feature 'app requests', type: :request do
     end
 
     describe '#create' do
-      subject(:request) { post apps_url, params: { app: app_attributes } }
-      let(:app_attributes) do
-        FactoryBot.attributes_with_foreign_keys_for(:app)
-      end
-
-      context 'role: guest' do
-        include_examples 'status code', 401
-      end
-
-      context 'role: user' do
-        include_context 'login user'
-        include_examples 'status code', 401
-      end
-
-      context 'role: moderator' do
-        include_context 'login moderator'
-        include_examples 'status code', 302
-      end
-
-      context 'role: admin' do
-        include_context 'login admin'
-        include_examples 'status code', 302
-      end
+      # TODO: add specs for the format.js response
     end
 
     describe '#show' do
-      subject(:request) { get app_path(some_app) }
+      subject(:request) { get domain_path(domain.name) }
 
-      # IMPORTANT: 'app' as a variable name will remove all path helpers
-      let(:some_app) { FactoryBot.create(:app) }
+      let(:domain) { FactoryBot.create(:domain) }
 
       context 'role: guest' do
         include_examples 'status code', 200
@@ -78,13 +55,18 @@ RSpec.feature 'app requests', type: :request do
 
   describe 'activities' do
     describe '#create' do
-      subject(:request) { post apps_url, params: { app: app_attributes } }
-      let(:app_attributes) do
-        FactoryBot.attributes_with_foreign_keys_for(:app)
-      end
-      include_context 'login admin'
+      include_context 'login user'
 
-      it "creates an 'app.create' activity with {owner: current_user}" do
+      subject(:request) { post domains_url, xhr: true, params: { domain: domain_attributes } }
+      let(:domain_attributes) do
+        FactoryBot.attributes_with_foreign_keys_for(:domain)
+      end
+
+      before do
+        allow_any_instance_of(Domain).to receive(:url_exists?).and_return(true)
+      end
+
+      it "creates an 'domain.create' activity with {owner: current_user}" do
         PublicActivity.with_tracking do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 

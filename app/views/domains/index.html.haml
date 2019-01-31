@@ -12,8 +12,6 @@
       %th
         Stamps
       %th
-        User
-      %th
         Link
   %tbody
     - @domains.each do |domain|
@@ -23,8 +21,6 @@
             = domain.name
         %td
           = domain.stamps.count
-        %td
-          = domain.user.username
         %td
           = link_to domain.href do
             %i.purple.external.icon

@@ -24,7 +24,11 @@ gem 'redcarpet'
 
 gem 'bootsnap', require: false
 
+# WARNING: when updating public_activity
+# assert our patch works: models/concerns/public_activity
+# and the specs:    specs/models/concerns/public_activity
 gem 'devise'
+gem 'public_activity'
 gem 'pundit'
 gem 'state_machines-activerecord'
 
@@ -55,5 +59,6 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'fakeredis'
   # check if the release is out yet https://github.com/thoughtbot/shoulda-matchers/milestone/13
 end

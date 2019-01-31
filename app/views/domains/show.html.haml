@@ -54,11 +54,6 @@
   %div.ui.basic.segment
     %div.ui.relaxed.list
       %div.item
-        %i.user.icon
-        %div.content
-          = link_to user_path(@domain.user_id) do
-            = @domain.user.username
-      %div.item
         %i.clock.outline.icon
         %div.content
           = time_ago_in_words(@domain.created_at)
