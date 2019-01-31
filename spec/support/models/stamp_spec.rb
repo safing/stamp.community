@@ -91,7 +91,7 @@ RSpec.shared_examples 'a STI child of Stamp' do |options|
 
     context "instance is a :#{options[:factory]}" do
       it 'returns flag_stamp.create' do
-        expect(subject).to eq('flag_stamp.create')
+        expect(subject).to eq("#{options[:factory]}.create")
       end
     end
 
