@@ -13,8 +13,6 @@
         Description
       %th
         Operating Systems
-      %th
-        User
   %tbody
     - @apps.each do |app|
       %tr{ onclick: "location.href='#{app_path(app)}'" }
@@ -25,5 +23,3 @@
           = app.description
         %td
           = render 'apps/partials/icons', app: app
-        %td
-          = app.user.username
