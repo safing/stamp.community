@@ -9,6 +9,7 @@ class User < ApplicationRecord
       has_many :domains, foreign_key: :user_id
       has_many :stamps, foreign_key: :user_id
       has_many :votes
+      has_many :boosts
 
       def activities
         PublicActivity::Activity.where(owner_id: self.id)

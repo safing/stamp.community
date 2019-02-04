@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
       it { is_expected.to have_many(:stamps).with_foreign_key(:user_id) }
       it { is_expected.to have_many(:votes) }
       it { is_expected.to have_many(:comments) }
+      it { is_expected.to have_many(:boosts) }
     end
 
     describe '#activities' do
