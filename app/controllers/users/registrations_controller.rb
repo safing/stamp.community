@@ -39,11 +39,17 @@ module Users
     #   super
     # end
 
-    # protected
+    protected
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
       devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+    end
+
+    def sign_up(resource_name, resource)
+      super(resource_name, resource)
+      # create activity: user.signup
+      resource.create_activity(:signup, trackable: resource, owner: resource).inspect
     end
 
     # If you have extra params to permit, append them to the sanitizer.

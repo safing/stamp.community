@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include PublicActivity::Common
   include Roles
   include Relations
 
