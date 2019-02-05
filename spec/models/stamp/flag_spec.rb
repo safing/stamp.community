@@ -8,6 +8,9 @@ RSpec.describe Stamp::Flag, type: :model do
   describe 'fields' do
     let(:flag_stamp) { Stamp::Flag.new }
 
+    # TODO: should these fields merge to 'have_attr_accessor?'
+    # => it { is_expected.to have_attr_accessor(:internet) }
+
     it '#internet is set by default, has getter and setter' do
       expect(flag_stamp.internet).to be false
       flag_stamp.internet = true

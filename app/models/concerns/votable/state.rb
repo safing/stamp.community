@@ -3,6 +3,9 @@ module Votable
     extend ActiveSupport::Concern
 
     included do
+      # used so boosts can reference the transition_activity
+      attr_accessor :transition_activity
+
       after_create :schedule!
 
       scope :accepted, -> { with_state(:accepted) }
@@ -25,7 +28,8 @@ module Votable
         end
 
         before_transition do |votable, transition|
-          votable.create_system_activity(
+          # set transition_activity so other methods can reference the current activity
+          votable.transition_activity = votable.create_system_activity(
             key: votable.key_for(action: transition.to_name),
             recipient: votable.stampable
           )

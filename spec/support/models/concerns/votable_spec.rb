@@ -14,6 +14,10 @@ RSpec.shared_examples 'a votable model' do |options|
     it { is_expected.to validate_presence_of(:state) }
   end
 
+  describe 'fields' do
+    it { is_expected.to have_attr_accessor(:transition_activity) }
+  end
+
   describe 'state machine' do
     subject { instance }
 
