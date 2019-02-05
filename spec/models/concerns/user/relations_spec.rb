@@ -7,20 +7,9 @@ RSpec.describe User, type: :model do
       it { is_expected.to have_many(:votes) }
       it { is_expected.to have_many(:comments) }
       it { is_expected.to have_many(:boosts) }
-    end
-
-    describe '#activities' do
-      subject { user.activities }
-      let(:user) { FactoryBot.create(:user) }
-
-      before do
-        FactoryBot.create_list(:domain_activity, 2, owner: user)
-        FactoryBot.create_list(:app_activity, 2)
-      end
-
-      it 'returns all activities of the user' do
-        expect(PublicActivity::Activity.count).to eq(4)
-        expect(subject.count).to eq(2)
+      it do
+        is_expected.to have_many(:activities).class_name('PublicActivity::Activity')
+                                             .with_foreign_key(:owner_id)
       end
     end
 

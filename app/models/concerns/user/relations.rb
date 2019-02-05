@@ -10,10 +10,7 @@ class User < ApplicationRecord
       has_many :stamps, foreign_key: :user_id
       has_many :votes
       has_many :boosts
-
-      def activities
-        PublicActivity::Activity.where(owner_id: self.id)
-      end
+      has_many :activities, class_name: 'PublicActivity::Activity', foreign_key: :owner_id
 
       def domains
         Domain.where(id: activities.where(key: 'domain.create').select(:trackable_id))
