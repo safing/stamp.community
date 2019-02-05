@@ -37,3 +37,4 @@ end
 # Schema Info:
 #
 # reputation: is a counter_cache from user#boosts reputation sum => Boost
+#   - this value is corrected once a day to keep it accutare => RecalcCounterCachesWorker

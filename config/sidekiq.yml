@@ -10,3 +10,8 @@ production:
   - critical
   - default
   - low
+
+:schedule:
+  recalc_counter_caches_worker:
+    cron: '0 30 3 * * *' # once a day at 3:30 AM
+    class: RecalcCounterCachesWorker
