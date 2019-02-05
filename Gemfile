@@ -8,6 +8,7 @@ end
 
 gem 'rails', '~> 5.2.1'
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
 gem 'hirb'
 gem 'jsonb_accessor'
