@@ -12,6 +12,13 @@ FactoryBot.define do
       confirmed_at { nil }
       confirmation_sent_at { nil }
     end
+
+    trait :with_signup_activity do
+      after(:create) do |user|
+        activity = FactoryBot.create(:signup_activity, owner: user, trackable: user)
+        FactoryBot.create(:boost, reputation: 1, user: user, activity: activity)
+      end
+    end
   end
 
   factory :moderator, parent: :user do

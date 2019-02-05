@@ -14,4 +14,8 @@ FactoryBot.define do
 
     key { 'app.create' }
   end
+
+  factory :signup_activity, parent: :activity do
+    key { 'user.signup' }
+  end
 end
