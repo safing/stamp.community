@@ -5,8 +5,6 @@ class User < ApplicationRecord
 
   validates_presence_of %i[role username]
 
-  before_create :add_reputation
-
   devise :confirmable, :database_authenticatable, :registerable, :recoverable,
          :rememberable, :validatable
 
@@ -20,10 +18,6 @@ class User < ApplicationRecord
 
   def daily_voting_limit
     ENVProxy.required_integer('USER_DAILY_VOTING_LIMIT')
-  end
-
-  def add_reputation
-    self.reputation = ENVProxy.required_integer('USER_INITIAL_REPUTATION') if reputation.nil?
   end
 
   def top_labels(limit: 5)
