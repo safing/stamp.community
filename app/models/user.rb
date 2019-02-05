@@ -33,3 +33,7 @@ class User < ApplicationRecord
     votable.votes.where(user_id: id).exists?
   end
 end
+
+# Schema Info:
+#
+# reputation: is a counter_cache from user#boosts reputation sum => Boost

@@ -24,6 +24,7 @@ gem 'redcarpet'
 
 gem 'bootsnap', require: false
 
+gem 'counter_culture'
 # WARNING: when updating public_activity
 # assert our patch works: models/concerns/public_activity
 # and the specs:    specs/models/concerns/public_activity

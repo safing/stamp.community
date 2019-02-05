@@ -4,4 +4,7 @@ class Boost < ApplicationRecord
 
   validates_presence_of %i[activity reputation user]
   validates :reputation, numericality: { other_than: 0 }
+
+  # https://github.com/magnusvk/counter_culture#totaling-instead-of-counting
+  counter_culture :user, column_name: 'reputation', delta_column: 'reputation'
 end
