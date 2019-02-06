@@ -48,15 +48,17 @@ module Users
 
     def sign_up(resource_name, resource)
       super(resource_name, resource)
-      # create activity: user.signup
+
       resource.create_activity(:signup, trackable: resource, owner: resource)
       activity = resource.activities.where(key: 'user.signup').first
+
+      return unless initial_rep.positive? # otherwise boost would not be valid
 
       resource.boosts.create(
         reputation: initial_rep,
         activity: activity,
         user: resource
-      ) if initial_rep > 0 # otherwise boost would not be valid
+      )
     end
 
     def initial_rep

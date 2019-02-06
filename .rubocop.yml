@@ -18,10 +18,13 @@ Metrics/BlockLength:
   CountComments: false
   Exclude:
     - 'spec/**/*.rb'
+    - 'config/**/*.rb'
 Metrics/LineLength:
   Max: 100
+Metrics/MethodLength:
+  Max: 15 # default = 10
 Metrics/AbcSize:
-  Max: 17 # default = 15
+  Max: 18 # default = 15
 
 Style/ClassAndModuleChildren:
   Exclude:
@@ -29,5 +32,10 @@ Style/ClassAndModuleChildren:
     - 'app/workers/**/*.rb'
     - 'app/models/**/*.rb'
     - 'app/policies/**/*.rb'
+Style/EmptyMethod:
+  Enabled: false
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Naming/VariableNumber:
   Enabled: false

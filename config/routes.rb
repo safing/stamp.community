@@ -40,7 +40,6 @@ Rails.application.routes.draw do
     get 'label_stamps', to: 'guides#label_stamps', as: :label_stamps_guide
   end
 
-
   scope :redirect do
     get '/forums', to: redirect('https://discourse.safing.community/c/stamp'), as: :forums
     get '/uMatrix', to: redirect('https://github.com/gorhill/uMatrix'), as: :umatrix

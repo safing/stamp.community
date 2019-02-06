@@ -6,9 +6,11 @@ RSpec.describe Boost, type: :model do
   describe 'relations' do
     it { is_expected.to belong_to(:user).required(true) }
     it do
+      # rubocop:disable Layout/MultilineMethodCallIndentation
       is_expected.to belong_to(:activity).class_name('PublicActivity::Activity')
                                          .with_foreign_key(:activity_id)
                                          .required(true)
+      # rubocop:enable Layout/MultilineMethodCallIndentation
     end
   end
 

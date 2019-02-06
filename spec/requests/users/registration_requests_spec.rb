@@ -21,7 +21,7 @@ RSpec.feature 'registration requests', type: :request do
       end
 
       it 'does not create a user boosts' do
-        expect { subject }.not_to change { Boost.count }
+        expect { subject }.not_to change(Boost.count)
       end
     end
 
@@ -56,7 +56,7 @@ RSpec.feature 'registration requests', type: :request do
 
         user = User.last
         activity = PublicActivity::Activity.first
-        expect(activity.key).to eq("user.signup")
+        expect(activity.key).to eq('user.signup')
         expect(activity.owner).to eq(user)
         expect(activity.trackable).to eq(user)
         expect(activity.recipient).to eq(nil)

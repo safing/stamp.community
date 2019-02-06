@@ -367,7 +367,6 @@ RSpec.shared_examples 'a votable model' do |options|
         PublicActivity.with_tracking do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
-
           activity = PublicActivity::Activity.first
           expect(activity.key).to eq("#{instance.param_key}.disputed")
           expect(activity.owner_type).to eq('System')
