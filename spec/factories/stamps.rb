@@ -7,12 +7,12 @@ FactoryBot.define do
       state { :accepted }
     end
 
-    trait :with_upvotes do
-      votes { build_list :upvote, 2 }
-    end
-
-    trait :with_downvotes do
-      votes { build_list :downvote, 2 }
+    trait :with_up_and_downvotes do
+      after(:create) do |stamp, _|
+        stamp.votes << FactoryBot.build_list(:upvote, 2)
+        stamp.votes << FactoryBot.build_list(:downvote, 2)
+        stamp.save
+      end
     end
   end
 

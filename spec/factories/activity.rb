@@ -18,4 +18,8 @@ FactoryBot.define do
   factory :signup_activity, parent: :activity do
     key { 'user.signup' }
   end
+
+  factory :transition_activity, parent: :activity do
+    key { 'stamp.accept' }
+  end
 end
