@@ -55,12 +55,12 @@ ActiveRecord::Schema.define(version: 2019_02_05_122632) do
   end
 
   create_table "boosts", force: :cascade do |t|
-    t.bigint "activity_id", null: false
+    t.bigint "cause_id", null: false
     t.datetime "created_at", null: false
     t.bigint "reputation", null: false
+    t.bigint "trigger_id", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["activity_id"], name: "index_boosts_on_activity_id"
     t.index ["user_id"], name: "index_boosts_on_user_id"
   end
 
@@ -154,7 +154,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_122632) do
   end
 
   add_foreign_key "api_keys", "users"
-  add_foreign_key "boosts", "activities"
+  add_foreign_key "boosts", "activities", column: "cause_id"
+  add_foreign_key "boosts", "activities", column: "trigger_id"
   add_foreign_key "boosts", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "domains", "domains", column: "parent_id"
