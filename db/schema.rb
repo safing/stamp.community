@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_122632) do
     t.bigint "trigger_id", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["cause_id"], name: "index_boosts_on_cause_id"
+    t.index ["trigger_id"], name: "index_boosts_on_trigger_id"
     t.index ["user_id"], name: "index_boosts_on_user_id"
   end
 
