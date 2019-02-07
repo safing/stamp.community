@@ -5,6 +5,10 @@
 # => returns all system activities
 class System < User
   def id
-    -1
+    @id ||= -1
+  end
+
+  def activities
+    PublicActivity::Activity.where(owner_type: 'System', owner_id: id)
   end
 end
