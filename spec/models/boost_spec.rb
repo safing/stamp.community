@@ -6,17 +6,21 @@ RSpec.describe Boost, type: :model do
   describe 'relations' do
     it { is_expected.to belong_to(:user).required(true) }
     it do
-      # rubocop:disable Layout/MultilineMethodCallIndentation
-      is_expected.to belong_to(:activity).class_name('PublicActivity::Activity')
-                                         .with_foreign_key(:activity_id)
-                                         .required(true)
-      # rubocop:enable Layout/MultilineMethodCallIndentation
+      is_expected.to belong_to(:cause).class_name('PublicActivity::Activity')
+                                      .with_foreign_key(:cause_id)
+                                      .required(true)
+    end
+    it do
+      is_expected.to belong_to(:trigger).class_name('PublicActivity::Activity')
+                                        .with_foreign_key(:trigger_id)
+                                        .required(true)
     end
   end
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:user) }
-    it { is_expected.to validate_presence_of(:activity) }
+    it { is_expected.to validate_presence_of(:cause) }
+    it { is_expected.to validate_presence_of(:trigger) }
     it { is_expected.to validate_presence_of(:reputation) }
 
     describe '#reputation other_than: 0' do
@@ -34,6 +38,7 @@ RSpec.describe Boost, type: :model do
 
   describe 'database' do
     it { is_expected.to have_db_index(:user_id) }
-    it { is_expected.to have_db_index(:activity_id) }
+    it { is_expected.to have_db_index(:cause_id) }
+    it { is_expected.to have_db_index(:trigger_id) }
   end
 end
