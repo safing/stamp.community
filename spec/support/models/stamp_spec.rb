@@ -5,6 +5,44 @@ RSpec.shared_examples 'a STI child of Stamp' do |options|
   subject { stamp }
   let(:stamp) { FactoryBot.create(options[:factory]) }
 
+  describe 'factories' do
+    subject { FactoryBot.create(options[:factory], :with_votes, activities: activities)}
+
+    describe 'trait :with_votes' do
+      context 'activities is false' do
+        let(:activities) { false }
+
+        it 'creates a stamp with 2 upvotes & 2 downvotes' do
+          expect { subject }.to change { Stamp.count }.from(0).to(1)
+
+          stamp = Stamp.last
+          expect(stamp.upvotes.count).to eq(2)
+          expect(stamp.downvotes.count).to eq(2)
+        end
+
+        it 'does not create any activities' do
+          expect { subject }.not_to change { PublicActivity::Activity.count }
+        end
+      end
+
+      context 'activities is true' do
+        let(:activities) { true }
+
+        it 'creates a stamp with 2 upvotes & 2 downvotes' do
+          expect { subject }.to change { Stamp.count }.from(0).to(1)
+
+          stamp = Stamp.last
+          expect(stamp.upvotes.count).to eq(2)
+          expect(stamp.downvotes.count).to eq(2)
+        end
+
+        it 'creates exactly 4 activities (fitting to the up & downvotes)' do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(4)
+        end
+      end
+    end
+  end
+
   describe 'relations' do
     it { is_expected.to have_many(:comments) }
     it { is_expected.to belong_to(:creator).class_name('User').required(true) }
