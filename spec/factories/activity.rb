@@ -16,10 +16,19 @@ FactoryBot.define do
   end
 
   factory :signup_activity, parent: :activity do
+    association :trackable, factory: :user
     key { 'user.signup' }
   end
 
   factory :transition_activity, parent: :activity do
+    association :trackable, factory: :flag_stamp
+    owner_type { 'System' }
+    owner_id { -1 }
     key { 'stamp.accept' }
+  end
+
+  factory :vote_activity, parent: :activity do
+    trackable { build(:vote, user: owner) }
+    key { 'vote.create' }
   end
 end
