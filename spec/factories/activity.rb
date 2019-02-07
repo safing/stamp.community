@@ -28,7 +28,13 @@ FactoryBot.define do
   end
 
   factory :vote_activity, parent: :activity do
-    trackable { build(:vote, user: owner) }
+    transient do
+      vote { create(:vote) }
+    end
+
+    trackable { vote }
+    owner { vote.user }
+    recipient { vote.votable }
     key { 'vote.create' }
   end
 end

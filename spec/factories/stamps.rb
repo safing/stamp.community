@@ -7,11 +7,21 @@ FactoryBot.define do
       state { :accepted }
     end
 
-    trait :with_up_and_downvotes do
-      after(:create) do |stamp, _|
-        stamp.votes << FactoryBot.build_list(:upvote, 2)
-        stamp.votes << FactoryBot.build_list(:downvote, 2)
+    trait :with_votes do
+      transient do
+        activities { false }
+      end
+
+      after(:create) do |stamp, evaluator|
+        stamp.votes << FactoryBot.build_list(:upvote, 2, votable: stamp)
+        stamp.votes << FactoryBot.build_list(:downvote, 2, votable: stamp)
         stamp.save
+
+        if evaluator.activities
+          stamp.votes.each do |vote|
+            FactoryBot.create(:vote_activity, vote: vote)
+          end
+        end
       end
     end
   end
