@@ -9,7 +9,6 @@ RSpec.describe User, type: :model do
       it { is_expected.to have_many(:boosts) }
       it do
         is_expected.to have_many(:activities).class_name('PublicActivity::Activity')
-                                             .with_foreign_key(:owner_id)
       end
     end
 
