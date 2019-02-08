@@ -21,7 +21,7 @@ RSpec.feature 'registration requests', type: :request do
       end
 
       it 'does not create a user boosts' do
-        expect { subject }.not_to change(Boost.count)
+        expect { subject }.not_to change { Boost.count }
       end
     end
 
@@ -34,12 +34,14 @@ RSpec.feature 'registration requests', type: :request do
         expect(User.last.reputation).to eq(1)
       end
 
-      it 'creates a user boost with rep 1 and a link to the user.signup activity' do
+      it 'creates a user boost (rep +1) and links to the user.signup activity (cause & trigger)' do
         expect { subject }.to change { Boost.count }.from(0).to(1)
 
         boost = Boost.last
+        activity = PublicActivity::Activity.last
         expect(boost.reputation).to eq(1)
-        expect(boost.activity).to eq(PublicActivity::Activity.last)
+        expect(boost.cause).to eq(activity)
+        expect(boost.trigger).to eq(activity)
       end
     end
   end
@@ -51,7 +53,7 @@ RSpec.feature 'registration requests', type: :request do
         FactoryBot.attributes_for(:user).slice(:email, :username, :password)
       end
 
-      it "creates an 'user.signed_up' activity with {owner: user, trackable: user}" do
+      it "creates a 'user.signed_up' activity with {owner: user, trackable: user}" do
         expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
         user = User.last
