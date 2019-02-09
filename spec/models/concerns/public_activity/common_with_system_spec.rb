@@ -1,4 +1,4 @@
-RSpec.describe Stamp, type: :model do
+RSpec.describe PublicActivity, type: :model do
   describe '::CommonWithSystem' do
     let(:stamp) { FactoryBot.create(:label_stamp) }
 
