@@ -1,5 +1,6 @@
 class Domain < ApplicationRecord
   include PublicActivity::Common
+  include PublicActivity::Recipient
 
   # rubocop:disable LineLength
   # got the regex from https://stackoverflow.com/a/26987741/2235594

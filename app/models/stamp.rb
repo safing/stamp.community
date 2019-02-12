@@ -1,5 +1,6 @@
 class Stamp < ApplicationRecord
   include PublicActivity::CommonWithSystem
+  include PublicActivity::Recipient
 
   TYPES = %w[Stamp::Flag Stamp::Label Stamp::Identifier].freeze
 

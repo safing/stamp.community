@@ -1,4 +1,6 @@
 RSpec.describe User, type: :model do
+  it_behaves_like 'PublicActivity::Owner', factory: :user
+
   it 'has a valid factory' do
     expect(FactoryBot.create(:user)).to be_valid
   end

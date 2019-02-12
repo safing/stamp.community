@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include PublicActivity::Common
+  include PublicActivity::Owner
   include Roles
   include Relations
 

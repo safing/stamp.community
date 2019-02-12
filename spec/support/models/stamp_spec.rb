@@ -1,6 +1,7 @@
 RSpec.shared_examples 'a STI child of Stamp' do |options|
   it_behaves_like 'a votable model', factory: options[:factory]
   it_behaves_like 'a rewardable model', factory: options[:factory]
+  it_behaves_like 'PublicActivity::Recipient', factory: options[:factory]
 
   subject { stamp }
   let(:stamp) { FactoryBot.create(options[:factory]) }
