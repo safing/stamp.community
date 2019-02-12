@@ -91,7 +91,7 @@ RSpec.shared_examples 'a rewardable model' do |options|
     describe '#award_upvoters!' do
       subject { instance.award_upvoters! }
 
-      let(:instance) { FactoryBot.create(options[:factory], :with_up_and_downvotes) }
+      let(:instance) { FactoryBot.create(options[:factory], :with_votes) }
       let(:vote_1) { instance.upvotes.first }
       let(:vote_2) { instance.upvotes.second }
 
@@ -123,7 +123,7 @@ RSpec.shared_examples 'a rewardable model' do |options|
     describe '#punish_upvoters!' do
       subject { instance.punish_upvoters! }
 
-      let(:instance) { FactoryBot.create(options[:factory], :with_up_and_downvotes) }
+      let(:instance) { FactoryBot.create(options[:factory], :with_votes) }
       let(:vote_1) { instance.upvotes.first }
       let(:vote_2) { instance.upvotes.second }
 
@@ -155,7 +155,7 @@ RSpec.shared_examples 'a rewardable model' do |options|
     describe '#award_downvoters!' do
       subject { instance.award_downvoters! }
 
-      let(:instance) { FactoryBot.create(options[:factory], :with_up_and_downvotes) }
+      let(:instance) { FactoryBot.create(options[:factory], :with_votes) }
       let(:vote_1) { instance.downvotes.first }
       let(:vote_2) { instance.downvotes.second }
 
@@ -187,7 +187,7 @@ RSpec.shared_examples 'a rewardable model' do |options|
     describe '#punish_downvoters!' do
       subject { instance.punish_downvoters! }
 
-      let(:instance) { FactoryBot.create(options[:factory], :with_up_and_downvotes) }
+      let(:instance) { FactoryBot.create(options[:factory], :with_votes) }
       let(:vote_1) { instance.downvotes.first }
       let(:vote_2) { instance.downvotes.second }
 
