@@ -7,7 +7,7 @@ RSpec.shared_examples 'a STI child of Stamp' do |options|
   let(:stamp) { FactoryBot.create(options[:factory]) }
 
   describe 'factories' do
-    subject { FactoryBot.create(options[:factory], :with_votes, activities: activities)}
+    subject { FactoryBot.create(options[:factory], :with_votes, activities: activities) }
 
     describe 'trait :with_votes' do
       context 'activities is false' do

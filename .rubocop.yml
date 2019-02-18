@@ -37,5 +37,12 @@ Style/EmptyMethod:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*.rb'
+
 Naming/VariableNumber:
   Enabled: false
