@@ -1,5 +1,6 @@
 class Stamp < ApplicationRecord
   include PublicActivity::CommonWithSystem
+  include PublicActivity::Recipient
 
   TYPES = %w[Stamp::Flag Stamp::Label Stamp::Identifier].freeze
 
@@ -45,6 +46,10 @@ class Stamp < ApplicationRecord
 
   def concluded_at
     conclusion_at
+  end
+
+  def creation_activity
+    activities.find_by(key: 'stamp.create', owner_id: user_id)
   end
 
   # overwrites https://apidock.com/rails/ActiveRecord/Inheritance/ClassMethods/sti_name

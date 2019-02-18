@@ -1,4 +1,4 @@
-RSpec.describe Stamp, type: :model do
+RSpec.describe PublicActivity, type: :model do
   describe '::CommonWithSystem' do
     let(:stamp) { FactoryBot.create(:label_stamp) }
 
@@ -44,7 +44,7 @@ RSpec.describe Stamp, type: :model do
       context 'owner is set' do
         let(:user) { FactoryBot.create(:user) }
 
-        it 'creates an Activity with {action: stamp_label.update, owner_type: System, owner_id: -1}' do
+        it 'creates Activity with {key: stamp_label.update, owner_type: System, owner_id: -1}' do
           PublicActivity.with_tracking do
             expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
@@ -59,7 +59,7 @@ RSpec.describe Stamp, type: :model do
       context 'owner is not set' do
         let(:user) { nil }
 
-        it 'creates an Activity with {action: stamp_label.update, owner_type: System, owner_id: -1}' do
+        it 'creates Activity with {key: stamp_label.update, owner_type: System, owner_id: -1}' do
           PublicActivity.with_tracking do
             expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
@@ -99,7 +99,6 @@ RSpec.describe Stamp, type: :model do
               expect(user_activity.owner_id).to eq(user.id)
             end
           end
-
         end
 
         context 'owner is not set' do

@@ -73,6 +73,43 @@ RSpec.describe Vote, type: :model do
     end
   end
 
+  describe '.joins_activities' do
+    subject { Vote.joins_activities }
+
+    before do
+      FactoryBot.create(:flag_stamp, :with_votes, activities: true)
+
+      # create noise
+      FactoryBot.create_list(:transition_activity, 2)
+      FactoryBot.create_list(:vote, 2)
+    end
+
+    it 'returns all votes with their adjoining activities' do
+      expect(subject.count).to eq(4)
+
+      # cannot select two 'id' columns
+      selection = subject.select('
+        votes.*,
+        activities.owner_id,
+        activities.owner_type,
+        activities.recipient_id,
+        activities.recipient_type,
+        activities.trackable_id,
+        activities.trackable_type
+      ')
+
+      # tests if the join is set up properly
+      selection.each do |vote|
+        expect(vote.id).to eq(vote.trackable_id)
+        expect('Vote').to eq(vote.trackable_type)
+        expect(vote.user_id).to eq(vote.owner_id)
+        expect('User').to eq(vote.owner_type)
+        expect(vote.votable_id).to eq(vote.recipient_id)
+        expect(vote.votable_type).to eq(vote.recipient_type)
+      end
+    end
+  end
+
   describe '#cache_users_voting_power' do
     subject { vote.send('cache_users_voting_power') }
     let(:vote) { FactoryBot.build(:vote, power: nil) }

@@ -24,6 +24,18 @@ class Vote < ApplicationRecord
     !accept
   end
 
+  def self.joins_activities
+    joins(%(
+      INNER JOIN activities
+              ON activities.trackable_id = votes.id
+             AND activities.trackable_type = 'Vote'
+             AND activities.owner_id = votes.user_id
+             AND activities.owner_type = 'User'
+             AND activities.recipient_id = votes.votable_id
+             AND activities.recipient_type = votes.votable_type
+    ))
+  end
+
   private
 
   def cache_users_voting_power

@@ -1,4 +1,6 @@
 RSpec.describe Domain, type: :model do
+  it_behaves_like 'PublicActivity::Recipient', factory: :domain
+
   it 'has a valid factory' do
     expect(FactoryBot.create(:domain)).to be_valid
   end

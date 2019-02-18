@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require 'sidekiq-scheduler/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
@@ -38,7 +39,6 @@ Rails.application.routes.draw do
     get 'tour', to: 'guides#tour', as: :tour
     get 'label_stamps', to: 'guides#label_stamps', as: :label_stamps_guide
   end
-
 
   scope :redirect do
     get '/forums', to: redirect('https://discourse.safing.community/c/stamp'), as: :forums

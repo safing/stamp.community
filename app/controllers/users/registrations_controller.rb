@@ -39,11 +39,30 @@ module Users
     #   super
     # end
 
-    # protected
+    protected
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
       devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+    end
+
+    def sign_up(resource_name, resource)
+      super(resource_name, resource)
+
+      activity = resource.create_activity(:signup, trackable: resource, owner: resource)
+
+      return unless initial_rep.positive? # otherwise boost would not be valid
+
+      resource.boosts.create(
+        reputation: initial_rep,
+        cause: activity,
+        trigger: activity,
+        user: resource
+      )
+    end
+
+    def initial_rep
+      @initial_rep ||= ENVProxy.required_integer('USER_INITIAL_REPUTATION')
     end
 
     # If you have extra params to permit, append them to the sanitizer.

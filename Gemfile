@@ -8,6 +8,7 @@ end
 
 gem 'rails', '~> 5.2.1'
 gem 'sidekiq'
+gem 'sidekiq-scheduler'
 
 gem 'hirb'
 gem 'jsonb_accessor'
@@ -24,6 +25,7 @@ gem 'redcarpet'
 
 gem 'bootsnap', require: false
 
+gem 'counter_culture'
 # WARNING: when updating public_activity
 # assert our patch works: models/concerns/public_activity
 # and the specs:    specs/models/concerns/public_activity
@@ -57,8 +59,8 @@ group :test do
   gem 'state_machines-rspec'
 
   gem 'capybara'
+  gem 'fakeredis'
   gem 'launchy'
   gem 'selenium-webdriver'
-  gem 'fakeredis'
   # check if the release is out yet https://github.com/thoughtbot/shoulda-matchers/milestone/13
 end

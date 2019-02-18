@@ -1,9 +1,48 @@
 RSpec.shared_examples 'a STI child of Stamp' do |options|
   it_behaves_like 'a votable model', factory: options[:factory]
   it_behaves_like 'a rewardable model', factory: options[:factory]
+  it_behaves_like 'PublicActivity::Recipient', factory: options[:factory]
 
   subject { stamp }
   let(:stamp) { FactoryBot.create(options[:factory]) }
+
+  describe 'factories' do
+    subject { FactoryBot.create(options[:factory], :with_votes, activities: activities) }
+
+    describe 'trait :with_votes' do
+      context 'activities is false' do
+        let(:activities) { false }
+
+        it 'creates a stamp with 2 upvotes & 2 downvotes' do
+          expect { subject }.to change { Stamp.count }.from(0).to(1)
+
+          stamp = Stamp.last
+          expect(stamp.upvotes.count).to eq(2)
+          expect(stamp.downvotes.count).to eq(2)
+        end
+
+        it 'does not create any activities' do
+          expect { subject }.not_to change { PublicActivity::Activity.count }
+        end
+      end
+
+      context 'activities is true' do
+        let(:activities) { true }
+
+        it 'creates a stamp with 2 upvotes & 2 downvotes' do
+          expect { subject }.to change { Stamp.count }.from(0).to(1)
+
+          stamp = Stamp.last
+          expect(stamp.upvotes.count).to eq(2)
+          expect(stamp.downvotes.count).to eq(2)
+        end
+
+        it 'creates exactly 4 activities (fitting to the up & downvotes)' do
+          expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(4)
+        end
+      end
+    end
+  end
 
   describe 'relations' do
     it { is_expected.to have_many(:comments) }
@@ -100,6 +139,24 @@ RSpec.shared_examples 'a STI child of Stamp' do |options|
 
       it 'returns stamp.create' do
         expect(subject).to eq('stamp.create')
+      end
+    end
+  end
+
+  describe '#creation_activity' do
+    subject { stamp.creation_activity }
+
+    context 'activity exists' do
+      let(:stamp) { FactoryBot.create(options[:factory], :with_creation_activity) }
+
+      it 'returns the creation activity' do
+        expect(subject).to eq(PublicActivity::Activity.last)
+      end
+    end
+
+    context 'activity does not exist' do
+      it 'returns nil' do
+        expect(subject).to be_nil
       end
     end
   end

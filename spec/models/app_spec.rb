@@ -1,4 +1,6 @@
 RSpec.describe App, type: :model do
+  it_behaves_like 'PublicActivity::Recipient', factory: :app
+
   it 'has a valid factory' do
     expect(FactoryBot.create(:app)).to be_valid
   end

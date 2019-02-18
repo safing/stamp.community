@@ -1,10 +1,10 @@
 class User < ApplicationRecord
+  include PublicActivity::Common
+  include PublicActivity::Owner
   include Roles
   include Relations
 
   validates_presence_of %i[role username]
-
-  before_create :add_reputation
 
   devise :confirmable, :database_authenticatable, :registerable, :recoverable,
          :rememberable, :validatable
@@ -21,10 +21,6 @@ class User < ApplicationRecord
     ENVProxy.required_integer('USER_DAILY_VOTING_LIMIT')
   end
 
-  def add_reputation
-    self.reputation = ENVProxy.required_integer('USER_INITIAL_REPUTATION') if reputation.nil?
-  end
-
   def top_labels(limit: 5)
     Label.joins(:stamps)
          .where(stamps: { user_id: id })
@@ -38,3 +34,8 @@ class User < ApplicationRecord
     votable.votes.where(user_id: id).exists?
   end
 end
+
+# Schema Info:
+#
+# reputation: is a counter_cache from user#boosts reputation sum => Boost
+#   - this value is corrected once a day to keep it accutare => RecalcCounterCachesWorker
