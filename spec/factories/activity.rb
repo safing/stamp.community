@@ -20,6 +20,13 @@ FactoryBot.define do
     key { 'user.signup' }
   end
 
+  factory :stamp_activity, parent: :activity do
+    association :trackable, factory: :flag_stamp
+    owner { trackable.creator }
+    recipient { trackable.stampable }
+    key { 'stamp.create' }
+  end
+
   factory :transition_activity, parent: :activity do
     association :trackable, factory: :flag_stamp
     owner_type { 'System' }

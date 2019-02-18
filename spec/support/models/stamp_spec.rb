@@ -142,4 +142,22 @@ RSpec.shared_examples 'a STI child of Stamp' do |options|
       end
     end
   end
+
+  describe '#creation_activity' do
+    subject { stamp.creation_activity }
+
+    context 'activity exists' do
+      let(:stamp) { FactoryBot.create(options[:factory], :with_creation_activity) }
+
+      it 'returns the creation activity' do
+        expect(subject).to eq(PublicActivity::Activity.last)
+      end
+    end
+
+    context 'activity does not exist' do
+      it 'returns nil' do
+        expect(subject).to be_nil
+      end
+    end
+  end
 end

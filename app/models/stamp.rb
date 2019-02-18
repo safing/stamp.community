@@ -48,6 +48,10 @@ class Stamp < ApplicationRecord
     conclusion_at
   end
 
+  def creation_activity
+    activities.find_by(key: 'stamp.create', owner_id: user_id)
+  end
+
   # overwrites https://apidock.com/rails/ActiveRecord/Inheritance/ClassMethods/sti_name
   # because otherwise the type would just be Label - we already have a model called that
   def sti_name

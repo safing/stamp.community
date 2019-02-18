@@ -24,6 +24,12 @@ FactoryBot.define do
         end
       end
     end
+
+    trait :with_creation_activity do
+      after(:create) do |stamp, _|
+        stamp.activities << FactoryBot.create(:stamp_activity, trackable: stamp)
+      end
+    end
   end
 
   factory :label_stamp, class: Stamp::Label, parent: :stamp do
