@@ -102,7 +102,7 @@ RSpec.shared_examples 'a rewardable model' do |options|
 
       before { expect_required_integer_env("#{class_name_env}_UPVOTER_PRIZE").and_return(1) }
 
-      it 'increases all accept voters reputation by 1' do
+      it 'increases all upvoters reputation by 1' do
         expect { subject }.to change { vote_1.reload.user.reputation }.by(1).and \
           change { vote_2.reload.user.reputation }.by(1)
       end
@@ -138,7 +138,7 @@ RSpec.shared_examples 'a rewardable model' do |options|
 
       before { expect_required_integer_env("#{class_name_env}_UPVOTER_PENALTY").and_return(-5) }
 
-      it 'decreases all accept voters reputation by -5' do
+      it 'decreases all upvoters reputation by -5' do
         expect { subject }.to change { vote_1.reload.user.reputation }.by(-5).and \
           change { vote_2.reload.user.reputation }.by(-5)
       end
@@ -174,7 +174,7 @@ RSpec.shared_examples 'a rewardable model' do |options|
 
       before { expect_required_integer_env("#{class_name_env}_DOWNVOTER_PRIZE").and_return(2) }
 
-      it 'increases all accept voters reputation by 2' do
+      it 'increases all downvoters reputation by 2' do
         expect { subject }.to change { vote_1.reload.user.reputation }.by(2).and \
           change { vote_2.reload.user.reputation }.by(2)
       end
@@ -208,7 +208,7 @@ RSpec.shared_examples 'a rewardable model' do |options|
 
       before { expect_required_integer_env("#{class_name_env}_DOWNVOTER_PENALTY").and_return(-4) }
 
-      it 'decreases all accept voters reputation by -4' do
+      it 'decreases all downvoters reputation by -4' do
         expect { subject }.to change { vote_1.reload.user.reputation }.by(-4).and \
           change { vote_2.reload.user.reputation }.by(-4)
       end
