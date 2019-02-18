@@ -19,17 +19,30 @@ module Votable
       end
 
       def award_creator!
-        creator.boosts.create(reputation: creator_prize, activity: transition_activity)
+        creator.boosts.create(
+          reputation: creator_prize,
+          trigger: transition_activity,
+          cause: creation_activity
+        )
       end
 
       def punish_creator!
-        creator.boosts.create(reputation: creator_penalty, activity: transition_activity)
+        creator.boosts.create(
+          reputation: creator_penalty,
+          trigger: transition_activity,
+          cause: creation_activity
+        )
       end
 
       def award_upvoters!
         Boost.transaction do
-          User.where(id: upvotes.select(:user_id)).each do |user|
-            user.boosts.create(reputation: upvoter_prize, activity: transition_activity)
+          upvotes.joins_activities.select('activities.id', 'votes.user_id').each do |upvote|
+            Boost.create(
+              user_id: upvote.user_id,
+              reputation: upvoter_prize,
+              trigger: transition_activity,
+              cause_id: upvote.id
+            )
           end
         end
 
@@ -40,7 +53,8 @@ module Votable
         #
         # ActiveRecord::Base.connection.execute(%{
         #   INSERT INTO boosts (
-        #     activity_id,
+        #     trigger_id,
+        #     cause_id,
         #     reputation,
         #     user_id,
         #     created_at,
@@ -48,6 +62,7 @@ module Votable
         #   )
         #   SELECT
         #     #{transition_activity.id},
+        #     ???? <- need another query here
         #     #{upvoter_prize},
         #     votes.user_id,
         #     current_timestamp,
@@ -61,24 +76,39 @@ module Votable
 
       def punish_upvoters!
         Boost.transaction do
-          User.where(id: upvotes.select(:user_id)).each do |user|
-            user.boosts.create(reputation: upvoter_penalty, activity: transition_activity)
+          upvotes.joins_activities.select('activities.id', 'votes.user_id').each do |upvote|
+            Boost.create(
+              user_id: upvote.user_id,
+              reputation: upvoter_penalty,
+              trigger: transition_activity,
+              cause_id: upvote.id
+            )
           end
         end
       end
 
       def award_downvoters!
         Boost.transaction do
-          User.where(id: downvotes.select(:user_id)).each do |user|
-            user.boosts.create(reputation: downvoter_prize, activity: transition_activity)
+          downvotes.joins_activities.select('activities.id', 'votes.user_id').each do |downvote|
+            Boost.create(
+              user_id: downvote.user_id,
+              reputation: downvoter_prize,
+              trigger: transition_activity,
+              cause_id: downvote.id
+            )
           end
         end
       end
 
       def punish_downvoters!
         Boost.transaction do
-          User.where(id: downvotes.select(:user_id)).each do |user|
-            user.boosts.create(reputation: downvoter_penalty, activity: transition_activity)
+          downvotes.joins_activities.select('activities.id', 'votes.user_id').each do |downvote|
+            Boost.create(
+              user_id: downvote.user_id,
+              reputation: downvoter_penalty,
+              trigger: transition_activity,
+              cause_id: downvote.id
+            )
           end
         end
       end
