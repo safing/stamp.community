@@ -1,4 +1,4 @@
-RSpec.describe 'stamps/show.html.haml', type: :view do
+RSpec.describe 'stamps/labels/show.html.haml', type: :view do
   let(:stamp) { FactoryBot.create(:label_stamp, state: state) }
   let(:state) { :in_progress }
 
@@ -41,7 +41,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
   end
 
   it 'shows the stamps label' do
-    expect(rendered).to have_css('.container .ui.segment:first', text: stamp.label.name)
+    expect(rendered).to have_css('.ui.segment:first .ui.tag', text: stamp.label.name)
   end
 
   it 'shows the stamps percentage' do
@@ -375,7 +375,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
       end
     end
 
-    context 'stamped domain has sibling stamps' do
+    context 'stamped domain has peer stamps' do
       before { stamp.domain.stamps << FactoryBot.build_list(:label_stamp, 2, state: state) }
 
       context 'which are accepted' do
@@ -401,13 +401,13 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
       end
     end
 
-    context 'stamped domain has no sibling stamps' do
+    context 'stamped domain has no peer stamps' do
       include_context 'show: other stamps segment', false
       include_context 'show: in_progress stamps segment', false
     end
 
     context 'current_user is not set (guest)' do
-      it 'does not link to sibling-stamp#new' do
+      it 'does not link to peer-stamp#new' do
         expect(rendered).not_to have_button('Add Stamp')
       end
     end
@@ -415,7 +415,7 @@ RSpec.describe 'stamps/show.html.haml', type: :view do
     context 'current_user is set' do
       include_context 'login user'
 
-      it 'links to sibling-stamp#new' do
+      it 'links to peer-stamp#new' do
         expect(rendered).to have_button('Add Stamp')
       end
     end

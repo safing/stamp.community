@@ -26,43 +26,43 @@
       = render 'comments/comments'
       = render 'comments/form' if current_user && @stamp.in_progress?
 %div.six.wide.column
-  - if @stamp.siblings.accepted.exists?
+  - if @stamp.peers.accepted.exists?
     %div.ui.basic.segment{style: "margin-bottom: -22px;"}
       %h3
         Other Stamps of this domain
         %div.ui.divider
       %div.ui.grid
-        - @stamp.siblings.accepted.each do |sibling|
+        - @stamp.peers.accepted.each do |peer|
           %div.four.wide.column
-            =link_to label_stamp_path(sibling.id) do
+            =link_to label_stamp_path(peer.id) do
               %h5.ui.middle.aligned.header
-                = sibling.label.name
+                = peer.label.name
           %div.twelve.wide.column
             %div.bar.float.right
               %div.ui.purple.small.progress
-                %div.bar.second-bar{style: "width: #{sibling.percentage}%;"}
+                %div.bar.second-bar{style: "width: #{peer.percentage}%;"}
                   %div.progress
-                    = sibling.percentage
+                    = peer.percentage
                     \%
               %div.ui.teal.small.progress
                 %div.bar.bartwo{style: "width: 49%; margin-top: -39px;"}
   %div.ui.basic.segment
-    - if @stamp.siblings.in_progress.exists?
+    - if @stamp.peers.in_progress.exists?
       %h3
         Suggested
         %div.ui.divider{ style: "margin-top: 0px;"}
       %div.ui.grid
-        - @stamp.siblings.in_progress.each do |sibling|
+        - @stamp.peers.in_progress.each do |peer|
           %div.four.wide.column
-            =link_to label_stamp_path(sibling.id) do
+            =link_to label_stamp_path(peer.id) do
               %h5.ui.middle.aligned.header
-                = sibling.label.name
+                = peer.label.name
           %div.twelve.wide.column
             %div.bar.float.right
               %div.ui.teal.small.progress
-                %div.bar.second-bar{style: "width: #{sibling.percentage}%;"}
+                %div.bar.second-bar{style: "width: #{peer.percentage}%;"}
                   %div.progress
-                    = sibling.percentage
+                    = peer.percentage
                     \%
   - if user_signed_in?
     %div.ui.basic.segment{style: "padding: 0;"}

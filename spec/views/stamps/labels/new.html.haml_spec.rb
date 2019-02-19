@@ -1,10 +1,10 @@
-RSpec.describe 'stamps/new.html.haml', type: :view do
+RSpec.describe 'stamps/labels/new.html.haml', type: :view do
   let(:stamp) { FactoryBot.create(:label_stamp) }
   let(:labels) { FactoryBot.create_list(:label, 2) }
 
   def rendered
     assign(:stamp, stamp)
-    assign(:labels, labels)
+    assign(:parent_labels, labels)
     render
     super
   end
@@ -17,7 +17,7 @@ RSpec.describe 'stamps/new.html.haml', type: :view do
 
   it 'shows a percentage slider' do
     expect(rendered).to have_content('2. Define percentage & comment')
-    expect(rendered).to have_css('.content:last .purple.range')
+    expect(rendered).to have_css('.content:last .purple.slider')
   end
 
   it 'shows a comment field' do
@@ -53,7 +53,7 @@ RSpec.describe 'stamps/new.html.haml', type: :view do
       end
     end
 
-    context 'domain to be stamped has sibling stamps' do
+    context 'domain to be stamped has peers' do
       before { stamp.domain.stamps << FactoryBot.build_list(:label_stamp, 2, state: state) }
 
       context 'which are accepted' do
@@ -79,7 +79,7 @@ RSpec.describe 'stamps/new.html.haml', type: :view do
       end
     end
 
-    context 'domain to be stamped has no sibling stamps' do
+    context 'domain to be stamped has no peers' do
       include_context 'show: other stamps segment', false
       include_context 'show: in_progress stamps segment', false
     end
