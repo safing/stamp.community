@@ -1,0 +1,24 @@
+= time_ago_in_words(boost.updated_at)
+ago
+- if boost.reputation > 0
+  %span.ui.green.text
+    +
+    = boost.reputation
+- else
+  %span.ui.red.text
+    \-
+    = boost.reputation
+REP because
+- if boost.trigger.key == "user.signup"
+  you signed up
+- else
+  = " #{boost.trigger.owner_type} accepted"
+  = link_to boost.trigger.trackable_type, boost.trigger.trackable
+  - if boost.cause.recipient_type == "Stamp"
+    of
+    - if boost.cause.recipient.stampable_type == "App"
+      = link_to boost.cause.recipient.stampable.name, app_path(boost.cause.recipient.stampable)
+    - elsif boost.cause.recipient.stampable_type == "Domain"
+      = link_to boost.cause.recipient.stampable.name, domain_path(boost.cause.recipient.stampable.name)
+    - else
+      wtf how does this work
