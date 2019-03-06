@@ -1,4 +1,4 @@
-- content_for :container_class, 'middle aligned centered grid'
+- content_for :container_class, 'centered grid'
 - content_for :container_style, 'height: 70%;'
 
 %div.row
@@ -64,3 +64,25 @@
           %i.linkify.icon
           %div.content
             = pluralize(@user.domains.count, 'domain')
+.row
+  .eight.wide.column
+    %h3
+      Boosts
+    - if @user.boosts.exists?
+      .ui.basic.segments
+        - @user.boosts.last(12).reverse.each do |boost|
+          .ui.secondary.header.segment
+            = render partial: "boosts/boosts", locals: { boost: boost }
+
+    - else
+      Hey maybe do something more for your reputation!
+  .eight.wide.column
+    %h3
+      Activity
+    - if @user.activities.exists?
+      .ui.basic.segments
+        - @user.activities.last(12).reverse.each do |activity|
+          .ui.secondary.header.segment
+            = render partial: "activities/#{activity.key}", locals: { activity: activity }
+    - else
+      Hey maybe do something more for your activities!
