@@ -70,7 +70,7 @@
       Boosts
     - if @user.boosts.exists?
       .ui.basic.segments
-        - @user.boosts.last(12).reverse.each do |boost|
+        - @user.boosts.order(created_at: :desc).limit(12).each do |boost|
           .ui.secondary.header.segment
             = render partial: "boosts/boosts", locals: { boost: boost }
 
@@ -81,7 +81,7 @@
       Activity
     - if @user.activities.exists?
       .ui.basic.segments
-        - @user.activities.last(12).reverse.each do |activity|
+        - @user.activities.order(created_at: :desc).limit(12).each do |activity|
           .ui.secondary.header.segment
             = render partial: "activities/#{activity.key}", locals: { activity: activity }
     - else
