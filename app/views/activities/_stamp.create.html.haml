@@ -1,0 +1,13 @@
+= time_ago_in_words(activity.updated_at)
+ago created a
+= link_to activity.trackable_type, activity.trackable
+for
+- if activity.trackable_type == "Stamp::Label"
+  = link_to activity.trackable.stampable.name, domain_path(activity.recipient.name)
+- elsif activity.trackable_type == "Stamp::Flag"
+  = link_to activity.trackable.stampable.name, app_path(activity.recipient)
+- else
+  wtf how does this work
+its
+= activity.trackable.state
+\.
