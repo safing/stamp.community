@@ -19,6 +19,21 @@ FactoryBot.define do
         FactoryBot.create(:boost, reputation: 1, user: user, activity: activity)
       end
     end
+
+    trait :with_boosts do
+      after(:create) do |user|
+        user.boosts << FactoryBot.build_list(:boost, 2, user: user)
+        user.save
+      end
+    end
+
+    trait :with_activities do
+      after(:create) do |user|
+        user.activities << FactoryBot.build(:signup_activity)
+        user.activities << FactoryBot.build(:vote_activity)
+        user.save
+      end
+    end
   end
 
   factory :moderator, parent: :user do
