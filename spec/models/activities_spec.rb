@@ -9,4 +9,9 @@ RSpec.describe PublicActivity::Activity, type: :model do
     it { is_expected.to have_db_index([:owner_id, :owner_type]) }
     it { is_expected.to have_db_index([:recipient_id, :recipient_type]) }
   end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:key) }
+    it { is_expected.to validate_inclusion_of(:key).in_array(Activity::KEYS) }
+  end
 end
