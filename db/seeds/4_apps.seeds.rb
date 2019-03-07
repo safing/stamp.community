@@ -7,7 +7,6 @@ apps = [
     linux: true,
     macos: true,
     windows: true,
-    user_id: user_id,
     flag_stamp: {
       state: 'accepted',
       user_id: user_id,
@@ -29,7 +28,6 @@ apps = [
     linux: true,
     macos: true,
     windows: true,
-    user_id: user_id,
     flag_stamp: {
       state: 'accepted',
       user_id: user_id,
@@ -50,7 +48,6 @@ apps = [
     linux: true,
     macos: true,
     windows: true,
-    user_id: user_id,
     flag_stamp: {
       state: 'accepted',
       user_id: user_id,
@@ -71,7 +68,6 @@ apps = [
     linux: false,
     macos: true,
     windows: false,
-    user_id: user_id,
     flag_stamp: {
       state: 'accepted',
       user_id: user_id,
