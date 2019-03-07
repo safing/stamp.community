@@ -1,3 +1,6 @@
-= time_ago_in_words(activity.updated_at)
-ago added
-= link_to activity.trackable.name, domain_path(activity.trackable.name)
+.content
+  %span.date
+    = time_ago_in_words(activity.updated_at)
+    ago
+  added
+  = link_to activity.trackable.name, domain_path(activity.trackable.name)

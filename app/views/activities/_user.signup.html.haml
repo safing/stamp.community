@@ -1,2 +1,4 @@
-= time_ago_in_words(activity.updated_at)
-= " ago #{activity.trackable.username} joined Stamp. Welcome!"
+.content
+  %span.date
+    = time_ago_in_words(activity.updated_at)
+  = " ago #{activity.trackable.username} joined Stamp. Welcome!"

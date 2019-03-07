@@ -8,4 +8,5 @@ class Boost < ApplicationRecord
 
   # https://github.com/magnusvk/counter_culture#totaling-instead-of-counting
   counter_culture :user, column_name: 'reputation', delta_column: 'reputation'
+
 end
