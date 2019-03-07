@@ -30,7 +30,7 @@ module Votable
         before_transition do |votable, transition|
           # set transition_activity so other methods can reference the current activity
           votable.transition_activity = votable.create_system_activity(
-            key: votable.key_for(action: transition.to_name),
+            key: votable.key_for(action: transition.event),
             recipient: votable.stampable
           )
         end

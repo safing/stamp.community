@@ -327,12 +327,12 @@ RSpec.shared_examples 'a votable model' do |options|
       subject { instance.accept! }
       let(:state) { :in_progress }
 
-      it "creates an 'stamp.accepted' activity with {owner_type: System, owner_id: -1}" do
+      it "creates an 'stamp.accept' activity with {owner_type: System, owner_id: -1}" do
         PublicActivity.with_tracking do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
           activity = PublicActivity::Activity.first
-          expect(activity.key).to eq("#{instance.param_key}.accepted")
+          expect(activity.key).to eq("#{instance.param_key}.accept")
           expect(activity.owner_type).to eq('System')
           expect(activity.owner_id).to eq(-1)
           expect(activity.trackable).to eq(instance)
@@ -345,12 +345,12 @@ RSpec.shared_examples 'a votable model' do |options|
       subject { instance.deny! }
       let(:state) { :in_progress }
 
-      it "creates an 'stamp.denied' activity with {owner_type: System, owner_id: -1}" do
+      it "creates an 'stamp.deny' activity with {owner_type: System, owner_id: -1}" do
         PublicActivity.with_tracking do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
           activity = PublicActivity::Activity.first
-          expect(activity.key).to eq("#{instance.param_key}.denied")
+          expect(activity.key).to eq("#{instance.param_key}.deny")
           expect(activity.owner_type).to eq('System')
           expect(activity.owner_id).to eq(-1)
           expect(activity.trackable).to eq(instance)
@@ -363,12 +363,12 @@ RSpec.shared_examples 'a votable model' do |options|
       subject { instance.dispute! }
       let(:state) { :in_progress }
 
-      it "creates an 'stamp.disputed' activity with {owner_type: System, owner_id: -1}" do
+      it "creates an 'stamp.dispute' activity with {owner_type: System, owner_id: -1}" do
         PublicActivity.with_tracking do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
           activity = PublicActivity::Activity.first
-          expect(activity.key).to eq("#{instance.param_key}.disputed")
+          expect(activity.key).to eq("#{instance.param_key}.dispute")
           expect(activity.owner_type).to eq('System')
           expect(activity.owner_id).to eq(-1)
           expect(activity.trackable).to eq(instance)
@@ -381,12 +381,12 @@ RSpec.shared_examples 'a votable model' do |options|
       subject { instance.archive! }
       let(:state) { :accepted }
 
-      it "creates an 'stamp.archived' activity with {owner_type: System, owner_id: -1}" do
+      it "creates an 'stamp.archive' activity with {owner_type: System, owner_id: -1}" do
         PublicActivity.with_tracking do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
           activity = PublicActivity::Activity.first
-          expect(activity.key).to eq("#{instance.param_key}.archived")
+          expect(activity.key).to eq("#{instance.param_key}.archive")
           expect(activity.owner_type).to eq('System')
           expect(activity.owner_id).to eq(-1)
           expect(activity.trackable).to eq(instance)
