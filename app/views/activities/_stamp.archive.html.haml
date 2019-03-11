@@ -1,0 +1,13 @@
+.content
+  %span.date
+    = time_ago_in_words(activity.updated_at)
+    ago
+  archived
+  = link_to activity.trackable_type, activity.trackable
+  of
+  - if activity.trackable.stampable_type == "Domain"
+    = link_to activity.recipient.name, domain_path(activity.recipient.name)
+  - elsif activity.trackable.stampable_type == "App"
+    = link_to activity.recipient.name, app_path(activity.recipient)
+  - else
+    wtf how does this work
