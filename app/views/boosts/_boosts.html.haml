@@ -12,14 +12,13 @@
     ago
   - if boost.trigger.key == "user.signup"
     you signed up
-  - else
-    = " #{boost.trigger.owner_type} accepted"
+  -else
+    = boost.trigger.owner_type
+    - if boost.reputation > 0
+      accepted
+    - else
+      denied
     = link_to boost.trigger.trackable_type, boost.trigger.trackable
     - if boost.cause.recipient_type == "Stamp"
       of
-      - if boost.cause.recipient.stampable_type == "App"
-        = link_to boost.cause.recipient.stampable.name, app_path(boost.cause.recipient.stampable)
-      - elsif boost.cause.recipient.stampable_type == "Domain"
-        = link_to boost.cause.recipient.stampable.name, domain_path(boost.cause.recipient.stampable.name)
-      - else
-        wtf how does this work
+      = link_to boost.cause.recipient.stampable.name, boost.cause.recipient.stampable

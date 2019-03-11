@@ -68,16 +68,6 @@
   .eight.wide.column
     %h3
       Boosts
-      - if @user.boosts.exists?
-        Your curent flow (
-        - curent_flow = @user.boosts.where("created_at >= ?", Time.now - 1.month).sum(:reputation).to_i
-        - if curent_flow > 0
-          %span.ui.green.text
-            = "+#{curent_flow}"
-        - else
-          %span.ui.red.text
-            = curent_flow
-        )
     - if @user.boosts.exists?
       .ui.feed
         - @user.boosts.order(created_at: :desc).limit(10).each do |boost|
@@ -91,8 +81,12 @@
       Activity
     - if @user.activities.exists?
       .ui.feed
-        - @user.activities.order(created_at: :desc).limit(10).each do |activity|
+        - @user.activities.order(created_at: :desc).each do |activity|
           .event
-            = render partial: "activities/#{activity.key}", locals: { activity: activity }
+            .content
+              %span.date
+                = time_ago_in_words(activity.created_at)
+                ago
+              = render partial: "activities/#{activity.key}", locals: { activity: activity }
     - else
       Hey maybe do something more for your activities!

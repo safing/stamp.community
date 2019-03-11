@@ -1,13 +1,4 @@
-.content
-  %span.date
-    = time_ago_in_words(activity.created_at)
-    ago
-  dispute
-  = link_to activity.trackable_type, activity.trackable
-  of
-  - if activity.trackable.stampable_type == "Domain"
-    = link_to activity.recipient.name, domain_path(activity.recipient.name)
-  - elsif activity.trackable.stampable_type == "App"
-    = link_to activity.recipient.name, app_path(activity.recipient)
-  - else
-    wtf how does this work
+disputed
+= link_to activity.trackable_type, activity.trackable
+of
+= link_to activity.recipient.name, activity.recipient

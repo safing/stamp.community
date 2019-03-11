@@ -1,16 +1,6 @@
-.content
-  %span.date
-    = time_ago_in_words(activity.created_at)
-    ago
-  you vote for a
-  = link_to activity.recipient_type, activity.recipient
-  of
-  - if activity.recipient.stampable_type == "Domain"
-    = link_to activity.recipient.stampable.name, domain_path(activity.recipient.stampable.name)
-  - elsif activity.recipient.stampable_type == "App"
-    = link_to activity.recipient.stampable.name, app_path(activity.recipient.stampable)
-  - else
-    wtf howe does this work
-  its
-  = activity.recipient.state
-  
+you voted for a
+= link_to activity.recipient_type, activity.recipient
+of
+= link_to activity.recipient.stampable.name, activity.recipient.stampable
+its
+= activity.recipient.state

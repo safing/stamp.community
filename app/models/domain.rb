@@ -16,6 +16,10 @@ class Domain < ApplicationRecord
   validates :name, format: { with: NAME_REGEX_WITH_ANCHORS, message: 'is not a valid domain name' }
   validates_presence_of :name
 
+  def to_param
+    name
+  end
+
   def parent_name
     parent.name if parent_id.present?
   end
