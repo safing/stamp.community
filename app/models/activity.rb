@@ -8,7 +8,7 @@ class Activity
     stamp.create
     stamp.deny
     stamp.dispute
-    user.create
+    user.signup
     vote.create
   ].freeze
 

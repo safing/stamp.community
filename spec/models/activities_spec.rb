@@ -14,4 +14,12 @@ RSpec.describe PublicActivity::Activity, type: :model do
     it { is_expected.to validate_presence_of(:key) }
     it { is_expected.to validate_inclusion_of(:key).in_array(Activity::KEYS) }
   end
+
+  describe 'view partials' do
+    Activity::KEYS.each do |key|
+      it "#{key}.html.haml partial exists" do
+        expect(File).to exist("app/views/activities/_#{key}.html.haml")
+      end
+    end
+  end
 end

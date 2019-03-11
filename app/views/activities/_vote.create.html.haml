@@ -1,6 +1,6 @@
 .content
   %span.date
-    = time_ago_in_words(activity.updated_at)
+    = time_ago_in_words(activity.created_at)
     ago
   you vote for a
   = link_to activity.recipient_type, activity.recipient
@@ -13,4 +13,4 @@
     wtf howe does this work
   its
   = activity.recipient.state
-  \.
+  
