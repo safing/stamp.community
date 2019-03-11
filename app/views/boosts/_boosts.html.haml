@@ -8,17 +8,10 @@
       = boost.reputation
 .content
   %span.date
-    = time_ago_in_words(boost.updated_at)
+    = time_ago_in_words(boost.created_at)
     ago
   - if boost.trigger.key == "user.signup"
     you signed up
   -else
     = boost.trigger.owner_type
-    - if boost.reputation > 0
-      accepted
-    - else
-      denied
-    = link_to boost.trigger.trackable_type, boost.trigger.trackable
-    - if boost.cause.recipient_type == "Stamp"
-      of
-      = link_to boost.cause.recipient.stampable.name, boost.cause.recipient.stampable
+    = render partial: "activities/#{boost.trigger.key}", locals: { activity: boost.trigger }
