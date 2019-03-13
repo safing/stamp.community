@@ -81,7 +81,7 @@
       Activity
     - if @user.activities.exists?
       .ui.feed
-        - @user.activities.order(created_at: :desc).each do |activity|
+        - @user.activities.order(created_at: :desc).limit(15).each do |activity|
           .event
             .content
               %span.date
