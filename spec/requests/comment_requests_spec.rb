@@ -69,6 +69,7 @@ RSpec.feature 'comment requests', type: :request do
           expect { subject }.to change { PublicActivity::Activity.count }.from(0).to(1)
 
           activity = PublicActivity::Activity.first
+          expect(activity.key).to eq('comment.create')
           expect(activity.owner).to eq(controller.current_user)
           expect(activity.recipient).to eq(stamp)
         end

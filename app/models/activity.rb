@@ -2,6 +2,7 @@
 class Activity
   KEYS = %w[
     app.create
+    comment.create
     domain.create
     stamp.accept
     stamp.archive
