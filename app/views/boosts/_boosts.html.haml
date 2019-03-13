@@ -11,7 +11,7 @@
     = time_ago_in_words(boost.created_at)
     ago
   - if boost.trigger.key == "user.signup"
-    you signed up
+    signed up
   -else
     = boost.trigger.owner_type
     = render partial: "activities/#{boost.trigger.key}", locals: { activity: boost.trigger }
