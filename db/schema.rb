@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_05_122632) do
+ActiveRecord::Schema.define(version: 2019_02_26_102653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -105,6 +105,22 @@ ActiveRecord::Schema.define(version: 2019_02_05_122632) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "activity_id", null: false
+    t.bigint "actor_id", null: false
+    t.jsonb "cache", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.boolean "read", default: false, null: false
+    t.bigint "recipient_id", null: false
+    t.bigint "reference_id", null: false
+    t.string "reference_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_notifications_on_activity_id"
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
+    t.index ["reference_type", "reference_id"], name: "index_notifications_on_reference_type_and_reference_id"
+  end
+
   create_table "stamps", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.jsonb "data", default: {}, null: false
@@ -162,6 +178,9 @@ ActiveRecord::Schema.define(version: 2019_02_05_122632) do
   add_foreign_key "comments", "users"
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "labels", "labels", column: "parent_id"
+  add_foreign_key "notifications", "activities"
+  add_foreign_key "notifications", "users", column: "actor_id"
+  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "stamps", "users"
   add_foreign_key "votes", "users"
 end
