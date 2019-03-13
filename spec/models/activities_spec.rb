@@ -5,9 +5,9 @@ RSpec.describe PublicActivity::Activity, type: :model do
   end
 
   describe 'database' do
-    it { is_expected.to have_db_index([:trackable_id, :trackable_type]) }
-    it { is_expected.to have_db_index([:owner_id, :owner_type]) }
-    it { is_expected.to have_db_index([:recipient_id, :recipient_type]) }
+    it { is_expected.to have_db_index(%i[trackable_id trackable_type]) }
+    it { is_expected.to have_db_index(%i[owner_id owner_type]) }
+    it { is_expected.to have_db_index(%i[recipient_id recipient_type]) }
   end
 
   describe 'validations' do

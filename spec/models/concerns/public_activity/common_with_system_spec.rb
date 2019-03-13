@@ -20,7 +20,7 @@ RSpec.describe PublicActivity, type: :model do
             activity = PublicActivity::Activity.first
             expect(activity.key).to eq('stamp.create')
             expect(activity.owner_type).to eq('User')
-            expect(activity.owner_id).to  eq(user.id)
+            expect(activity.owner_id).to eq(user.id)
           end
         end
       end
