@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
 
       before do
         FactoryBot.create(:domain_activity, owner: user)
-        FactoryBot.create(:domain_activity, owner: user, key: 'domain.update')
+        FactoryBot.create(:app_activity, owner: user)
         FactoryBot.create(:domain_activity)
       end
 
