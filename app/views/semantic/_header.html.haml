@@ -20,6 +20,38 @@
 
   .right.menu
     - if user_signed_in?
+      .ui.simple.icon.top.right.dropdown.item
+        - if current_user.activities.exists?
+          %i.inbox.green.icon
+          = current_user.activities.count
+          .menu
+            - current_user.activities.order(created_at: :desc).limit(10).each do |activity|
+              .item
+                .ui.feed
+                  .event
+                    .content
+                      .date
+                      = time_ago_in_words(activity.created_at)
+                      ago
+                      .summary
+                        = render partial: "activities/#{activity.key}", locals: { activity: activity }
+        - else
+          %i.inbox.icon
+      .ui.simple.icon.top.right.dropdown.item
+        - if current_user.boosts.exists?
+          - if current_user.boosts.order(created_at: :desc).limit(10).sum(:reputation).to_i > 0
+            %i.trophy.green.icon
+          - else
+            %i.trophy.red.icon
+          = current_user.boosts.count
+          .menu
+            - current_user.boosts.order(created_at: :desc).limit(10).each do |boost|
+              .item
+                .ui.feed
+                  .event
+                    = render partial: "boosts/boosts", locals: { boost: boost }
+        - else
+          %i.trophy.icon
       = link_to user_path(current_user), class: 'item' do
         %img.small_stamp{src: '/assets/stamp_j3rik0_no_text_icon.png'}
         = current_user.stamps.count
