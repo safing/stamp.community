@@ -7,8 +7,11 @@ services:
   web:
     # dev image:        registry.safing.network/dev/stamp:latest
     # production image: registry.safing.network/server/stamp:latest
+    # image: local/dev/stamp:latest
     image: registry.safing.network/dev/stamp:latest
     entrypoint: /stamp/docker-rm-server-pid.sh
+    # to sleep:
+    # command: ["sh", "-c", "tail -f /dev/null"]
     command: ["rails", "server", "-b", "0.0.0.0"]
     volumes:
       - .:/stamp
@@ -30,12 +33,14 @@ services:
     volumes:
       - ${STAMP}/data/redis:/data
   sidekiq:
+    # image: local/dev/stamp:latest
     image: registry.safing.network/dev/stamp:latest
     entrypoint: sidekiq -C config/sidekiq.yml
     volumes:
       - .:/stamp
     env_file: .docker_rails_env
   guard:
+    # image: local/dev/stamp:latest
     image: registry.safing.network/dev/stamp:latest
     command: guard --no-bundler-warning --no-interactions
     volumes:
