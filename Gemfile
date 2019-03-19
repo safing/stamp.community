@@ -15,7 +15,7 @@ gem 'jsonb_accessor'
 gem 'pg'
 
 gem 'font_awesome5_rails'
-gem 'sass-rails'
+gem 'sassc-rails'
 
 gem 'jquery-rails'
 gem 'turbolinks'
