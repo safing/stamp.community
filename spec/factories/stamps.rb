@@ -25,6 +25,14 @@ FactoryBot.define do
       end
     end
 
+    trait :with_comments do
+      after(:create) do |stamp, evaluator|
+        stamp.comments << FactoryBot.build(:comment, commentable: stamp, user_id: stamp.user_id)
+        stamp.comments << FactoryBot.build_list(:comment, 2, commentable: stamp)
+        stamp.save
+      end
+    end
+
     trait :with_creation_activity do
       after(:create) do |stamp, _|
         stamp.activities << FactoryBot.create(:stamp_activity, trackable: stamp)

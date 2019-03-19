@@ -85,6 +85,18 @@ RSpec.shared_examples 'a STI child of Stamp' do |options|
     end
   end
 
+  describe '#commenter_ids', focus: true do
+    subject { stamp.commenter_ids }
+    let(:stamp) { FactoryBot.create(options[:factory], :with_comments) } # 3 comments
+
+    before { FactoryBot.create(:comment) }
+
+    it 'returns all user_ids of people who commented on the stamp' do
+      expect(subject).to be_a(Array)
+      expect(subject.count).to eq(3)
+    end
+  end
+
   describe 'stamp#param_key(base_class:)' do
     subject { stamp.param_key(base_class: base_class) }
 
