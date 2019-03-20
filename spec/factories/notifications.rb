@@ -7,5 +7,9 @@ FactoryBot.define do
     association :reference, factory: :domain
 
     read { Faker::Boolean.boolean }
+
+    trait :system_actor do
+      actor_id { -1 }
+    end
   end
 end

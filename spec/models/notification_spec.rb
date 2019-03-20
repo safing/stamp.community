@@ -19,4 +19,25 @@ RSpec.describe Notification, type: :model do
     it { is_expected.to have_db_index(:recipient_id) }
     it { is_expected.to have_db_index([:reference_type, :reference_id]) }
   end
+
+  describe '#actor' do
+    subject { notification.actor }
+
+    context 'actor_id is -1' do
+        let(:notification) { FactoryBot.create(:notification, :system_actor) }
+
+      it 'returns the System object' do
+        expect(subject).to eq(System.new)
+      end
+    end
+
+    context 'actor_id is a normal id' do
+      let(:notification) { FactoryBot.create(:notification, actor: user) }
+      let(:user) { FactoryBot.create(:user) }
+
+      it 'retrieves the user with the id' do
+        expect(subject).to eq(user)
+      end
+    end
+  end
 end
