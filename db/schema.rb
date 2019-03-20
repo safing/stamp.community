@@ -179,7 +179,6 @@ ActiveRecord::Schema.define(version: 2019_02_26_102653) do
   add_foreign_key "domains", "domains", column: "parent_id"
   add_foreign_key "labels", "labels", column: "parent_id"
   add_foreign_key "notifications", "activities"
-  add_foreign_key "notifications", "users", column: "actor_id"
   add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "stamps", "users"
   add_foreign_key "votes", "users"
