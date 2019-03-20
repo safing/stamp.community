@@ -23,6 +23,14 @@ module Votable
         transition in_progress: :disputed, on: :dispute
         transition accepted: :archived, on: :archive
 
+        after_transition accepted: :archived do |votable, _|
+          votable.creator.notifications.create(
+            actor: System.new,
+            activity_id: votable.transition_activity.id,
+            reference: votable
+          )
+        end
+
         before_transition in_progress: :accepted do |votable, _|
           votable.archive_accepted_siblings!
         end

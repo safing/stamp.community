@@ -9,7 +9,7 @@ FactoryBot.define do
     read { Faker::Boolean.boolean }
 
     trait :system_actor do
-      actor_id { -1 }
+      actor { System.new }
     end
   end
 end

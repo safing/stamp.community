@@ -50,11 +50,14 @@ RSpec.shared_examples 'a votable model' do |options|
       end
 
       it ':accepted => :archive' do
-        is_expected.to transition_from(
-          :accepted,
-          to_state: :archived,
-          on_event: :archive
-        )
+        # needed for the notification
+        PublicActivity.with_tracking do
+          is_expected.to transition_from(
+            :accepted,
+            to_state: :archived,
+            on_event: :archive
+          )
+        end
       end
     end
 
@@ -83,6 +86,19 @@ RSpec.shared_examples 'a votable model' do |options|
     describe '#archive!' do
       subject { instance.archive! }
       let(:state) { :accepted }
+
+      it 'notifies the creator of the state change' do
+        PublicActivity.with_tracking do
+          expect { subject }.to change { Notification.count }.by(1)
+
+          notification = Notification.last
+          expect(notification.recipient).to eq(instance.creator)
+          expect(notification.actor_id).to eq(-1)
+          expect(notification.read).to be false
+          expect(notification.activity.key).to eq('stamp.archive')
+          expect(notification.reference).to eq(instance)
+        end
+      end
     end
 
     describe '#archive_accepted_siblings!' do
@@ -98,9 +114,12 @@ RSpec.shared_examples 'a votable model' do |options|
       end
 
       it 'archives the accepted sibling' do
-        expect { subject }.to change {
-          accepted_sibling.reload.state
-        }.from('accepted').to('archived')
+        # needed for the notification
+        PublicActivity.with_tracking do
+          expect { subject }.to change {
+            accepted_sibling.reload.state
+          }.from('accepted').to('archived')
+        end
       end
     end
   end

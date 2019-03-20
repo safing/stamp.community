@@ -85,7 +85,7 @@ RSpec.shared_examples 'a STI child of Stamp' do |options|
     end
   end
 
-  describe '#commenter_ids', focus: true do
+  describe '#commenter_ids' do
     subject { stamp.commenter_ids }
     let(:stamp) { FactoryBot.create(options[:factory], :with_comments) } # 3 comments
 
