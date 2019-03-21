@@ -68,6 +68,14 @@
   .eight.wide.column
     %h3
       Boosts
+      Your curent flow (
+      - if @user.curent_flow > 0
+        %span.ui.green.text
+          = "+#{@user.curent_flow}"
+      - else
+        %span.ui.red.text
+          = @user.curent_flow
+      )
     - if @user.boosts.exists?
       .ui.feed
         - @user.boosts.order(created_at: :desc).limit(10).each do |boost|

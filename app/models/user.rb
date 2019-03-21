@@ -33,6 +33,10 @@ class User < ApplicationRecord
   def voted?(votable)
     votable.votes.where(user_id: id).exists?
   end
+
+  def curent_flow
+    boosts.where("created_at >= ?", Time.now - 1.month).sum(:reputation).to_i
+  end
 end
 
 # Schema Info:
