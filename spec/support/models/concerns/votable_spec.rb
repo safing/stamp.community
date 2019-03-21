@@ -66,7 +66,7 @@ RSpec.shared_examples 'a votable model' do |options|
     end
 
     shared_examples 'notify creator of transition' do |options|
-      it "notifies creator of the :#{options[:transition]} transition" do
+      it "notifies the creator of the :#{options[:transition]} transition" do
         expect { subject }.to change { Notification.count }.by(1)
 
         notification = Notification.last
@@ -87,17 +87,23 @@ RSpec.shared_examples 'a votable model' do |options|
           expect(instance).to receive(:archive_accepted_siblings!).and_return(true)
           subject
         end
+
+        include_examples 'notify creator of transition', transition: :accept
       end
     end
 
     describe '#deny!' do
       subject { instance.deny! }
       let(:state) { :in_progress }
+
+      include_examples 'notify creator of transition', transition: :deny
     end
 
     describe '#dispute!' do
       subject { instance.dispute! }
       let(:state) { :in_progress }
+
+      include_examples 'notify creator of transition', transition: :dispute
     end
 
     describe '#archive!' do
