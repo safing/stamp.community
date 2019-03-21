@@ -24,6 +24,13 @@ RSpec.shared_examples 'a votable model' do |options|
     let(:instance) { FactoryBot.create(options[:factory], state: state) }
     let(:state) { :in_progress }
 
+    around do |test|
+      # needed for the notifications
+      PublicActivity.with_tracking do
+        test.run
+      end
+    end
+
     describe 'transitions' do
       it ':in_progress => :accepted' do
         is_expected.to transition_from(
@@ -50,14 +57,24 @@ RSpec.shared_examples 'a votable model' do |options|
       end
 
       it ':accepted => :archive' do
-        # needed for the notification
-        PublicActivity.with_tracking do
-          is_expected.to transition_from(
-            :accepted,
-            to_state: :archived,
-            on_event: :archive
-          )
-        end
+        is_expected.to transition_from(
+          :accepted,
+          to_state: :archived,
+          on_event: :archive
+        )
+      end
+    end
+
+    shared_examples 'notify creator of transition' do |options|
+      it "notifies creator of the :#{options[:transition]} transition" do
+        expect { subject }.to change { Notification.count }.by(1)
+
+        notification = Notification.last
+        expect(notification.recipient).to eq(instance.creator)
+        expect(notification.actor_id).to eq(-1)
+        expect(notification.read).to be false
+        expect(notification.activity.key).to eq("stamp.#{options[:transition]}")
+        expect(notification.reference).to eq(instance)
       end
     end
 
@@ -87,18 +104,7 @@ RSpec.shared_examples 'a votable model' do |options|
       subject { instance.archive! }
       let(:state) { :accepted }
 
-      it 'notifies the creator of the state change' do
-        PublicActivity.with_tracking do
-          expect { subject }.to change { Notification.count }.by(1)
-
-          notification = Notification.last
-          expect(notification.recipient).to eq(instance.creator)
-          expect(notification.actor_id).to eq(-1)
-          expect(notification.read).to be false
-          expect(notification.activity.key).to eq('stamp.archive')
-          expect(notification.reference).to eq(instance)
-        end
-      end
+      include_examples 'notify creator of transition', transition: :archive
     end
 
     describe '#archive_accepted_siblings!' do
