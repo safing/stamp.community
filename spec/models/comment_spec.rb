@@ -23,11 +23,7 @@ RSpec.describe Comment, type: :model do
   end
 
   describe '#create_activity(*args)' do
-    around do |test|
-      PublicActivity.with_tracking do
-        test.run
-      end
-    end
+    include_context 'with activity tracking'
 
     subject { comment.create_activity(*params) }
 

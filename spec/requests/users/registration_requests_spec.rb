@@ -1,10 +1,5 @@
 RSpec.feature 'registration requests', type: :request do
-  # theses specs are all dependent on Activity tracking
-  around do |test|
-    PublicActivity.with_tracking do
-      test.run
-    end
-  end
+  include_context 'with activity tracking'
 
   describe 'POST /users' do
     subject(:request) { post user_registration_path, params: { user: user_attributes } }

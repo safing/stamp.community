@@ -24,12 +24,7 @@ RSpec.shared_examples 'a votable model' do |options|
     let(:instance) { FactoryBot.create(options[:factory], state: state) }
     let(:state) { :in_progress }
 
-    around do |test|
-      # needed for the notifications
-      PublicActivity.with_tracking do
-        test.run
-      end
-    end
+    include_context 'with activity tracking'
 
     describe 'transitions' do
       it ':in_progress => :accepted' do
