@@ -11,6 +11,10 @@ RSpec.describe Notification, type: :model do
   end
 
   describe 'validations' do
+    it { is_expected.to validate_presence_of(:activity) }
+    it { is_expected.to validate_presence_of(:actor) }
+    it { is_expected.to validate_presence_of(:recipient) }
+    it { is_expected.to validate_presence_of(:reference) }
   end
 
   describe 'database' do

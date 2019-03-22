@@ -4,6 +4,8 @@ class Notification < ApplicationRecord
   belongs_to :recipient, class_name: 'User'
   belongs_to :reference, polymorphic: true
 
+  validates_presence_of %i[activity actor recipient reference]
+
   def actor
     actor_id == -1 ? System.new : super
   end
