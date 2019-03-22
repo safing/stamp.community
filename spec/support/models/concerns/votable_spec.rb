@@ -60,19 +60,6 @@ RSpec.shared_examples 'a votable model' do |options|
       end
     end
 
-    shared_examples 'notify creator of transition' do |options|
-      it "notifies the creator of the :#{options[:transition]} transition" do
-        expect { subject }.to change { Notification.count }.by(1)
-
-        notification = Notification.last
-        expect(notification.recipient).to eq(instance.creator)
-        expect(notification.actor_id).to eq(-1)
-        expect(notification.read).to be false
-        expect(notification.activity.key).to eq("stamp.#{options[:transition]}")
-        expect(notification.reference).to eq(instance)
-      end
-    end
-
     describe '#accept!' do
       subject { instance.accept! }
       let(:state) { :in_progress }
@@ -82,8 +69,16 @@ RSpec.shared_examples 'a votable model' do |options|
           expect(instance).to receive(:archive_accepted_siblings!).and_return(true)
           subject
         end
+      end
 
-        include_examples 'notify creator of transition', transition: :accept
+      include_examples 'notify creator of transition', transition: :accept
+
+      context 'with votes' do
+        let(:instance) do
+          FactoryBot.create(options[:factory], :with_votes, state: state, activities: true)
+        end
+
+        include_examples 'notify voters of transition', transition: :accept
       end
     end
 
@@ -92,6 +87,14 @@ RSpec.shared_examples 'a votable model' do |options|
       let(:state) { :in_progress }
 
       include_examples 'notify creator of transition', transition: :deny
+
+      context 'with votes' do
+        let(:instance) do
+          FactoryBot.create(options[:factory], :with_votes, state: state, activities: true)
+        end
+
+        include_examples 'notify voters of transition', transition: :deny
+      end
     end
 
     describe '#dispute!' do
@@ -99,6 +102,14 @@ RSpec.shared_examples 'a votable model' do |options|
       let(:state) { :in_progress }
 
       include_examples 'notify creator of transition', transition: :dispute
+
+      context 'with votes' do
+        let(:instance) do
+          FactoryBot.create(options[:factory], :with_votes, state: state, activities: true)
+        end
+
+        include_examples 'notify voters of transition', transition: :dispute
+      end
     end
 
     describe '#archive!' do
@@ -106,6 +117,14 @@ RSpec.shared_examples 'a votable model' do |options|
       let(:state) { :accepted }
 
       include_examples 'notify creator of transition', transition: :archive
+
+      context 'with votes' do
+        let(:instance) do
+          FactoryBot.create(options[:factory], :with_votes, state: state, activities: true)
+        end
+
+        include_examples 'do not notify voters of transition', transition: :archive
+      end
     end
 
     describe '#archive_accepted_siblings!' do
