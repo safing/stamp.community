@@ -1,6 +1,14 @@
 %footer
   .ui.divider
   .ui.grid.center.aligned.stackable.container
+    .ui.sixteen.wide.column
+      Stamps are accepted with
+      = ENV['VOTABLE_POWER_THRESHOLD']
+      votes and
+      = "#{ENV['VOTABLE_MAJORITY_THRESHOLD']}%"
+      consensus after
+      = ENV['STAMP_CONCLUDE_IN_HOURS']
+      hours.
     .ui.seven.wide.column
       - if user_signed_in?
         .ui.list
