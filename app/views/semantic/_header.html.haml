@@ -29,22 +29,22 @@
         = current_user.reputation
         rep
       .ui.simple.icon.top.right.dropdown.item
-        - if current_user.activities.exists?
+        - if current_user.notifications.exists?
           %i.inbox.purple.large.icon
-          = current_user.activities.count
+          = current_user.notifications.count
           .menu
-            - current_user.activities.order(created_at: :desc).limit(10).each do |activity|
+            - current_user.notifications.order(created_at: :desc).each do |notification|
               .item
-                .ui.feed
-                  .event
-                    .content
-                      .date
-                      = time_ago_in_words(activity.created_at)
-                      ago
-                      .summary
-                        = render partial: "activities/#{activity.key}", locals: { activity: activity }
+                %span.date
+                  = time_ago_in_words(notification.created_at)
+                  ago
+                %span
+                  = render partial: "notifications/#{notification.activity.key}", locals: { notification: notification }
+                  = link_to notification.reference_type, notification.reference
+                  of
+                  = link_to notification.reference.stampable.name, notification.reference.stampable
         - else
-          %i.inbox.large.icon
+          %i.inbox.grey.large.icon
       .ui.simple.icon.top.right.dropdown.item
         - if current_user.boosts.exists?
           - if current_user.boosts.order(created_at: :desc).limit(10).sum(:reputation).to_i >= 0
