@@ -3,6 +3,8 @@ RSpec.describe Votable::DisputeWorker, type: :worker do
     subject { dispute_worker.perform(votable_type, votable_id) }
     let(:dispute_worker) { Votable::DisputeWorker.new }
 
+    include_context 'with activity tracking'
+
     context 'votable exists' do
       let(:votable) { FactoryBot.create(:label_stamp, state: state) }
       let(:votable_type) { votable.class.to_s }

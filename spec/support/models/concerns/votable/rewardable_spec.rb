@@ -3,6 +3,8 @@ RSpec.shared_examples 'a rewardable model' do |options|
   let(:class_name_env) { instance.class_name_env }
 
   describe 'state machine' do
+    include_context 'with activity tracking'
+
     describe '#accept!' do
       subject { instance.accept! }
       let(:state) { :in_progress }

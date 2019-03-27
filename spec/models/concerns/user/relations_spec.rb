@@ -2,11 +2,12 @@ RSpec.describe User, type: :model do
   describe '::Relations' do
     describe 'relations' do
       it { is_expected.to have_one(:api_key) }
+      it { is_expected.to have_many(:boosts) }
+      it { is_expected.to have_many(:comments) }
       it { is_expected.to have_many(:domains).with_foreign_key(:user_id) }
+      it { is_expected.to have_many(:notifications).with_foreign_key(:recipient_id) }
       it { is_expected.to have_many(:stamps).with_foreign_key(:user_id) }
       it { is_expected.to have_many(:votes) }
-      it { is_expected.to have_many(:comments) }
-      it { is_expected.to have_many(:boosts) }
       it do
         is_expected.to have_many(:activities).class_name('PublicActivity::Activity')
       end

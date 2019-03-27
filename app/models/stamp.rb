@@ -36,6 +36,10 @@ class Stamp < ApplicationRecord
     siblings.count.positive?
   end
 
+  def commenter_ids
+    comments.select(:user_id).distinct.pluck(:user_id)
+  end
+
   def vote_of(user)
     @vote_of ||= votes.find_by(user_id: user.id)
   end

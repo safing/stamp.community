@@ -3,6 +3,8 @@ RSpec.describe Votable::DenyWorker, type: :worker do
     subject { deny_worker.perform(votable_type, votable_id) }
     let(:deny_worker) { Votable::DenyWorker.new }
 
+    include_context 'with activity tracking'
+
     context 'votable exists' do
       let(:votable) { FactoryBot.create(:label_stamp, state: state) }
       let(:votable_type) { votable.class.to_s }

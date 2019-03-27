@@ -11,5 +11,5 @@
 
   # create user.signup activity & boost
   activity = FactoryBot.create(:signup_activity, owner: user, trackable: user)
-  FactoryBot.create(:boost, reputation: 1, user: user, activity: activity)
+  FactoryBot.create(:boost, reputation: 1, user: user, cause: activity, trigger: activity)
 end

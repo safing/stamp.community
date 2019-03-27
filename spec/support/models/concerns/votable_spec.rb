@@ -24,6 +24,8 @@ RSpec.shared_examples 'a votable model' do |options|
     let(:instance) { FactoryBot.create(options[:factory], state: state) }
     let(:state) { :in_progress }
 
+    include_context 'with activity tracking'
+
     describe 'transitions' do
       it ':in_progress => :accepted' do
         is_expected.to transition_from(
@@ -68,21 +70,61 @@ RSpec.shared_examples 'a votable model' do |options|
           subject
         end
       end
+
+      include_examples 'notify creator of transition', transition: :accept
+
+      context 'with votes' do
+        let(:instance) do
+          FactoryBot.create(options[:factory], :with_votes, state: state, activities: true)
+        end
+
+        include_examples 'notify voters of transition', transition: :accept
+      end
     end
 
     describe '#deny!' do
       subject { instance.deny! }
       let(:state) { :in_progress }
+
+      include_examples 'notify creator of transition', transition: :deny
+
+      context 'with votes' do
+        let(:instance) do
+          FactoryBot.create(options[:factory], :with_votes, state: state, activities: true)
+        end
+
+        include_examples 'notify voters of transition', transition: :deny
+      end
     end
 
     describe '#dispute!' do
       subject { instance.dispute! }
       let(:state) { :in_progress }
+
+      include_examples 'notify creator of transition', transition: :dispute
+
+      context 'with votes' do
+        let(:instance) do
+          FactoryBot.create(options[:factory], :with_votes, state: state, activities: true)
+        end
+
+        include_examples 'notify voters of transition', transition: :dispute
+      end
     end
 
     describe '#archive!' do
       subject { instance.archive! }
       let(:state) { :accepted }
+
+      include_examples 'notify creator of transition', transition: :archive
+
+      context 'with votes' do
+        let(:instance) do
+          FactoryBot.create(options[:factory], :with_votes, state: state, activities: true)
+        end
+
+        include_examples 'do not notify voters of transition', transition: :archive
+      end
     end
 
     describe '#archive_accepted_siblings!' do
@@ -98,9 +140,12 @@ RSpec.shared_examples 'a votable model' do |options|
       end
 
       it 'archives the accepted sibling' do
-        expect { subject }.to change {
-          accepted_sibling.reload.state
-        }.from('accepted').to('archived')
+        # needed for the notification
+        PublicActivity.with_tracking do
+          expect { subject }.to change {
+            accepted_sibling.reload.state
+          }.from('accepted').to('archived')
+        end
       end
     end
   end
