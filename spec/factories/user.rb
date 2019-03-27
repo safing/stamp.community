@@ -34,6 +34,13 @@ FactoryBot.define do
         user.save
       end
     end
+
+    trait :with_notifications do
+      after(:create) do |user|
+        user.notifications << FactoryBot.build(:notification, recipient: user)
+        user.save
+      end
+    end
   end
 
   factory :moderator, parent: :user do
