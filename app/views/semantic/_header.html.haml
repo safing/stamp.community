@@ -45,21 +45,7 @@
                   = link_to notification.reference.stampable.name, notification.reference.stampable
         - else
           %i.inbox.grey.large.icon
-      .ui.simple.icon.top.right.dropdown.item
-        - if current_user.boosts.exists?
-          - if current_user.boosts.order(created_at: :desc).limit(10).sum(:reputation).to_i >= 0
-            %i.trophy.green.large.icon
-          - else
-            %i.trophy.red.large.icon
-          = current_user.boosts.count
-          .menu
-            - current_user.boosts.order(created_at: :desc).limit(10).each do |boost|
-              .item
-                .ui.feed
-                  .event
-                    = render partial: "boosts/boosts", locals: { boost: boost }
-        - else
-          %i.trophy.large.icon
+      =#current_flow
       .ui.simple.inverted.dropdown.item
         %i.bars.icon
         .menu
