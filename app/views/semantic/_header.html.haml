@@ -22,7 +22,7 @@
     - if user_signed_in?
       = link_to user_path(current_user), class: 'vertically fitted item' do
         %img{class: 'ui avatar image', src: '/assets/portmaster.png'}
-        = fa_icon 'chess-king', size: '1x'
+        = fa_icon 'chess-king', size: '1x', style: 'margin-right: 0.3rem;'
         = current_user.voting_power
         %span
           ⎮
@@ -35,7 +35,7 @@
           .menu
             - current_user.notifications.order(created_at: :desc).each do |notification|
               .item
-                %span.date
+                %span.ui.grey.text
                   = time_ago_in_words(notification.created_at)
                   ago
                 %span
@@ -45,7 +45,6 @@
                   = link_to notification.reference.stampable.name, notification.reference.stampable
         - else
           %i.inbox.grey.large.icon
-      =#current_flow
       .ui.simple.inverted.dropdown.item
         %i.bars.icon
         .menu
