@@ -20,15 +20,31 @@
 
   .right.menu
     - if user_signed_in?
-      = link_to user_path(current_user), class: 'item' do
-        %img.small_stamp{src: '/assets/stamp_j3rik0_no_text_icon.png'}
-        = current_user.stamps.count
-        .content
-        %i.fitted.sort.icon
-        = current_user.votes.count
-        .content
-        %i.fitted.linkify.icon
-        = current_user.domains.count
+      = link_to user_path(current_user), class: 'vertically fitted item' do
+        %img{class: 'ui avatar image', src: '/assets/portmaster.png'}
+        = fa_icon 'chess-king', size: '1x', style: 'margin-right: 0.3rem;'
+        = current_user.voting_power
+        %span
+          ⎮
+        = current_user.reputation
+        rep
+      .ui.simple.icon.top.right.dropdown.item
+        - if current_user.notifications.exists?
+          %i.inbox.purple.large.icon
+          = current_user.notifications.count
+          .menu
+            - current_user.notifications.order(created_at: :desc).each do |notification|
+              .item
+                %span.ui.grey.text
+                  = time_ago_in_words(notification.created_at)
+                  ago
+                %span
+                  = render partial: "notifications/#{notification.activity.key}", locals: { notification: notification }
+                  = link_to notification.reference_type, notification.reference
+                  of
+                  = link_to notification.reference.stampable.name, notification.reference.stampable
+        - else
+          %i.inbox.grey.large.icon
       .ui.simple.inverted.dropdown.item
         %i.bars.icon
         .menu
