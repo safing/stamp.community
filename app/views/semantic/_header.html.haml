@@ -28,23 +28,7 @@
           ⎮
         = current_user.reputation
         rep
-      .ui.simple.icon.top.right.dropdown.item
-        - if current_user.notifications.exists?
-          %i.inbox.purple.large.icon
-          = current_user.notifications.count
-          .menu
-            - current_user.notifications.order(created_at: :desc).each do |notification|
-              .item
-                %span.ui.grey.text
-                  = time_ago_in_words(notification.created_at)
-                  ago
-                %span
-                  = render partial: "notifications/#{notification.activity.key}", locals: { notification: notification }
-                  = link_to notification.reference_type, notification.reference
-                  of
-                  = link_to notification.reference.stampable.name, notification.reference.stampable
-        - else
-          %i.inbox.grey.large.icon
+      = render partial: 'notifications/dropdown'
       .ui.simple.inverted.dropdown.item
         %i.bars.icon
         .menu
