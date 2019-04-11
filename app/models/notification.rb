@@ -6,6 +6,8 @@ class Notification < ApplicationRecord
 
   validates_presence_of %i[activity actor recipient reference]
 
+  scope :unread, -> { where(read: false) }
+
   def actor
     actor_id == -1 ? System.new : super
   end
