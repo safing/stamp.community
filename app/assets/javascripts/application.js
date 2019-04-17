@@ -16,4 +16,5 @@
 //= require jquery_ujs
 //= require fomantic
 //= require stimulus/init
+//= require cable
 //= require_tree .
