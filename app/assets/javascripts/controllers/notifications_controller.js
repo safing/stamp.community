@@ -1,7 +1,7 @@
 (() => {
   stimulus.register("notifications", class extends Stimulus.Controller {
     static get targets() {
-      return [ 'menu' ]
+      return [ 'icon', 'counter', 'menu' ]
     }
 
     connect() {
@@ -15,6 +15,7 @@
         App.notifications = App.cable.subscriptions.create('NotificationsChannel', {
           received: function(data) {
             notificationsController.appendNotification(data)
+            notificationsController.increaseCounter()
           }
         })
       }
@@ -26,6 +27,17 @@
       ).body.firstChild;
 
       this.menuTarget.insertBefore(new_notification, this.menuTarget.firstChild)
+    }
+
+    increaseCounter() {
+      var counter = parseFloat(this.counterTarget.innerText)
+
+      if (counter == 0) {
+        this.iconTarget.classList.remove('grey')
+        this.iconTarget.classList.add('purple')
+      }
+
+      this.counterTarget.innerText = counter + 1
     }
   })
 })()
