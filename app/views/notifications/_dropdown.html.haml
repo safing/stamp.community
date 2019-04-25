@@ -1,9 +1,6 @@
 .ui.simple.top.right.dropdown.item{data: {controller: 'notifications'}}
-  - if notifications.unread.exists?
-    %i.inbox.purple.large.icon
-    = notifications.unread.count
-  - else
-    %i.inbox.grey.large.icon
+  %i.inbox.large.icon{class: notifications.unread.exists? ? 'purple' : 'grey'}
+  %span.counter= notifications.unread.count
   .menu{data: {target: 'notifications.menu'}}
     - notifications.limit(10).each do |notification|
       = render partial: 'notifications/notification', locals: { notification: notification }
