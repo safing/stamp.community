@@ -1,0 +1,9 @@
+.item
+  %span.ui.grey.text
+    = time_ago_in_words(notification.created_at)
+    ago
+  %span
+    = render partial: "notifications/#{notification.activity.key}", locals: { notification: notification }
+    = link_to notification.reference_type, notification.reference
+    of
+    = link_to notification.reference.stampable.name, notification.reference.stampable
