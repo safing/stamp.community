@@ -24,6 +24,15 @@ RSpec.describe Notification, type: :model do
     it { is_expected.to have_db_index([:reference_type, :reference_id]) }
   end
 
+  describe '#create' do
+    subject { notification.save }
+    let(:notification) { FactoryBot.build(:notification) }
+
+    it 'queues a NotificationBroadcastWorker' do
+      expect { subject }.to change { NotificationBroadcastWorker.jobs.size }.by(1)
+    end
+  end
+
   describe '#actor' do
     subject { notification.actor }
 
