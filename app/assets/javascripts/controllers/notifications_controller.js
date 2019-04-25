@@ -1,33 +1,31 @@
 (() => {
   stimulus.register("notifications", class extends Stimulus.Controller {
     static get targets() {
-      return [ 'notifications' ]
+      return [ 'menu' ]
     }
 
     connect() {
+      this.connectToNotificationsChannel()
+    }
+
+    connectToNotificationsChannel() {
+      let notificationsController = this
+
       if (App.notifications == null) {
-        connectToNotificationsChannel()
+        App.notifications = App.cable.subscriptions.create('NotificationsChannel', {
+          received: function(data) {
+            notificationsController.appendNotification(data)
+          }
+        })
       }
+    }
+
+    appendNotification(data) {
+      let new_notification = new DOMParser().parseFromString(
+        data['notification'], 'text/html'
+      ).body.firstChild;
+
+      this.menuTarget.insertBefore(new_notification, this.menuTarget.firstChild)
     }
   })
 })()
-
-function connectToNotificationsChannel() {
-  App.notifications = App.cable.subscriptions.create('NotificationsChannel', {
-    initialized: function() {
-      console.log('initialized')
-    },
-
-    connected: function() {
-      console.log('connected')
-    },
-
-    disconnected: function() {
-      console.log('disconnected')
-    },
-
-    received: function(data) {
-      console.log('received')
-    }
-  })
-}

@@ -4,6 +4,6 @@
     = notifications.unread.count
   - else
     %i.inbox.grey.large.icon
-  .menu
+  .menu{data: {target: 'notifications.menu'}}
     - notifications.limit(10).each do |notification|
       = render partial: 'notifications/notification', locals: { notification: notification }
