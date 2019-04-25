@@ -1,4 +1,4 @@
-.ui.simple.top.right.dropdown.item
+.ui.simple.top.right.dropdown.item{data: {controller: 'notifications'}}
   - if notifications.unread.exists?
     %i.inbox.purple.large.icon
     = notifications.unread.count
