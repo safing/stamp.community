@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :system_actor do
       actor { System.new }
     end
+
+    trait :unread do
+      read { false }
+    end
   end
 end
