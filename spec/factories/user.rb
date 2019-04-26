@@ -37,7 +37,7 @@ FactoryBot.define do
 
     trait :with_notifications do
       after(:create) do |user|
-        user.notifications << FactoryBot.build(:notification, :unread, recipient: user)
+        user.notifications << FactoryBot.build_list(:notification, 2, :unread, recipient: user)
         user.save
       end
     end

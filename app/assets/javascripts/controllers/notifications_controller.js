@@ -39,5 +39,27 @@
 
       this.counterTarget.innerText = counter + 1
     }
+
+    readAll() {
+      let notificationsController = this
+      var counter = parseFloat(this.counterTarget.innerText)
+
+      if (counter > 0) {
+        // authenticate to /notifications/read_all
+        const request = new XMLHttpRequest()
+        var csrf_meta = document.head.querySelector('meta[name=csrf-token]')
+
+        request.open('POST', '/notifications/read_all', true)
+        request.setRequestHeader('X-CSRF-Token', csrf_meta.getAttribute('content'))
+        request.send()
+
+        // set counter to 0 and update style
+        window.setTimeout(function() {
+          notificationsController.iconTarget.classList.remove('purple')
+          notificationsController.iconTarget.classList.add('grey')
+          notificationsController.counterTarget.innerText = 0
+        }, 600)
+      }
+    }
   })
 })()
