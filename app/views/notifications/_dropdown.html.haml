@@ -1,4 +1,4 @@
-.ui.simple.top.right.dropdown.item{data: {controller: 'notifications'}}
+.ui.top.right.dropdown.item{data: {controller: 'notifications'}}
   %i.inbox.large.icon{class: (notifications.unread.exists? ? 'purple' : 'grey'), data: {target: 'notifications.icon'}}
   %span.counter{data: {target: 'notifications.counter'}}
     = notifications.unread.count
