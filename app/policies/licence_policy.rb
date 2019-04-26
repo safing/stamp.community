@@ -1,9 +1,9 @@
 class LicencePolicy < ApplicationPolicy
-  attr_reader :user, :stamp
+  attr_reader :user, :licence
 
-  def initialize(user, stamp)
+  def initialize(user, licence)
     @user = user
-    @stamp = stamp
+    @licence = licence
   end
 
   def create?

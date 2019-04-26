@@ -32,6 +32,10 @@ Rails.application.routes.draw do
     resources :votes, only: [:create]
   end
 
+  # rubocop:disable LineLength
+  post 'notifications/read_all', to: 'notifications#read_all', as: :read_all_notifications, constraints: { format: :js }
+  # rubocop:enable LineLength
+
   mount APIRouter => '/'
   get 'terms', to: 'static#terms', as: :tos
 

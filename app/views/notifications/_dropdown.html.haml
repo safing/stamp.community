@@ -1,0 +1,7 @@
+.ui.top.right.dropdown.item{data: {controller: 'notifications', action: 'click->notifications#readAll'}}
+  %i.inbox.large.icon{class: (notifications.unread.exists? ? 'purple' : 'grey'), data: {target: 'notifications.icon'}}
+  %span.counter{data: {target: 'notifications.counter'}}
+    = notifications.unread.count
+  .menu{data: {target: 'notifications.menu'}}
+    - notifications.limit(10).each do |notification|
+      = render partial: 'notifications/notification', locals: { notification: notification }

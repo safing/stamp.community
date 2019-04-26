@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def notifications
+    current_user.notifications.order(created_at: :desc)
+  end
+
   def current_day
     Time.current.utc.to_date
   end

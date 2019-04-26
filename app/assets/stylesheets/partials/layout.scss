@@ -13,6 +13,18 @@
       padding-right: 4px;
     }
 
+    .ui.dropdown.item {
+      .inbox.icon {
+        &.grey + .counter{
+          display: none;
+        }
+
+        &.purple + .counter {
+          display: block;
+        }
+      }
+    }
+
     .content {
       padding-left: 11px;
     }

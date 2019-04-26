@@ -14,6 +14,8 @@ gem 'hirb'
 gem 'jsonb_accessor'
 gem 'pg'
 
+gem 'puma'
+
 gem 'font_awesome5_rails'
 gem 'sassc-rails'
 
