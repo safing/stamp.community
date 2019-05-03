@@ -4,7 +4,7 @@ class Notification < ApplicationRecord
   belongs_to :recipient, class_name: 'User'
   belongs_to :reference, polymorphic: true
 
-  after_create { NotificationBroadcastWorker.perform_async(self.id) }
+  after_create { NotificationBroadcastWorker.perform_async(id) }
 
   validates_presence_of %i[activity actor recipient reference]
 

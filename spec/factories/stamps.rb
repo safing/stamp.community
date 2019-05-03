@@ -26,7 +26,7 @@ FactoryBot.define do
     end
 
     trait :with_comments do
-      after(:create) do |stamp, evaluator|
+      after(:create) do |stamp, _|
         stamp.comments << FactoryBot.build(:comment, commentable: stamp, user_id: stamp.user_id)
         stamp.comments << FactoryBot.build_list(:comment, 2, commentable: stamp)
         stamp.save

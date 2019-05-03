@@ -21,7 +21,7 @@ RSpec.describe Notification, type: :model do
     it { is_expected.to have_db_index(:activity_id) }
     it { is_expected.to have_db_index(:actor_id) }
     it { is_expected.to have_db_index(:recipient_id) }
-    it { is_expected.to have_db_index([:reference_type, :reference_id]) }
+    it { is_expected.to have_db_index(%i[reference_type reference_id]) }
   end
 
   describe '#create' do
@@ -37,7 +37,7 @@ RSpec.describe Notification, type: :model do
     subject { notification.actor }
 
     context 'actor_id is -1' do
-        let(:notification) { FactoryBot.create(:notification, :system_actor) }
+      let(:notification) { FactoryBot.create(:notification, :system_actor) }
 
       it 'returns the System object' do
         expect(subject).to eq(System.new)
