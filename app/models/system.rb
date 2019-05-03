@@ -9,4 +9,12 @@ class System < User
   def self.polymorphic_name
     'System'
   end
+
+  def created_at
+    '01-01-2019'.to_date
+  end
+
+  def updated_at
+    created_at
+  end
 end

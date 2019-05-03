@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = params[:id].to_i == -1 ? System.new : User.find(params[:id])
   end
 
   def index
