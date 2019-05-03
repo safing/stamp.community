@@ -27,7 +27,12 @@ class Stamp < ApplicationRecord
   end
 
   # must be implemented @ each subclass
-  # can describe a stronger connection than peers
+  #   -> used to describe the stampable object in the UI
+  def stampable_name
+    raise NotImplementedError
+  end
+
+  #   -> can describe a stronger connection than peers
   def siblings
     raise NotImplementedError
   end

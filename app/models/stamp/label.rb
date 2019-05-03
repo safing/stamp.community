@@ -14,6 +14,10 @@ class Stamp::Label < Stamp
     stampable
   end
 
+  def stampable_name
+    domain.name
+  end
+
   def initial_stamp_cannot_be_0
     return true if percentage != 0
     return true if siblings.accepted.present?
