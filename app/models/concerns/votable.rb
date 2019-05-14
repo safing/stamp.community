@@ -7,6 +7,7 @@ module Votable
     include Votable::Results
 
     has_many :votes, as: :votable
+    has_many :activities, class_name: 'PublicActivity::Activity', as: :trackable
   end
 
   def upvotes
