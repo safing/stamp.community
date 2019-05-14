@@ -28,10 +28,14 @@ FactoryBot.define do
   end
 
   factory :transition_activity, parent: :activity do
-    association :trackable, factory: :flag_stamp
+    association :trackable, factory: :label_stamp
     owner_type { 'System' }
     owner_id { -1 }
     key { 'stamp.accept' }
+    parameters {{
+      majority_threshold: 80,
+      power_threshold: 5
+    }}
   end
 
   factory :vote_activity, parent: :activity do

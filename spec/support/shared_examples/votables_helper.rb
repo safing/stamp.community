@@ -38,3 +38,23 @@ RSpec.shared_examples 'do not notify voters of transition' do |params|
     end
   end
 end
+
+RSpec.shared_examples 'set threshold metrics of transition' do
+  before do
+    allow_required_integer_env('STAMP_CONCLUDE_IN_HOURS').and_return(100)
+    allow_required_integer_env('VOTABLE_MAJORITY_THRESHOLD').and_return(80)
+    allow_required_integer_env('VOTABLE_POWER_THRESHOLD').and_return(5)
+    allow_required_integer_env('STAMP::LABEL_CREATOR_PENALTY').and_return(100)
+    allow_required_integer_env('STAMP::LABEL_CREATOR_PRIZE').and_return(100)
+    allow_required_integer_env('STAMP::LABEL_UPVOTER_PENALTY').and_return(100)
+    allow_required_integer_env('STAMP::LABEL_UPVOTER_PRIZE').and_return(100)
+    allow_required_integer_env('STAMP::LABEL_DOWNVOTER_PENALTY').and_return(100)
+    allow_required_integer_env('STAMP::LABEL_DOWNVOTER_PRIZE').and_return(100)
+    allow_required_integer_env('STAMP::FLAG_CREATOR_PENALTY').and_return(100)
+    allow_required_integer_env('STAMP::FLAG_CREATOR_PRIZE').and_return(100)
+    allow_required_integer_env('STAMP::FLAG_UPVOTER_PENALTY').and_return(100)
+    allow_required_integer_env('STAMP::FLAG_DOWNVOTER_PENALTY').and_return(100)
+    allow_required_integer_env('STAMP::FLAG_UPVOTER_PRIZE').and_return(100)
+    allow_required_integer_env('STAMP::FLAG_DOWNVOTER_PRIZE').and_return(100)
+  end
+end

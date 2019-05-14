@@ -1,5 +1,5 @@
 RSpec.describe 'stamps/labels/show.html.haml', type: :view do
-  let(:stamp) { FactoryBot.create(:label_stamp, state: state) }
+  let(:stamp) { FactoryBot.create(:label_stamp, :with_accept_activity, state: state) }
   let(:state) { :in_progress }
 
   def rendered
@@ -28,6 +28,9 @@ RSpec.describe 'stamps/labels/show.html.haml', type: :view do
       expect(rendered).not_to have_button('Add Comment')
     end
 
+    it 'shows the stamp requirements' do
+      expect(rendered).to have_content('The requirements were:')
+    end
     # add specs to show the correct color of the vote buttons
     # depending on results & whether the user voted or not
   end
