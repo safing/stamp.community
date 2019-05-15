@@ -60,7 +60,7 @@ RSpec.describe PublicActivity::Activity, type: :model do
       let(:cache_key) { :user_username }
 
       context 'cache is already set' do
-        let(:parameters) { {user_username: user.username} }
+        let(:parameters) { { user_username: user.username } }
 
         it 'returns the cached value' do
           expect(subject).to eq(user.username)
@@ -69,7 +69,9 @@ RSpec.describe PublicActivity::Activity, type: :model do
 
       context 'cache is not set yet' do
         it 'sets the cache' do
-          expect { subject }.to change { activity.parameters }.from({}).to({'user_username' => user.username})
+          expect { subject }.to change { activity.parameters }.from({}).to(
+            'user_username' => user.username
+          )
         end
 
         it 'recalls #cache(cache_key) to return the value' do

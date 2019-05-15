@@ -2,6 +2,7 @@ module Votable
   module State
     extend ActiveSupport::Concern
 
+    # rubocop:disable Metrics/BlockLength
     included do
       # used so boosts can reference the transition_activity
       attr_accessor :transition_activity
@@ -54,6 +55,7 @@ module Votable
         end
       end
     end
+    # rubocop:enable Metrics/BlockLength
 
     def scheduled_at
       created_at + ENVProxy.required_integer('STAMP_CONCLUDE_IN_HOURS').hours

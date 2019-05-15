@@ -62,7 +62,7 @@ RSpec.describe Comment, type: :model do
 
       # rubocop:disable LineLength
       it 'creates notifications {activity: self, actor: actor, recipient: other commenters, reference: stamp}' do
-      # rubocop:enable LineLength
+        # rubocop:enable LineLength
         subject
 
         activity = PublicActivity::Activity.last
