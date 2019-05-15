@@ -1,6 +1,9 @@
 class Comment < ApplicationRecord
   include PublicActivity::Common
 
+  # :commentable can currently only be used with stamps
+  # comment.create activities caches data of stamps, so this would fail if used on another object
+  # in cache config => comment_create => stampable_name is cached
   belongs_to :commentable, polymorphic: true
   belongs_to :user
 
