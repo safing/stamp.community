@@ -13,7 +13,6 @@ RSpec.describe 'semantic/_header.html.haml', type: :view do
     context 'user has notifications' do
       let(:user) { FactoryBot.create(:user, :with_notifications) }
 
-
       it 'shows the notification inbox as a purple icon' do
         expect(rendered).to have_css('.inbox.purple.large.icon')
       end

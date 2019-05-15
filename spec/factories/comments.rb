@@ -6,7 +6,7 @@ FactoryBot.define do
     association :commentable, factory: :label_stamp
   end
 
-  # meaning: the comment & commentable were created by the same user 
+  # meaning: the comment & commentable were created by the same user
   factory :initial_comment, parent: :comment do
     commentable { create(:label_stamp, creator: user) }
   end

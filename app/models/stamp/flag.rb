@@ -12,6 +12,10 @@ class Stamp::Flag < Stamp
     stampable
   end
 
+  def stampable_name
+    app.name
+  end
+
   def siblings
     peers
   end
