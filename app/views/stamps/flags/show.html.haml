@@ -14,3 +14,4 @@
       - if @stamp.in_progress?
         %div.column.flag-column
           = render 'stamps/flags/partials/flag_stamp', skip_card: true, stamp: @stamp
+= render partial: 'stamps/partials/results', locals: { stamp: @stamp }

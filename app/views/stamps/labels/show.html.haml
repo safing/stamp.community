@@ -69,31 +69,4 @@
       = link_to new_label_stamp_path(domain_name: @stamp.domain.name) do
         %button.ui.purple.basic.big.button
           Add Stamp
-- unless @stamp.in_progress?
-  .sixteen.wide.column
-    .ui.segment.results
-      %h2.ui.header
-        .content
-          Results
-          .sub.header
-            = @stamp.state.titleize
-            = time_ago_in_words(@stamp.updated_at)
-            ago
-            %i.hand.fitted.caret.up.big.green.icon
-            = @stamp.upvote_power
-            %i.hand.fitted.caret.down.big.red.icon
-            = @stamp.downvote_power
-      - if @stamp.conclusion_activity.present?
-        .ui.large.top.right.attached.label{style: "margin: 0 !important;"}
-          (The requirements were:
-          = @stamp.conclusion_activity.parameters['power_threshold']
-          voting power with an
-          = "#{@stamp.conclusion_activity.parameters['majority_threshold']}%"
-          acceptance)
-      .ui.divider
-        - @stamp.votes.order(power: :desc, accept: :desc).each do |vote|
-          = link_to user_path(vote.user.id), class: %w[ui label].push(vote.upvote? ? 'green' : 'red') do
-            = vote.user.username
-            .detail
-              %i.chess.queen.icon
-              = vote.power
+= render partial: 'stamps/partials/results', locals: { stamp: @stamp }
