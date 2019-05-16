@@ -35,4 +35,9 @@ module Votable
       Votable::DisputeWorker.perform_async(self.class.to_s, id)
     end
   end
+
+  def conclusion_activity
+    return nil if self.in_progress?
+    activities.where(key: ["stamp.accept", "stamp.deny", "stamp.dispute"]).first
+  end
 end
