@@ -389,6 +389,78 @@ RSpec.shared_examples 'a votable model' do |options|
     end
   end
 
+  describe '#conclusion_activity', focus: true do
+    subject { instance.conclusion_activity }
+
+    context 'state is in_progress' do
+
+      it 'returns nil' do
+        expect(subject).to eq(nil)
+      end
+    end
+
+    context 'state is accepted' do
+
+      before do
+        PublicActivity.with_tracking do
+          instance.accept!
+        end
+      end
+
+      it 'returns the stamps conclusion_activity with key: stamp.accept' do
+        expect(subject).to be_kind_of(PublicActivity::Activity)
+        expect(subject.trackable).to eq(instance)
+        expect(subject.key).to eq('stamp.accept')
+      end
+    end
+
+    context 'state is denied' do
+
+      before do
+        PublicActivity.with_tracking do
+          instance.deny!
+        end
+      end
+
+      it 'returns the stamps conclusion_activity with key: stamp.deny' do
+        expect(subject).to be_kind_of(PublicActivity::Activity)
+        expect(subject.trackable).to eq(instance)
+        expect(subject.key).to eq('stamp.deny')
+      end
+    end
+
+    context 'state is disputed' do
+
+      before do
+        PublicActivity.with_tracking do
+          instance.dispute!
+        end
+      end
+
+      it 'returns the stamps conclusion_activity with key: stamp.dispute' do
+        expect(subject).to be_kind_of(PublicActivity::Activity)
+        expect(subject.trackable).to eq(instance)
+        expect(subject.key).to eq('stamp.dispute')
+      end
+    end
+
+    context 'state is archived' do
+
+      before do
+        PublicActivity.with_tracking do
+          instance.accept!
+          instance.archive!
+        end
+      end
+
+      it 'returns the stamps conclusion_activity with key: stamp.accept' do
+        expect(subject).to be_kind_of(PublicActivity::Activity)
+        expect(subject.trackable).to eq(instance)
+        expect(subject.key).to eq('stamp.accept')
+      end
+    end
+  end
+
   describe 'activities' do
     subject { instance }
 
