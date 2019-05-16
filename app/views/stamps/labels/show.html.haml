@@ -83,12 +83,13 @@
             = @stamp.upvote_power
             %i.hand.fitted.caret.down.big.red.icon
             = @stamp.downvote_power
-      .ui.large.top.right.attached.label{style: "margin: 0 !important;"}
-        (The requirements were:
-        = @stamp.activities.first.parameters['power_threshold']
-        voting power with an
-        = "#{@stamp.activities.first.parameters['majority_threshold']}%"
-        acceptance)
+      - if @stamp.conclusion_activity.present?
+        .ui.large.top.right.attached.label{style: "margin: 0 !important;"}
+          (The requirements were:
+          = @stamp.conclusion_activity.parameters['power_threshold']
+          voting power with an
+          = "#{@stamp.conclusion_activity.parameters['majority_threshold']}%"
+          acceptance)
       .ui.divider
         - @stamp.votes.order(power: :desc, accept: :desc).each do |vote|
           = link_to user_path(vote.user.id), class: %w[ui label].push(vote.upvote? ? 'green' : 'red') do
