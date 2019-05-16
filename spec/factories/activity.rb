@@ -32,10 +32,12 @@ FactoryBot.define do
     owner_type { 'System' }
     owner_id { -1 }
     key { 'stamp.accept' }
-    parameters {{
-      majority_threshold: 80,
-      power_threshold: 5
-    }}
+    parameters do
+      {
+        majority_threshold: 80,
+        power_threshold: 5
+      }
+    end
   end
 
   factory :vote_activity, parent: :activity do

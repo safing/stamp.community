@@ -389,18 +389,16 @@ RSpec.shared_examples 'a votable model' do |options|
     end
   end
 
-  describe '#conclusion_activity', focus: true do
+  describe '#conclusion_activity' do
     subject { instance.conclusion_activity }
 
     context 'state is in_progress' do
-
       it 'returns nil' do
         expect(subject).to eq(nil)
       end
     end
 
     context 'state is accepted' do
-
       before do
         PublicActivity.with_tracking do
           instance.accept!
@@ -415,7 +413,6 @@ RSpec.shared_examples 'a votable model' do |options|
     end
 
     context 'state is denied' do
-
       before do
         PublicActivity.with_tracking do
           instance.deny!
@@ -430,7 +427,6 @@ RSpec.shared_examples 'a votable model' do |options|
     end
 
     context 'state is disputed' do
-
       before do
         PublicActivity.with_tracking do
           instance.dispute!
@@ -445,7 +441,6 @@ RSpec.shared_examples 'a votable model' do |options|
     end
 
     context 'state is archived' do
-
       before do
         PublicActivity.with_tracking do
           instance.accept!
