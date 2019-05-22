@@ -3,6 +3,7 @@ RSpec.shared_examples 'a votable model' do |options|
 
   describe 'relations' do
     it { is_expected.to have_many(:votes) }
+    it { is_expected.to have_many(:activities).class_name('PublicActivity::Activity') }
   end
 
   describe 'database' do
@@ -63,7 +64,10 @@ RSpec.shared_examples 'a votable model' do |options|
     describe '#accept!' do
       subject { instance.accept! }
       let(:state) { :in_progress }
-      include_examples 'set threshold metrics of transition'
+
+      include_context 'stubbed conclusion ENVs'
+      include_context 'stubbed rewardable ENVs'
+      include_examples 'notify creator of transition', transition: :accept
 
       context 'stampable already has an accepted sibling' do
         it 'calls archive_accepted_siblings!' do
@@ -71,8 +75,6 @@ RSpec.shared_examples 'a votable model' do |options|
           subject
         end
       end
-
-      include_examples 'notify creator of transition', transition: :accept
 
       context 'with votes' do
         let(:instance) do
@@ -85,16 +87,17 @@ RSpec.shared_examples 'a votable model' do |options|
       it 'saves the threshold metrics in the transition activity' do
         subject
         activity = instance.transition_activity
-        expect(activity.parameters['majority_threshold']).to eq(80)
-        expect(activity.parameters['power_threshold']).to eq(5)
+        expect(activity.parameters['majority_threshold']).to eq(75)
+        expect(activity.parameters['power_threshold']).to eq(10)
       end
     end
 
     describe '#deny!' do
       subject { instance.deny! }
       let(:state) { :in_progress }
-      include_examples 'set threshold metrics of transition'
 
+      include_context 'stubbed conclusion ENVs'
+      include_context 'stubbed rewardable ENVs'
       include_examples 'notify creator of transition', transition: :deny
 
       context 'with votes' do
@@ -108,16 +111,17 @@ RSpec.shared_examples 'a votable model' do |options|
       it 'saves the threshold metrics in the transition activity' do
         subject
         activity = instance.transition_activity
-        expect(activity.parameters['majority_threshold']).to eq(80)
-        expect(activity.parameters['power_threshold']).to eq(5)
+        expect(activity.parameters['majority_threshold']).to eq(75)
+        expect(activity.parameters['power_threshold']).to eq(10)
       end
     end
 
     describe '#dispute!' do
       subject { instance.dispute! }
       let(:state) { :in_progress }
-      include_examples 'set threshold metrics of transition'
 
+      include_context 'stubbed conclusion ENVs'
+      include_context 'stubbed rewardable ENVs'
       include_examples 'notify creator of transition', transition: :dispute
 
       context 'with votes' do
@@ -131,8 +135,8 @@ RSpec.shared_examples 'a votable model' do |options|
       it 'saves the threshold metrics in the transition activity' do
         subject
         activity = instance.transition_activity
-        expect(activity.parameters['majority_threshold']).to eq(80)
-        expect(activity.parameters['power_threshold']).to eq(5)
+        expect(activity.parameters['majority_threshold']).to eq(75)
+        expect(activity.parameters['power_threshold']).to eq(10)
       end
     end
 
@@ -150,7 +154,7 @@ RSpec.shared_examples 'a votable model' do |options|
         include_examples 'do not notify voters of transition', transition: :archive
       end
 
-      it 'have not parameters' do
+      it 'does not save any parameters' do
         subject
         activity = instance.transition_activity
         expect(activity.parameters).to eq({})
@@ -182,6 +186,8 @@ RSpec.shared_examples 'a votable model' do |options|
 
   describe '#concludable?' do
     subject { instance.concludable? }
+
+    include_context 'stubbed conclusion ENVs'
 
     before do
       allow(instance).to receive(:total_power).and_return(total_power)
@@ -228,7 +234,7 @@ RSpec.shared_examples 'a votable model' do |options|
       end
 
       context 'majority_size equals majority_threshold' do
-        let(:majority_size) { 100 }
+        let(:majority_size) { 75 }
 
         it 'returns true' do
           expect(subject).to be true
@@ -236,7 +242,7 @@ RSpec.shared_examples 'a votable model' do |options|
       end
 
       context 'majority_size is above majority_threshold' do
-        let(:majority_size) { 100 }
+        let(:majority_size) { 80 }
 
         it 'returns true' do
           expect(subject).to be true
@@ -256,7 +262,7 @@ RSpec.shared_examples 'a votable model' do |options|
       end
 
       context 'majority_size equals majority_threshold' do
-        let(:majority_size) { 100 }
+        let(:majority_size) { 75 }
 
         it 'returns true' do
           expect(subject).to be true
@@ -264,7 +270,7 @@ RSpec.shared_examples 'a votable model' do |options|
       end
 
       context 'majority_size is above majority_threshold' do
-        let(:majority_size) { 100 }
+        let(:majority_size) { 80 }
 
         it 'returns true' do
           expect(subject).to be true
