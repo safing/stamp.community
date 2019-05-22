@@ -17,7 +17,7 @@ RSpec.describe UserPolicy do
     it { is_expected.to permit_action(:show) }
 
     context 'updating himself' do
-      let(:user) { targeted_user }
+      let(:targeted_user) { user }
       it { is_expected.to permit_edit_and_update_actions }
     end
 
@@ -33,7 +33,7 @@ RSpec.describe UserPolicy do
     it { is_expected.to permit_action(:show) }
 
     context 'updating himself' do
-      let(:user) { targeted_user }
+      let(:targeted_user) { user }
       it { is_expected.to permit_edit_and_update_actions }
     end
 
@@ -47,6 +47,14 @@ RSpec.describe UserPolicy do
 
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
-    it { is_expected.to permit_edit_and_update_actions }
+
+    context 'updating himself' do
+      let(:targeted_user) { user }
+      it { is_expected.to permit_edit_and_update_actions }
+    end
+
+    context 'updating another user' do
+      it { is_expected.to permit_edit_and_update_actions }
+    end
   end
 end
