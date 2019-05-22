@@ -29,9 +29,18 @@
       = @user.username
 
     %div.ui.divider
-    %p
-      The user description will be coming - whenever 🤷🏼‍♂️.
-      It was not part of the MVP 😅
+    .ui.basic.segment
+      - if params[:action] == "edit"
+        = render partial: "users/partials/edit_description"
+      - else
+        - if @user.description == nil
+          Hey add some discription
+        - else
+          = @user.description
+        - if policy(@user).update?
+          .ui.top.right.attached.circular.label{style: "top: -11px;"}
+            = link_to edit_user_path(params[:id]) do
+              %i.pen.alternate.icon
   %div.three.wide.right.floated.column
     %div.ui.basic.segment
       %div.ui.relaxed.list
