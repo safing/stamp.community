@@ -44,23 +44,21 @@ module Votable
         before_transition in_progress: :accepted do |votable, _|
           votable.archive_accepted_siblings!
         end
+
         before_transition do |votable, transition|
-          if transition.event.in? %i[accept deny dispute]
           # set transition_activity so other methods can reference the current activity
-            votable.transition_activity = votable.create_system_activity(
-              key: votable.key_for(action: transition.event),
-              recipient: votable.stampable,
-              parameters: {
-                majority_threshold: ENVProxy.required_integer('VOTABLE_MAJORITY_THRESHOLD'),
-                power_threshold: ENVProxy.required_integer('VOTABLE_POWER_THRESHOLD')
-              }
-            )
-          else
-            votable.transition_activity = votable.create_system_activity(
-              key: votable.key_for(action: transition.event),
-              recipient: votable.stampable
-            )
-          end
+          votable.transition_activity = votable.create_system_activity(
+            key: votable.key_for(action: transition.event),
+            recipient: votable.stampable,
+            parameters: transition.event.in?(%i[accept deny dispute]) ? threshold_params : {}
+          )
+        end
+        
+        def threshold_params
+          {
+            majority_threshold: ENVProxy.required_integer('VOTABLE_MAJORITY_THRESHOLD'),
+            power_threshold: ENVProxy.required_integer('VOTABLE_POWER_THRESHOLD')
+          }
         end
       end
     end
