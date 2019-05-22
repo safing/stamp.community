@@ -1,5 +1,5 @@
 = form_for @user, url: user_path(params[:id]), html: {class: %w[ui form]} do |f|
   = f.text_area :description, type: "text"
-  = f.submit 'Save description', class: %w[ui purple basic button right floated]
-= link_to user_path(params[:id]), class: 'ui basic purple button battle-button' do
-  Back
+  = f.submit 'Save', class: %w[ui purple basic button right floated]
+  = link_to user_path(params[:id]), class: 'ui tertiary basic grey button right floated', style: 'margin-top: 0px !important;' do
+    Back
