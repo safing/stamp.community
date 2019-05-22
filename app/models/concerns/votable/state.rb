@@ -49,8 +49,16 @@ module Votable
           # set transition_activity so other methods can reference the current activity
           votable.transition_activity = votable.create_system_activity(
             key: votable.key_for(action: transition.event),
-            recipient: votable.stampable
+            recipient: votable.stampable,
+            parameters: transition.event.in?(%i[accept deny dispute]) ? threshold_params : {}
           )
+        end
+        
+        def threshold_params
+          {
+            majority_threshold: ENVProxy.required_integer('VOTABLE_MAJORITY_THRESHOLD'),
+            power_threshold: ENVProxy.required_integer('VOTABLE_POWER_THRESHOLD')
+          }
         end
       end
     end

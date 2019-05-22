@@ -3,6 +3,7 @@ RSpec.shared_examples 'a votable model' do |options|
 
   describe 'relations' do
     it { is_expected.to have_many(:votes) }
+    it { is_expected.to have_many(:activities).class_name('PublicActivity::Activity') }
   end
 
   describe 'database' do
@@ -64,14 +65,16 @@ RSpec.shared_examples 'a votable model' do |options|
       subject { instance.accept! }
       let(:state) { :in_progress }
 
+      include_context 'stubbed conclusion ENVs'
+      include_context 'stubbed rewardable ENVs'
+      include_examples 'notify creator of transition', transition: :accept
+
       context 'stampable already has an accepted sibling' do
         it 'calls archive_accepted_siblings!' do
           expect(instance).to receive(:archive_accepted_siblings!).and_return(true)
           subject
         end
       end
-
-      include_examples 'notify creator of transition', transition: :accept
 
       context 'with votes' do
         let(:instance) do
@@ -80,12 +83,21 @@ RSpec.shared_examples 'a votable model' do |options|
 
         include_examples 'notify voters of transition', transition: :accept
       end
+
+      it 'saves the threshold metrics in the transition activity' do
+        subject
+        activity = instance.transition_activity
+        expect(activity.parameters['majority_threshold']).to eq(75)
+        expect(activity.parameters['power_threshold']).to eq(10)
+      end
     end
 
     describe '#deny!' do
       subject { instance.deny! }
       let(:state) { :in_progress }
 
+      include_context 'stubbed conclusion ENVs'
+      include_context 'stubbed rewardable ENVs'
       include_examples 'notify creator of transition', transition: :deny
 
       context 'with votes' do
@@ -95,12 +107,21 @@ RSpec.shared_examples 'a votable model' do |options|
 
         include_examples 'notify voters of transition', transition: :deny
       end
+
+      it 'saves the threshold metrics in the transition activity' do
+        subject
+        activity = instance.transition_activity
+        expect(activity.parameters['majority_threshold']).to eq(75)
+        expect(activity.parameters['power_threshold']).to eq(10)
+      end
     end
 
     describe '#dispute!' do
       subject { instance.dispute! }
       let(:state) { :in_progress }
 
+      include_context 'stubbed conclusion ENVs'
+      include_context 'stubbed rewardable ENVs'
       include_examples 'notify creator of transition', transition: :dispute
 
       context 'with votes' do
@@ -109,6 +130,13 @@ RSpec.shared_examples 'a votable model' do |options|
         end
 
         include_examples 'notify voters of transition', transition: :dispute
+      end
+
+      it 'saves the threshold metrics in the transition activity' do
+        subject
+        activity = instance.transition_activity
+        expect(activity.parameters['majority_threshold']).to eq(75)
+        expect(activity.parameters['power_threshold']).to eq(10)
       end
     end
 
@@ -124,6 +152,12 @@ RSpec.shared_examples 'a votable model' do |options|
         end
 
         include_examples 'do not notify voters of transition', transition: :archive
+      end
+
+      it 'does not save any parameters' do
+        subject
+        activity = instance.transition_activity
+        expect(activity.parameters).to eq({})
       end
     end
 
@@ -153,10 +187,9 @@ RSpec.shared_examples 'a votable model' do |options|
   describe '#concludable?' do
     subject { instance.concludable? }
 
+    include_context 'stubbed conclusion ENVs'
+
     before do
-      allow_required_integer_env('STAMP_CONCLUDE_IN_HOURS').and_return(48)
-      allow_required_integer_env('VOTABLE_POWER_THRESHOLD').and_return(10)
-      allow_required_integer_env('VOTABLE_MAJORITY_THRESHOLD').and_return(75)
       allow(instance).to receive(:total_power).and_return(total_power)
       allow(instance).to receive(:majority_size).and_return(majority_size)
     end
@@ -358,6 +391,73 @@ RSpec.shared_examples 'a votable model' do |options|
           )
           subject
         end
+      end
+    end
+  end
+
+  describe '#conclusion_activity' do
+    subject { instance.conclusion_activity }
+
+    context 'state is in_progress' do
+      it 'returns nil' do
+        expect(subject).to eq(nil)
+      end
+    end
+
+    context 'state is accepted' do
+      before do
+        PublicActivity.with_tracking do
+          instance.accept!
+        end
+      end
+
+      it 'returns the stamps conclusion_activity with key: stamp.accept' do
+        expect(subject).to be_kind_of(PublicActivity::Activity)
+        expect(subject.trackable).to eq(instance)
+        expect(subject.key).to eq('stamp.accept')
+      end
+    end
+
+    context 'state is denied' do
+      before do
+        PublicActivity.with_tracking do
+          instance.deny!
+        end
+      end
+
+      it 'returns the stamps conclusion_activity with key: stamp.deny' do
+        expect(subject).to be_kind_of(PublicActivity::Activity)
+        expect(subject.trackable).to eq(instance)
+        expect(subject.key).to eq('stamp.deny')
+      end
+    end
+
+    context 'state is disputed' do
+      before do
+        PublicActivity.with_tracking do
+          instance.dispute!
+        end
+      end
+
+      it 'returns the stamps conclusion_activity with key: stamp.dispute' do
+        expect(subject).to be_kind_of(PublicActivity::Activity)
+        expect(subject.trackable).to eq(instance)
+        expect(subject.key).to eq('stamp.dispute')
+      end
+    end
+
+    context 'state is archived' do
+      before do
+        PublicActivity.with_tracking do
+          instance.accept!
+          instance.archive!
+        end
+      end
+
+      it 'returns the stamps conclusion_activity with key: stamp.accept' do
+        expect(subject).to be_kind_of(PublicActivity::Activity)
+        expect(subject.trackable).to eq(instance)
+        expect(subject.key).to eq('stamp.accept')
       end
     end
   end

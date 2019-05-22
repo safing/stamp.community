@@ -38,6 +38,12 @@ FactoryBot.define do
         stamp.activities << FactoryBot.create(:stamp_activity, trackable: stamp)
       end
     end
+
+    trait :with_accept_activity do
+      after(:create) do |stamp, _|
+        stamp.activities << FactoryBot.create(:transition_activity, trackable: stamp)
+      end
+    end
   end
 
   factory :label_stamp, class: Stamp::Label, parent: :stamp do
