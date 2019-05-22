@@ -69,4 +69,4 @@
       = link_to new_label_stamp_path(domain_name: @stamp.domain.name) do
         %button.ui.purple.basic.big.button
           Add Stamp
-= render partial: 'stamps/partials/results', locals: { stamp: @stamp }
+= render partial: 'stamps/partials/results', locals: { stamp: @stamp } unless @stamp.in_progress?
