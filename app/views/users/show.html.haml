@@ -30,10 +30,10 @@
 
     %div.ui.divider
     .ui.basic.segment
-      - if params[:action] == "edit"
+      - if params[:action] == "edit" || params[:action] == "update"
         = render partial: "users/partials/edit_description"
       - else
-        - if @user.description == nil
+        - if @user.description.blank?
           Hey add some discription
         - else
           = @user.description
