@@ -15,6 +15,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-     admin? || user == targeted_user
+    admin? || user == targeted_user
   end
 end
