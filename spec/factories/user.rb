@@ -4,6 +4,7 @@ FactoryBot.define do
     username { Faker::Internet.user_name }
     password { Faker::Internet.password(12, 30) }
     reputation { Faker::Number.between(-10, 20_000) }
+    description { nil }
 
     confirmed_at { 2.minutes.ago }
     confirmation_sent_at { 5.minutes.ago }
@@ -40,6 +41,10 @@ FactoryBot.define do
         user.notifications << FactoryBot.build_list(:notification, 2, :unread, recipient: user)
         user.save
       end
+    end
+
+    trait :with_description do
+      description { Faker::Lorem.paragraph }
     end
   end
 
