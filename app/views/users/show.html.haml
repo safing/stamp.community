@@ -34,7 +34,8 @@
         = render partial: "users/partials/edit_description"
       - else
         - if @user.description.blank?
-          Hey add some discription
+          %span.ui.grey.text
+            This user remains an enigma - and probably just wants to intrigue you.
         - else
           = @user.description
         - if policy(@user).update?
