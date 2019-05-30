@@ -23,6 +23,7 @@ RSpec.describe 'users/show.html.haml', type: :view do
 
   context 'user has description' do
     let(:user) { FactoryBot.create(:user, :with_description) }
+
     it 'shows user description' do
       expect(rendered).to have_content(user.description)
     end
