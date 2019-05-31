@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # rubocop:enable LineLength
   resources :labels, only: %i[show index]
   resources :licences, only: %i[show index]
-  resources :users, only: %i[show index]
+  resources :users, only: %i[show index edit update]
 
   # neat patterns for different Stamp::TYPES =>
   #  Prefix                URI Pattern                       Controller#Action

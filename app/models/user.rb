@@ -5,6 +5,7 @@ class User < ApplicationRecord
   include Relations
 
   validates_presence_of %i[role username]
+  validates :description, length: { maximum: 300 }
 
   devise :confirmable, :database_authenticatable, :registerable, :recoverable,
          :rememberable, :validatable
