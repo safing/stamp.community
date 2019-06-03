@@ -38,9 +38,9 @@
             This user remains an enigma - and probably just wants to intrigue you.
         - else
           = @user.description
-        - if user_signed_in? && policy(@user).update?
+        - if policy(@user).update?
           .ui.top.right.attached.circular.label{style: "top: -11px;"}
-            = link_to edit_user_path(params[:id]) do
+            = link_to edit_user_path(@user.id) do
               %i.pen.alternate.blue.icon
   %div.three.wide.right.floated.column
     %div.ui.basic.segment
