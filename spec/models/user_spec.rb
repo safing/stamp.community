@@ -19,6 +19,16 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_length_of(:description).is_at_most(300) }
   end
 
+  describe 'fields' do
+    let(:user) { User.new }
+
+    it '#flag_stamps is set by default, has getter and setter' do
+      expect(user.flag_stamps).to be false
+      user.flag_stamps = true
+      expect(user.flag_stamps).to be true
+    end
+  end
+
   describe '#voting_power' do
     subject { user.voting_power }
     let(:user) { FactoryBot.create(:user, reputation: reputation) }
