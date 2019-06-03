@@ -67,4 +67,39 @@ RSpec.describe UserPolicy do
       it { is_expected.to forbid_edit_and_update_actions }
     end
   end
+
+  describe '#permitted_attributes' do
+    subject { policy.permitted_attributes }
+
+    let(:policy) { UserPolicy.new(user, targeted_user) }
+    let(:user) { FactoryBot.create(:user) }
+
+    context 'targeted_user is current user' do
+      let(:targeted_user) { user }
+
+      context 'user can view_flag_stamps?' do
+        before { expect(policy).to receive(:view_flag_stamps?).and_return(true) }
+
+        it 'returns [:description, :flag_stamps]' do
+          expect(subject).to eq([:description, :flag_stamps])
+        end
+      end
+
+      context 'user cannot view_flag_stamps?' do
+        before { expect(policy).to receive(:view_flag_stamps?).and_return(false) }
+
+        it 'returns [:description]' do
+          expect(subject).to eq([:description])
+        end
+      end
+    end
+
+    context 'targeted_user is another user' do
+      let(:targeted_user) { user }
+
+      it 'returns [:description]' do
+        expect(subject).to eq([:description])
+      end
+    end
+  end
 end

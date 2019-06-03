@@ -17,16 +17,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize(@user)
 
-    if @user.update(user_params)
+    if @user.update(permitted_attributes(@user))
       redirect_to user_path(@user)
     else
       render action: 'show'
     end
-  end
-
-  private
-
-  def user_params
-    params.require(:user).permit(:description)
   end
 end

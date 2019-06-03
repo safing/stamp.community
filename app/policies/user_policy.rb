@@ -6,6 +6,14 @@ class UserPolicy < ApplicationPolicy
     @targeted_user = targeted_user
   end
 
+  def permitted_attributes
+    if user == targeted_user && view_flag_stamps?
+      [:description, :flag_stamps]
+    else
+      [:description]
+    end
+  end
+
   def create?
     false
   end
