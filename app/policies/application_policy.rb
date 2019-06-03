@@ -34,6 +34,10 @@ class ApplicationPolicy
     false
   end
 
+  def view_flag_stamps?
+    admin? && user.flag_stamps
+  end
+
   def scope
     Pundit.policy_scope!(user, record.class)
   end

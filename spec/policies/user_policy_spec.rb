@@ -8,7 +8,6 @@ RSpec.describe UserPolicy do
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
     it { is_expected.to forbid_edit_and_update_actions }
-    it { is_expected.to forbid_action(:view_flag_stamps) }
     it { is_expected.to forbid_action(:update_config) }
   end
 
@@ -17,7 +16,6 @@ RSpec.describe UserPolicy do
 
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
-    it { is_expected.to forbid_action(:view_flag_stamps) }
 
     context 'updating himself' do
       let(:targeted_user) { user }
@@ -36,7 +34,6 @@ RSpec.describe UserPolicy do
 
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
-    it { is_expected.to forbid_action(:view_flag_stamps) }
 
     context 'updating himself' do
       let(:targeted_user) { user }
@@ -72,16 +69,6 @@ RSpec.describe UserPolicy do
 
       it { is_expected.to forbid_edit_and_update_actions }
       it { is_expected.to forbid_action(:update_config) }
-    end
-
-    context 'admin has set his config#flag_stamps to false' do
-      it { is_expected.to forbid_action(:view_flag_stamps) }
-    end
-
-    context 'admin has set his config#flag_stamps to true' do
-      let(:user) { FactoryBot.create(:admin, flag_stamps: true) }
-
-      it { is_expected.to permit_action(:view_flag_stamps) }
     end
   end
 

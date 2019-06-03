@@ -31,8 +31,4 @@ class UserPolicy < ApplicationPolicy
   def update_config?
     admin? && user == targeted_user
   end
-
-  def view_flag_stamps?
-    admin? && user.flag_stamps
-  end
 end
