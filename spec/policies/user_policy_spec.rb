@@ -8,6 +8,7 @@ RSpec.describe UserPolicy do
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
     it { is_expected.to forbid_edit_and_update_actions }
+    it { is_expected.to forbid_action(:view_flag_stamps) }
   end
 
   context 'for a user' do
@@ -15,6 +16,7 @@ RSpec.describe UserPolicy do
 
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_action(:view_flag_stamps) }
 
     context 'updating himself' do
       let(:targeted_user) { user }
@@ -31,6 +33,7 @@ RSpec.describe UserPolicy do
 
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
+    it { is_expected.to forbid_action(:view_flag_stamps) }
 
     context 'updating himself' do
       let(:targeted_user) { user }
@@ -47,6 +50,7 @@ RSpec.describe UserPolicy do
 
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
+    it { is_expected.to permit_action(:view_flag_stamps) }
 
     context 'updating himself' do
       let(:targeted_user) { user }
