@@ -34,7 +34,7 @@ class ApplicationPolicy
     false
   end
 
-  def view_flag_stamps?
+  def access_flag_stamps?
     admin? && user.flag_stamps
   end
 
