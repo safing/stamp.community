@@ -14,12 +14,22 @@ RSpec.feature 'app requests', type: :request do
 
       context 'role: moderator' do
         include_context 'login moderator'
-        include_examples 'status code', 200
+        include_examples 'status code', 401
       end
 
       context 'role: admin' do
+        let(:admin) { FactoryBot.create(:admin, flag_stamps: flag_stamps) }
         include_context 'login admin'
-        include_examples 'status code', 200
+
+        context 'admin has set #flag_stamps to true' do
+          let(:flag_stamps) { true }
+          include_examples 'status code', 200
+        end
+
+        context 'admin has set #flag_stamps to true' do
+          let(:flag_stamps) { false }
+          include_examples 'status code', 401
+        end
       end
     end
 
@@ -40,12 +50,22 @@ RSpec.feature 'app requests', type: :request do
 
       context 'role: moderator' do
         include_context 'login moderator'
-        include_examples 'status code', 302
+        include_examples 'status code', 401
       end
 
       context 'role: admin' do
+        let(:admin) { FactoryBot.create(:admin, flag_stamps: flag_stamps) }
         include_context 'login admin'
-        include_examples 'status code', 302
+
+        context 'admin has set #flag_stamps to true' do
+          let(:flag_stamps) { true }
+          include_examples 'status code', 302
+        end
+
+        context 'admin has set #flag_stamps to true' do
+          let(:flag_stamps) { false }
+          include_examples 'status code', 401
+        end
       end
     end
 
@@ -56,22 +76,32 @@ RSpec.feature 'app requests', type: :request do
       let(:some_app) { FactoryBot.create(:app) }
 
       context 'role: guest' do
-        include_examples 'status code', 200
+        include_examples 'status code', 401
       end
 
       context 'role: user' do
         include_context 'login user'
-        include_examples 'status code', 200
+        include_examples 'status code', 401
       end
 
       context 'role: moderator' do
         include_context 'login moderator'
-        include_examples 'status code', 200
+        include_examples 'status code', 401
       end
 
       context 'role: admin' do
+        let(:admin) { FactoryBot.create(:admin, flag_stamps: flag_stamps) }
         include_context 'login admin'
-        include_examples 'status code', 200
+
+        context 'admin has set #flag_stamps to true' do
+          let(:flag_stamps) { true }
+          include_examples 'status code', 200
+        end
+
+        context 'admin has set #flag_stamps to true' do
+          let(:flag_stamps) { false }
+          include_examples 'status code', 401
+        end
       end
     end
   end
@@ -79,9 +109,12 @@ RSpec.feature 'app requests', type: :request do
   describe 'activities' do
     describe '#create' do
       subject(:request) { post apps_url, params: { app: app_attributes } }
+
+      let(:admin) { FactoryBot.create(:admin, flag_stamps: true) }
       let(:app_attributes) do
         FactoryBot.attributes_with_foreign_keys_for(:app)
       end
+
       include_context 'login admin'
 
       it "creates an 'app.create' activity with {owner: current_user}" do

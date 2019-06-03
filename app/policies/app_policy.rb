@@ -7,14 +7,14 @@ class AppPolicy < ApplicationPolicy
   end
 
   def create?
-    moderator?
+    access_flag_stamps?
   end
 
   def show?
-    true
+    access_flag_stamps?
   end
 
   def update?
-    moderator?
+    access_flag_stamps?
   end
 end
