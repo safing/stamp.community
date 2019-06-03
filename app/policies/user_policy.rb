@@ -7,7 +7,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if user == targeted_user && view_flag_stamps?
+    if update_config?
       [:description, :flag_stamps]
     else
       [:description]
@@ -28,7 +28,11 @@ class UserPolicy < ApplicationPolicy
     user == targeted_user || admin? && !targeted_user.admin?
   end
 
+  def update_config?
+    admin? && user == targeted_user
+  end
+
   def view_flag_stamps?
-    admin?
+    admin? && user.flag_stamps
   end
 end
