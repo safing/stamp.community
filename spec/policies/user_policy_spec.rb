@@ -60,5 +60,11 @@ RSpec.describe UserPolicy do
     context 'updating another user' do
       it { is_expected.to permit_edit_and_update_actions }
     end
+
+    context 'updating another admin' do
+      let(:targeted_user) { FactoryBot.create(:admin) }
+
+      it { is_expected.to forbid_edit_and_update_actions }
+    end
   end
 end

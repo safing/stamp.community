@@ -15,7 +15,9 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    admin? || user == targeted_user
+    # always allow edits on themselves
+    # OR allow admins all edits except when target is admin too
+    user == targeted_user || admin? && !targeted_user.admin?
   end
 
   def view_flag_stamps?
