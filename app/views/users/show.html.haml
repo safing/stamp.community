@@ -31,7 +31,7 @@
     %div.ui.divider
     .ui.basic.segment
       - if params[:action] == "edit" || params[:action] == "update"
-        = render partial: "users/partials/edit_description"
+        = render partial: "users/form"
       - else
         - if @user.description.blank?
           %span.ui.grey.text
