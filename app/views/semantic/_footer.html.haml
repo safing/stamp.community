@@ -5,7 +5,7 @@
       - if user_signed_in?
         .ui.list
           = link_to 'All Domains', domains_path, class: 'item'
-          = link_to 'All Apps', apps_path, class: 'item'
+          = link_to 'All Apps', apps_path, class: 'item' if policy(App).index?
     .ui.two.wide.column
       %a{class: 'item img_item', href: '/'}
         %img{src: '/assets/basic_logo.png'}

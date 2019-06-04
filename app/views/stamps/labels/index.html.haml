@@ -5,6 +5,7 @@
   %div.eight.wide.column
     - @recent_label_stamps.each do |label_stamp|
       = render 'stamps/labels/partials/label_stamp', header: true, stamp: label_stamp
-  %div.eight.wide.column
-    - @recent_flag_stamps.each do |flag_stamp|
-      = render 'stamps/flags/partials/flag_stamp', header: true, operating_system: true, show_stamp: true, stamp: flag_stamp
+  - if policy(Stamp).access_flag_stamps?
+    %div.eight.wide.column
+      - @recent_flag_stamps.each do |flag_stamp|
+        = render 'stamps/flags/partials/flag_stamp', header: true, operating_system: true, show_stamp: true, stamp: flag_stamp
