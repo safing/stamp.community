@@ -6,6 +6,10 @@ class AppPolicy < ApplicationPolicy
     @app = app
   end
 
+  def index?
+    access_flag_stamps?
+  end
+
   def create?
     access_flag_stamps?
   end

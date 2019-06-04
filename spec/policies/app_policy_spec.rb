@@ -5,6 +5,7 @@ RSpec.describe AppPolicy do
   context 'for a visitor' do
     let(:user) { nil }
 
+    it { is_expected.to forbid_action(:index) }
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to forbid_action(:show) }
     it { is_expected.to forbid_edit_and_update_actions }
@@ -13,6 +14,7 @@ RSpec.describe AppPolicy do
   context 'for a user' do
     let(:user) { FactoryBot.create(:user) }
 
+    it { is_expected.to forbid_action(:index) }
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to forbid_action(:show) }
     it { is_expected.to forbid_edit_and_update_actions }
@@ -21,6 +23,7 @@ RSpec.describe AppPolicy do
   context 'for a moderator' do
     let(:user) { FactoryBot.create(:moderator) }
 
+    it { is_expected.to forbid_action(:index) }
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to forbid_action(:show) }
     it { is_expected.to forbid_edit_and_update_actions }
@@ -33,6 +36,7 @@ RSpec.describe AppPolicy do
     it { is_expected.to forbid_edit_and_update_actions }
 
     context 'admin has set his config#flag_stamps to false' do
+      it { is_expected.to forbid_action(:index) }
       it { is_expected.to forbid_new_and_create_actions }
       it { is_expected.to forbid_action(:show) }
     end
@@ -40,6 +44,7 @@ RSpec.describe AppPolicy do
     context 'admin has set his config#flag_stamps to true' do
       let(:flag_stamps) { true }
 
+      it { is_expected.to permit_action(:index) }
       it { is_expected.to permit_new_and_create_actions }
       it { is_expected.to permit_action(:show) }
     end
