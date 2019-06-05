@@ -25,6 +25,7 @@ class AppsController < ApplicationController
 
   def index
     @apps = App.all
+    authorize(App)
   end
 
   private

@@ -1,5 +1,12 @@
 = form_for @user, url: user_path(params[:id]), html: {class: %w[ui form]} do |f|
-  = f.text_area :description, type: "text"
+  .field
+    = f.label :description, 'Description'
+    = f.text_area :description, type: "text", rows: 5
+  - if policy(@user).update_config?
+    .field
+      .ui.toggle.checkbox
+        = f.check_box :flag_stamps, class: 'hidden'
+        = f.label :flag_stamps, 'Activate Flag Stamps UI'
   = f.submit 'Save', class: %w[ui purple basic button right floated]
   = link_to user_path(params[:id]), class: 'ui tertiary basic grey button right floated', style: 'margin-top: 0px !important;' do
     Back

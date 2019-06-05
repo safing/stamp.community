@@ -101,17 +101,13 @@ RSpec.feature 'user requests', type: :request do
     subject(:request) { patch user_path(id: user.id), params: { user: user_attributes } }
 
     let(:user) { FactoryBot.create(:user) }
-    let!(:hold_user) { user.dup }
     let(:user_attributes) { FactoryBot.attributes_for(:user, :with_description) }
 
-    include_context 'login admin'
+    include_context 'login user'
 
-    it 'only updates the users description' do
+    it 'calls UserPolicy#permitted_attributes' do
+      expect_any_instance_of(UserPolicy).to receive(:permitted_attributes).and_call_original
       request
-      user.reload
-      expect(user.username).to eq(hold_user.username)
-      expect(user.description).not_to eq(hold_user.username)
-      expect(user.description).to eq(user_attributes[:description])
     end
   end
 end

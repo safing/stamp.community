@@ -1,10 +1,17 @@
 RSpec.describe 'users/show.html.haml', type: :view do
-  let(:user) { FactoryBot.create(:user) }
+  let(:targeted_user) { FactoryBot.create(:user) }
+  let(:current_user) { nil }
 
   def rendered
-    assign(:user, user)
+    assign(:user, targeted_user)
     render
     super
+  end
+
+  before do
+    without_partial_double_verification do
+      allow(view).to receive(:policy).and_return(UserPolicy.new(current_user, targeted_user))
+    end
   end
 
   it 'shows the boosts segment' do
@@ -12,20 +19,20 @@ RSpec.describe 'users/show.html.haml', type: :view do
   end
 
   context 'user has boosts' do
-    let(:user) { FactoryBot.create(:user, :with_boosts) }
+    let(:targeted_user) { FactoryBot.create(:user, :with_boosts) }
 
     it 'shows user boosts' do
-      user.boosts.each do |boost|
+      targeted_user.boosts.each do |boost|
         expect(rendered).to have_content(boost.reputation)
       end
     end
   end
 
   context 'user has description' do
-    let(:user) { FactoryBot.create(:user, :with_description) }
+    let(:targeted_user) { FactoryBot.create(:user, :with_description) }
 
     it 'shows user description' do
-      expect(rendered).to have_content(user.description)
+      expect(rendered).to have_content(targeted_user.description)
     end
   end
 
@@ -40,10 +47,10 @@ RSpec.describe 'users/show.html.haml', type: :view do
   end
 
   context 'user has activities' do
-    let(:user) { FactoryBot.create(:user, :with_activities) }
+    let(:targeted_user) { FactoryBot.create(:user, :with_activities) }
 
     it 'shows user activity' do
-      user.activities.each do |activity|
+      targeted_user.activities.each do |activity|
         expect(rendered).to render_template(partial: "activities/_#{activity.key}")
       end
     end
@@ -52,6 +59,21 @@ RSpec.describe 'users/show.html.haml', type: :view do
   context 'user has no activities' do
     it 'shows a motivational text' do
       expect(rendered).to have_content('Hey maybe do something more for your activities!')
+    end
+  end
+
+  context 'user is not logged in' do
+    it 'shows the edit button' do
+      expect(rendered).not_to have_css('.pen.blue.icon')
+    end
+  end
+
+  context 'user is logged in' do
+    # log in is mocked via setting current_user of UserPolicy
+    let(:current_user) { targeted_user }
+
+    it 'shows the edit button' do
+      expect(rendered).to have_css('.pen.blue.icon')
     end
   end
 end

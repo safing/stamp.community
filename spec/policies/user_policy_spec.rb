@@ -8,6 +8,7 @@ RSpec.describe UserPolicy do
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
     it { is_expected.to forbid_edit_and_update_actions }
+    it { is_expected.to forbid_action(:update_config) }
   end
 
   context 'for a user' do
@@ -19,10 +20,12 @@ RSpec.describe UserPolicy do
     context 'updating himself' do
       let(:targeted_user) { user }
       it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to forbid_action(:update_config) }
     end
 
     context 'updating another user' do
       it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:update_config) }
     end
   end
 
@@ -35,10 +38,12 @@ RSpec.describe UserPolicy do
     context 'updating himself' do
       let(:targeted_user) { user }
       it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to forbid_action(:update_config) }
     end
 
     context 'updating another user' do
       it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:update_config) }
     end
   end
 
@@ -51,10 +56,40 @@ RSpec.describe UserPolicy do
     context 'updating himself' do
       let(:targeted_user) { user }
       it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to permit_action(:update_config) }
     end
 
     context 'updating another user' do
       it { is_expected.to permit_edit_and_update_actions }
+      it { is_expected.to forbid_action(:update_config) }
+    end
+
+    context 'updating another admin' do
+      let(:targeted_user) { FactoryBot.create(:admin) }
+
+      it { is_expected.to forbid_edit_and_update_actions }
+      it { is_expected.to forbid_action(:update_config) }
+    end
+  end
+
+  describe '#permitted_attributes' do
+    subject { policy.permitted_attributes }
+    let(:policy) { UserPolicy.new(User.new, User.new) }
+
+    context 'user can update_config?' do
+      before { expect(policy).to receive(:update_config?).and_return(true) }
+
+      it 'returns [:description, :flag_stamps]' do
+        expect(subject).to eq([:description, :flag_stamps])
+      end
+    end
+
+    context 'user cannot update_config?' do
+      before { expect(policy).to receive(:update_config?).and_return(false) }
+
+      it 'returns [:description]' do
+        expect(subject).to eq([:description])
+      end
     end
   end
 end

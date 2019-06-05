@@ -6,15 +6,19 @@ class AppPolicy < ApplicationPolicy
     @app = app
   end
 
+  def index?
+    access_flag_stamps?
+  end
+
   def create?
-    moderator?
+    access_flag_stamps?
   end
 
   def show?
-    true
+    access_flag_stamps?
   end
 
   def update?
-    moderator?
+    access_flag_stamps?
   end
 end

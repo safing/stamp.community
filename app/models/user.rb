@@ -10,6 +10,8 @@ class User < ApplicationRecord
   devise :confirmable, :database_authenticatable, :registerable, :recoverable,
          :rememberable, :validatable
 
+  jsonb_accessor :config, flag_stamps: [:boolean, default: false]
+
   def voting_power
     reputation <= 0 ? 0 : reputation.log10_power
   end

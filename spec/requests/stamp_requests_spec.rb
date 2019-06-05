@@ -109,10 +109,11 @@ RSpec.feature 'stamp requests', type: :request do
     end
 
     describe 'Stamp::Flag#create' do
-      include_context 'login user'
+      include_context 'login admin'
 
       subject(:request) { post(flag_stamp_index_url, params: { flag_stamp: stamp_attributes }) }
 
+      let(:admin) { FactoryBot.create(:admin, flag_stamps: true) }
       # IMPORTANT: 'app' as a variable name will remove all path helpers
       let(:some_app) { FactoryBot.create(:app) }
       let(:stamp_attributes) do

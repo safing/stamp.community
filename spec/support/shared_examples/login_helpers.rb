@@ -17,9 +17,9 @@ RSpec.shared_context 'login user' do
 end
 
 RSpec.shared_context 'login moderator' do
-  before { sign_in(FactoryBot.create(:moderator)) }
+  before { sign_in(defined?(moderator) ? moderator : FactoryBot.create(:moderator)) }
 end
 
 RSpec.shared_context 'login admin' do
-  before { sign_in(FactoryBot.create(:admin)) }
+  before { sign_in(defined?(admin) ? admin : FactoryBot.create(:admin)) }
 end
