@@ -5,18 +5,18 @@ RSpec.feature 'user requests', type: :request do
       let(:targeted_user) { FactoryBot.create(:user) }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'targeted user is random user' do
         context 'role: user' do
           include_context 'login user'
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'role: moderator' do
           include_context 'login moderator'
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'role: admin' do
@@ -54,18 +54,18 @@ RSpec.feature 'user requests', type: :request do
       let(:user_attributes) { FactoryBot.attributes_for(:user) }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'targeted user is random user' do
         context 'role: user' do
           include_context 'login user'
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'role: moderator' do
           include_context 'login moderator'
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'role: admin' do

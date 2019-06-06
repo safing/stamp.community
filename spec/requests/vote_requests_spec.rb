@@ -7,7 +7,7 @@ RSpec.feature 'vote requests', type: :request do
       let(:vote_attributes) { { vote: { accept: true } } }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do
@@ -20,22 +20,22 @@ RSpec.feature 'vote requests', type: :request do
 
         context 'state is :accepted' do
           let(:state) { :accepted }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'state is :archived' do
           let(:state) { :archived }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'state is :denied' do
           let(:state) { :denied }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'state is :disputed' do
           let(:state) { :disputed }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
       end
 

@@ -4,7 +4,7 @@ RSpec.feature 'notification requests', type: :request do
       subject(:request) { post read_all_notifications_url, xhr: true }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do

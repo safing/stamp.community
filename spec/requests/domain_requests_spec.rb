@@ -4,7 +4,7 @@ RSpec.feature 'domain requests', type: :request do
       subject(:request) { get new_domain_url }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do

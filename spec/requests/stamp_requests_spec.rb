@@ -5,7 +5,7 @@ RSpec.feature 'stamp requests', type: :request do
       let(:domain) { FactoryBot.create(:domain) }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do
@@ -36,7 +36,7 @@ RSpec.feature 'stamp requests', type: :request do
       end
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do
