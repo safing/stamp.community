@@ -1,0 +1,16 @@
+= form_for @label, html: {class: %w[ui form]} do |f|
+  - if policy(@label).create?
+    .field
+      = f.label :name, 'Name'
+      = f.text_field :name, type: "text"
+  .field
+    = f.label :description, 'Description'
+    = f.text_area :description, type: "text", rows: 5
+  - if policy(@label).create?
+    .field
+      = f.label :licence_id, 'Licence'
+      = f.collection_select :licence_id, Licence.order(:name), :id, :name, prompt: true
+    .field
+      = f.label :parent_id, 'Parent'
+      = f.collection_select :parent_id, Label.parent_labels.order(:name), :id, :name, include_blank: "is a parent"
+  = f.submit 'Save', class: %w[ui purple basic button right floated]

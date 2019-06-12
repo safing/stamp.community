@@ -13,3 +13,6 @@
         %tr{ onclick: "location.href='#{label_path(child)}'"}
           %td= child.name
           %td= child.description
+- if policy(@parents).create?
+  = link_to new_label_path do
+    new

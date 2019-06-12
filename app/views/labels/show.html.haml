@@ -4,6 +4,9 @@
   %h2= @label.name
 %div.eleven.wide.column
   %p= @label.description
+  - if policy(@label).edit?
+    = link_to edit_label_path(@label.id) do
+      edit
 %div.eight.wide.column
   %table.ui.celled.table
     %thead
@@ -38,3 +41,4 @@
           %td
             = image_tag 'stamp_j3rik0_no_text_icon', class: 'ss'
             = contributor.count
+= link_to 'All Labels', labels_path

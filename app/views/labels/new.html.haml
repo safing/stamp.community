@@ -1,0 +1,9 @@
+- content_for :container_class, 'middle aligned centered grid'
+- content_for :container_style, 'height: 70%;'
+
+%div.four.wide.column
+  = render 'partials/errors', object: @label, attached: true
+  %div.ui.segment{style: 'margin: 0;'}
+    = render partial: "labels/partials/label_form"
+    = link_to :back do
+      back

@@ -10,6 +10,8 @@ class Label < ApplicationRecord
 
   validates :steps, inclusion: { in: [nil, 1, 5, 10] }
 
+  scope :parent_labels, -> { where(parent_id: nil) }
+
   # TODO
   def top_contributors
     User.joins(:stamps)

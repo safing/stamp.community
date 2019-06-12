@@ -6,6 +6,16 @@ class LabelPolicy < ApplicationPolicy
     @label = label
   end
 
+  def permitted_attributes
+    if moderator?
+      [:description]
+    end
+  end
+
+  def index?
+    true
+  end
+
   def create?
     admin?
   end
@@ -15,6 +25,10 @@ class LabelPolicy < ApplicationPolicy
   end
 
   def update?
-    admin?
+    admin? || permitted_attributes
+  end
+
+  def edit?
+    admin? || permitted_attributes
   end
 end
