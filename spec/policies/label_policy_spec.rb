@@ -37,4 +37,25 @@ RSpec.describe LabelPolicy do
     it { is_expected.to permit_action(:edit) }
     it { is_expected.to permit_edit_and_update_actions }
   end
+
+  describe '#permitted_attributes' do
+    subject { policy.permitted_attributes }
+    let(:policy) { LabelPolicy.new(user, Label.new) }
+
+    context 'user is a admin' do
+      let(:user) { FactoryBot.create(:admin) }
+
+      it 'returns [:name, :description, :licence_id, :parent_id]' do
+        expect(subject).to eq([:name, :description, :licence_id, :parent_id])
+      end
+    end
+
+    context 'user is a moderator' do
+      let(:user) { FactoryBot.create(:moderator) }
+
+      it 'returns [:description]' do
+        expect(subject).to eq([:description])
+      end
+    end
+  end
 end
