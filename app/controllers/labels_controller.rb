@@ -13,9 +13,9 @@ class LabelsController < ApplicationController
   end
 
   def create
-    @label = Label.new(label_params)
+    @label = Label.new
     authorize(@label)
-    if @label.save
+    if @label.update(permitted_attributes(@label))
       redirect_to(label_path(@label), flash: { success: 'Label created successfully' })
     else
       render 'new'
@@ -37,9 +37,5 @@ class LabelsController < ApplicationController
     else
       render action: 'new'
     end
-  end
-
-  def label_params
-    params.require(:label).permit(:name, :description, :licence_id, :parent_id)
   end
 end

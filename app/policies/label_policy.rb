@@ -7,7 +7,9 @@ class LabelPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if moderator?
+    if admin?
+      [:name, :description, :licence_id, :parent_id]
+    elsif moderator?
       [:description]
     end
   end
@@ -25,10 +27,10 @@ class LabelPolicy < ApplicationPolicy
   end
 
   def update?
-    admin? || permitted_attributes
+    moderator?
   end
 
   def edit?
-    admin? || permitted_attributes
+    moderator?
   end
 end

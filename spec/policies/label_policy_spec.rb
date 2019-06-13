@@ -16,6 +16,7 @@ RSpec.describe LabelPolicy do
 
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
+    it { is_expected.to permit_action(:index) }
     it { is_expected.to forbid_edit_and_update_actions }
   end
 
@@ -24,7 +25,7 @@ RSpec.describe LabelPolicy do
 
     it { is_expected.to forbid_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
-    it { is_expected.to permit_action(:edit) }
+    it { is_expected.to permit_action(:index) }
     it { is_expected.to permit_edit_and_update_actions }
   end
 
@@ -33,8 +34,7 @@ RSpec.describe LabelPolicy do
 
     it { is_expected.to permit_new_and_create_actions }
     it { is_expected.to permit_action(:show) }
-    it { is_expected.to permit_action(:new) }
-    it { is_expected.to permit_action(:edit) }
+    it { is_expected.to permit_action(:index) }
     it { is_expected.to permit_edit_and_update_actions }
   end
 
