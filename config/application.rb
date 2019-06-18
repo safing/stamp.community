@@ -24,6 +24,8 @@ module StampCommunity
     config.generators do |g|
       g.test_framework  :rspec
       g.helper          false
+      g.javascripts     false
+      g.stylesheets     false
     end
 
     console do
