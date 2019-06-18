@@ -4,6 +4,11 @@ RSpec.describe Domain, type: :model do
   it 'has a valid factory' do
     expect(FactoryBot.create(:domain)).to be_valid
   end
+  
+  describe 'database' do
+    it { is_expected.to have_db_index(:name).unique(true) }
+    it { is_expected.to have_db_index(:parent_id) }
+  end
 
   describe 'relations' do
     it { is_expected.to belong_to(:parent).class_name('Domain').optional }
@@ -32,10 +37,5 @@ RSpec.describe Domain, type: :model do
       it { is_expected.not_to allow_value('x.com/oahethutoa').for(:name) }
       it { is_expected.not_to allow_value(')*)xn--cybr-noa.space').for(:name) }
     end
-  end
-
-  describe 'database' do
-    it { is_expected.to have_db_index(:name).unique(true) }
-    it { is_expected.to have_db_index(:parent_id) }
   end
 end
