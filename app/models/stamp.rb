@@ -87,6 +87,11 @@ class Stamp < ApplicationRecord
     def model_name
       @model_name ||= Stamp::Name.new(self)
     end
+
+    # inspired by model_name.collection =>  stamp/labels
+    def plural_collection
+      model_name.collection.split('/').map(&:pluralize).join('/')
+    end
   end
 
   class Name < ActiveModel::Name

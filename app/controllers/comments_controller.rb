@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     else
       instance_variable_set "@#{@resource.singularize}".to_sym, @commentable
       @comments = @commentable.comments.where.not(id: nil)
-      render "#{@resource}/show"
+      render "#{@commentable.class.plural_collection}/show"
     end
   end
 
