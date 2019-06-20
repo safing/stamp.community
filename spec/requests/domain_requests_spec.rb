@@ -1,25 +1,37 @@
 RSpec.feature 'domain requests', type: :request do
   describe 'authentication & authourization' do
+    # :authorize calls :public_send on the fitting Policy
+    # this is easier to stub than :authorize, which would not raise an error
+    # https://github.com/varvet/pundit/blob/master/lib/pundit.rb#L221
+    shared_context 'user is authorized' do
+      before do
+        allow_any_instance_of(DomainPolicy).to(receive(:public_send).and_return(true))
+      end
+    end
+
+    shared_context 'user is unauthorized' do
+      before do
+        allow_any_instance_of(DomainPolicy).to(receive(:public_send).and_return(false))
+      end
+    end
+
     describe '#new' do
       subject(:request) { get new_domain_url }
 
-      context 'role: guest' do
-        include_examples 'status code', 403
+      context 'user is unauthenticated (guest)' do
+        include_examples 'status code', 401
       end
 
-      context 'role: user' do
-        include_context 'login user'
-        include_examples 'status code', 200
-      end
+      context 'user is authenticated' do
+        context 'user is unauthorized' do
+          include_context 'user is unauthorized'
+          include_examples 'status code', 403
+        end
 
-      context 'role: moderator' do
-        include_context 'login moderator'
-        include_examples 'status code', 200
-      end
-
-      context 'role: admin' do
-        include_context 'login admin'
-        include_examples 'status code', 200
+        context 'user is authorized' do
+          include_context 'user is authorized'
+          include_examples 'status code', 200
+        end
       end
     end
 
@@ -29,26 +41,22 @@ RSpec.feature 'domain requests', type: :request do
 
     describe '#show' do
       subject(:request) { get domain_path(domain.name) }
-
       let(:domain) { FactoryBot.create(:domain) }
 
-      context 'role: guest' do
+      context 'user is unauthenticated (guest)' do
         include_examples 'status code', 200
       end
 
-      context 'role: user' do
-        include_context 'login user'
-        include_examples 'status code', 200
-      end
+      context 'user is authenticated' do
+        context 'user is unauthorized' do
+          include_context 'user is unauthorized'
+          include_examples 'status code', 403
+        end
 
-      context 'role: moderator' do
-        include_context 'login moderator'
-        include_examples 'status code', 200
-      end
-
-      context 'role: admin' do
-        include_context 'login admin'
-        include_examples 'status code', 200
+        context 'user is authorized' do
+          include_context 'user is authorized'
+          include_examples 'status code', 200
+        end
       end
     end
   end
