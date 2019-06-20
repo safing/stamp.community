@@ -1,5 +1,5 @@
 RSpec.feature 'stamp requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
     describe '#new' do
       subject(:request) { get new_label_stamp_path(domain_name: domain.name) }
       let(:domain) { FactoryBot.create(:domain) }

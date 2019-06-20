@@ -1,5 +1,5 @@
 RSpec.feature 'user requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
     describe '#edit' do
       subject(:request) { get edit_user_path(id: targeted_user.id) }
       let(:targeted_user) { FactoryBot.create(:user) }

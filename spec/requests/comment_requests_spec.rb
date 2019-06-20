@@ -1,5 +1,5 @@
 RSpec.feature 'comment requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
     # :authorize calls :public_send on the fitting Policy
     # this is easier to stub than :authorize, which would not raise an error
     # https://github.com/varvet/pundit/blob/master/lib/pundit.rb#L221

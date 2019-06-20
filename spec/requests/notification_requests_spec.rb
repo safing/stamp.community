@@ -1,5 +1,5 @@
 RSpec.feature 'notification requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
     describe '#read_all' do
       subject(:request) { post read_all_notifications_url, xhr: true }
 

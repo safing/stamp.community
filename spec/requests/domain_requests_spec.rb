@@ -1,5 +1,5 @@
 RSpec.feature 'domain requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
     describe '#new' do
       subject(:request) { get new_domain_url }
 

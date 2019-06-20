@@ -1,5 +1,5 @@
 RSpec.feature 'static requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
     describe '#terms' do
       subject(:request) { get tos_path }
 
