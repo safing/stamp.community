@@ -26,6 +26,8 @@ RSpec.feature 'comment requests', type: :request do
       end
 
       context 'user is authenticated' do
+        include_context 'login user'
+
         context 'user is unauthorized' do
           include_context 'user is unauthorized'
           include_examples 'status code', 403
@@ -33,7 +35,7 @@ RSpec.feature 'comment requests', type: :request do
 
         context 'user is authorized' do
           include_context 'user is authorized'
-          include_examples 'status code', 200
+          include_examples 'status code', 302
         end
       end
     end

@@ -23,6 +23,8 @@ RSpec.feature 'app requests', type: :request do
       end
 
       context 'user is authenticated' do
+        include_context 'login user'
+
         context 'user is unauthorized' do
           include_context 'user is unauthorized'
           include_examples 'status code', 403
@@ -46,6 +48,8 @@ RSpec.feature 'app requests', type: :request do
       end
 
       context 'user is authenticated' do
+        include_context 'login user'
+
         context 'user is unauthorized' do
           include_context 'user is unauthorized'
           include_examples 'status code', 403
@@ -75,6 +79,8 @@ RSpec.feature 'app requests', type: :request do
         end
 
         context 'user is authorized' do
+          include_context 'login user'
+
           include_context 'user is authorized'
           include_examples 'status code', 200
         end

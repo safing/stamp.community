@@ -23,6 +23,8 @@ RSpec.feature 'domain requests', type: :request do
       end
 
       context 'user is authenticated' do
+        include_context 'login user'
+
         context 'user is unauthorized' do
           include_context 'user is unauthorized'
           include_examples 'status code', 403
@@ -48,6 +50,8 @@ RSpec.feature 'domain requests', type: :request do
       end
 
       context 'user is authenticated' do
+        include_context 'login user'
+
         context 'user is unauthorized' do
           include_context 'user is unauthorized'
           include_examples 'status code', 403
