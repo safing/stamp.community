@@ -1,4 +1,6 @@
 class GuidesController < ApplicationController
+  skip_after_action :verify_authorized
+
   layout 'guides'
 
   def tour

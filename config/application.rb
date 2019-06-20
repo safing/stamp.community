@@ -30,6 +30,11 @@ module StampCommunity
       g.helper          :policy
     end
 
+    config.to_prepare do
+      # exclude devise controllers from forcing the pundit authorize() method on its actions
+      DeviseController.skip_after_action :verify_authorized
+    end
+
     console do
       require 'hirb'
       Hirb.enable
