@@ -7,7 +7,7 @@ RSpec.feature 'comment requests', type: :request do
       let(:comment_attributes) { { comment: { content: '1' * 40 } } }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do
@@ -20,22 +20,22 @@ RSpec.feature 'comment requests', type: :request do
 
         context 'state is :accepted' do
           let(:state) { :accepted }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'state is :archived' do
           let(:state) { :archived }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'state is :denied' do
           let(:state) { :denied }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'state is :disputed' do
           let(:state) { :disputed }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
       end
 

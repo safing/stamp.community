@@ -4,17 +4,17 @@ RSpec.feature 'app requests', type: :request do
       subject(:request) { get new_app_url }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do
         include_context 'login user'
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: moderator' do
         include_context 'login moderator'
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: admin' do
@@ -28,7 +28,7 @@ RSpec.feature 'app requests', type: :request do
 
         context 'admin has set #flag_stamps to true' do
           let(:flag_stamps) { false }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
       end
     end
@@ -40,17 +40,17 @@ RSpec.feature 'app requests', type: :request do
       end
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do
         include_context 'login user'
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: moderator' do
         include_context 'login moderator'
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: admin' do
@@ -64,7 +64,7 @@ RSpec.feature 'app requests', type: :request do
 
         context 'admin has set #flag_stamps to true' do
           let(:flag_stamps) { false }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
       end
     end
@@ -76,17 +76,17 @@ RSpec.feature 'app requests', type: :request do
       let(:some_app) { FactoryBot.create(:app) }
 
       context 'role: guest' do
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: user' do
         include_context 'login user'
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: moderator' do
         include_context 'login moderator'
-        include_examples 'status code', 401
+        include_examples 'status code', 403
       end
 
       context 'role: admin' do
@@ -100,7 +100,7 @@ RSpec.feature 'app requests', type: :request do
 
         context 'admin has set #flag_stamps to true' do
           let(:flag_stamps) { false }
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
       end
     end

@@ -3,7 +3,7 @@ module Authenticator
 
   included do
     before do
-      error!('401 Unauthorized', 401) unless authenticated
+      error!('403 Forbidden', 403) unless authenticated
     end
 
     helpers do

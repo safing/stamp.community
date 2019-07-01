@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   private
 
   def not_authorized
-    flash[:alert] = 'You are not authorized to do this.'
-    redirect_to(request.referrer || root_path, status: 401)
+    render file: 'public/403.html', status: 403
   end
 end
