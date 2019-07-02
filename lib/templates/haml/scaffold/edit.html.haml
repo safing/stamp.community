@@ -1,0 +1,7 @@
+%h1
+  Editing
+  = link_to @<%= singular_table_name %> do
+    <%= human_name %>
+    = @<%= singular_table_name %>.id
+
+= render 'form'

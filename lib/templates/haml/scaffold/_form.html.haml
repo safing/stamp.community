@@ -1,0 +1,20 @@
+- if @<%= singular_table_name %>.errors.any?
+  .ui.error.message
+    %i.close.icon
+    .header
+      = "#{pluralize(@<%= singular_table_name %>.errors.count, "error")} prohibited this <%= singular_table_name %> from being saved:"
+    %ul.list
+      - @<%= singular_table_name %>.errors.full_messages.each do |message|
+        %li= message
+= form_for @<%= singular_table_name %>, html: { class: 'ui form' } do |f|
+<% attributes.each do |attribute| -%>
+  .field
+    = f.label :<%= attribute.name %>
+    = f.<%= attribute.field_type %> :<%= attribute.name %>
+<% end -%>
+  - if @<%= singular_table_name %>.new_record?
+    = f.submit 'Create', class: 'ui submit button'
+    = link_to 'Cancel', <%= index_helper %>_path, class: 'ui button'
+  - else
+    = f.submit 'Save', class: 'ui submit button'
+    = link_to 'Cancel', @<%= singular_table_name %>, class: 'ui button'

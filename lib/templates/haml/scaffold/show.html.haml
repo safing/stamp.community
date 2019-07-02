@@ -1,0 +1,11 @@
+.ui.list
+<% attributes.each do |attribute| -%>
+  .item
+    %b <%= attribute.human_name %>:
+    = @<%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+
+- if policy(Warrior).update?
+  = link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'ui mini blue icon labeled button' do
+    %i.pen.icon
+    Edit
