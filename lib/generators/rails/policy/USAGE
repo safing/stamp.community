@@ -1,0 +1,9 @@
+Description:
+  Stubs out a new Policy. Pass the model name, either CamelCased or under_scored.
+
+Example:
+  `rails generate policy Mage`
+
+  This will create:
+
+    app/policies/mage_policy.rb

@@ -1,47 +1,38 @@
 RSpec.feature 'user requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
+    # :authorize calls :public_send on the fitting Policy
+    # this is easier to stub than :authorize, which would not raise an error
+    # https://github.com/varvet/pundit/blob/master/lib/pundit.rb#L221
+    shared_context 'user is authorized' do
+      before do
+        allow_any_instance_of(UserPolicy).to(receive(:public_send).and_return(true))
+      end
+    end
+
+    shared_context 'user is unauthorized' do
+      before do
+        allow_any_instance_of(UserPolicy).to(receive(:public_send).and_return(false))
+      end
+    end
+
     describe '#edit' do
       subject(:request) { get edit_user_path(id: targeted_user.id) }
       let(:targeted_user) { FactoryBot.create(:user) }
 
-      context 'role: guest' do
-        include_examples 'status code', 403
+      context 'user is unauthenticated (guest)' do
+        include_examples 'status code', 401
       end
 
-      context 'targeted user is random user' do
-        context 'role: user' do
-          include_context 'login user'
+      context 'user is authenticated' do
+        include_context 'login user'
+
+        context 'user is unauthorized' do
+          include_context 'user is unauthorized'
           include_examples 'status code', 403
         end
 
-        context 'role: moderator' do
-          include_context 'login moderator'
-          include_examples 'status code', 403
-        end
-
-        context 'role: admin' do
-          include_context 'login admin'
-          include_examples 'status code', 200
-        end
-      end
-
-      context 'targeted user is current user' do
-        let(:targeted_user) { current_user }
-
-        before { sign_in(current_user) }
-
-        context 'role: user' do
-          let(:current_user) { FactoryBot.create(:user) }
-          include_examples 'status code', 200
-        end
-
-        context 'role: moderator' do
-          let(:current_user) { FactoryBot.create(:moderator) }
-          include_examples 'status code', 200
-        end
-
-        context 'role: admin' do
-          let(:current_user) { FactoryBot.create(:admin) }
+        context 'user is authorized' do
+          include_context 'user is authorized'
           include_examples 'status code', 200
         end
       end
@@ -53,44 +44,20 @@ RSpec.feature 'user requests', type: :request do
       let(:targeted_user) { FactoryBot.create(:user) }
       let(:user_attributes) { FactoryBot.attributes_for(:user) }
 
-      context 'role: guest' do
-        include_examples 'status code', 403
+      context 'user is unauthenticated (guest)' do
+        include_examples 'status code', 401
       end
 
-      context 'targeted user is random user' do
-        context 'role: user' do
-          include_context 'login user'
+      context 'user is authenticated' do
+        include_context 'login user'
+
+        context 'user is unauthorized' do
+          include_context 'user is unauthorized'
           include_examples 'status code', 403
         end
 
-        context 'role: moderator' do
-          include_context 'login moderator'
-          include_examples 'status code', 403
-        end
-
-        context 'role: admin' do
-          include_context 'login admin'
-          include_examples 'status code', 302
-        end
-      end
-
-      context 'targeted user is current user' do
-        let(:targeted_user) { current_user }
-
-        before { sign_in(current_user) }
-
-        context 'role: user' do
-          let(:current_user) { FactoryBot.create(:user) }
-          include_examples 'status code', 302
-        end
-
-        context 'role: moderator' do
-          let(:current_user) { FactoryBot.create(:moderator) }
-          include_examples 'status code', 302
-        end
-
-        context 'role: admin' do
-          let(:current_user) { FactoryBot.create(:admin) }
+        context 'user is authorized' do
+          include_context 'user is authorized'
           include_examples 'status code', 302
         end
       end

@@ -1,52 +1,42 @@
 RSpec.feature 'comment requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
+    # :authorize calls :public_send on the fitting Policy
+    # this is easier to stub than :authorize, which would not raise an error
+    # https://github.com/varvet/pundit/blob/master/lib/pundit.rb#L221
+    shared_context 'user is authorized' do
+      before do
+        allow_any_instance_of(CommentPolicy).to(receive(:public_send).and_return(true))
+      end
+    end
+
+    shared_context 'user is unauthorized' do
+      before do
+        allow_any_instance_of(CommentPolicy).to(receive(:public_send).and_return(false))
+      end
+    end
+
     describe '#create' do
       subject(:request) { post stamp_comments_url(stamp.id), params: comment_attributes }
       let(:stamp) { FactoryBot.create(:label_stamp, state: state) }
       let(:state) { :in_progress }
       let(:comment_attributes) { { comment: { content: '1' * 40 } } }
 
-      context 'role: guest' do
-        include_examples 'status code', 403
+      context 'user is unauthenticated (guest)' do
+        include_examples 'status code', 401
       end
 
-      context 'role: user' do
+      context 'user is authenticated' do
         include_context 'login user'
 
-        context 'state is :in_progress' do
-          let(:state) { :in_progress }
+        context 'user is unauthorized' do
+          include_context 'user is unauthorized'
+          include_examples 'status code', 403
+        end
+
+        context 'user is authorized' do
+          include_context 'user is authorized'
           include_examples 'status code', 302
         end
-
-        context 'state is :accepted' do
-          let(:state) { :accepted }
-          include_examples 'status code', 403
-        end
-
-        context 'state is :archived' do
-          let(:state) { :archived }
-          include_examples 'status code', 403
-        end
-
-        context 'state is :denied' do
-          let(:state) { :denied }
-          include_examples 'status code', 403
-        end
-
-        context 'state is :disputed' do
-          let(:state) { :disputed }
-          include_examples 'status code', 403
-        end
-      end
-
-      context 'role: moderator' do
-        include_context 'login moderator'
-        include_examples 'status code', 302
-      end
-
-      context 'role: admin' do
-        include_context 'login admin'
-        include_examples 'status code', 302
       end
     end
   end

@@ -37,7 +37,7 @@ module Votable
   end
 
   def conclusion_activity
-    return nil if self.in_progress?
+    return nil if in_progress?
     activities.where(key: %w[stamp.accept stamp.deny stamp.dispute]).first
   end
 end

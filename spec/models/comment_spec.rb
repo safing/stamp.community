@@ -3,6 +3,11 @@ RSpec.describe Comment, type: :model do
     expect(FactoryBot.create(:comment)).to be_valid
   end
 
+  describe 'database' do
+    it { is_expected.to have_db_index(:user_id) }
+    it { is_expected.to have_db_index(%i[commentable_type commentable_id]) }
+  end
+
   describe 'relations' do
     subject { FactoryBot.create(:comment) }
 
@@ -15,11 +20,6 @@ RSpec.describe Comment, type: :model do
     it { is_expected.to validate_presence_of(:content) }
     it { is_expected.to validate_presence_of(:commentable) }
     it { is_expected.to validate_presence_of(:user) }
-  end
-
-  describe 'database' do
-    it { is_expected.to have_db_index(:user_id) }
-    it { is_expected.to have_db_index(%i[commentable_type commentable_id]) }
   end
 
   describe '#create_activity(*args)' do

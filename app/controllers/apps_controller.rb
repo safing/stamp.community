@@ -1,12 +1,12 @@
 class AppsController < ApplicationController
   def show
     @app = App.find(params[:id])
-    authorize @app
+    authorize(@app)
   end
 
   def new
     @app = App.new
-    authorize @app
+    authorize(@app)
   end
 
   def create

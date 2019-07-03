@@ -5,11 +5,11 @@ RSpec.describe App, type: :model do
     expect(FactoryBot.create(:app)).to be_valid
   end
 
-  describe 'relations' do
-    it { is_expected.to have_many(:stamps) }
+  describe 'database' do
   end
 
-  describe 'database' do
+  describe 'relations' do
+    it { is_expected.to have_many(:stamps) }
   end
 
   describe 'fields' do

@@ -1,34 +1,38 @@
 RSpec.feature 'app requests', type: :request do
-  describe 'authourization' do
+  describe 'authentication & authourization' do
+    # :authorize calls :public_send on the fitting Policy
+    # this is easier to stub than :authorize, which would not raise an error
+    # https://github.com/varvet/pundit/blob/master/lib/pundit.rb#L221
+    shared_context 'user is authorized' do
+      before do
+        allow_any_instance_of(AppPolicy).to(receive(:public_send).and_return(true))
+      end
+    end
+
+    shared_context 'user is unauthorized' do
+      before do
+        allow_any_instance_of(AppPolicy).to(receive(:public_send).and_return(false))
+      end
+    end
+
     describe '#new' do
       subject(:request) { get new_app_url }
 
-      context 'role: guest' do
-        include_examples 'status code', 403
+      context 'user is unauthenticated (guest)' do
+        include_examples 'status code', 401
       end
 
-      context 'role: user' do
+      context 'user is authenticated' do
         include_context 'login user'
-        include_examples 'status code', 403
-      end
 
-      context 'role: moderator' do
-        include_context 'login moderator'
-        include_examples 'status code', 403
-      end
-
-      context 'role: admin' do
-        let(:admin) { FactoryBot.create(:admin, flag_stamps: flag_stamps) }
-        include_context 'login admin'
-
-        context 'admin has set #flag_stamps to true' do
-          let(:flag_stamps) { true }
-          include_examples 'status code', 200
+        context 'user is unauthorized' do
+          include_context 'user is unauthorized'
+          include_examples 'status code', 403
         end
 
-        context 'admin has set #flag_stamps to true' do
-          let(:flag_stamps) { false }
-          include_examples 'status code', 403
+        context 'user is authorized' do
+          include_context 'user is authorized'
+          include_examples 'status code', 200
         end
       end
     end
@@ -39,32 +43,21 @@ RSpec.feature 'app requests', type: :request do
         FactoryBot.attributes_with_foreign_keys_for(:app)
       end
 
-      context 'role: guest' do
-        include_examples 'status code', 403
+      context 'user is unauthenticated (guest)' do
+        include_examples 'status code', 401
       end
 
-      context 'role: user' do
+      context 'user is authenticated' do
         include_context 'login user'
-        include_examples 'status code', 403
-      end
 
-      context 'role: moderator' do
-        include_context 'login moderator'
-        include_examples 'status code', 403
-      end
-
-      context 'role: admin' do
-        let(:admin) { FactoryBot.create(:admin, flag_stamps: flag_stamps) }
-        include_context 'login admin'
-
-        context 'admin has set #flag_stamps to true' do
-          let(:flag_stamps) { true }
-          include_examples 'status code', 302
+        context 'user is unauthorized' do
+          include_context 'user is unauthorized'
+          include_examples 'status code', 403
         end
 
-        context 'admin has set #flag_stamps to true' do
-          let(:flag_stamps) { false }
-          include_examples 'status code', 403
+        context 'user is authorized' do
+          include_context 'user is authorized'
+          include_examples 'status code', 302
         end
       end
     end
@@ -75,32 +68,21 @@ RSpec.feature 'app requests', type: :request do
       # IMPORTANT: 'app' as a variable name will remove all path helpers
       let(:some_app) { FactoryBot.create(:app) }
 
-      context 'role: guest' do
-        include_examples 'status code', 403
+      context 'user is unauthenticated (guest)' do
+        include_examples 'status code', 401
       end
 
-      context 'role: user' do
+      context 'user is authenticated' do
         include_context 'login user'
-        include_examples 'status code', 403
-      end
 
-      context 'role: moderator' do
-        include_context 'login moderator'
-        include_examples 'status code', 403
-      end
-
-      context 'role: admin' do
-        let(:admin) { FactoryBot.create(:admin, flag_stamps: flag_stamps) }
-        include_context 'login admin'
-
-        context 'admin has set #flag_stamps to true' do
-          let(:flag_stamps) { true }
-          include_examples 'status code', 200
+        context 'user is unauthorized' do
+          include_context 'user is unauthorized'
+          include_examples 'status code', 403
         end
 
-        context 'admin has set #flag_stamps to true' do
-          let(:flag_stamps) { false }
-          include_examples 'status code', 403
+        context 'user is authorized' do
+          include_context 'user is authorized'
+          include_examples 'status code', 200
         end
       end
     end

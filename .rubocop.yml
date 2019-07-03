@@ -4,6 +4,7 @@ AllCops:
     - pgdata/**/*
     - db/**/*.rb
     - lib/templates/**/*.rb
+    - lib/generators/**/*.rb
     - log/**/*
     - node_modules/**/*
     - notes/**/*

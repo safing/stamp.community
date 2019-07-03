@@ -3,6 +3,13 @@ RSpec.describe Notification, type: :model do
     expect(FactoryBot.create(:notification)).to be_valid
   end
 
+  describe 'database' do
+    it { is_expected.to have_db_index(:activity_id) }
+    it { is_expected.to have_db_index(:actor_id) }
+    it { is_expected.to have_db_index(:recipient_id) }
+    it { is_expected.to have_db_index(%i[reference_type reference_id]) }
+  end
+
   describe 'relations' do
     it { is_expected.to belong_to(:activity).class_name('PublicActivity::Activity') }
     it { is_expected.to belong_to(:actor).class_name('User') }
@@ -15,13 +22,6 @@ RSpec.describe Notification, type: :model do
     it { is_expected.to validate_presence_of(:actor) }
     it { is_expected.to validate_presence_of(:recipient) }
     it { is_expected.to validate_presence_of(:reference) }
-  end
-
-  describe 'database' do
-    it { is_expected.to have_db_index(:activity_id) }
-    it { is_expected.to have_db_index(:actor_id) }
-    it { is_expected.to have_db_index(:recipient_id) }
-    it { is_expected.to have_db_index([:reference_type, :reference_id]) }
   end
 
   describe '#create' do
@@ -37,7 +37,7 @@ RSpec.describe Notification, type: :model do
     subject { notification.actor }
 
     context 'actor_id is -1' do
-        let(:notification) { FactoryBot.create(:notification, :system_actor) }
+      let(:notification) { FactoryBot.create(:notification, :system_actor) }
 
       it 'returns the System object' do
         expect(subject).to eq(System.new)

@@ -53,7 +53,7 @@ module Votable
             parameters: transition.event.in?(%i[accept deny dispute]) ? threshold_params : {}
           )
         end
-        
+
         def threshold_params
           {
             majority_threshold: ENVProxy.required_integer('VOTABLE_MAJORITY_THRESHOLD'),
