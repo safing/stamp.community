@@ -1,5 +1,5 @@
-%div{class: "ui large top right attached #{color_for(stamp.state)} label", data: { tooltip: (required_params_text if @stamp.in_progress?) }}
-  - if @stamp.in_progress?
+%div{class: "ui large top right attached #{color_for(stamp.state)} label", data: { tooltip: (required_params_text if stamp.in_progress?) }}
+  - if stamp.in_progress?
     %i.info.circle.icon
   = stamp.state.titleize
   .detail
