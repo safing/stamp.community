@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
   private
 
   def not_authorized
-    render file: 'public/403.html', status: 403
+    if user_signed_in?
+      # state: unauthorized, response: 403 forbidden
+      render file: 'public/403.html', status: 403
+    else
+      # state: unauthenticated, response: 401 unauthenticated
+      render file: 'public/401.html', status: 401
+    end
   end
 end

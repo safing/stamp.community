@@ -29,7 +29,7 @@ RSpec.feature 'flag stamp requests', type: :request do
 
         context 'user is unauthorized' do
           include_context 'user is unauthorized'
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'user is authorized' do
@@ -61,7 +61,7 @@ RSpec.feature 'flag stamp requests', type: :request do
 
         context 'user is unauthorized' do
           include_context 'user is unauthorized'
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'user is authorized' do
@@ -84,7 +84,7 @@ RSpec.feature 'flag stamp requests', type: :request do
 
         context 'user is unauthorized' do
           include_context 'user is unauthorized'
-          include_examples 'status code', 401
+          include_examples 'status code', 403
         end
 
         context 'user is authorized' do
