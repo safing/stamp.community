@@ -21,7 +21,7 @@ RSpec.describe Label, type: :model do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_inclusion_of(:steps).in_array([1, 5, 10]) }
   end
-  
+
   describe 'fields' do
     let(:label) { Label.new }
 

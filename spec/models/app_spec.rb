@@ -4,7 +4,7 @@ RSpec.describe App, type: :model do
   it 'has a valid factory' do
     expect(FactoryBot.create(:app)).to be_valid
   end
-  
+
   describe 'database' do
   end
 

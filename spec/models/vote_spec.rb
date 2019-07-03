@@ -2,7 +2,7 @@ RSpec.describe Vote, type: :model do
   it 'has a valid factory' do
     expect(FactoryBot.create(:vote)).to be_valid
   end
-  
+
   describe 'database' do
     it { is_expected.to have_db_index(:user_id) }
     it { is_expected.to have_db_index(%i[votable_type votable_id]) }

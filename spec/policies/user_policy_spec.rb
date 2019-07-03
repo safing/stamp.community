@@ -80,7 +80,7 @@ RSpec.describe UserPolicy do
       before { expect(policy).to receive(:update_config?).and_return(true) }
 
       it 'returns [:description, :flag_stamps]' do
-        expect(subject).to eq([:description, :flag_stamps])
+        expect(subject).to eq(%i[description flag_stamps])
       end
     end
 

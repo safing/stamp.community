@@ -4,7 +4,7 @@ RSpec.describe Domain, type: :model do
   it 'has a valid factory' do
     expect(FactoryBot.create(:domain)).to be_valid
   end
-  
+
   describe 'database' do
     it { is_expected.to have_db_index(:name).unique(true) }
     it { is_expected.to have_db_index(:parent_id) }

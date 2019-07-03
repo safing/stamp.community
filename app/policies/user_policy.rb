@@ -8,7 +8,7 @@ class UserPolicy < ApplicationPolicy
 
   def permitted_attributes
     if update_config?
-      [:description, :flag_stamps]
+      %i[description flag_stamps]
     else
       [:description]
     end

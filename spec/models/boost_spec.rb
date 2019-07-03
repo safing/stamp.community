@@ -2,7 +2,7 @@ RSpec.describe Boost, type: :model do
   it 'has a valid factory' do
     expect(FactoryBot.create(:boost)).to be_valid
   end
-  
+
   describe 'database' do
     it { is_expected.to have_db_index(:user_id) }
     it { is_expected.to have_db_index(:cause_id) }

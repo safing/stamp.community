@@ -9,7 +9,7 @@ class AppPolicy < ApplicationPolicy
   def index?
     access_flag_stamps?
   end
-  
+
   def show?
     access_flag_stamps?
   end
