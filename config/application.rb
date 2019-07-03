@@ -25,6 +25,7 @@ module StampCommunity
       g.test_framework  :rspec
       g.javascripts     false
       g.stylesheets     false
+      g.routing_specs   false
       # hackish: instead of creating a helper, create a policy
       #          but we do not need the helper anyway
       g.helper          :policy
