@@ -26,10 +26,10 @@ STAMP::LABEL:
     PENALTY: -5 # downvoted good stuff
 VOTABLE:
   POWER:
-    THRESHOLD: 4 # min power a stamp needs to continue conclusion
+    THRESHOLD: 3 # min power a stamp needs to continue conclusion
     # if a votable falls below this, it will simply get rejected
   MAJORITY:
-    THRESHOLD: 100 # in percent
+    THRESHOLD: 75 # in percent
 
 STAMP::FLAG:
   CREATOR:
@@ -43,10 +43,10 @@ STAMP::FLAG:
     PENALTY: -5 # downvoted good stuff
 VOTABLE:
   POWER:
-    THRESHOLD: 4 # min power a stamp needs to continue conclusion
+    THRESHOLD: 3 # min power a stamp needs to continue conclusion
     # if a votable falls below this, it will simply get rejected
   MAJORITY:
-    THRESHOLD: 100 # in percent
+    THRESHOLD: 75 # in percent
 
 FLAGS:
   # # write access
