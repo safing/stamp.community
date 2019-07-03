@@ -16,4 +16,11 @@ module StampsHelper
     when :in_progress then 'purple'
     end
   end
+
+  def required_params_text
+    "
+      Stamps are concluded with #{ENVProxy.required('VOTABLE_POWER_THRESHOLD')} or more votes
+      AND with a majority of at least #{ENVProxy.required('VOTABLE_MAJORITY_THRESHOLD')}%
+    "
+  end
 end
