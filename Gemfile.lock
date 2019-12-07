@@ -231,7 +231,8 @@ GEM
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (4.3.1)
+      nio4r (~> 2.0)
     pundit (2.0.0)
       activesupport (>= 3.0.0)
     pundit-matchers (1.6.0)
@@ -411,7 +412,7 @@ DEPENDENCIES
   pg
   pry-byebug
   public_activity
-  puma
+  puma (>= 3.12.2)
   pundit
   pundit-matchers
   rails (~> 5.2.2)
