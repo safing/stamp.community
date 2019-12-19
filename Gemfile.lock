@@ -237,7 +237,7 @@ GEM
     pundit-matchers (1.6.0)
       rspec-rails (>= 3.0.0)
     raabro (1.1.6)
-    rack (2.0.7)
+    rack (2.0.8)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-protection (2.0.4)
